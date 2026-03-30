@@ -152,10 +152,10 @@
 ### Faz 2 — Ana Sayfa & Fiyat Merkezi
 - [x] Ana sayfa layout + hero ✅ (statik placeholder, canlı veriye geçilecek)
 - [x] TradingView widget entegrasyonu ✅ — TradingViewWidget.tsx component
-  - Fiyat Merkezi: Arabica KC1!, Robusta RC1!, USD/TRY mini widget
-  - Ana Sayfa: Haftalık grafik KC1! widget
-  - Veri Kaynakları bölümü (ICE, Barchart, CEPEA, ICO)
-- [ ] Canlı fiyat bandı (TickerBand'ı gerçek API'ye bağla)
+  - Fiyat Merkezi: ICEUS:KC1! (Arabica), ICEEUR:RC1! (Robusta), FX_IDC:USDTRY
+  - Ana Sayfa: ICEUS:KC1! canlı grafik
+  - Veri Kaynakları bölümü (ICE Arabica/Robusta, Barchart KC/RM, CEPEA, ICO)
+- [x] Canlı fiyat bandı ✅ — TradingView Ticker Tape widget (6 sembol canlı)
 - [ ] Döviz kuru bandı
 - [x] Bülten kayıt formu ✅ (UI hazır, Mailchimp entegrasyonu yapılacak)
 - [x] Fiyat Merkezi sayfası ✅ — src/app/fiyat-merkezi/page.tsx
@@ -248,7 +248,7 @@
 - Proje yolu: C:\Users\rtuma\worldcoffee24
 
 ### 🚨 SONRAKİ CHAT'TE İLK YAPILACAK İŞ
-TickerBand'ı gerçek fiyat API'sine bağla, Mailchimp bülten entegrasyonu, backend planlama.
+Mailchimp bülten entegrasyonu, responsive/mobil test, backend planlama.
 
 ### 📍 HTML Dosya Haritası (kahve_dunyasi_final1.html — 790 satır)
 | Satırlar | Bölüm | Boyut (SVG'siz) |
