@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import TickerBand from "@/components/TickerBand";
@@ -7,25 +8,28 @@ const quickTags = ["Hedging", "Arabica", "Futures", "SCA Score", "Washed", "FOB"
 
 const guides = [
   {
-    category: "Botanik & Agronomi",
-    title: "Arabica - Robusta: Genetik Fark ve Gelecekteki Melezler",
-    desc: "Yukselen kahve cesitlerinde iklim dayanikliligi ve verim faktorlerinin analizi.",
+    category: "Cografya",
+    title: "Kahve Kusagi: Uretim Ulkeleri ve Bolgesel Lezzet Profilleri",
+    desc: "Brezilya'dan Etiyopya'ya, baslica uretim ulkeleri, iklim kosullari ve kahve cesitleri.",
     svgBg: "#1a2a12",
     svgFill: "#1f3318",
+    href: "/bilgi-merkezi/kahve-kusagi",
   },
   {
-    category: "Lojistik & Tedarik",
-    title: "Yesil Kahve Depolama: Bozulmayi ve Kalite Dususunu Onlemek",
-    desc: "Nakliye ve depolamada nem kontrolu ve atmosfer yonetimi.",
+    category: "Teknik Analiz",
+    title: "Grafik Okuma Rehberi: Candlestick, Destek/Direnc, Hareketli Ortalamalar",
+    desc: "Emtia grafigi okuma temelleri. Kahve traderlari icin teknik analiz araci.",
     svgBg: "#1a2535",
     svgFill: "#162030",
+    href: "/bilgi-merkezi/grafik-okuma",
   },
   {
-    category: "Ekonomi",
-    title: "Direkt Ticaret Paradoksu: Etik, Verimlilik ve Gerceklik",
-    desc: "Gercek anlamda surdurulebilir kahve tedariki ve seffaflik metriklerinin tanimlanmasi.",
+    category: "Sozluk",
+    title: "Kahve Terimler Sozlugu: A'dan Z'ye 33 Temel Terim",
+    desc: "Arabica'dan Washed Process'e, kahve ticaretinde kullanilan tum terimlerin aciklamasi.",
     svgBg: "#1a1008",
     svgFill: "#2d1a0a",
+    href: "/bilgi-merkezi/terimler-sozlugu",
   },
 ];
 
@@ -138,10 +142,10 @@ export default function BilgiMerkezi() {
                 <p className="text-on-primary-container mb-6 leading-relaxed text-sm">
                   New York Ticaret Borsasi&rsquo;nin mekanizmalarini anlayin. Fiyat oynakligina karsi nasil korunacaginizi ve dalgali kuresel piyasada riski nasil yonetecginizi ogrenin.
                 </p>
-                <button className="flex items-center gap-2 text-white font-bold tracking-widest uppercase text-xs border-b border-white pb-1 group-hover:gap-4 transition-all">
+                <Link href="/bilgi-merkezi/futures-101" className="flex items-center gap-2 text-white font-bold tracking-widest uppercase text-xs border-b border-white pb-1 group-hover:gap-4 transition-all">
                   Okumaya Basla
                   <span className="material-symbols-outlined text-sm">arrow_forward</span>
-                </button>
+                </Link>
               </div>
             </div>
 
@@ -171,10 +175,10 @@ export default function BilgiMerkezi() {
                       <path d="M72,35 Q68,24 74,14" fill="none" stroke="#aaa" strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
                     </svg>
                   </div>
-                  <span className="text-primary font-bold text-xs uppercase tracking-widest flex items-center gap-2 cursor-pointer">
+                  <Link href="/bilgi-merkezi/isleme-yontemleri" className="text-primary font-bold text-xs uppercase tracking-widest flex items-center gap-2">
                     Modulu Kesfet
                     <span className="material-symbols-outlined text-sm">arrow_forward</span>
-                  </span>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -192,7 +196,7 @@ export default function BilgiMerkezi() {
             </div>
             <div className="grid grid-cols-12 gap-8">
               {guides.map((guide, i) => (
-                <div key={i} className="col-span-12 md:col-span-4">
+                <Link key={i} href={guide.href} className="col-span-12 md:col-span-4 group">
                   <div className="mb-5 aspect-[4/5] overflow-hidden bg-surface-container flex items-center justify-center">
                     <svg width="100%" height="100%" viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
                       <rect width="200" height="250" fill={guide.svgBg} />
@@ -214,9 +218,9 @@ export default function BilgiMerkezi() {
                   <span className="text-[10px] font-label uppercase tracking-widest text-secondary mb-2 block">
                     {guide.category}
                   </span>
-                  <h4 className="font-headline text-xl mb-2">{guide.title}</h4>
+                  <h4 className="font-headline text-xl mb-2 group-hover:text-primary transition-colors">{guide.title}</h4>
                   <p className="text-xs text-secondary leading-normal">{guide.desc}</p>
-                </div>
+                </Link>
               ))}
             </div>
           </section>

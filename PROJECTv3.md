@@ -181,6 +181,12 @@
   - İleri Teknik Rehberler (3 kart: Botanik, Lojistik, Ekonomi)
   - Sektör Sözlüğü (4 terim + A-Z/Popüler butonları)
   - Hızlı Terimler Arama + tag'ler
+  - 5 alt sayfa (gerçek SEO içerik):
+    - /bilgi-merkezi/futures-101 — Vadeli işlemler rehberi
+    - /bilgi-merkezi/kahve-kusagi — Üretim ülkeleri & coğrafya
+    - /bilgi-merkezi/isleme-yontemleri — Washed/Natural/Honey/Anaerobik
+    - /bilgi-merkezi/grafik-okuma — Candlestick, destek/direnç, MA
+    - /bilgi-merkezi/terimler-sozlugu — 33 terim A-Z
   - Faydalı Kaynaklar (ITC, USDA, SeaRates, Coffee Encyclopedia)
   - Sektör Dernekleri & Sertifikalar (SCA, ICO, WCR, Rainforest, Fair Trade, CQI, ACE)
   - Premium Bülten CTA
