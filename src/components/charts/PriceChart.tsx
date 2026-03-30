@@ -10,7 +10,7 @@ import {
   Tooltip,
   CartesianGrid,
 } from "recharts";
-import { fetchArabicaHistory, type PricePoint } from "@/lib/api/fred";
+import { fetchPriceHistory, type PricePoint } from "@/lib/api/fred";
 
 interface PriceChartProps {
   title: string;
@@ -20,24 +20,38 @@ interface PriceChartProps {
 
 const periods = ["1M", "1Y", "5Y"] as const;
 
-export default function PriceChart({ title, subtitle }: PriceChartProps) {
+export default function PriceChart({
+  title,
+  subtitle,
+  symbol = "arabica",
+}: PriceChartProps) {
   const [period, setPeriod] = useState<"1M" | "1Y" | "5Y">("1Y");
   const [data, setData] = useState<PricePoint[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    fetchArabicaHistory(period).then((points) => {
-      setData(points);
+    setError(false);
+    fetchPriceHistory(symbol, period).then((points) => {
+      if (points.length === 0) {
+        setError(true);
+      } else {
+        setData(points);
+      }
       setLoading(false);
     });
-  }, [period]);
+  }, [symbol, period]);
 
-  const lastPrice = data.length > 0 ? data[data.length - 1].price : 0;
-  const firstPrice = data.length > 1 ? data[0].price : lastPrice;
-  const change = lastPrice - firstPrice;
-  const changePct = firstPrice > 0 ? (change / firstPrice) * 100 : 0;
-  const isUp = change >= 0;
+  const lastPrice = data.length > 0 ? data[data.length - 1].price : null;
+  const firstPrice = data.length > 1 ? data[0].price : null;
+  const change =
+    lastPrice !== null && firstPrice !== null ? lastPrice - firstPrice : null;
+  const changePct =
+    change !== null && firstPrice !== null && firstPrice > 0
+      ? (change / firstPrice) * 100
+      : null;
+  const isUp = change !== null && change >= 0;
 
   return (
     <div>
@@ -47,7 +61,9 @@ export default function PriceChart({ title, subtitle }: PriceChartProps) {
           <span className="text-[10px] font-label uppercase tracking-[0.2em] text-secondary mb-1 block">
             {subtitle || "Canli Veri"}
           </span>
-          <h3 className="font-headline text-2xl md:text-3xl font-bold">{title}</h3>
+          <h3 className="font-headline text-2xl md:text-3xl font-bold">
+            {title}
+          </h3>
         </div>
         <div className="flex gap-2">
           {periods.map((p) => (
@@ -67,24 +83,28 @@ export default function PriceChart({ title, subtitle }: PriceChartProps) {
       </div>
 
       {/* Fiyat özeti */}
-      <div className="flex items-end gap-4 mb-4">
-        <span className="font-headline text-4xl font-bold text-primary">
-          {lastPrice.toFixed(2)}
-        </span>
-        <span className="text-xs text-secondary">USD/lb</span>
-        <span
-          className={`text-sm font-bold flex items-center gap-1 ${
-            isUp ? "text-tertiary" : "text-error"
-          }`}
-        >
-          <span className="material-symbols-outlined text-base">
-            {isUp ? "trending_up" : "trending_down"}
+      {lastPrice !== null && (
+        <div className="flex items-end gap-4 mb-4">
+          <span className="font-headline text-4xl font-bold text-primary">
+            {lastPrice.toFixed(2)}
           </span>
-          {isUp ? "+" : ""}
-          {change.toFixed(2)} ({isUp ? "+" : ""}
-          {changePct.toFixed(2)}%)
-        </span>
-      </div>
+          <span className="text-xs text-secondary">USD/lb</span>
+          {change !== null && changePct !== null && (
+            <span
+              className={`text-sm font-bold flex items-center gap-1 ${
+                isUp ? "text-tertiary" : "text-error"
+              }`}
+            >
+              <span className="material-symbols-outlined text-base">
+                {isUp ? "trending_up" : "trending_down"}
+              </span>
+              {isUp ? "+" : ""}
+              {change.toFixed(2)} ({isUp ? "+" : ""}
+              {changePct.toFixed(2)}%)
+            </span>
+          )}
+        </div>
+      )}
 
       {/* Grafik */}
       <div className="h-72 w-full">
@@ -94,11 +114,27 @@ export default function PriceChart({ title, subtitle }: PriceChartProps) {
               progress_activity
             </span>
           </div>
+        ) : error ? (
+          <div className="h-full flex flex-col items-center justify-center text-secondary">
+            <span className="material-symbols-outlined text-4xl text-error mb-2">
+              error
+            </span>
+            <p className="text-sm">Veri yuklenemedi</p>
+            <p className="text-xs text-outline mt-1">
+              Lutfen daha sonra tekrar deneyin
+            </p>
+          </div>
         ) : (
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={data}>
               <defs>
-                <linearGradient id="priceGradient" x1="0" y1="0" x2="0" y2="1">
+                <linearGradient
+                  id={`grad-${symbol}`}
+                  x1="0"
+                  y1="0"
+                  x2="0"
+                  y2="1"
+                >
                   <stop offset="5%" stopColor="#4b2c20" stopOpacity={0.3} />
                   <stop offset="95%" stopColor="#4b2c20" stopOpacity={0} />
                 </linearGradient>
@@ -115,8 +151,14 @@ export default function PriceChart({ title, subtitle }: PriceChartProps) {
                 tickFormatter={(d: string) => {
                   const date = new Date(d);
                   if (period === "1M")
-                    return date.toLocaleDateString("tr", { day: "numeric", month: "short" });
-                  return date.toLocaleDateString("tr", { month: "short", year: "2-digit" });
+                    return date.toLocaleDateString("tr", {
+                      day: "numeric",
+                      month: "short",
+                    });
+                  return date.toLocaleDateString("tr", {
+                    month: "short",
+                    year: "2-digit",
+                  });
                 }}
                 axisLine={false}
                 tickLine={false}
@@ -143,14 +185,17 @@ export default function PriceChart({ title, subtitle }: PriceChartProps) {
                     year: "numeric",
                   })
                 }
-                formatter={(value) => [`${Number(value).toFixed(2)} USD/lb`, "Fiyat"]}
+                formatter={(value) => [
+                  `${Number(value).toFixed(2)} USD/lb`,
+                  "Fiyat",
+                ]}
               />
               <Area
                 type="monotone"
                 dataKey="price"
                 stroke="#4b2c20"
                 strokeWidth={2}
-                fill="url(#priceGradient)"
+                fill={`url(#grad-${symbol})`}
               />
             </AreaChart>
           </ResponsiveContainer>

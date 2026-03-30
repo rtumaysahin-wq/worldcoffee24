@@ -1,20 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import TickerBand from "@/components/TickerBand";
 import Footer from "@/components/Footer";
 import PriceChart from "@/components/charts/PriceChart";
 import PriceCard from "@/components/charts/PriceCard";
-import { fallbackPrices } from "@/lib/api/commodities";
-
-const contracts = [
-  { month: "May 2025", exchange: "ICE (KC)", price: "214.25", change: "+1.85", pct: "+0.87%", positive: true },
-  { month: "July 2025", exchange: "ICE (KC)", price: "212.90", change: "+1.40", pct: "+0.66%", positive: true },
-  { month: "Sept 2025", exchange: "ICE (KC)", price: "211.45", change: "-0.25", pct: "-0.12%", positive: false },
-  { month: "May 2025", exchange: "London (RC)", price: "3,812", change: "+42", pct: "+1.11%", positive: true },
-];
+import { fetchAllPrices, type PriceItem } from "@/lib/api/commodities";
 
 const scaPremiums = [
   { label: "SCA 86+ (Micro-lot)", range: "+80 / +120" },
@@ -24,8 +17,21 @@ const scaPremiums = [
 
 export default function FiyatMerkezi() {
   const [usdAmount, setUsdAmount] = useState("100");
-  const rate = 38.42;
-  const tryResult = usdAmount ? (parseFloat(usdAmount) * rate).toFixed(2) : "0.00";
+  const [prices, setPrices] = useState<PriceItem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchAllPrices().then((data) => {
+      if (data) setPrices(data.prices);
+      setLoading(false);
+    });
+  }, []);
+
+  const getPrice = (label: string) => prices.find((p) => p.label === label);
+  const usdTry = getPrice("USD/TRY");
+  const brlUsd = getPrice("BRL/USD");
+  const rate = usdTry?.price || 0;
+  const tryResult = usdAmount && rate ? (parseFloat(usdAmount) * rate).toFixed(2) : "—";
 
   return (
     <>
@@ -46,51 +52,44 @@ export default function FiyatMerkezi() {
                 Canli Piyasa Verisi
               </p>
             </div>
-            {/* Fiyat kartları */}
             <div className="flex flex-wrap gap-3">
               <PriceCard
                 label="USD/TRY"
-                price={fallbackPrices.usdtry.price}
-                change={fallbackPrices.usdtry.change}
-                changePct={fallbackPrices.usdtry.changePct}
+                price={usdTry?.price ?? null}
+                change={usdTry?.change ?? null}
+                changePct={usdTry?.changePct ?? null}
+                loading={loading}
               />
               <PriceCard
                 label="BRL/USD"
-                price={fallbackPrices.brlusd.price}
-                change={fallbackPrices.brlusd.change}
-                changePct={fallbackPrices.brlusd.changePct}
+                price={brlUsd?.price ?? null}
+                change={brlUsd?.change ?? null}
+                changePct={brlUsd?.changePct ?? null}
+                loading={loading}
               />
             </div>
           </header>
 
           <div className="grid grid-cols-12 gap-8">
 
-            {/* ═══ ARABİCA GRAFİK (Recharts) ═══ */}
+            {/* ═══ ARABİCA GRAFİK ═══ */}
             <section className="col-span-12 lg:col-span-8 bg-surface-container-lowest p-6 md:p-8 editorial-shadow">
               <PriceChart
                 title="ICE Arabica Futures (KC1!)"
                 subtitle="FRED / ICE New York"
+                symbol="arabica"
               />
-              <div className="mt-6 grid grid-cols-3 gap-8 border-t border-outline-variant/15 pt-6">
-                <div>
-                  <p className="text-[10px] font-label uppercase text-secondary mb-1">Kontrat Yuksek</p>
-                  <p className="font-headline text-xl font-bold">218.40</p>
-                </div>
-                <div>
-                  <p className="text-[10px] font-label uppercase text-secondary mb-1">Kontrat Dusuk</p>
-                  <p className="font-headline text-xl font-bold">209.15</p>
-                </div>
-                <div>
-                  <p className="text-[10px] font-label uppercase text-secondary mb-1">Hacim (Lot)</p>
-                  <p className="font-headline text-xl font-bold">42,810</p>
-                </div>
-              </div>
             </section>
 
             {/* ═══ KUR ÇEVİRİCİ ═══ */}
             <section className="col-span-12 lg:col-span-4 bg-primary-container text-white p-6 md:p-8 flex flex-col justify-between">
               <div>
-                <h3 className="font-headline text-2xl font-bold mb-7">Kur Cevirici</h3>
+                <h3 className="font-headline text-2xl font-bold mb-2">Kur Cevirici</h3>
+                {rate > 0 && (
+                  <p className="text-[10px] text-[#d5c3bd] mb-5">
+                    1 USD = {rate.toFixed(4)} TRY (canli kur)
+                  </p>
+                )}
                 <div className="space-y-5">
                   <div>
                     <label className="text-[10px] font-label uppercase tracking-widest text-[#d5c3bd] mb-1 block">
@@ -124,41 +123,17 @@ export default function FiyatMerkezi() {
                 </div>
               </div>
               <p className="text-[10px] italic text-[#d5c3bd] leading-relaxed mt-6 pt-5 border-t border-[#d5c3bd]/20">
-                Oranlar her 60 saniyede guncellenir. Merkez Bankasi orta piyasa kuruna gore hesaplanir.
+                Kur verileri ExchangeRate API&apos;den saatlik guncellenir.
               </p>
             </section>
 
-            {/* ═══ AKTİF KONTRATLAR TABLOSU ═══ */}
-            <section className="col-span-12 lg:col-span-8 bg-surface-container-low p-6 md:p-8">
-              <h3 className="font-headline text-2xl font-bold mb-6">Aktif Kontratlar (Futures)</h3>
-              <div className="overflow-x-auto">
-                <table className="w-full text-left">
-                  <thead>
-                    <tr className="text-[10px] font-label uppercase tracking-widest text-secondary border-b border-outline-variant/30">
-                      <th className="pb-4">Ay</th>
-                      <th className="pb-4">Borsa</th>
-                      <th className="pb-4 text-right">Fiyat</th>
-                      <th className="pb-4 text-right">Degisim</th>
-                      <th className="pb-4 text-right">%</th>
-                    </tr>
-                  </thead>
-                  <tbody className="text-sm divide-y divide-outline-variant/10">
-                    {contracts.map((c, i) => (
-                      <tr key={i} className="hover:bg-white/50">
-                        <td className="py-4 font-bold">{c.month}</td>
-                        <td className="py-4 text-secondary">{c.exchange}</td>
-                        <td className="py-4 text-right font-headline text-lg">{c.price}</td>
-                        <td className={`py-4 text-right font-bold ${c.positive ? "text-tertiary" : "text-error"}`}>
-                          {c.change}
-                        </td>
-                        <td className={`py-4 text-right ${c.positive ? "text-tertiary" : "text-error"}`}>
-                          {c.pct}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+            {/* ═══ ROBUSTA GRAFİK ═══ */}
+            <section className="col-span-12 lg:col-span-8 bg-surface-container-lowest p-6 md:p-8 editorial-shadow">
+              <PriceChart
+                title="Robusta Coffee Futures (RC1!)"
+                subtitle="FRED / London ICE"
+                symbol="robusta"
+              />
             </section>
 
             {/* ═══ SCA PREMİUM + FİZİKSEL REFERANS ═══ */}
@@ -189,9 +164,6 @@ export default function FiyatMerkezi() {
                 <p className="text-xs text-secondary leading-loose">
                   Fiziksel fiyatlar, Vietnam Robusta arzindaki sikilasmayi yansitiyor. G1 S18 primleri Londra uzerinde +600$ ile tarihi yuksek seviyelerde.
                 </p>
-                <button className="mt-5 text-xs font-bold text-primary underline underline-offset-4 uppercase tracking-widest">
-                  Yerel Fiyatlari Goruntule
-                </button>
               </div>
             </section>
 
@@ -205,22 +177,9 @@ export default function FiyatMerkezi() {
                     <ellipse cx="115" cy="140" rx="22" ry="14" transform="rotate(15,115,140)" />
                     <ellipse cx="75" cy="200" rx="22" ry="14" transform="rotate(-35,75,200)" />
                     <ellipse cx="175" cy="55" rx="22" ry="14" transform="rotate(10,175,55)" />
-                    <ellipse cx="195" cy="178" rx="22" ry="14" transform="rotate(-25,195,178)" />
                     <ellipse cx="258" cy="96" rx="22" ry="14" transform="rotate(30,258,96)" />
-                    <ellipse cx="298" cy="220" rx="22" ry="14" transform="rotate(-10,298,220)" />
                     <ellipse cx="358" cy="65" rx="22" ry="14" transform="rotate(20,358,65)" />
-                    <ellipse cx="378" cy="158" rx="22" ry="14" transform="rotate(-30,378,158)" />
                     <ellipse cx="438" cy="115" rx="22" ry="14" transform="rotate(15,438,115)" />
-                    <ellipse cx="418" cy="238" rx="22" ry="14" transform="rotate(-20,418,238)" />
-                    <ellipse cx="148" cy="238" rx="22" ry="14" transform="rotate(25,148,238)" />
-                  </g>
-                  <g stroke="#5a3018" strokeWidth="1.5" fill="none" opacity="0.5">
-                    <line x1="45" y1="75" x2="65" y2="75" transform="rotate(-20,55,75)" />
-                    <line x1="105" y1="140" x2="125" y2="140" transform="rotate(15,115,140)" />
-                    <line x1="165" y1="55" x2="185" y2="55" transform="rotate(10,175,55)" />
-                    <line x1="248" y1="96" x2="268" y2="96" transform="rotate(30,258,96)" />
-                    <line x1="348" y1="65" x2="368" y2="65" transform="rotate(20,358,65)" />
-                    <line x1="428" y1="115" x2="448" y2="115" transform="rotate(15,438,115)" />
                   </g>
                 </svg>
               </div>
