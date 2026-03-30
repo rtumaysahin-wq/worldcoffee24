@@ -8,7 +8,7 @@
 **Slogan:** Küresel Kahve Piyasa Platformu / Market Intelligence
 **Kurucu:** Recep Tümay Şahin
 **Başlangıç:** Mart 2026
-**Durum:** Recharts grafikleri + FRED API + kendi veri katmanı kuruldu → Mailchimp, responsive test sırada
+**Durum:** Canlı API entegrasyonu tamamlandı (FRED + ExchangeRate + API Ninjas) → Mailchimp, responsive test sırada
 
 ---
 
@@ -151,15 +151,14 @@
 
 ### Faz 2 — Ana Sayfa & Fiyat Merkezi
 - [x] Ana sayfa layout + hero ✅ (statik placeholder, canlı veriye geçilecek)
-- [x] Kendi grafik sistemi ✅ — Recharts + FRED API + fallback veriler
-  - src/lib/api/fred.ts: FRED API'den tarihsel Arabica fiyatları (PCOFFOTMUSDM)
-  - src/lib/api/commodities.ts: API Ninjas entegrasyonu + fallback fiyatlar
-  - src/components/charts/PriceChart.tsx: Çizgi grafik (1M/1Y/5Y, kahve tonları)
-  - src/components/charts/PriceCard.tsx: Fiyat kartı (fiyat, değişim %, ok ikonu)
-  - Fiyat Merkezi: Recharts Arabica grafik + PriceCard'lar + Veri Kaynakları
-  - Ana Sayfa: Recharts KC1! grafik
-  - TickerBand: Kendi ticker band'ı (fallback verilerden 6 sembol)
-  - TradingViewWidget.tsx artık kullanılmıyor
+- [x] Canlı API entegrasyonu ✅ — Server-side API route'lar + Recharts
+  - /api/prices: FRED (Arabica+Robusta) + ExchangeRate (USD/TRY, EUR/TRY, BRL/USD) + API Ninjas (Sugar)
+  - /api/prices/history: Tarihsel FRED verisi (1M/1Y/5Y)
+  - PriceChart.tsx: Recharts area chart, API'den veri, loading/error durumları
+  - PriceCard.tsx: null-safe, loading skeleton, hata gösterimi
+  - TickerBand: API'den canlı 6 fiyat, loading/error durumları
+  - Fiyat Merkezi: Arabica + Robusta ayrı grafikler, canlı kur çevirici
+  - Hardcoded veri yok — veri yoksa "Veri yüklenemedi" gösterir
 - [ ] Döviz kuru bandı
 - [x] Bülten kayıt formu ✅ (UI hazır, Mailchimp entegrasyonu yapılacak)
 - [x] Fiyat Merkezi sayfası ✅ — src/app/fiyat-merkezi/page.tsx
