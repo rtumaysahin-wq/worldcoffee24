@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import TickerBand from "@/components/TickerBand";
 import Sidebar from "@/components/Sidebar";
 import Footer from "@/components/Footer";
+import TradingViewWidget from "@/components/TradingViewWidget";
 
 export default function Home() {
   return (
@@ -173,23 +174,7 @@ export default function Home() {
                   </button>
                 </div>
               </div>
-              {/* Placeholder bar chart */}
-              <div className="h-64 relative flex items-end gap-2 border-b-2 border-outline-variant/20 pb-2">
-                <div className="flex-1 bg-primary/10 hover:bg-primary/20 transition-colors h-[40%] rounded-t-sm" />
-                <div className="flex-1 bg-primary/15 hover:bg-primary/20 transition-colors h-[55%] rounded-t-sm" />
-                <div className="flex-1 bg-primary/10 hover:bg-primary/20 transition-colors h-[48%] rounded-t-sm" />
-                <div className="flex-1 bg-primary/25 hover:bg-primary/20 transition-colors h-[70%] rounded-t-sm" />
-                <div className="flex-1 bg-primary/30 hover:bg-primary/20 transition-colors h-[85%] rounded-t-sm" />
-                <div className="flex-1 bg-primary/40 hover:bg-primary/20 transition-colors h-[80%] rounded-t-sm" />
-                <div className="flex-1 bg-primary h-[95%] rounded-t-sm relative">
-                  <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-primary text-white px-2 py-1 text-[10px] whitespace-nowrap">
-                    Current: 184.25
-                  </div>
-                </div>
-              </div>
-              <div className="flex justify-between mt-4 text-[10px] font-label uppercase tracking-widest text-secondary">
-                <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
-              </div>
+              <TradingViewWidget symbol="TVC:KC1!" height={320} />
             </div>
 
             {/* Üretici Bölge Havaları */}

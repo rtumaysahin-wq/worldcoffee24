@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import TickerBand from "@/components/TickerBand";
 import Footer from "@/components/Footer";
+import TradingViewWidget from "@/components/TradingViewWidget";
 
 const contracts = [
   { month: "May 2025", exchange: "ICE (KC)", price: "214.25", change: "+1.85", pct: "+0.87%", positive: true },
@@ -57,43 +58,17 @@ export default function FiyatMerkezi() {
 
           <div className="grid grid-cols-12 gap-8">
 
-            {/* ═══ ARABİCA FUTURES GRAFİK ═══ */}
+            {/* ═══ ARABİCA FUTURES GRAFİK (TradingView) ═══ */}
             <section className="col-span-12 lg:col-span-8 bg-surface-container-lowest p-6 md:p-8 editorial-shadow">
-              <div className="flex flex-col sm:flex-row justify-between items-start mb-6 gap-4">
-                <div>
-                  <span className="text-[10px] font-label uppercase tracking-[0.2em] text-secondary mb-1 block">
-                    Emtia Alfa
-                  </span>
-                  <h3 className="font-headline text-2xl md:text-3xl font-bold">
-                    ICE Arabica Futures (KC1!)
-                  </h3>
-                </div>
-                <div className="flex gap-2">
-                  <button className="px-3 py-1 text-xs bg-primary-container text-on-primary">1D</button>
-                  <button className="px-3 py-1 text-xs bg-surface-container hover:bg-surface-container-high">1W</button>
-                  <button className="px-3 py-1 text-xs bg-surface-container hover:bg-surface-container-high">1M</button>
-                </div>
+              <div className="mb-4">
+                <span className="text-[10px] font-label uppercase tracking-[0.2em] text-secondary mb-1 block">
+                  Emtia Alfa
+                </span>
+                <h3 className="font-headline text-2xl md:text-3xl font-bold">
+                  ICE Arabica Futures (KC1!)
+                </h3>
               </div>
-              {/* Placeholder chart */}
-              <div className="h-72 w-full bg-surface-container-low flex items-end justify-between px-2 pt-12 relative">
-                <div className="absolute inset-0 opacity-5 flex items-center justify-center pointer-events-none">
-                  <span className="material-symbols-outlined text-[120px]">monitoring</span>
-                </div>
-                <div className="w-full h-full flex items-end gap-1.5 relative z-10">
-                  <div className="flex-1 bg-primary/20 h-2/3" />
-                  <div className="flex-1 bg-primary/30 h-3/4" />
-                  <div className="flex-1 bg-primary/25 h-1/2" />
-                  <div className="flex-1 bg-primary/40 h-4/5" />
-                  <div className="flex-1 bg-primary h-5/6 relative">
-                    <div className="absolute -top-9 left-1/2 -translate-x-1/2 bg-primary text-white text-[10px] px-2 py-1 whitespace-nowrap">
-                      214.25
-                    </div>
-                  </div>
-                  <div className="flex-1 bg-primary/50 h-3/4" />
-                  <div className="flex-1 bg-primary/40 h-2/3" />
-                </div>
-              </div>
-              {/* Kontrat özet verileri */}
+              <TradingViewWidget symbol="TVC:KC1!" height={420} />
               <div className="mt-6 grid grid-cols-3 gap-8 border-t border-outline-variant/15 pt-6">
                 <div>
                   <p className="text-[10px] font-label uppercase text-secondary mb-1">Kontrat Yuksek</p>
@@ -264,6 +239,53 @@ export default function FiyatMerkezi() {
                 <button className="inline-block px-8 py-4 bg-primary text-white text-xs font-label uppercase tracking-widest hover:translate-x-1 transition-transform">
                   Tam Analizi Oku
                 </button>
+              </div>
+            </section>
+
+            {/* ═══ ROBUSTA FUTURES GRAFİK (TradingView) ═══ */}
+            <section className="col-span-12 lg:col-span-8 bg-surface-container-lowest p-6 md:p-8 editorial-shadow">
+              <div className="mb-4">
+                <span className="text-[10px] font-label uppercase tracking-[0.2em] text-secondary mb-1 block">
+                  London ICE
+                </span>
+                <h3 className="font-headline text-2xl md:text-3xl font-bold">
+                  Robusta Coffee Futures (RC1!)
+                </h3>
+              </div>
+              <TradingViewWidget symbol="TVC:RC1!" height={380} />
+            </section>
+
+            {/* ═══ USD/TRY MİNİ WIDGET ═══ */}
+            <section className="col-span-12 lg:col-span-4 bg-surface-container-lowest p-6 md:p-8 editorial-shadow">
+              <div className="mb-4">
+                <span className="text-[10px] font-label uppercase tracking-[0.2em] text-secondary mb-1 block">
+                  Doviz Kuru
+                </span>
+                <h3 className="font-headline text-2xl font-bold">USD/TRY</h3>
+              </div>
+              <TradingViewWidget symbol="FX:USDTRY" height={380} mini />
+            </section>
+
+            {/* ═══ VERİ KAYNAKLARI ═══ */}
+            <section className="col-span-12 bg-surface-container-low p-6 md:p-8">
+              <h3 className="font-headline text-2xl font-bold mb-6">Veri Kaynaklari</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <a href="https://www.theice.com/products/15/Coffee-C-Futures" target="_blank" rel="noopener noreferrer" className="p-4 bg-surface-container-lowest hover:bg-white transition-colors editorial-shadow">
+                  <p className="font-bold text-sm text-primary mb-1">ICE Futures</p>
+                  <p className="text-xs text-secondary">Arabica & Robusta vadeli islemler</p>
+                </a>
+                <a href="https://www.barchart.com/futures/quotes/KC*0/futures-prices" target="_blank" rel="noopener noreferrer" className="p-4 bg-surface-container-lowest hover:bg-white transition-colors editorial-shadow">
+                  <p className="font-bold text-sm text-primary mb-1">Barchart</p>
+                  <p className="text-xs text-secondary">Futures fiyatlar ve grafikler</p>
+                </a>
+                <a href="https://www.cepea.esalq.usp.br/en/indicator/coffee.aspx" target="_blank" rel="noopener noreferrer" className="p-4 bg-surface-container-lowest hover:bg-white transition-colors editorial-shadow">
+                  <p className="font-bold text-sm text-primary mb-1">CEPEA</p>
+                  <p className="text-xs text-secondary">Brezilya kahve fiyat endeksi</p>
+                </a>
+                <a href="http://www.ico.org/" target="_blank" rel="noopener noreferrer" className="p-4 bg-surface-container-lowest hover:bg-white transition-colors editorial-shadow">
+                  <p className="font-bold text-sm text-primary mb-1">ICO</p>
+                  <p className="text-xs text-secondary">Uluslararasi Kahve Orgutu</p>
+                </a>
               </div>
             </section>
 

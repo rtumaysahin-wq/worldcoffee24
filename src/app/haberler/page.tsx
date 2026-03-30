@@ -220,6 +220,39 @@ export default function Haberler() {
               </div>
             </aside>
 
+            {/* ═══ KAHVE HABER KAYNAKLARI ═══ */}
+            <section className="col-span-12">
+              <div className="flex items-center gap-4 mb-6">
+                <h2 className="font-headline text-2xl font-bold">Kahve Haber Kaynaklari</h2>
+                <div className="h-px flex-1 bg-outline-variant/20" />
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {[
+                  { name: "Daily Coffee News", desc: "Specialty kahve sektorunden gunluk haberler ve analizler.", url: "https://dailycoffeenews.com/" },
+                  { name: "Perfect Daily Grind", desc: "Kahve uretiminden tuketimine, sektor profesyonelleri icin icerikler.", url: "https://www.perfectdailygrind.com/" },
+                  { name: "Sprudge", desc: "Kuresel kahve kulturu, etkinlikler ve trendler.", url: "https://sprudge.com/" },
+                  { name: "Global Coffee Report", desc: "Kuresel kahve endustrisi haberleri, is dunyasi ve pazar analizi.", url: "http://www.gcrmag.com/" },
+                  { name: "Coffee & Cocoa", desc: "Kahve ve kakao sektorlerinden haberler ve piyasa verileri.", url: "https://www.coffeeandcocoa.net/" },
+                  { name: "Roast Magazine", desc: "Kavurma endustrisi, ekipman ve isletme yonetimi odakli yayin.", url: "https://www.roastmagazine.com/" },
+                  { name: "Coffee Science", desc: "Kahve bilimi, arastirma ve akademik calismalara erisim.", url: "https://www.coffeescience.org/" },
+                ].map((source) => (
+                  <a
+                    key={source.name}
+                    href={source.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-5 bg-surface-container-lowest editorial-shadow hover:-translate-y-1 transition-all group"
+                  >
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="material-symbols-outlined text-xl text-primary">newspaper</span>
+                      <h4 className="font-bold text-sm group-hover:text-primary">{source.name}</h4>
+                    </div>
+                    <p className="text-xs text-secondary leading-relaxed">{source.desc}</p>
+                  </a>
+                ))}
+              </div>
+            </section>
+
           </div>
         </div>
         <Footer />

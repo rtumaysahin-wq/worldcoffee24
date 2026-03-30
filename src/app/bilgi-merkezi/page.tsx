@@ -261,6 +261,60 @@ export default function BilgiMerkezi() {
             </div>
           </section>
 
+          {/* ═══ FAYDALI KAYNAKLAR ═══ */}
+          <section className="mb-12 md:mb-16">
+            <div className="flex items-center gap-4 mb-8">
+              <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary">Faydali Kaynaklar</h2>
+              <div className="h-px flex-1 bg-outline-variant/20" />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+              <a href="http://www.intracen.org/itc/sectors/coffee/" target="_blank" rel="noopener noreferrer" className="p-6 bg-surface-container-lowest editorial-shadow hover:-translate-y-1 transition-all group">
+                <span className="material-symbols-outlined text-3xl text-primary mb-3 block">public</span>
+                <h4 className="font-headline text-lg font-bold mb-2 group-hover:text-primary">ITC Coffee Guide</h4>
+                <p className="text-xs text-secondary leading-relaxed">Uluslararasi Ticaret Merkezi kahve sektor rehberi ve pazar analizi.</p>
+              </a>
+              <a href="https://www.fas.usda.gov/commodities/coffee" target="_blank" rel="noopener noreferrer" className="p-6 bg-surface-container-lowest editorial-shadow hover:-translate-y-1 transition-all group">
+                <span className="material-symbols-outlined text-3xl text-primary mb-3 block">agriculture</span>
+                <h4 className="font-headline text-lg font-bold mb-2 group-hover:text-primary">USDA Coffee Data</h4>
+                <p className="text-xs text-secondary leading-relaxed">ABD Tarim Bakanligi kahve uretim, tuketim ve ticaret verileri.</p>
+              </a>
+              <a href="https://www.searates.com/" target="_blank" rel="noopener noreferrer" className="p-6 bg-surface-container-lowest editorial-shadow hover:-translate-y-1 transition-all group">
+                <span className="material-symbols-outlined text-3xl text-primary mb-3 block">sailing</span>
+                <h4 className="font-headline text-lg font-bold mb-2 group-hover:text-primary">SeaRates</h4>
+                <p className="text-xs text-secondary leading-relaxed">Kuresel navlun oranlari, konteyner takibi ve lojistik hesaplayici.</p>
+              </a>
+              <a href="http://www.supremo.be/en/continent/coffee-encyclopedia" target="_blank" rel="noopener noreferrer" className="p-6 bg-surface-container-lowest editorial-shadow hover:-translate-y-1 transition-all group">
+                <span className="material-symbols-outlined text-3xl text-primary mb-3 block">auto_stories</span>
+                <h4 className="font-headline text-lg font-bold mb-2 group-hover:text-primary">Coffee Encyclopedia</h4>
+                <p className="text-xs text-secondary leading-relaxed">Kapsamli kahve ansiklopedisi: cesitler, bolgeler, isleme yontemleri.</p>
+              </a>
+            </div>
+          </section>
+
+          {/* ═══ SEKTÖR DERNEKLERİ & SERTİFİKALAR ═══ */}
+          <section className="mb-12 md:mb-16 bg-surface-container-low p-6 md:p-10">
+            <h2 className="font-headline text-3xl font-bold text-primary mb-8">Sektor Dernekleri &amp; Sertifikalar</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                { name: "SCA", full: "Specialty Coffee Association", url: "https://sca.coffee/", icon: "coffee" },
+                { name: "ICO", full: "International Coffee Organization", url: "http://www.ico.org/", icon: "public" },
+                { name: "WCR", full: "World Coffee Research", url: "https://worldcoffeeresearch.org/", icon: "biotech" },
+                { name: "Rainforest Alliance", full: "Surdurulebilirlik Sertifikasi", url: "https://www.rainforest-alliance.org/", icon: "forest" },
+                { name: "Fair Trade", full: "Adil Ticaret Sertifikasi", url: "https://www.fairtrade.net/", icon: "handshake" },
+                { name: "CQI", full: "Coffee Quality Institute", url: "https://www.coffeeinstitute.org/", icon: "verified" },
+                { name: "ACE", full: "Alliance for Coffee Excellence", url: "https://allianceforcoffeeexcellence.org/", icon: "emoji_events" },
+              ].map((org) => (
+                <a key={org.name} href={org.url} target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 p-4 bg-surface-container-lowest hover:bg-white transition-colors">
+                  <span className="material-symbols-outlined text-2xl text-primary mt-0.5">{org.icon}</span>
+                  <div>
+                    <p className="font-bold text-sm">{org.name}</p>
+                    <p className="text-[10px] text-secondary">{org.full}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+
           {/* ═══ PREMIUM BÜLTEN CTA ═══ */}
           <section className="text-center py-12 md:py-16">
             <h2 className="font-headline text-3xl md:text-4xl text-primary mb-4">

@@ -8,7 +8,7 @@
 **Slogan:** Küresel Kahve Piyasa Platformu / Market Intelligence
 **Kurucu:** Recep Tümay Şahin
 **Başlangıç:** Mart 2026
-**Durum:** Faz 4 Trade Board tamamlandı → tüm sayfalar hazır, SEO ve canlı veri entegrasyonu sırada
+**Durum:** TradingView widget'ları + kaynak linkleri eklendi → canlı API entegrasyonu sırada
 
 ---
 
@@ -151,7 +151,11 @@
 
 ### Faz 2 — Ana Sayfa & Fiyat Merkezi
 - [x] Ana sayfa layout + hero ✅ (statik placeholder, canlı veriye geçilecek)
-- [ ] Canlı fiyat bandı (TradingView widget — TickerBand'ı gerçek API'ye bağla)
+- [x] TradingView widget entegrasyonu ✅ — TradingViewWidget.tsx component
+  - Fiyat Merkezi: Arabica KC1!, Robusta RC1!, USD/TRY mini widget
+  - Ana Sayfa: Haftalık grafik KC1! widget
+  - Veri Kaynakları bölümü (ICE, Barchart, CEPEA, ICO)
+- [ ] Canlı fiyat bandı (TickerBand'ı gerçek API'ye bağla)
 - [ ] Döviz kuru bandı
 - [x] Bülten kayıt formu ✅ (UI hazır, Mailchimp entegrasyonu yapılacak)
 - [x] Fiyat Merkezi sayfası ✅ — src/app/fiyat-merkezi/page.tsx
@@ -174,6 +178,8 @@
   - İleri Teknik Rehberler (3 kart: Botanik, Lojistik, Ekonomi)
   - Sektör Sözlüğü (4 terim + A-Z/Popüler butonları)
   - Hızlı Terimler Arama + tag'ler
+  - Faydalı Kaynaklar (ITC, USDA, SeaRates, Coffee Encyclopedia)
+  - Sektör Dernekleri & Sertifikalar (SCA, ICO, WCR, Rainforest, Fair Trade, CQI, ACE)
   - Premium Bülten CTA
 - [x] Hava Radarı sayfası ✅ — src/app/hava-radari/page.tsx
   - Don Riski Uyarısı banner
@@ -186,6 +192,7 @@
   - Canlı RSS Akışı (6 haber placeholder)
   - Haftalık Özet paneli (5 madde)
   - Bülten kayıt formu
+  - Kahve Haber Kaynakları (7 kaynak kartı, yeni sekmede açılır)
   - Navbar ve Sidebar'a "Haberler" linki eklendi
 
 ### Faz 4 — İş & Ticaret + Backend
@@ -201,7 +208,12 @@
 - [ ] Admin panel (içerik yönetimi)
 
 ### Faz 5 — Büyüme & Monetizasyon
-- [ ] SEO optimizasyonu
+- [x] SEO optimizasyonu ✅
+  - Global metadata: title template, 10 keyword, Open Graph, Twitter Card
+  - 7 sayfaya özel metadata (title, description, keywords, OG)
+  - sitemap.xml (7 sayfa, priority + changeFrequency)
+  - robots.txt (tüm sayfalara izin + sitemap referansı)
+  - metadataBase: https://worldcoffee24.vercel.app
 - [ ] Mail listesi büyütme
 - [ ] Premium içerik sistemi
 - [ ] Reklam/sponsorluk alanları
@@ -216,7 +228,7 @@
 - **Sohbet 2 (29 Mart 2026):** Context window sorunu çözüldü (603KB HTML dosyasını her seferinde okumamaya karar verildi). Next.js projesi kuruldu (v16.2.1, App Router, Tailwind CSS, Turbopack). PowerShell execution policy sorunu çözüldü. GitHub repo oluşturuldu ve ilk push yapıldı. Proje çalışır durumda: localhost:3000.
 - **Sohbet 3 (30 Mart 2026):** HTML dosya haritası çıkarıldı (790 satır, hangi bölüm nerede). Tailwind custom config tamamlandı: tailwind.config.ts (renk paleti + fontlar), globals.css (custom stiller), layout.tsx (Newsreader + Inter fontları, Next.js font optimizasyonu). TypeScript bağımlılıkları otomatik kuruldu. Eski layout.js silindi, yeni layout.tsx aktif. Proje localhost:3000'de çalışıyor, arka plan rengi doğru (#f4fafe). Sıradaki: Navbar component.
 - **Sohbet 4 (30 Mart 2026):** HTML dosyası component parçalarına bölündü. Navbar içindeki 210KB inline SVG logo tespit edildi (şişkinliğin kaynağı). Navbar.tsx component'i oluşturuldu ve src/components/ klasörüne yerleştirildi. page.tsx oluşturuldu. Sorun: tsconfig.json'da `@/*` path alias tanımlı değil — bu yüzden Navbar import'u çalışmıyor. Çözüm aşağıda.
-- **Sohbet 5 (30 Mart 2026):** Footer component oluşturuldu. Ana Sayfa layout tamamlandı. Vercel'e deploy yapıldı: https://worldcoffee24.vercel.app. Fiyat Merkezi (/fiyat-merkezi), Piyasa Faktörleri (/piyasa-faktorleri), Bilgi Merkezi (/bilgi-merkezi), Hava Radarı (/hava-radari), Haberler (/haberler) sayfaları oluşturuldu. Navbar ve Sidebar'a Haberler linki eklendi. GitHub-Vercel otomatik deploy bağlantısı kuruldu (her push'ta otomatik deploy). Faz 1-3 tamamlandı.
+- **Sohbet 5 (30 Mart 2026):** Footer, Ana Sayfa layout, Fiyat Merkezi, Piyasa Faktörleri, Bilgi Merkezi, Hava Radarı, Haberler sayfaları oluşturuldu. Vercel deploy + GitHub otomatik deploy bağlantısı. İş & Ticaret (Trade Board) sayfası: İlanlar, Form, Incoterms, Sertifikalar, Tedarikçi Dizini. SEO optimizasyonu: her sayfaya metadata, sitemap.xml, robots.txt, Open Graph, Twitter Card. Faz 1-4 + SEO tamamlandı.
 
 ---
 
@@ -236,7 +248,7 @@
 - Proje yolu: C:\Users\rtuma\worldcoffee24
 
 ### 🚨 SONRAKİ CHAT'TE İLK YAPILACAK İŞ
-Tüm sayfaların UI'ı tamamlandı (7 sayfa). Sıradaki adımlar: SEO optimizasyonu, canlı veri entegrasyonu (TradingView, API), Mailchimp bülten bağlantısı, backend planlama.
+TickerBand'ı gerçek fiyat API'sine bağla, Mailchimp bülten entegrasyonu, backend planlama.
 
 ### 📍 HTML Dosya Haritası (kahve_dunyasi_final1.html — 790 satır)
 | Satırlar | Bölüm | Boyut (SVG'siz) |
@@ -279,7 +291,8 @@ C:\Users\rtuma\worldcoffee24\
 │       ├── Navbar.tsx        (üst menü, dil desteği, aktif sayfa takibi)
 │       ├── Sidebar.tsx       (sol sidebar, sayfa navigasyonu)
 │       ├── TickerBand.tsx    (canlı fiyat bandı, kayan ticker)
-│       └── Footer.tsx        (alt bilgi, linkler)
+│       ├── Footer.tsx        (alt bilgi, linkler)
+│       └── TradingViewWidget.tsx (TradingView embed component)
 ├── tailwind.config.ts        (renk paleti, fontlar)
 ├── tsconfig.json             (path alias: @/* → ./src/*)
 ├── package.json
