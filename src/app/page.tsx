@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import TickerBand from "@/components/TickerBand";
 import Sidebar from "@/components/Sidebar";
 import Footer from "@/components/Footer";
-import TradingViewWidget from "@/components/TradingViewWidget";
+import PriceChart from "@/components/charts/PriceChart";
 
 export default function Home() {
   return (
@@ -174,7 +174,7 @@ export default function Home() {
                   </button>
                 </div>
               </div>
-              <TradingViewWidget symbol="ICEUS:KC1!" height={320} />
+              <PriceChart title="KC1! Arabica Futures" subtitle="7 Gunluk Teknik Trend (ICE NY)" />
             </div>
 
             {/* Üretici Bölge Havaları */}

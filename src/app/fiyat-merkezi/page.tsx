@@ -5,7 +5,9 @@ import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import TickerBand from "@/components/TickerBand";
 import Footer from "@/components/Footer";
-import TradingViewWidget from "@/components/TradingViewWidget";
+import PriceChart from "@/components/charts/PriceChart";
+import PriceCard from "@/components/charts/PriceCard";
+import { fallbackPrices } from "@/lib/api/commodities";
 
 const contracts = [
   { month: "May 2025", exchange: "ICE (KC)", price: "214.25", change: "+1.85", pct: "+0.87%", positive: true },
@@ -22,7 +24,7 @@ const scaPremiums = [
 
 export default function FiyatMerkezi() {
   const [usdAmount, setUsdAmount] = useState("100");
-  const rate = 32.415;
+  const rate = 38.42;
   const tryResult = usdAmount ? (parseFloat(usdAmount) * rate).toFixed(2) : "0.00";
 
   return (
@@ -41,34 +43,34 @@ export default function FiyatMerkezi() {
               </h1>
               <p className="text-secondary text-sm md:text-base flex items-center gap-2">
                 <span className="material-symbols-outlined text-sm">update</span>
-                Canli Piyasa Verisi: Son guncelleme 14:22 GMT+3
+                Canli Piyasa Verisi
               </p>
             </div>
-            <div className="flex gap-4">
-              <div className="bg-surface-container-low px-5 py-3 flex flex-col items-end">
-                <span className="text-[10px] font-label uppercase tracking-widest text-secondary">USD/TRY</span>
-                <span className="font-headline text-2xl font-bold text-primary">32.4150</span>
-              </div>
-              <div className="bg-surface-container-low px-5 py-3 flex flex-col items-end">
-                <span className="text-[10px] font-label uppercase tracking-widest text-secondary">BRL/USD</span>
-                <span className="font-headline text-2xl font-bold text-primary">0.1982</span>
-              </div>
+            {/* Fiyat kartları */}
+            <div className="flex flex-wrap gap-3">
+              <PriceCard
+                label="USD/TRY"
+                price={fallbackPrices.usdtry.price}
+                change={fallbackPrices.usdtry.change}
+                changePct={fallbackPrices.usdtry.changePct}
+              />
+              <PriceCard
+                label="BRL/USD"
+                price={fallbackPrices.brlusd.price}
+                change={fallbackPrices.brlusd.change}
+                changePct={fallbackPrices.brlusd.changePct}
+              />
             </div>
           </header>
 
           <div className="grid grid-cols-12 gap-8">
 
-            {/* ═══ ARABİCA FUTURES GRAFİK (TradingView) ═══ */}
+            {/* ═══ ARABİCA GRAFİK (Recharts) ═══ */}
             <section className="col-span-12 lg:col-span-8 bg-surface-container-lowest p-6 md:p-8 editorial-shadow">
-              <div className="mb-4">
-                <span className="text-[10px] font-label uppercase tracking-[0.2em] text-secondary mb-1 block">
-                  Emtia Alfa
-                </span>
-                <h3 className="font-headline text-2xl md:text-3xl font-bold">
-                  ICE Arabica Futures (KC1!)
-                </h3>
-              </div>
-              <TradingViewWidget symbol="ICEUS:KC1!" height={420} />
+              <PriceChart
+                title="ICE Arabica Futures (KC1!)"
+                subtitle="FRED / ICE New York"
+              />
               <div className="mt-6 grid grid-cols-3 gap-8 border-t border-outline-variant/15 pt-6">
                 <div>
                   <p className="text-[10px] font-label uppercase text-secondary mb-1">Kontrat Yuksek</p>
@@ -161,7 +163,6 @@ export default function FiyatMerkezi() {
 
             {/* ═══ SCA PREMİUM + FİZİKSEL REFERANS ═══ */}
             <section className="col-span-12 lg:col-span-4 space-y-5">
-              {/* SCA Premium Rehberi */}
               <div className="bg-white p-6 md:p-8 shadow-sm">
                 <h3 className="font-headline text-2xl font-bold mb-3">SCA Premium Rehberi</h3>
                 <p className="text-sm text-secondary mb-5 italic">
@@ -180,7 +181,6 @@ export default function FiyatMerkezi() {
                 </div>
               </div>
 
-              {/* Fiziksel Referans */}
               <div className="bg-[#dde3e7] p-6 md:p-8">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="material-symbols-outlined text-primary">info</span>
@@ -197,7 +197,6 @@ export default function FiyatMerkezi() {
 
             {/* ═══ EDİTÖRYAL ANALİZ ═══ */}
             <section className="col-span-12 bg-surface-container-high p-6 md:p-10 flex flex-col md:flex-row gap-10 items-center">
-              {/* SVG kahve taneleri illüstrasyonu */}
               <div className="md:w-1/2 h-72 bg-[#1a1008] flex-shrink-0 relative overflow-hidden">
                 <svg width="100%" height="100%" viewBox="0 0 500 288" xmlns="http://www.w3.org/2000/svg">
                   <rect width="500" height="288" fill="#1a1008" />
@@ -225,7 +224,6 @@ export default function FiyatMerkezi() {
                   </g>
                 </svg>
               </div>
-              {/* Analiz metni */}
               <div className="md:w-1/2">
                 <span className="text-[10px] font-label uppercase tracking-[0.3em] text-secondary mb-4 block">
                   Editoryal Analiz
@@ -240,30 +238,6 @@ export default function FiyatMerkezi() {
                   Tam Analizi Oku
                 </button>
               </div>
-            </section>
-
-            {/* ═══ ROBUSTA FUTURES GRAFİK (TradingView) ═══ */}
-            <section className="col-span-12 lg:col-span-8 bg-surface-container-lowest p-6 md:p-8 editorial-shadow">
-              <div className="mb-4">
-                <span className="text-[10px] font-label uppercase tracking-[0.2em] text-secondary mb-1 block">
-                  London ICE
-                </span>
-                <h3 className="font-headline text-2xl md:text-3xl font-bold">
-                  Robusta Coffee Futures (RC1!)
-                </h3>
-              </div>
-              <TradingViewWidget symbol="ICEEUR:RC1!" height={380} />
-            </section>
-
-            {/* ═══ USD/TRY MİNİ WIDGET ═══ */}
-            <section className="col-span-12 lg:col-span-4 bg-surface-container-lowest p-6 md:p-8 editorial-shadow">
-              <div className="mb-4">
-                <span className="text-[10px] font-label uppercase tracking-[0.2em] text-secondary mb-1 block">
-                  Doviz Kuru
-                </span>
-                <h3 className="font-headline text-2xl font-bold">USD/TRY</h3>
-              </div>
-              <TradingViewWidget symbol="FX_IDC:USDTRY" height={380} />
             </section>
 
             {/* ═══ VERİ KAYNAKLARI ═══ */}

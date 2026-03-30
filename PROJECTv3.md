@@ -8,7 +8,7 @@
 **Slogan:** Küresel Kahve Piyasa Platformu / Market Intelligence
 **Kurucu:** Recep Tümay Şahin
 **Başlangıç:** Mart 2026
-**Durum:** TradingView widget'ları + kaynak linkleri eklendi → canlı API entegrasyonu sırada
+**Durum:** Recharts grafikleri + FRED API + kendi veri katmanı kuruldu → Mailchimp, responsive test sırada
 
 ---
 
@@ -151,11 +151,15 @@
 
 ### Faz 2 — Ana Sayfa & Fiyat Merkezi
 - [x] Ana sayfa layout + hero ✅ (statik placeholder, canlı veriye geçilecek)
-- [x] TradingView widget entegrasyonu ✅ — TradingViewWidget.tsx component
-  - Fiyat Merkezi: ICEUS:KC1! (Arabica), ICEEUR:RC1! (Robusta), FX_IDC:USDTRY
-  - Ana Sayfa: ICEUS:KC1! canlı grafik
-  - Veri Kaynakları bölümü (ICE Arabica/Robusta, Barchart KC/RM, CEPEA, ICO)
-- [x] Canlı fiyat bandı ✅ — TradingView Ticker Tape widget (6 sembol canlı)
+- [x] Kendi grafik sistemi ✅ — Recharts + FRED API + fallback veriler
+  - src/lib/api/fred.ts: FRED API'den tarihsel Arabica fiyatları (PCOFFOTMUSDM)
+  - src/lib/api/commodities.ts: API Ninjas entegrasyonu + fallback fiyatlar
+  - src/components/charts/PriceChart.tsx: Çizgi grafik (1M/1Y/5Y, kahve tonları)
+  - src/components/charts/PriceCard.tsx: Fiyat kartı (fiyat, değişim %, ok ikonu)
+  - Fiyat Merkezi: Recharts Arabica grafik + PriceCard'lar + Veri Kaynakları
+  - Ana Sayfa: Recharts KC1! grafik
+  - TickerBand: Kendi ticker band'ı (fallback verilerden 6 sembol)
+  - TradingViewWidget.tsx artık kullanılmıyor
 - [ ] Döviz kuru bandı
 - [x] Bülten kayıt formu ✅ (UI hazır, Mailchimp entegrasyonu yapılacak)
 - [x] Fiyat Merkezi sayfası ✅ — src/app/fiyat-merkezi/page.tsx
