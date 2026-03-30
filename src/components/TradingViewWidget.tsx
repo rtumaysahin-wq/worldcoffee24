@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, memo } from "react";
 
 interface TradingViewWidgetProps {
   symbol: string;
@@ -8,7 +8,7 @@ interface TradingViewWidgetProps {
   mini?: boolean;
 }
 
-export default function TradingViewWidget({
+function TradingViewWidgetInner({
   symbol,
   height = 400,
   mini = false,
@@ -17,14 +17,20 @@ export default function TradingViewWidget({
 
   useEffect(() => {
     if (!containerRef.current) return;
-    containerRef.current.innerHTML = "";
+
+    const widgetDiv = document.createElement("div");
+    widgetDiv.className = "tradingview-widget-container__widget";
+    widgetDiv.style.height = `${height}px`;
+    widgetDiv.style.width = "100%";
 
     const script = document.createElement("script");
-    script.src = "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
-    script.type = "text/javascript";
+    script.src =
+      "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
     script.async = true;
-    script.innerHTML = JSON.stringify({
-      autosize: true,
+    script.textContent = JSON.stringify({
+      autosize: false,
+      height,
+      width: "100%",
       symbol,
       interval: "D",
       timezone: "Europe/Istanbul",
@@ -36,19 +42,29 @@ export default function TradingViewWidget({
       allow_symbol_change: !mini,
       save_image: false,
       calendar: false,
-      height,
-      width: "100%",
       support_host: "https://www.tradingview.com",
     });
 
+    containerRef.current.innerHTML = "";
+    containerRef.current.appendChild(widgetDiv);
     containerRef.current.appendChild(script);
+
+    return () => {
+      if (containerRef.current) {
+        containerRef.current.innerHTML = "";
+      }
+    };
   }, [symbol, height, mini]);
 
   return (
-    <div
-      className="tradingview-widget-container"
-      ref={containerRef}
-      style={{ height, width: "100%" }}
-    />
+    <div className="tradingview-widget-container" ref={containerRef}>
+      <div
+        className="tradingview-widget-container__widget"
+        style={{ height, width: "100%" }}
+      />
+    </div>
   );
 }
+
+const TradingViewWidget = memo(TradingViewWidgetInner);
+export default TradingViewWidget;
