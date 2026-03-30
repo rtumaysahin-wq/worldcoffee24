@@ -1,26 +1,70 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* ===== Genel Stiller ===== */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), "Inter", sans-serif;
+}
+
+h1, h2, h3, h4, blockquote {
+  font-family: var(--font-headline), "Newsreader", serif;
+}
+
+/* ===== Material Symbols İkon Fontu ===== */
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  vertical-align: middle;
+}
+
+/* ===== Ticker Band Animasyonu ===== */
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-track {
+  display: flex;
+  animation: ticker 35s linear infinite;
+  width: max-content;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+/* ===== Sayfa Geçiş Animasyonu ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Sol Sidebar Stilleri ===== */
+.sb-item {
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  width: 100%;
+  text-align: left;
+}
+
+.sb-item.active {
+  background: #32170d;
+  color: white;
+  border-left: 4px solid #d5c3bd;
+  padding-left: 12px;
+}
+
+.sb-item:not(.active) {
+  color: rgba(213, 195, 189, 0.7);
+}
+
+.sb-item:not(.active):hover {
+  background: #32170d;
+  color: white;
+}
+
+/* ===== Editör Kartı Gölgesi ===== */
+.editorial-shadow {
+  box-shadow: 0 24px 40px -12px rgba(22, 29, 31, 0.05);
 }
