@@ -10,6 +10,7 @@ const sidebarLinks = [
   { href: "/hava-radari", icon: "cloudy_snowing", labelTR: "Hava Radarı", labelEN: "Weather Radar" },
   { href: "/bilgi-merkezi", icon: "menu_book", labelTR: "Bilgi Merkezi", labelEN: "Learn" },
   { href: "/haberler", icon: "newspaper", labelTR: "Haberler", labelEN: "News" },
+  { href: "/is-ticaret", icon: "storefront", labelTR: "İş & Ticaret", labelEN: "Trade Board" },
 ];
 
 export default function Sidebar() {

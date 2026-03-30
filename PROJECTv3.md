@@ -8,7 +8,7 @@
 **Slogan:** Küresel Kahve Piyasa Platformu / Market Intelligence
 **Kurucu:** Recep Tümay Şahin
 **Başlangıç:** Mart 2026
-**Durum:** Faz 3 tamamlandı — tüm içerik sayfaları hazır → Faz 4 (Trade Board) sırada
+**Durum:** Faz 4 Trade Board tamamlandı → tüm sayfalar hazır, SEO ve canlı veri entegrasyonu sırada
 
 ---
 
@@ -189,9 +189,15 @@
   - Navbar ve Sidebar'a "Haberler" linki eklendi
 
 ### Faz 4 — İş & Ticaret + Backend
-- [ ] Trade Board sayfası
-- [ ] İlan sistemi
-- [ ] Tedarikçi dizini
+- [x] Trade Board sayfası ✅ — src/app/is-ticaret/page.tsx
+  - Aktif İlanlar (3 örnek: Satıcı/Alıcı, sertifika badge'leri)
+  - İlan Formu (Alıcı/Satıcı toggle, 6 input alanı)
+  - Incoterms Rehberi (FOB, CIF, EXW, FCA tablosu)
+  - Sertifika Rehberi (Rainforest, Fair Trade, UTZ, Organic)
+  - Tedarikçi Dizini (4 firma)
+  - Sidebar'a "İş & Ticaret" linki eklendi
+- [ ] İlan sistemi (backend — Faz 5'te)
+- [ ] Tedarikçi dizini (backend — Faz 5'te)
 - [ ] Admin panel (içerik yönetimi)
 
 ### Faz 5 — Büyüme & Monetizasyon
@@ -210,7 +216,7 @@
 - **Sohbet 2 (29 Mart 2026):** Context window sorunu çözüldü (603KB HTML dosyasını her seferinde okumamaya karar verildi). Next.js projesi kuruldu (v16.2.1, App Router, Tailwind CSS, Turbopack). PowerShell execution policy sorunu çözüldü. GitHub repo oluşturuldu ve ilk push yapıldı. Proje çalışır durumda: localhost:3000.
 - **Sohbet 3 (30 Mart 2026):** HTML dosya haritası çıkarıldı (790 satır, hangi bölüm nerede). Tailwind custom config tamamlandı: tailwind.config.ts (renk paleti + fontlar), globals.css (custom stiller), layout.tsx (Newsreader + Inter fontları, Next.js font optimizasyonu). TypeScript bağımlılıkları otomatik kuruldu. Eski layout.js silindi, yeni layout.tsx aktif. Proje localhost:3000'de çalışıyor, arka plan rengi doğru (#f4fafe). Sıradaki: Navbar component.
 - **Sohbet 4 (30 Mart 2026):** HTML dosyası component parçalarına bölündü. Navbar içindeki 210KB inline SVG logo tespit edildi (şişkinliğin kaynağı). Navbar.tsx component'i oluşturuldu ve src/components/ klasörüne yerleştirildi. page.tsx oluşturuldu. Sorun: tsconfig.json'da `@/*` path alias tanımlı değil — bu yüzden Navbar import'u çalışmıyor. Çözüm aşağıda.
-- **Sohbet 5 (30 Mart 2026):** Footer component oluşturuldu (Footer.tsx). Ana Sayfa layout tamamlandı (page.tsx): Hero kartı (SVG plantasyon illüstrasyonu + öne çıkan haber), Editörün Günlük Notu, Piyasa Duyarlılığı göstergesi, Haftalık Fiyat Grafiği (placeholder bar chart), Üretici Bölge Havaları (Brezilya/Vietnam/Kolombiya), Bülten Kayıt Formu. Vercel'e deploy yapıldı: https://worldcoffee24.vercel.app. Fiyat Merkezi sayfası (/fiyat-merkezi) oluşturuldu: Arabica Futures grafik, Kur Çevirici (çalışan USD→TRY hesap makinesi), Aktif Kontratlar tablosu, SCA Premium Rehberi, Fiziksel Referans kartı, Editöryal Analiz bölümü. Piyasa Faktörleri sayfası (/piyasa-faktorleri) oluşturuldu: İklim & Üretim (ENSO, Brazil Harvest, Don Uyarıları), Küresel Talep Trendleri (3 kart), Ekonomik Faktörler (BRL/USD, Lojistik, COT, ICE Stoklar).
+- **Sohbet 5 (30 Mart 2026):** Footer component oluşturuldu. Ana Sayfa layout tamamlandı. Vercel'e deploy yapıldı: https://worldcoffee24.vercel.app. Fiyat Merkezi (/fiyat-merkezi), Piyasa Faktörleri (/piyasa-faktorleri), Bilgi Merkezi (/bilgi-merkezi), Hava Radarı (/hava-radari), Haberler (/haberler) sayfaları oluşturuldu. Navbar ve Sidebar'a Haberler linki eklendi. GitHub-Vercel otomatik deploy bağlantısı kuruldu (her push'ta otomatik deploy). Faz 1-3 tamamlandı.
 
 ---
 
@@ -230,7 +236,7 @@
 - Proje yolu: C:\Users\rtuma\worldcoffee24
 
 ### 🚨 SONRAKİ CHAT'TE İLK YAPILACAK İŞ
-Faz 3 tamamlandı. Faz 4'e geç: Trade Board sayfası, ilan sistemi, tedarikçi dizini. Veya Vercel'e yeniden deploy.
+Tüm sayfaların UI'ı tamamlandı (7 sayfa). Sıradaki adımlar: SEO optimizasyonu, canlı veri entegrasyonu (TradingView, API), Mailchimp bülten bağlantısı, backend planlama.
 
 ### 📍 HTML Dosya Haritası (kahve_dunyasi_final1.html — 790 satır)
 | Satırlar | Bölüm | Boyut (SVG'siz) |
@@ -265,8 +271,10 @@ C:\Users\rtuma\worldcoffee24\
 │   │   │   └── page.tsx      (Bilgi Merkezi: Futures 101, Rehberler, Sözlük)
 │   │   ├── hava-radari/
 │   │   │   └── page.tsx      (Hava Radarı: 7 bölge, ENSO, Don Uyarısı)
-│   │   └── haberler/
-│   │       └── page.tsx      (Haberler: Editör Seçimi, RSS, Haftalık Özet)
+│   │   ├── haberler/
+│   │   │   └── page.tsx      (Haberler: Editör Seçimi, RSS, Haftalık Özet)
+│   │   └── is-ticaret/
+│   │       └── page.tsx      (Trade Board: İlanlar, Form, Incoterms, Sertifikalar)
 │   └── components/
 │       ├── Navbar.tsx        (üst menü, dil desteği, aktif sayfa takibi)
 │       ├── Sidebar.tsx       (sol sidebar, sayfa navigasyonu)
