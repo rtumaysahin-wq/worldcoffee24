@@ -8,7 +8,7 @@
 **Slogan:** Küresel Kahve Piyasa Platformu / Market Intelligence
 **Kurucu:** Recep Tümay Şahin
 **Başlangıç:** Mart 2026
-**Durum:** Canlı API entegrasyonu tamamlandı (FRED + ExchangeRate + API Ninjas) → Mailchimp, responsive test sırada
+**Durum:** Canlı API + RSS haber + Bilgi Merkezi içerik tamamlandı → Mailchimp sırada
 
 ---
 
@@ -201,7 +201,11 @@
   - Canlı RSS Akışı (6 haber placeholder)
   - Haftalık Özet paneli (5 madde)
   - Bülten kayıt formu
-  - Kahve Haber Kaynakları (7 kaynak kartı, yeni sekmede açılır)
+  - Canlı RSS haber akışı (/api/news) — 4 kaynaktan otomatik çekme
+    - Daily Coffee News, Sprudge, Perfect Daily Grind, Google News
+    - 30dk cache, tarihe göre sıralı, son 20 haber
+  - Kaynak bazlı filtreleme, loading skeleton, hata durumu
+  - Haber kaynakları kartları (5 kaynak, yeni sekmede açılır)
   - Navbar ve Sidebar'a "Haberler" linki eklendi
 
 ### Faz 4 — İş & Ticaret + Backend

@@ -3,6 +3,7 @@ import TickerBand from "@/components/TickerBand";
 import Sidebar from "@/components/Sidebar";
 import Footer from "@/components/Footer";
 import PriceChart from "@/components/charts/PriceChart";
+import LatestNews from "@/components/LatestNews";
 
 export default function Home() {
   return (
@@ -217,6 +218,9 @@ export default function Home() {
               </div>
             </div>
           </section>
+
+          {/* ═══ SON HABERLER ═══ */}
+          <LatestNews />
 
           {/* ═══ BÜLTEN KAYIT FORMU ═══ */}
           <section className="bg-[#f4fafe] p-8 md:p-12 flex flex-col items-center text-center border border-outline-variant/15 relative">

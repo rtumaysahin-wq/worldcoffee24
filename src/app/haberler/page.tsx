@@ -1,65 +1,66 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import TickerBand from "@/components/TickerBand";
 import Footer from "@/components/Footer";
 
-const categories = ["Tumu", "Piyasa", "Uretim", "Iklim", "Regulasyon", "Teknoloji"];
+interface NewsItem {
+  title: string;
+  summary: string;
+  link: string;
+  date: string;
+  source: string;
+}
 
-const editorPicks = [
-  {
-    tag: "Piyasa",
-    title: "Arabica Futures 220 Dolarla 18 Ayin Zirvesinde",
-    desc: "ICE New York'ta Arabica vadeli islemleri Brezilya hasat endiselerinin ardindan 220.40 dolara yukseldi. Analistler kisa vadede konsolidasyon bekliyor.",
-    author: "Elara Vance",
-    date: "29 Mar 2026",
-    readTime: "5 dk",
-    featured: true,
-  },
-  {
-    tag: "Iklim",
-    title: "La Nina Gecisi: Kahve Uretim Bolgeleri Icin Ne Anlama Geliyor?",
-    desc: "Meteorolojistler La Nina'nin %70 olasilikla olusacagini ongoruyor. Brezilya ve Vietnam uretim bolgeleri farkli etkilenecek.",
-    author: "Julian Thorne",
-    date: "28 Mar 2026",
-    readTime: "8 dk",
-    featured: false,
-  },
-  {
-    tag: "Regulasyon",
-    title: "AB Ormansizlasma Yonetmeligi 2025'te Yururluge Giriyor",
-    desc: "Avrupa Birligi'nin yeni ormansizlasma yonetmeligi kahve ithalatinda izlenebilirlik zorunlulugu getiriyor. Vietnam ve Endonezya en cok etkilenecek ulkeler.",
-    author: "Mika Orinova",
-    date: "27 Mar 2026",
-    readTime: "6 dk",
-    featured: false,
-  },
-];
+const categories = ["Tumu", "Daily Coffee News", "Sprudge", "Perfect Daily Grind", "Google News"];
 
-const rssFeed = [
-  { source: "Reuters", title: "Coffee prices surge as Brazil frost fears grow", time: "2 saat once" },
-  { source: "Bloomberg", title: "Vietnam robusta exports fall 12% in March", time: "4 saat once" },
-  { source: "ICO", title: "Global coffee consumption reaches record 178M bags", time: "6 saat once" },
-  { source: "FT", title: "Commodity traders bet on La Nina impact on crops", time: "8 saat once" },
-  { source: "Reuters", title: "Colombian coffee federation raises production forecast", time: "12 saat once" },
-  { source: "CoffeeNetwork", title: "Specialty coffee demand outpaces supply in Asia-Pacific", time: "1 gun once" },
-];
-
-const weeklySummary = {
-  title: "Haftalik Piyasa Ozeti — 24-30 Mart 2026",
-  points: [
-    "Arabica KC1! haftalik %3.2 yukselisle 220.40'ta kapandi",
-    "Vietnam Robusta ihracati Mart'ta %12 geriledi",
-    "Brezilya Real dolara karsi %1.8 deger kaybetti",
-    "ICE sertifikali stoklar 842K cuval ile 10 yilin en dusugunde",
-    "La Nina gecis olasiligi %70'e yukseldi",
-  ],
+const sourceColors: Record<string, string> = {
+  "Daily Coffee News": "bg-primary",
+  "Sprudge": "bg-tertiary",
+  "Perfect Daily Grind": "bg-secondary",
+  "Google News": "bg-on-tertiary-container",
 };
+
+const newsSourceCards = [
+  { name: "Daily Coffee News", desc: "Specialty kahve sektorunden gunluk haberler ve analizler.", url: "https://dailycoffeenews.com/" },
+  { name: "Perfect Daily Grind", desc: "Kahve uretiminden tuketimine, sektor profesyonelleri icin icerikler.", url: "https://www.perfectdailygrind.com/" },
+  { name: "Sprudge", desc: "Kuresel kahve kulturu, etkinlikler ve trendler.", url: "https://sprudge.com/" },
+  { name: "Global Coffee Report", desc: "Kuresel kahve endustrisi haberleri ve pazar analizi.", url: "http://www.gcrmag.com/" },
+  { name: "Roast Magazine", desc: "Kavurma endustrisi, ekipman ve isletme yonetimi odakli yayin.", url: "https://www.roastmagazine.com/" },
+];
 
 export default function Haberler() {
   const [activeCategory, setActiveCategory] = useState("Tumu");
+  const [news, setNews] = useState<NewsItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    fetch("/api/news")
+      .then((res) => {
+        if (!res.ok) throw new Error();
+        return res.json();
+      })
+      .then((data) => {
+        if (data.news && data.news.length > 0) {
+          setNews(data.news);
+        } else {
+          setError(true);
+        }
+        setLoading(false);
+      })
+      .catch(() => {
+        setError(true);
+        setLoading(false);
+      });
+  }, []);
+
+  const filtered =
+    activeCategory === "Tumu"
+      ? news
+      : news.filter((n) => n.source === activeCategory);
 
   return (
     <>
@@ -80,13 +81,13 @@ export default function Haberler() {
                   Haberler &amp; Analiz
                 </h1>
                 <p className="text-secondary text-sm md:text-base">
-                  Kuresel kahve piyasasindan son gelismeler, editor secimleri ve haftalik ozetler.
+                  Kuresel kahve piyasasindan canli haber akisi — RSS kaynaklarindan otomatik guncellenir.
                 </p>
               </div>
               <div className="flex items-center gap-2 bg-surface-container-low px-5 py-3">
                 <span className="material-symbols-outlined text-sm text-secondary">rss_feed</span>
                 <span className="text-[10px] font-label uppercase tracking-widest text-secondary">
-                  Canli Akis &bull; Son: 14:22 GMT
+                  Canli RSS Akisi &bull; {news.length} haber
                 </span>
               </div>
             </div>
@@ -111,147 +112,125 @@ export default function Haberler() {
 
           <div className="grid grid-cols-12 gap-8">
 
-            {/* ═══ SOL: EDİTÖR SEÇİMİ HABERLER ═══ */}
-            <section className="col-span-12 lg:col-span-8 space-y-6">
+            {/* ═══ SOL: CANLI HABERLER ═══ */}
+            <section className="col-span-12 lg:col-span-8 space-y-4">
               <div className="flex items-center gap-4 mb-2">
-                <h2 className="font-headline text-2xl font-bold">Editor Secimi</h2>
+                <h2 className="font-headline text-2xl font-bold">Canli Haber Akisi</h2>
                 <div className="h-px flex-1 bg-outline-variant/20" />
               </div>
 
-              {editorPicks.map((news, i) => (
-                <article
-                  key={i}
-                  className={`bg-surface-container-lowest editorial-shadow overflow-hidden ${
-                    news.featured ? "border-l-4 border-primary" : ""
-                  }`}
-                >
-                  <div className="p-6 md:p-8">
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className="bg-primary-container text-on-primary px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest">
-                        {news.tag}
-                      </span>
-                      {news.featured && (
-                        <span className="bg-tertiary text-on-tertiary-fixed px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest">
-                          One Cikan
-                        </span>
-                      )}
+              {loading ? (
+                <div className="space-y-4">
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <div key={i} className="bg-surface-container-lowest p-6 md:p-8 editorial-shadow animate-pulse">
+                      <div className="h-4 bg-surface-container-high rounded w-20 mb-4" />
+                      <div className="h-6 bg-surface-container-high rounded w-3/4 mb-3" />
+                      <div className="h-4 bg-surface-container-high rounded w-full mb-2" />
+                      <div className="h-4 bg-surface-container-high rounded w-1/2" />
                     </div>
-                    <h3 className={`font-headline mb-3 ${news.featured ? "text-3xl md:text-4xl" : "text-2xl"}`}>
-                      {news.title}
-                    </h3>
-                    <p className="text-sm text-secondary leading-relaxed mb-5">{news.desc}</p>
-                    <div className="flex items-center gap-4 text-[10px] font-label uppercase tracking-widest text-secondary">
-                      <span className="flex items-center gap-1">
-                        <span className="material-symbols-outlined text-sm">person</span>
-                        {news.author}
-                      </span>
-                      <span>{news.date}</span>
-                      <span>{news.readTime} okuma</span>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </section>
-
-            {/* ═══ SAĞ: RSS AKIŞI + HAFTALIK ÖZET ═══ */}
-            <aside className="col-span-12 lg:col-span-4 space-y-6">
-
-              {/* RSS Akışı */}
-              <div>
-                <div className="flex items-center gap-4 mb-4">
-                  <h2 className="font-headline text-2xl font-bold">Canli Akis</h2>
-                  <div className="h-px flex-1 bg-outline-variant/20" />
+                  ))}
                 </div>
-                <div className="space-y-0 divide-y divide-outline-variant/15">
-                  {rssFeed.map((item, i) => (
-                    <div key={i} className="py-4 hover:bg-surface-container-low px-3 -mx-3 transition-colors cursor-pointer">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-primary-container">
+              ) : error ? (
+                <div className="bg-surface-container-lowest p-10 text-center editorial-shadow">
+                  <span className="material-symbols-outlined text-4xl text-error mb-3 block">error</span>
+                  <p className="text-sm text-error font-bold mb-1">Haberler yuklenemedi</p>
+                  <p className="text-xs text-secondary">Lutfen daha sonra tekrar deneyin.</p>
+                </div>
+              ) : filtered.length === 0 ? (
+                <div className="bg-surface-container-lowest p-10 text-center editorial-shadow">
+                  <p className="text-sm text-secondary">Bu kategoride haber bulunamadi.</p>
+                </div>
+              ) : (
+                filtered.map((item, i) => (
+                  <a
+                    key={i}
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block bg-surface-container-lowest editorial-shadow hover:-translate-y-0.5 transition-all"
+                  >
+                    <div className="p-6 md:p-8">
+                      <div className="flex items-center gap-3 mb-3">
+                        <span
+                          className={`px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-white ${
+                            sourceColors[item.source] || "bg-primary-container"
+                          }`}
+                        >
                           {item.source}
                         </span>
-                        <span className="text-[10px] text-outline">{item.time}</span>
+                        {item.date && (
+                          <span className="text-[10px] text-outline">
+                            {new Date(item.date).toLocaleDateString("tr", {
+                              day: "numeric",
+                              month: "short",
+                              year: "numeric",
+                            })}
+                          </span>
+                        )}
                       </div>
-                      <p className="text-sm font-medium text-on-surface leading-snug">{item.title}</p>
+                      <h3 className="font-headline text-xl md:text-2xl mb-2 hover:text-primary transition-colors">
+                        {item.title}
+                      </h3>
+                      {item.summary && (
+                        <p className="text-sm text-secondary leading-relaxed">
+                          {item.summary}
+                        </p>
+                      )}
                     </div>
-                  ))}
-                </div>
-              </div>
+                  </a>
+                ))
+              )}
+            </section>
 
-              {/* Haftalık Özet */}
-              <div className="bg-primary-container text-white p-6 md:p-8">
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="material-symbols-outlined text-on-primary-container">summarize</span>
-                  <h3 className="font-headline text-xl font-bold">Haftalik Ozet</h3>
+            {/* ═══ SAĞ: KAYNAKLAR + BÜLTEN ═══ */}
+            <aside className="col-span-12 lg:col-span-4 space-y-6">
+
+              {/* Haber Kaynakları */}
+              <div>
+                <div className="flex items-center gap-4 mb-4">
+                  <h2 className="font-headline text-2xl font-bold">Kaynaklar</h2>
+                  <div className="h-px flex-1 bg-outline-variant/20" />
                 </div>
-                <p className="text-[10px] font-label uppercase tracking-widest text-on-primary-container mb-5">
-                  {weeklySummary.title}
-                </p>
-                <ul className="space-y-3">
-                  {weeklySummary.points.map((point, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-on-primary-container">
-                      <span className="material-symbols-outlined text-sm mt-0.5 text-tertiary-fixed">arrow_right</span>
-                      {point}
-                    </li>
+                <div className="space-y-3">
+                  {newsSourceCards.map((source) => (
+                    <a
+                      key={source.name}
+                      href={source.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block p-4 bg-surface-container-lowest editorial-shadow hover:bg-white transition-colors"
+                    >
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="material-symbols-outlined text-lg text-primary">newspaper</span>
+                        <h4 className="font-bold text-sm">{source.name}</h4>
+                      </div>
+                      <p className="text-xs text-secondary leading-relaxed">{source.desc}</p>
+                    </a>
                   ))}
-                </ul>
-                <button className="mt-6 w-full bg-primary text-white py-3 text-xs font-bold uppercase tracking-widest hover:bg-[#32170d] transition-colors">
-                  Tam Raporu Oku
-                </button>
+                </div>
               </div>
 
               {/* Bülten CTA */}
-              <div className="bg-surface-container-low p-6 md:p-8 border border-outline-variant/15">
-                <h4 className="font-headline text-lg font-bold text-primary mb-2">
-                  Haftalik Bulten
-                </h4>
-                <p className="text-xs text-secondary mb-4">
+              <div className="bg-primary-container text-white p-6 md:p-8">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="material-symbols-outlined text-on-primary-container">mail</span>
+                  <h3 className="font-headline text-xl font-bold">Haftalik Bulten</h3>
+                </div>
+                <p className="text-xs text-on-primary-container mb-4">
                   Her Pazartesi piyasa ozeti ve editor secimi haberler e-postanizda.
                 </p>
                 <div className="flex gap-0">
                   <input
-                    className="flex-1 border border-outline-variant px-3 py-2.5 text-sm outline-none focus:ring-1 focus:ring-primary"
+                    className="flex-1 border border-white/20 bg-white/10 px-3 py-2.5 text-sm outline-none focus:bg-white/20 placeholder:text-white/50"
                     placeholder="email@adres.com"
                     type="email"
                   />
-                  <button className="bg-primary text-white px-4 py-2.5 text-xs font-bold uppercase tracking-widest">
+                  <button className="bg-primary text-white px-4 py-2.5 text-xs font-bold uppercase tracking-widest hover:bg-[#32170d]">
                     Abone
                   </button>
                 </div>
               </div>
             </aside>
-
-            {/* ═══ KAHVE HABER KAYNAKLARI ═══ */}
-            <section className="col-span-12">
-              <div className="flex items-center gap-4 mb-6">
-                <h2 className="font-headline text-2xl font-bold">Kahve Haber Kaynaklari</h2>
-                <div className="h-px flex-1 bg-outline-variant/20" />
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {[
-                  { name: "Daily Coffee News", desc: "Specialty kahve sektorunden gunluk haberler ve analizler.", url: "https://dailycoffeenews.com/" },
-                  { name: "Perfect Daily Grind", desc: "Kahve uretiminden tuketimine, sektor profesyonelleri icin icerikler.", url: "https://www.perfectdailygrind.com/" },
-                  { name: "Sprudge", desc: "Kuresel kahve kulturu, etkinlikler ve trendler.", url: "https://sprudge.com/" },
-                  { name: "Global Coffee Report", desc: "Kuresel kahve endustrisi haberleri, is dunyasi ve pazar analizi.", url: "http://www.gcrmag.com/" },
-                  { name: "Coffee & Cocoa", desc: "Kahve ve kakao sektorlerinden haberler ve piyasa verileri.", url: "https://www.coffeeandcocoa.net/" },
-                  { name: "Roast Magazine", desc: "Kavurma endustrisi, ekipman ve isletme yonetimi odakli yayin.", url: "https://www.roastmagazine.com/" },
-                  { name: "Coffee Science", desc: "Kahve bilimi, arastirma ve akademik calismalara erisim.", url: "https://www.coffeescience.org/" },
-                ].map((source) => (
-                  <a
-                    key={source.name}
-                    href={source.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-5 bg-surface-container-lowest editorial-shadow hover:-translate-y-1 transition-all group"
-                  >
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="material-symbols-outlined text-xl text-primary">newspaper</span>
-                      <h4 className="font-bold text-sm group-hover:text-primary">{source.name}</h4>
-                    </div>
-                    <p className="text-xs text-secondary leading-relaxed">{source.desc}</p>
-                  </a>
-                ))}
-              </div>
-            </section>
 
           </div>
         </div>
