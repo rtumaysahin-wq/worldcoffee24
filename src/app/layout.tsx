@@ -15,9 +15,46 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "WorldCoffee24.com — Küresel Kahve Piyasa Platformu",
+  title: {
+    default: "WorldCoffee24 — Küresel Kahve Piyasa Platformu",
+    template: "%s | WorldCoffee24",
+  },
   description:
     "Canlı kahve fiyatları, piyasa analizleri, haberler ve eğitim içerikleri. Arabica & Robusta futures, döviz kurları, üretim bölgeleri hava durumu.",
+  keywords: [
+    "kahve fiyatları",
+    "coffee prices",
+    "arabica futures",
+    "robusta futures",
+    "kahve piyasası",
+    "coffee market",
+    "ICE coffee",
+    "kahve borsası",
+    "commodity trading",
+    "emtia",
+  ],
+  authors: [{ name: "WorldCoffee24" }],
+  creator: "WorldCoffee24",
+  metadataBase: new URL("https://worldcoffee24.vercel.app"),
+  openGraph: {
+    type: "website",
+    locale: "tr_TR",
+    alternateLocale: "en_US",
+    siteName: "WorldCoffee24",
+    title: "WorldCoffee24 — Küresel Kahve Piyasa Platformu",
+    description:
+      "Canlı kahve fiyatları, piyasa analizleri, haberler ve eğitim içerikleri.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "WorldCoffee24 — Küresel Kahve Piyasa Platformu",
+    description:
+      "Canlı kahve fiyatları, piyasa analizleri, haberler ve eğitim içerikleri.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
