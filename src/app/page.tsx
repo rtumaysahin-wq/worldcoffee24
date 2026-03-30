@@ -174,7 +174,7 @@ export default function Home() {
                   </button>
                 </div>
               </div>
-              <TradingViewWidget symbol="TVC:KC1!" height={320} />
+              <TradingViewWidget symbol="ICEUS:KC1!" height={320} />
             </div>
 
             {/* Üretici Bölge Havaları */}

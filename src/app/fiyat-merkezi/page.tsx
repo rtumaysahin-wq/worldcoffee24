@@ -68,7 +68,7 @@ export default function FiyatMerkezi() {
                   ICE Arabica Futures (KC1!)
                 </h3>
               </div>
-              <TradingViewWidget symbol="TVC:KC1!" height={420} />
+              <TradingViewWidget symbol="ICEUS:KC1!" height={420} />
               <div className="mt-6 grid grid-cols-3 gap-8 border-t border-outline-variant/15 pt-6">
                 <div>
                   <p className="text-[10px] font-label uppercase text-secondary mb-1">Kontrat Yuksek</p>
@@ -252,7 +252,7 @@ export default function FiyatMerkezi() {
                   Robusta Coffee Futures (RC1!)
                 </h3>
               </div>
-              <TradingViewWidget symbol="TVC:RC1!" height={380} />
+              <TradingViewWidget symbol="ICEEUR:RC1!" height={380} />
             </section>
 
             {/* ═══ USD/TRY MİNİ WIDGET ═══ */}
@@ -263,23 +263,31 @@ export default function FiyatMerkezi() {
                 </span>
                 <h3 className="font-headline text-2xl font-bold">USD/TRY</h3>
               </div>
-              <TradingViewWidget symbol="FX:USDTRY" height={380} mini />
+              <TradingViewWidget symbol="FX_IDC:USDTRY" height={380} />
             </section>
 
             {/* ═══ VERİ KAYNAKLARI ═══ */}
             <section className="col-span-12 bg-surface-container-low p-6 md:p-8">
               <h3 className="font-headline text-2xl font-bold mb-6">Veri Kaynaklari</h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 <a href="https://www.theice.com/products/15/Coffee-C-Futures" target="_blank" rel="noopener noreferrer" className="p-4 bg-surface-container-lowest hover:bg-white transition-colors editorial-shadow">
-                  <p className="font-bold text-sm text-primary mb-1">ICE Futures</p>
-                  <p className="text-xs text-secondary">Arabica & Robusta vadeli islemler</p>
+                  <p className="font-bold text-sm text-primary mb-1">ICE Coffee C Futures</p>
+                  <p className="text-xs text-secondary">Arabica vadeli islemler (NY)</p>
+                </a>
+                <a href="https://www.theice.com/products/37089079/Robusta-Coffee-Futures" target="_blank" rel="noopener noreferrer" className="p-4 bg-surface-container-lowest hover:bg-white transition-colors editorial-shadow">
+                  <p className="font-bold text-sm text-primary mb-1">ICE Robusta Futures</p>
+                  <p className="text-xs text-secondary">Robusta vadeli islemler (London)</p>
                 </a>
                 <a href="https://www.barchart.com/futures/quotes/KC*0/futures-prices" target="_blank" rel="noopener noreferrer" className="p-4 bg-surface-container-lowest hover:bg-white transition-colors editorial-shadow">
-                  <p className="font-bold text-sm text-primary mb-1">Barchart</p>
-                  <p className="text-xs text-secondary">Futures fiyatlar ve grafikler</p>
+                  <p className="font-bold text-sm text-primary mb-1">Barchart Arabica</p>
+                  <p className="text-xs text-secondary">KC futures fiyatlar ve grafikler</p>
+                </a>
+                <a href="https://www.barchart.com/futures/quotes/RM*0/futures-prices" target="_blank" rel="noopener noreferrer" className="p-4 bg-surface-container-lowest hover:bg-white transition-colors editorial-shadow">
+                  <p className="font-bold text-sm text-primary mb-1">Barchart Robusta</p>
+                  <p className="text-xs text-secondary">RM futures fiyatlar ve grafikler</p>
                 </a>
                 <a href="https://www.cepea.esalq.usp.br/en/indicator/coffee.aspx" target="_blank" rel="noopener noreferrer" className="p-4 bg-surface-container-lowest hover:bg-white transition-colors editorial-shadow">
-                  <p className="font-bold text-sm text-primary mb-1">CEPEA</p>
+                  <p className="font-bold text-sm text-primary mb-1">CEPEA Kahve</p>
                   <p className="text-xs text-secondary">Brezilya kahve fiyat endeksi</p>
                 </a>
                 <a href="http://www.ico.org/" target="_blank" rel="noopener noreferrer" className="p-4 bg-surface-container-lowest hover:bg-white transition-colors editorial-shadow">
