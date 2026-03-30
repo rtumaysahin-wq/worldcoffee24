@@ -8,7 +8,7 @@
 **Slogan:** Küresel Kahve Piyasa Platformu / Market Intelligence
 **Kurucu:** Recep Tümay Şahin
 **Başlangıç:** Mart 2026
-**Durum:** Ana Sayfa layout tamamlandı → Vercel deploy sırada
+**Durum:** Hava Radarı sayfası tamamlandı → Haberler sayfası sırada
 
 ---
 
@@ -150,17 +150,36 @@
 - [x] Vercel'e deploy ✅ — https://worldcoffee24.vercel.app
 
 ### Faz 2 — Ana Sayfa & Fiyat Merkezi
-- [x] Ana sayfa layout + hero ✅ (statik placeholder, Faz 2'de canlı veriye geçilecek)
+- [x] Ana sayfa layout + hero ✅ (statik placeholder, canlı veriye geçilecek)
 - [ ] Canlı fiyat bandı (TradingView widget — TickerBand'ı gerçek API'ye bağla)
 - [ ] Döviz kuru bandı
-- [x] Bülten kayıt formu ✅ (UI hazır, Mailchimp entegrasyonu Faz 2'de)
-- [ ] Fiyat Merkezi sayfası
-- [ ] TRY çeviri hesabı
+- [x] Bülten kayıt formu ✅ (UI hazır, Mailchimp entegrasyonu yapılacak)
+- [x] Fiyat Merkezi sayfası ✅ — src/app/fiyat-merkezi/page.tsx
+  - Arabica Futures grafik (placeholder bar chart)
+  - Kur Çevirici (USD→TRY, çalışan hesap makinesi)
+  - Aktif Kontratlar tablosu (4 satır örnek veri)
+  - SCA Premium Rehberi
+  - Fiziksel Referans kartı
+  - Editöryal Analiz bölümü (SVG illüstrasyon)
+- [x] TRY çeviri hesabı ✅ (Kur Çevirici olarak Fiyat Merkezi'nde)
 
 ### Faz 3 — İçerik Sayfaları
-- [ ] Piyasa Faktörleri sayfası
-- [ ] Bilgi Merkezi / Learn sayfası (SEO öncelikli)
-- [ ] Hava Radarı sayfası
+- [x] Piyasa Faktörleri sayfası ✅ — src/app/piyasa-faktorleri/page.tsx
+  - İklim & Üretim: ENSO Status, Brazil Harvest, Don Uyarıları
+  - Küresel Talep Trendleri: Çin, Premium, Sürdürülebilirlik
+  - Ekonomik Faktörler: BRL/USD, Lojistik, COT, ICE Stoklar
+- [x] Bilgi Merkezi / Learn sayfası ✅ — src/app/bilgi-merkezi/page.tsx
+  - Kahve Futures 101 hero kartı (SVG illüstrasyon)
+  - İşleme Yöntemleri kartı (SVG kahve fincanı)
+  - İleri Teknik Rehberler (3 kart: Botanik, Lojistik, Ekonomi)
+  - Sektör Sözlüğü (4 terim + A-Z/Popüler butonları)
+  - Hızlı Terimler Arama + tag'ler
+  - Premium Bülten CTA
+- [x] Hava Radarı sayfası ✅ — src/app/hava-radari/page.tsx
+  - Don Riski Uyarısı banner
+  - 3 Ana Bölge kartı (Brezilya, Vietnam, Kolombiya) — sıcaklık, nem, rüzgar, yağış
+  - 4 İkincil Bölge (Etiyopya, Endonezya, Honduras, Uganda)
+  - ENSO Durumu paneli (Beklenen Etki + Fiyat Etkisi)
 - [ ] Haberler sayfası (RSS entegrasyonu)
 
 ### Faz 4 — İş & Ticaret + Backend
@@ -185,7 +204,7 @@
 - **Sohbet 2 (29 Mart 2026):** Context window sorunu çözüldü (603KB HTML dosyasını her seferinde okumamaya karar verildi). Next.js projesi kuruldu (v16.2.1, App Router, Tailwind CSS, Turbopack). PowerShell execution policy sorunu çözüldü. GitHub repo oluşturuldu ve ilk push yapıldı. Proje çalışır durumda: localhost:3000.
 - **Sohbet 3 (30 Mart 2026):** HTML dosya haritası çıkarıldı (790 satır, hangi bölüm nerede). Tailwind custom config tamamlandı: tailwind.config.ts (renk paleti + fontlar), globals.css (custom stiller), layout.tsx (Newsreader + Inter fontları, Next.js font optimizasyonu). TypeScript bağımlılıkları otomatik kuruldu. Eski layout.js silindi, yeni layout.tsx aktif. Proje localhost:3000'de çalışıyor, arka plan rengi doğru (#f4fafe). Sıradaki: Navbar component.
 - **Sohbet 4 (30 Mart 2026):** HTML dosyası component parçalarına bölündü. Navbar içindeki 210KB inline SVG logo tespit edildi (şişkinliğin kaynağı). Navbar.tsx component'i oluşturuldu ve src/components/ klasörüne yerleştirildi. page.tsx oluşturuldu. Sorun: tsconfig.json'da `@/*` path alias tanımlı değil — bu yüzden Navbar import'u çalışmıyor. Çözüm aşağıda.
-- **Sohbet 5 (30 Mart 2026):** Footer component oluşturuldu (Footer.tsx). Ana Sayfa layout tamamlandı (page.tsx): Hero kartı (SVG plantasyon illüstrasyonu + öne çıkan haber), Editörün Günlük Notu, Piyasa Duyarlılığı göstergesi, Haftalık Fiyat Grafiği (placeholder bar chart), Üretici Bölge Havaları (Brezilya/Vietnam/Kolombiya), Bülten Kayıt Formu. Tüm veriler şu an statik/placeholder — Faz 2'de canlı API'lere bağlanacak. Build başarılı.
+- **Sohbet 5 (30 Mart 2026):** Footer component oluşturuldu (Footer.tsx). Ana Sayfa layout tamamlandı (page.tsx): Hero kartı (SVG plantasyon illüstrasyonu + öne çıkan haber), Editörün Günlük Notu, Piyasa Duyarlılığı göstergesi, Haftalık Fiyat Grafiği (placeholder bar chart), Üretici Bölge Havaları (Brezilya/Vietnam/Kolombiya), Bülten Kayıt Formu. Vercel'e deploy yapıldı: https://worldcoffee24.vercel.app. Fiyat Merkezi sayfası (/fiyat-merkezi) oluşturuldu: Arabica Futures grafik, Kur Çevirici (çalışan USD→TRY hesap makinesi), Aktif Kontratlar tablosu, SCA Premium Rehberi, Fiziksel Referans kartı, Editöryal Analiz bölümü. Piyasa Faktörleri sayfası (/piyasa-faktorleri) oluşturuldu: İklim & Üretim (ENSO, Brazil Harvest, Don Uyarıları), Küresel Talep Trendleri (3 kart), Ekonomik Faktörler (BRL/USD, Lojistik, COT, ICE Stoklar).
 
 ---
 
@@ -205,7 +224,7 @@
 - Proje yolu: C:\Users\rtuma\worldcoffee24
 
 ### 🚨 SONRAKİ CHAT'TE İLK YAPILACAK İŞ
-Faz 1 tamamlandı. Faz 2'ye geç: Fiyat Merkezi sayfası (/fiyat-merkezi), TradingView widget entegrasyonu, canlı fiyat API bağlantıları, Mailchimp bülten formu entegrasyonu.
+Haberler sayfası (/haberler). Orijinal HTML'de yok, IS_AKISI_REHBERI.md'deki tanıma göre oluşturulacak.
 
 ### 📍 HTML Dosya Haritası (kahve_dunyasi_final1.html — 790 satır)
 | Satırlar | Bölüm | Boyut (SVG'siz) |
@@ -231,7 +250,15 @@ C:\Users\rtuma\worldcoffee24\
 │   │   ├── favicon.ico
 │   │   ├── globals.css      (custom CSS değişkenleri + ticker animasyonu)
 │   │   ├── layout.tsx        (Newsreader + Inter fontları + Material Symbols)
-│   │   └── page.tsx          (Ana Sayfa: Hero, Editör Notu, Grafik, Hava, Bülten)
+│   │   ├── page.tsx          (Ana Sayfa: Hero, Editör Notu, Grafik, Hava, Bülten)
+│   │   ├── fiyat-merkezi/
+│   │   │   └── page.tsx      (Fiyat Merkezi: Grafik, Kur Çevirici, Kontratlar, SCA)
+│   │   ├── piyasa-faktorleri/
+│   │   │   └── page.tsx      (Piyasa Faktörleri: İklim, Talep, Ekonomik)
+│   │   ├── bilgi-merkezi/
+│   │   │   └── page.tsx      (Bilgi Merkezi: Futures 101, Rehberler, Sözlük)
+│   │   └── hava-radari/
+│   │       └── page.tsx      (Hava Radarı: 7 bölge, ENSO, Don Uyarısı)
 │   └── components/
 │       ├── Navbar.tsx        (üst menü, dil desteği, aktif sayfa takibi)
 │       ├── Sidebar.tsx       (sol sidebar, sayfa navigasyonu)

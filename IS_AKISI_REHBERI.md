@@ -65,15 +65,15 @@
 
 ### ~~2. Vercel'e Deploy~~ ✅ TAMAMLANDI — https://worldcoffee24.vercel.app
 
-### 3. Fiyat Merkezi Sayfası (Faz 2) ← SIRADA
+### ~~3. Fiyat Merkezi Sayfası (Faz 2)~~ ✅ TAMAMLANDI
 Claude Code'a şunu söyle:
 ```
 Projeyi Vercel'e deploy etmek istiyorum. Adım adım anlat ne yapmam lazım.
 ```
 
-### ~~3. Fiyat Merkezi Sayfası (Faz 2)~~ (yukarıda zaten SIRADA olarak işaretlendi)
+### ~~4. Piyasa Faktörleri Sayfası (Faz 3)~~ ✅ TAMAMLANDI
 ```
-/fiyat-merkezi sayfasını oluştur. kahve_dunyasi_final1.html'deki Price Hub bölümünü (satır 386-504) referans al:
+/piyat-merkezi sayfasını oluştur. kahve_dunyasi_final1.html'deki Price Hub bölümünü (satır 386-504) referans al:
 - Arabica Futures placeholder (TradingView widget alanı)
 - Robusta Futures placeholder
 - Kontrat tablosu (statik örnek veri)
