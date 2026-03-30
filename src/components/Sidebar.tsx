@@ -9,6 +9,7 @@ const sidebarLinks = [
   { href: "/piyasa-faktorleri", icon: "account_tree", labelTR: "Piyasa Faktörleri", labelEN: "Market Factors" },
   { href: "/hava-radari", icon: "cloudy_snowing", labelTR: "Hava Radarı", labelEN: "Weather Radar" },
   { href: "/bilgi-merkezi", icon: "menu_book", labelTR: "Bilgi Merkezi", labelEN: "Learn" },
+  { href: "/haberler", icon: "newspaper", labelTR: "Haberler", labelEN: "News" },
 ];
 
 export default function Sidebar() {

@@ -8,7 +8,7 @@
 **Slogan:** Küresel Kahve Piyasa Platformu / Market Intelligence
 **Kurucu:** Recep Tümay Şahin
 **Başlangıç:** Mart 2026
-**Durum:** Hava Radarı sayfası tamamlandı → Haberler sayfası sırada
+**Durum:** Faz 3 tamamlandı — tüm içerik sayfaları hazır → Faz 4 (Trade Board) sırada
 
 ---
 
@@ -180,7 +180,13 @@
   - 3 Ana Bölge kartı (Brezilya, Vietnam, Kolombiya) — sıcaklık, nem, rüzgar, yağış
   - 4 İkincil Bölge (Etiyopya, Endonezya, Honduras, Uganda)
   - ENSO Durumu paneli (Beklenen Etki + Fiyat Etkisi)
-- [ ] Haberler sayfası (RSS entegrasyonu)
+- [x] Haberler sayfası ✅ — src/app/haberler/page.tsx
+  - Editör Seçimi haberler (3 makale kartı, öne çıkan vurgulu)
+  - Kategori filtreleri (6 kategori, aktif state)
+  - Canlı RSS Akışı (6 haber placeholder)
+  - Haftalık Özet paneli (5 madde)
+  - Bülten kayıt formu
+  - Navbar ve Sidebar'a "Haberler" linki eklendi
 
 ### Faz 4 — İş & Ticaret + Backend
 - [ ] Trade Board sayfası
@@ -224,7 +230,7 @@
 - Proje yolu: C:\Users\rtuma\worldcoffee24
 
 ### 🚨 SONRAKİ CHAT'TE İLK YAPILACAK İŞ
-Haberler sayfası (/haberler). Orijinal HTML'de yok, IS_AKISI_REHBERI.md'deki tanıma göre oluşturulacak.
+Faz 3 tamamlandı. Faz 4'e geç: Trade Board sayfası, ilan sistemi, tedarikçi dizini. Veya Vercel'e yeniden deploy.
 
 ### 📍 HTML Dosya Haritası (kahve_dunyasi_final1.html — 790 satır)
 | Satırlar | Bölüm | Boyut (SVG'siz) |
@@ -257,8 +263,10 @@ C:\Users\rtuma\worldcoffee24\
 │   │   │   └── page.tsx      (Piyasa Faktörleri: İklim, Talep, Ekonomik)
 │   │   ├── bilgi-merkezi/
 │   │   │   └── page.tsx      (Bilgi Merkezi: Futures 101, Rehberler, Sözlük)
-│   │   └── hava-radari/
-│   │       └── page.tsx      (Hava Radarı: 7 bölge, ENSO, Don Uyarısı)
+│   │   ├── hava-radari/
+│   │   │   └── page.tsx      (Hava Radarı: 7 bölge, ENSO, Don Uyarısı)
+│   │   └── haberler/
+│   │       └── page.tsx      (Haberler: Editör Seçimi, RSS, Haftalık Özet)
 │   └── components/
 │       ├── Navbar.tsx        (üst menü, dil desteği, aktif sayfa takibi)
 │       ├── Sidebar.tsx       (sol sidebar, sayfa navigasyonu)

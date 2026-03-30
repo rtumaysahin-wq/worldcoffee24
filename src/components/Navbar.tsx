@@ -10,6 +10,7 @@ const navLinks = [
   { href: "/piyasa-faktorleri", labelTR: "Piyasa Faktörleri", labelEN: "Market Factors" },
   { href: "/hava-radari", labelTR: "Hava Radarı", labelEN: "Weather Radar" },
   { href: "/bilgi-merkezi", labelTR: "Bilgi Merkezi", labelEN: "Learn" },
+  { href: "/haberler", labelTR: "Haberler", labelEN: "News" },
 ];
 
 export default function Navbar() {
