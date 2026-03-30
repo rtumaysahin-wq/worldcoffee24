@@ -6,6 +6,7 @@ interface PriceCardProps {
   change: number | null;
   changePct: number | null;
   currency?: string;
+  unit?: string;
   loading?: boolean;
 }
 
@@ -15,6 +16,7 @@ export default function PriceCard({
   change,
   changePct,
   currency = "",
+  unit = "",
   loading = false,
 }: PriceCardProps) {
   if (loading) {
@@ -54,8 +56,8 @@ export default function PriceCard({
             maximumFractionDigits: price < 10 ? 4 : 2,
           })}
         </span>
-        {currency && (
-          <span className="text-xs text-secondary mb-1">{currency}</span>
+        {(currency || unit) && (
+          <span className="text-xs text-secondary mb-1">{unit || currency}</span>
         )}
       </div>
       {change !== null && changePct !== null ? (

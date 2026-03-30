@@ -3,6 +3,7 @@ export interface PriceItem {
   price: number | null;
   change: number | null;
   changePct: number | null;
+  unit: string;
   source: string;
   updated: string | null;
 }

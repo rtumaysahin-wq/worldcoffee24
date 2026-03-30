@@ -9,16 +9,21 @@ function TickerItem({ item }: { item: PriceItem }) {
   const isUp = item.changePct !== null && item.changePct >= 0;
   const hasChange = item.changePct !== null;
 
+  const formatted = item.price.toLocaleString("en-US", {
+    minimumFractionDigits: item.price < 10 ? 4 : 2,
+    maximumFractionDigits: item.price < 10 ? 4 : 2,
+  });
+
   return (
     <span className="flex items-center gap-2 shrink-0">
       <span className="font-label uppercase tracking-widest text-secondary text-[11px]">
         {item.label}
       </span>
       <span className="font-bold text-[11px]">
-        {item.price.toLocaleString("en-US", {
-          minimumFractionDigits: item.price < 10 ? 4 : 2,
-          maximumFractionDigits: item.price < 10 ? 4 : 2,
-        })}
+        {formatted}
+        {item.unit && (
+          <span className="text-secondary font-normal ml-0.5">{item.unit}</span>
+        )}
       </span>
       {hasChange && (
         <span
