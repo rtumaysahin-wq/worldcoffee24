@@ -1,169 +1,125 @@
 import { NextResponse } from "next/server";
 
-const FRED_KEY = process.env.NEXT_PUBLIC_FRED_API_KEY || "";
+export const revalidate = 300; // 5 dakika cache
 
 interface PriceItem {
   label: string;
+  symbol: string;
   price: number | null;
   change: number | null;
   changePct: number | null;
   unit: string;
   source: string;
-  updated: string | null;
 }
 
+const FRED_KEY = process.env.NEXT_PUBLIC_FRED_API_KEY || "";
+
 // Yahoo Finance — server-side only
-async function fetchYahooQuote(symbol: string): Promise<{
-  price: number;
-  change: number;
-  changePct: number;
-  name: string;
-  currency: string;
-} | null> {
+async function fetchYahooQuotes(symbols: string[]): Promise<Record<string, PriceItem>> {
+  const results: Record<string, PriceItem> = {};
   try {
     const YahooFinance = (await import("yahoo-finance2")).default;
     const yf = new YahooFinance({ suppressNotices: ["yahooSurvey"] });
-    const q = await yf.quote(symbol);
-    if (!q || q.regularMarketPrice === undefined) return null;
-    return {
-      price: q.regularMarketPrice,
-      change: q.regularMarketChange ?? 0,
-      changePct: q.regularMarketChangePercent ?? 0,
-      name: q.shortName || q.longName || symbol,
-      currency: q.currency || "",
-    };
+
+    for (const symbol of symbols) {
+      try {
+        const q = await yf.quote(symbol);
+        if (q && q.regularMarketPrice !== undefined) {
+          results[symbol] = {
+            label: "",
+            symbol,
+            price: q.regularMarketPrice,
+            change: q.regularMarketChange ?? null,
+            changePct: q.regularMarketChangePercent ?? null,
+            unit: "",
+            source: "Yahoo Finance",
+          };
+        }
+      } catch {
+        // Sembol bazlı hata — devam et
+      }
+    }
   } catch {
-    return null;
+    // Yahoo modül hatası
   }
+  return results;
 }
 
-// FRED — Robusta fallback (Yahoo'da yok)
-async function fetchFredLatest(
-  seriesId: string
-): Promise<{ price: number; prevPrice: number; date: string } | null> {
+// FRED — Robusta fallback
+async function fetchFredRobusta(): Promise<PriceItem | null> {
   try {
-    const url = `https://api.stlouisfed.org/fred/series/observations?series_id=${seriesId}&api_key=${FRED_KEY}&file_type=json&sort_order=desc&limit=2`;
+    const url = `https://api.stlouisfed.org/fred/series/observations?series_id=PCOFFROBUSDM&api_key=${FRED_KEY}&file_type=json&sort_order=desc&limit=2`;
     const res = await fetch(url);
     if (!res.ok) return null;
     const data = await res.json();
     const obs = data.observations;
     if (!obs || obs.length < 2) return null;
     const price = parseFloat(obs[0].value);
-    const prevPrice = parseFloat(obs[1].value);
-    if (isNaN(price) || isNaN(prevPrice)) return null;
-    return { price, prevPrice, date: obs[0].date };
+    const prev = parseFloat(obs[1].value);
+    if (isNaN(price) || isNaN(prev)) return null;
+    const change = price - prev;
+    const pct = (change / prev) * 100;
+    return {
+      label: "Robusta Coffee",
+      symbol: "RC=F",
+      price: Math.round(price * 100) / 100,
+      change: Math.round(change * 100) / 100,
+      changePct: Math.round(pct * 100) / 100,
+      unit: "¢/lb",
+      source: "FRED (London ICE)",
+    };
   } catch {
     return null;
   }
 }
 
-export const revalidate = 300; // 5 dakika cache
-
 export async function GET() {
-  // Paralel fetch
-  const [arabica, sugar, usdtry, eurtry, brlusd, robusta] = await Promise.all([
-    fetchYahooQuote("KC=F"),
-    fetchYahooQuote("SB=F"),
-    fetchYahooQuote("USDTRY=X"),
-    fetchYahooQuote("EURTRY=X"),
-    fetchYahooQuote("BRLUSD=X"),
-    fetchFredLatest("PCOFFROBUSDM"),
+  const [yahooData, robusta] = await Promise.all([
+    fetchYahooQuotes(["KC=F", "SB=F", "USDTRY=X", "EURTRY=X", "BRLUSD=X"]),
+    fetchFredRobusta(),
   ]);
 
-  const now = new Date().toISOString().split("T")[0];
   const prices: PriceItem[] = [];
 
-  // Arabica (Yahoo)
-  if (arabica) {
-    prices.push({
-      label: "Arabica Coffee",
-      price: Math.round(arabica.price * 100) / 100,
-      change: Math.round(arabica.change * 100) / 100,
-      changePct: Math.round(arabica.changePct * 100) / 100,
-      unit: "¢/lb",
-      source: "Yahoo Finance (ICE)",
-      updated: now,
-    });
-  } else {
-    prices.push({ label: "Arabica Coffee", price: null, change: null, changePct: null, unit: "¢/lb", source: "Yahoo Finance", updated: null });
-  }
+  // Arabica
+  const kc = yahooData["KC=F"];
+  prices.push(kc
+    ? { ...kc, label: "Arabica Coffee", unit: "¢/lb" }
+    : { label: "Arabica Coffee", symbol: "KC=F", price: null, change: null, changePct: null, unit: "¢/lb", source: "Yahoo Finance" }
+  );
 
   // Robusta (FRED — Yahoo'da yok)
-  if (robusta) {
-    const change = robusta.price - robusta.prevPrice;
-    const pct = (change / robusta.prevPrice) * 100;
-    prices.push({
-      label: "Robusta Coffee",
-      price: Math.round(robusta.price * 100) / 100,
-      change: Math.round(change * 100) / 100,
-      changePct: Math.round(pct * 100) / 100,
-      unit: "¢/lb",
-      source: "FRED (London ICE)",
-      updated: robusta.date,
-    });
-  } else {
-    prices.push({ label: "Robusta Coffee", price: null, change: null, changePct: null, unit: "¢/lb", source: "FRED", updated: null });
-  }
+  prices.push(robusta
+    ?? { label: "Robusta Coffee", symbol: "RC=F", price: null, change: null, changePct: null, unit: "¢/lb", source: "FRED" }
+  );
 
   // USD/TRY
-  if (usdtry) {
-    prices.push({
-      label: "USD/TRY",
-      price: Math.round(usdtry.price * 10000) / 10000,
-      change: Math.round(usdtry.change * 10000) / 10000,
-      changePct: Math.round(usdtry.changePct * 100) / 100,
-      unit: "",
-      source: "Yahoo Finance",
-      updated: now,
-    });
-  } else {
-    prices.push({ label: "USD/TRY", price: null, change: null, changePct: null, unit: "", source: "Yahoo Finance", updated: null });
-  }
+  const usdtry = yahooData["USDTRY=X"];
+  prices.push(usdtry
+    ? { ...usdtry, label: "USD/TRY", unit: "" }
+    : { label: "USD/TRY", symbol: "USDTRY=X", price: null, change: null, changePct: null, unit: "", source: "Yahoo Finance" }
+  );
 
   // EUR/TRY
-  if (eurtry) {
-    prices.push({
-      label: "EUR/TRY",
-      price: Math.round(eurtry.price * 10000) / 10000,
-      change: Math.round(eurtry.change * 10000) / 10000,
-      changePct: Math.round(eurtry.changePct * 100) / 100,
-      unit: "",
-      source: "Yahoo Finance",
-      updated: now,
-    });
-  } else {
-    prices.push({ label: "EUR/TRY", price: null, change: null, changePct: null, unit: "", source: "Yahoo Finance", updated: null });
-  }
+  const eurtry = yahooData["EURTRY=X"];
+  prices.push(eurtry
+    ? { ...eurtry, label: "EUR/TRY", unit: "" }
+    : { label: "EUR/TRY", symbol: "EURTRY=X", price: null, change: null, changePct: null, unit: "", source: "Yahoo Finance" }
+  );
 
   // BRL/USD
-  if (brlusd) {
-    prices.push({
-      label: "BRL/USD",
-      price: Math.round(brlusd.price * 10000) / 10000,
-      change: Math.round(brlusd.change * 10000) / 10000,
-      changePct: Math.round(brlusd.changePct * 100) / 100,
-      unit: "",
-      source: "Yahoo Finance",
-      updated: now,
-    });
-  } else {
-    prices.push({ label: "BRL/USD", price: null, change: null, changePct: null, unit: "", source: "Yahoo Finance", updated: null });
-  }
+  const brlusd = yahooData["BRLUSD=X"];
+  prices.push(brlusd
+    ? { ...brlusd, label: "BRL/USD", unit: "" }
+    : { label: "BRL/USD", symbol: "BRLUSD=X", price: null, change: null, changePct: null, unit: "", source: "Yahoo Finance" }
+  );
 
-  // Sugar (Yahoo)
-  if (sugar) {
-    prices.push({
-      label: "Sugar #11",
-      price: Math.round(sugar.price * 100) / 100,
-      change: Math.round(sugar.change * 100) / 100,
-      changePct: Math.round(sugar.changePct * 100) / 100,
-      unit: "¢/lb",
-      source: "Yahoo Finance (ICE)",
-      updated: now,
-    });
-  } else {
-    prices.push({ label: "Sugar #11", price: null, change: null, changePct: null, unit: "¢/lb", source: "Yahoo Finance", updated: null });
-  }
+  // Sugar
+  const sb = yahooData["SB=F"];
+  prices.push(sb
+    ? { ...sb, label: "Sugar #11", unit: "¢/lb" }
+    : { label: "Sugar #11", symbol: "SB=F", price: null, change: null, changePct: null, unit: "¢/lb", source: "Yahoo Finance" }
+  );
 
   return NextResponse.json({ prices, fetchedAt: new Date().toISOString() });
 }

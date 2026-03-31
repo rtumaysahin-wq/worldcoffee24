@@ -1,11 +1,11 @@
 export interface PriceItem {
   label: string;
+  symbol: string;
   price: number | null;
   change: number | null;
   changePct: number | null;
   unit: string;
   source: string;
-  updated: string | null;
 }
 
 export interface PricesResponse {
