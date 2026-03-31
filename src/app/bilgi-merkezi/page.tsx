@@ -105,7 +105,7 @@ export default function BilgiMerkezi() {
           <section className="grid grid-cols-12 gap-6 mb-16 md:mb-20">
             <div className="col-span-12 lg:col-span-8 group relative overflow-hidden bg-primary-container min-h-[360px] md:min-h-[440px] flex items-end p-6 md:p-10">
               <Image
-                src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefda?w=1200&q=80"
+                src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=1200&q=80"
                 alt="Kahve vadeli işlemler"
                 fill
                 className="object-cover"
