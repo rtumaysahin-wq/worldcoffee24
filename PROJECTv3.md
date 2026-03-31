@@ -191,9 +191,10 @@
   - Sektör Dernekleri & Sertifikalar (SCA, ICO, WCR, Rainforest, Fair Trade, CQI, ACE)
   - Premium Bülten CTA
 - [x] Hava Radarı sayfası ✅ — src/app/hava-radari/page.tsx
-  - Don Riski Uyarısı banner
-  - 3 Ana Bölge kartı (Brezilya, Vietnam, Kolombiya) — sıcaklık, nem, rüzgar, yağış
-  - 4 İkincil Bölge (Etiyopya, Endonezya, Honduras, Uganda)
+  - Canlı hava verisi (/api/weather) — Open-Meteo API (ücretsiz, key gereksiz)
+  - 3 Ana Bölge (Brezilya, Vietnam, Kolombiya) — canlı sıcaklık, nem, rüzgar, 7 günlük yağış
+  - 4 İkincil Bölge (Etiyopya, Endonezya, Honduras, Uganda) — canlı veri
+  - 30dk cache, loading skeleton, hata durumu
   - ENSO Durumu paneli (Beklenen Etki + Fiyat Etkisi)
 - [x] Haberler sayfası ✅ — src/app/haberler/page.tsx
   - Editör Seçimi haberler (3 makale kartı, öne çıkan vurgulu)
