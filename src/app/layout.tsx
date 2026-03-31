@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Newsreader, Inter } from "next/font/google";
 import "./globals.css";
 
@@ -73,6 +75,8 @@ export default function RootLayout({
       </head>
       <body className="bg-surface text-on-surface font-body antialiased">
         {children}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
