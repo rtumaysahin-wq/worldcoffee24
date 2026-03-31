@@ -1,10 +1,9 @@
 import Link from "next/link";
 
 const footerLinks = [
-  { href: "/gizlilik", labelTR: "Gizlilik Politikası", labelEN: "Privacy Policy" },
-  { href: "/kullanim-kosullari", labelTR: "Kullanım Koşulları", labelEN: "Terms of Service" },
-  { href: "/api-docs", labelTR: "API Documentation", labelEN: "API Documentation" },
-  { href: "/iletisim", labelTR: "Uzmanla İletişim", labelEN: "Contact Expert" },
+  { href: "#", labelTR: "Gizlilik Politikası" },
+  { href: "#", labelTR: "Kullanım Koşulları" },
+  { href: "#", labelTR: "İletişim" },
 ];
 
 export default function Footer() {
@@ -24,11 +23,11 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* Sag: Linkler */}
+        {/* Sağ: Linkler */}
         <div className="flex flex-wrap justify-center gap-6 md:gap-8">
           {footerLinks.map((link) => (
             <Link
-              key={link.href}
+              key={link.labelTR}
               href={link.href}
               className="text-slate-400 hover:text-[#4B2C20] text-xs transition-colors"
             >

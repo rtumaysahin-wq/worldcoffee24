@@ -49,12 +49,8 @@ export default function Sidebar() {
         })}
       </nav>
 
-      {/* Bottom Button */}
-      <div className="p-4 border-t border-white/10">
-        <button className="w-full bg-[#32170d] text-white py-3 text-[10px] uppercase tracking-widest font-bold hover:opacity-90 transition-opacity border border-white/10 rounded-sm">
-          Raporu İndir
-        </button>
-      </div>
+      {/* Alt boşluk */}
+      <div className="p-4" />
     </aside>
   );
 }

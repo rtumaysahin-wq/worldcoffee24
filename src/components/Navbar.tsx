@@ -69,28 +69,13 @@ export default function Navbar() {
             />
           </div>
 
-          {/* Bildirimler */}
-          <button className="material-symbols-outlined text-primary-container hover:bg-surface-container p-2 rounded-full transition-all text-xl">
-            notifications
-          </button>
-
-          {/* Ayarlar */}
-          <button className="material-symbols-outlined text-primary-container hover:bg-surface-container p-2 rounded-full transition-all text-xl hidden md:block">
-            settings
-          </button>
-
-          {/* Dil Değiştirme */}
+          {/* Dil Değiştirme — ileride aktif edilecek */}
           <button
             onClick={toggleLang}
             className="text-xs font-bold text-primary-container border border-outline-variant/50 px-3 py-1.5 hover:bg-surface-container transition-colors rounded"
           >
             {lang === "tr" ? "EN" : "TR"}
           </button>
-
-          {/* Kullanıcı Avatarı */}
-          <div className="w-8 h-8 rounded-full bg-primary-fixed-dim border border-outline-variant/30 flex items-center justify-center font-bold text-primary text-xs">
-            RT
-          </div>
 
           {/* Mobil Menü Butonu */}
           <button
