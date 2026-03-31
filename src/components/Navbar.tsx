@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const navLinks = [
-  { href: "/", labelTR: "Dashboard", labelEN: "Dashboard" },
+  { href: "/", labelTR: "Ana Sayfa", labelEN: "Home" },
   { href: "/fiyat-merkezi", labelTR: "Fiyat Merkezi", labelEN: "Price Hub" },
   { href: "/piyasa-faktorleri", labelTR: "Piyasa Faktörleri", labelEN: "Market Factors" },
   { href: "/hava-radari", labelTR: "Hava Radarı", labelEN: "Weather Radar" },

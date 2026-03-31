@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const sidebarLinks = [
-  { href: "/", icon: "dashboard", labelTR: "Dashboard", labelEN: "Dashboard" },
+  { href: "/", icon: "home", labelTR: "Ana Sayfa", labelEN: "Home" },
   { href: "/fiyat-merkezi", icon: "payments", labelTR: "Fiyat Merkezi", labelEN: "Price Hub" },
   { href: "/piyasa-faktorleri", icon: "account_tree", labelTR: "Piyasa Faktörleri", labelEN: "Market Factors" },
   { href: "/hava-radari", icon: "cloudy_snowing", labelTR: "Hava Radarı", labelEN: "Weather Radar" },
