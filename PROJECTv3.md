@@ -8,7 +8,7 @@
 **Slogan:** Küresel Kahve Piyasa Platformu / Market Intelligence
 **Kurucu:** Recep Tümay Şahin
 **Başlangıç:** Mart 2026
-**Durum:** Canlı API + RSS haber + Bilgi Merkezi içerik tamamlandı → Mailchimp sırada
+**Durum:** Türkçe dil düzeltmesi + tüm sayfalar Türkçe → Mailchimp sırada
 
 ---
 
@@ -241,7 +241,8 @@
 - **Sohbet 2 (29 Mart 2026):** Context window sorunu çözüldü (603KB HTML dosyasını her seferinde okumamaya karar verildi). Next.js projesi kuruldu (v16.2.1, App Router, Tailwind CSS, Turbopack). PowerShell execution policy sorunu çözüldü. GitHub repo oluşturuldu ve ilk push yapıldı. Proje çalışır durumda: localhost:3000.
 - **Sohbet 3 (30 Mart 2026):** HTML dosya haritası çıkarıldı (790 satır, hangi bölüm nerede). Tailwind custom config tamamlandı: tailwind.config.ts (renk paleti + fontlar), globals.css (custom stiller), layout.tsx (Newsreader + Inter fontları, Next.js font optimizasyonu). TypeScript bağımlılıkları otomatik kuruldu. Eski layout.js silindi, yeni layout.tsx aktif. Proje localhost:3000'de çalışıyor, arka plan rengi doğru (#f4fafe). Sıradaki: Navbar component.
 - **Sohbet 4 (30 Mart 2026):** HTML dosyası component parçalarına bölündü. Navbar içindeki 210KB inline SVG logo tespit edildi (şişkinliğin kaynağı). Navbar.tsx component'i oluşturuldu ve src/components/ klasörüne yerleştirildi. page.tsx oluşturuldu. Sorun: tsconfig.json'da `@/*` path alias tanımlı değil — bu yüzden Navbar import'u çalışmıyor. Çözüm aşağıda.
-- **Sohbet 5 (30 Mart 2026):** Footer, Ana Sayfa layout, Fiyat Merkezi, Piyasa Faktörleri, Bilgi Merkezi, Hava Radarı, Haberler sayfaları oluşturuldu. Vercel deploy + GitHub otomatik deploy bağlantısı. İş & Ticaret (Trade Board) sayfası: İlanlar, Form, Incoterms, Sertifikalar, Tedarikçi Dizini. SEO optimizasyonu: her sayfaya metadata, sitemap.xml, robots.txt, Open Graph, Twitter Card. Faz 1-4 + SEO tamamlandı.
+- **Sohbet 5 (30 Mart 2026):** Footer, Ana Sayfa layout, Fiyat Merkezi, Piyasa Faktörleri, Bilgi Merkezi, Hava Radarı, Haberler sayfaları oluşturuldu. Vercel deploy + GitHub otomatik deploy bağlantısı. İş & Ticaret (Trade Board) sayfası. SEO optimizasyonu. Faz 1-4 tamamlandı.
+- **Sohbet 6 (31 Mart 2026):** Yahoo Finance + FRED API entegrasyonu (canlı fiyatlar). RSS haber akışı (4 kaynak, 30dk cache). Bilgi Merkezi 5 alt sayfa (gerçek SEO içerik: Futures 101, Kahve Kuşağı, İşleme Yöntemleri, Grafik Okuma, Terimler Sözlüğü). Türkçe karakter düzeltmesi (16 dosya, 419 satır). Tüm İngilizce metinler Türkçeye çevrildi. KAYNAKLAR.md oluşturuldu.
 
 ---
 
