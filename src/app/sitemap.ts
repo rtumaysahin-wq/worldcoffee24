@@ -41,12 +41,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/is-ticaret`,
-      lastModified: new Date(),
-      changeFrequency: "daily",
-      priority: 0.6,
-    },
-    {
       url: `${baseUrl}/bilgi-merkezi/futures-101`,
       lastModified: new Date(),
       changeFrequency: "monthly",
