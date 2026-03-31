@@ -30,24 +30,24 @@ export default function Home() {
                   className="object-cover"
                   priority
                 />
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/70" />
+                {/* Gradient overlay — alttan güçlü, üstten hafif */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
                 {/* İçerik */}
-                <div className="absolute bottom-0 p-6 md:p-10 text-white max-w-2xl">
+                <div className="absolute bottom-0 p-6 md:p-10 text-white max-w-2xl" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.5)" }}>
                   <span className="bg-primary px-3 py-1 text-[10px] uppercase tracking-[0.2em] font-bold mb-5 inline-block">
                     Analiz
                   </span>
                   <h1 className="font-headline text-3xl md:text-5xl leading-tight mb-5">
                     Arabica&apos;nın Direnci: Arz Kısıtları 2026 Verim Beklentilerini Nasıl Yeniden Şekillendiriyor?
                   </h1>
-                  <p className="text-white/80 text-sm md:text-base mb-8">
+                  <p className="text-white/90 text-sm md:text-base mb-8">
                     İklim oynaklığı Brezilya Yaylalarını vururken, ihracatçılar küresel sabah kahvesini stabilize etmek için Kolombiya çeşitlerine yöneliyor.
                   </p>
                   <div className="flex flex-wrap items-center gap-4 md:gap-6">
                     <button className="bg-[#f4fafe] text-primary-container px-6 py-3 font-bold text-xs uppercase tracking-widest hover:bg-white transition-colors">
                       Raporu Oku
                     </button>
-                    <span className="text-xs uppercase tracking-widest opacity-60">
+                    <span className="text-xs uppercase tracking-widest text-white/70">
                       12 Dk Okuma &bull; WC24 Analiz Ekibi
                     </span>
                   </div>
