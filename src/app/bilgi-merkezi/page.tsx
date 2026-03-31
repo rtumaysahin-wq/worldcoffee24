@@ -68,7 +68,7 @@ export default function BilgiMerkezi() {
                 Bilgi Merkezi
               </span>
               <h1 className="font-headline text-5xl md:text-7xl font-bold text-primary leading-none mb-6">
-                Mastering the <span className="italic font-normal">Global Bean</span>
+                Küresel Kahve Ticaretinde <span className="italic font-normal">Uzmanlaşın</span>
               </h1>
               <p className="text-base md:text-lg text-on-surface-variant max-w-xl leading-relaxed">
                 Kahve üreticileri, kurumsal traderlar ve ciddi meraklılar için derinlemesine eğitim kaynakları.

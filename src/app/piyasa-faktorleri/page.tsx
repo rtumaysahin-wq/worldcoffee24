@@ -53,7 +53,7 @@ export default function PiyasaFaktorleri() {
                   <p className="font-headline text-lg font-bold">30 Mar 2026</p>
                 </div>
                 <div>
-                  <span className="text-[10px] font-label uppercase text-secondary">Index Volatility</span>
+                  <span className="text-[10px] font-label uppercase text-secondary">Endeks Oynaklığı</span>
                   <p className="font-headline text-lg font-bold text-error">Moderate (1.2%)</p>
                 </div>
               </div>
@@ -76,10 +76,10 @@ export default function PiyasaFaktorleri() {
                 {/* ENSO Status */}
                 <div className="group bg-surface-container-lowest p-6 md:p-8 editorial-shadow relative overflow-hidden hover:-translate-y-1 transition-all">
                   <span className="text-[10px] font-label uppercase tracking-widest text-secondary block mb-5">
-                    Meteorology
+                    Meteoroloji
                   </span>
                   <h3 className="font-headline text-2xl md:text-3xl mb-4">
-                    ENSO Status: La Nina Transition
+                    ENSO Durumu: La Niña Geçişi
                   </h3>
                   <p className="text-sm text-secondary mb-7 leading-relaxed">
                     La Nina&rsquo;nin Eylül-Kasım arasında oluşma olasılığı %70&rsquo;tir. Kuzey Brezilya&rsquo;da artan yağış, çiçeklenmeyi geciktirebilir.
@@ -98,9 +98,9 @@ export default function PiyasaFaktorleri() {
                 {/* Brazil Harvest */}
                 <div className="bg-primary-container p-6 md:p-8 editorial-shadow text-on-primary">
                   <span className="text-[10px] font-label uppercase tracking-widest text-on-primary-container block mb-5">
-                    Supply Analysis
+                    Arz Analizi
                   </span>
-                  <h3 className="font-headline text-2xl md:text-3xl mb-4">Brazil Harvest Cycle</h3>
+                  <h3 className="font-headline text-2xl md:text-3xl mb-4">Brezilya Hasat Döngüsü</h3>
                   <p className="text-sm text-on-tertiary-container mb-7 leading-relaxed">
                     2025/26 üretimi için &ldquo;yıldan yıla dönüşüm&rdquo; döngüsü bekleniyor. İlk tahminler çift yıllık döngüler nedeniyle Arabica üretiminde %12 azalma öngörüyor.
                   </p>
@@ -246,8 +246,8 @@ export default function PiyasaFaktorleri() {
                   <div className="bg-primary w-[35%] h-full rounded-full" />
                 </div>
                 <div className="flex justify-between text-[10px] text-secondary">
-                  <span>Current Level</span>
-                  <span>5-Year Avg (2.4M)</span>
+                  <span>Mevcut Seviye</span>
+                  <span>5 Yıllık Ort. (2.4M)</span>
                 </div>
                 <p className="text-[10px] font-bold text-error uppercase mt-3 tracking-widest">
                   Stok Uyarısı: 10 Yılın En Düşüğü

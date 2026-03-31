@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 
 const mainRegions = [
   {
-    country: "Brazil",
+    country: "Brezilya",
     city: "Minas Gerais",
     zone: "Ana Arabica Üretim Bölgesi",
     temp: 28,
@@ -37,7 +37,7 @@ const mainRegions = [
     impact: "Etki: Uzun kuraklık Robusta çerçevesini zorluyor; hafta sonu yağış hasat zamanlamasını etkileyebilir.",
   },
   {
-    country: "Colombia",
+    country: "Kolombiya",
     city: "Huila / Narino",
     zone: "Specialty Arabica Bölgesi",
     temp: 22,
@@ -55,9 +55,9 @@ const mainRegions = [
 ];
 
 const secondaryRegions = [
-  { name: "Ethiopia — Yirgacheffe", icon: "cloud", temp: "19°C", rain: "18mm" },
-  { name: "Indonesia — Sumatra", icon: "thunderstorm", temp: "30°C", rain: "85mm" },
-  { name: "Honduras — Copan", icon: "partly_cloudy_day", temp: "25°C", rain: "12mm" },
+  { name: "Etiyopya — Yirgacheffe", icon: "cloud", temp: "19°C", rain: "18mm" },
+  { name: "Endonezya — Sumatra", icon: "thunderstorm", temp: "30°C", rain: "85mm" },
+  { name: "Honduras — Copán", icon: "partly_cloudy_day", temp: "25°C", rain: "12mm" },
   { name: "Uganda — Mt. Elgon", icon: "rainy", temp: "21°C", rain: "34mm" },
 ];
 

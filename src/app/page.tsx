@@ -84,10 +84,10 @@ export default function Home() {
                     Analiz
                   </span>
                   <h1 className="font-headline text-3xl md:text-5xl leading-tight mb-5">
-                    The Resilience of Arabica: Why Supply Constraints are Redefining 2024 Yield Expectations.
+                    Arabica&apos;nın Direnci: Arz Kısıtları 2024 Verim Beklentilerini Nasıl Yeniden Şekillendiriyor?
                   </h1>
                   <p className="text-on-primary-container/80 text-sm md:text-base mb-8">
-                    As climate volatility hits Brazilian Highlands, exporters look towards Colombian varietals to stabilize the global morning cup.
+                    İklim oynaklığı Brezilya Yaylalarını vururken, ihracatçılar küresel sabah kahvesini stabilize etmek için Kolombiya çeşitlerine yöneliyor.
                   </p>
                   <div className="flex flex-wrap items-center gap-4 md:gap-6">
                     <button className="bg-[#f4fafe] text-primary-container px-6 py-3 font-bold text-xs uppercase tracking-widest hover:bg-white transition-colors">
@@ -113,7 +113,7 @@ export default function Home() {
                   Editörün Günlük Notu
                 </h4>
                 <p className="text-sm leading-relaxed text-secondary italic mb-6">
-                  &ldquo;The shift we&rsquo;re seeing in the Vietnamese Robusta market isn&rsquo;t just a pricing spike; it&rsquo;s a structural realignment. Investors who ignore the moisture levels in the Central Highlands are trading in the dark.&rdquo;
+                  &ldquo;Vietnam Robusta piyasasında gördüğümüz değişim sadece bir fiyat sıçraması değil; yapısal bir yeniden düzenlenme. Orta Yaylalar&rsquo;daki nem seviyelerini görmezden gelen yatırımcılar karanlıkta işlem yapıyor.&rdquo;
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-primary-fixed-dim flex items-center justify-center font-bold text-primary text-sm">
@@ -136,7 +136,7 @@ export default function Home() {
                   Piyasa Duyarlılığı
                 </h4>
                 <div className="flex justify-between items-end mb-4">
-                  <span className="text-4xl font-headline font-light italic">Bullish</span>
+                  <span className="text-4xl font-headline font-light italic">Yükseliş</span>
                   <span className="text-tertiary-fixed text-xl font-bold">78%</span>
                 </div>
                 <div className="w-full bg-white/10 h-1 rounded-full overflow-hidden mb-5">
