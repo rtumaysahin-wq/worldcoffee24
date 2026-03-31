@@ -14,7 +14,7 @@ interface NewsItem {
   source: string;
 }
 
-const categories = ["Tumu", "Daily Coffee News", "Sprudge", "Perfect Daily Grind", "Google News"];
+const categories = ["Tümü", "Daily Coffee News", "Sprudge", "Perfect Daily Grind", "Google News"];
 
 const sourceColors: Record<string, string> = {
   "Daily Coffee News": "bg-primary",
@@ -24,15 +24,15 @@ const sourceColors: Record<string, string> = {
 };
 
 const newsSourceCards = [
-  { name: "Daily Coffee News", desc: "Specialty kahve sektorunden gunluk haberler ve analizler.", url: "https://dailycoffeenews.com/" },
-  { name: "Perfect Daily Grind", desc: "Kahve uretiminden tuketimine, sektor profesyonelleri icin icerikler.", url: "https://www.perfectdailygrind.com/" },
-  { name: "Sprudge", desc: "Kuresel kahve kulturu, etkinlikler ve trendler.", url: "https://sprudge.com/" },
-  { name: "Global Coffee Report", desc: "Kuresel kahve endustrisi haberleri ve pazar analizi.", url: "http://www.gcrmag.com/" },
-  { name: "Roast Magazine", desc: "Kavurma endustrisi, ekipman ve isletme yonetimi odakli yayin.", url: "https://www.roastmagazine.com/" },
+  { name: "Daily Coffee News", desc: "Specialty kahve sektöründen günlük haberler ve analizler.", url: "https://dailycoffeenews.com/" },
+  { name: "Perfect Daily Grind", desc: "Kahve üretiminden tüketimine, sektör profesyonelleri için içerikler.", url: "https://www.perfectdailygrind.com/" },
+  { name: "Sprudge", desc: "Küresel kahve kültürü, etkinlikler ve trendler.", url: "https://sprudge.com/" },
+  { name: "Global Coffee Report", desc: "Küresel kahve endüstrisi haberleri ve pazar analizi.", url: "http://www.gcrmag.com/" },
+  { name: "Roast Magazine", desc: "Kavurma endüstrisi, ekipman ve işletme yönetimi odaklı yayın.", url: "https://www.roastmagazine.com/" },
 ];
 
 export default function Haberler() {
-  const [activeCategory, setActiveCategory] = useState("Tumu");
+  const [activeCategory, setActiveCategory] = useState("Tümü");
   const [news, setNews] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -58,7 +58,7 @@ export default function Haberler() {
   }, []);
 
   const filtered =
-    activeCategory === "Tumu"
+    activeCategory === "Tümü"
       ? news
       : news.filter((n) => n.source === activeCategory);
 
@@ -75,19 +75,19 @@ export default function Haberler() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
               <div>
                 <span className="text-xs font-label uppercase tracking-[0.2em] text-secondary mb-3 block">
-                  Guncel Haberler
+                  Güncel Haberler
                 </span>
                 <h1 className="font-headline text-4xl md:text-5xl font-light text-primary leading-none mb-3">
                   Haberler &amp; Analiz
                 </h1>
                 <p className="text-secondary text-sm md:text-base">
-                  Kuresel kahve piyasasindan canli haber akisi — RSS kaynaklarindan otomatik guncellenir.
+                  Küresel kahve piyasasından canlı haber akışı — RSS kaynaklarından otomatik güncellenir.
                 </p>
               </div>
               <div className="flex items-center gap-2 bg-surface-container-low px-5 py-3">
                 <span className="material-symbols-outlined text-sm text-secondary">rss_feed</span>
                 <span className="text-[10px] font-label uppercase tracking-widest text-secondary">
-                  Canli RSS Akisi &bull; {news.length} haber
+                  Canlı RSS Akışı &bull; {news.length} haber
                 </span>
               </div>
             </div>
@@ -115,7 +115,7 @@ export default function Haberler() {
             {/* ═══ SOL: CANLI HABERLER ═══ */}
             <section className="col-span-12 lg:col-span-8 space-y-4">
               <div className="flex items-center gap-4 mb-2">
-                <h2 className="font-headline text-2xl font-bold">Canli Haber Akisi</h2>
+                <h2 className="font-headline text-2xl font-bold">Canlı Haber Akışı</h2>
                 <div className="h-px flex-1 bg-outline-variant/20" />
               </div>
 
@@ -133,12 +133,12 @@ export default function Haberler() {
               ) : error ? (
                 <div className="bg-surface-container-lowest p-10 text-center editorial-shadow">
                   <span className="material-symbols-outlined text-4xl text-error mb-3 block">error</span>
-                  <p className="text-sm text-error font-bold mb-1">Haberler yuklenemedi</p>
-                  <p className="text-xs text-secondary">Lutfen daha sonra tekrar deneyin.</p>
+                  <p className="text-sm text-error font-bold mb-1">Haberler yüklenemedi</p>
+                  <p className="text-xs text-secondary">Lütfen daha sonra tekrar deneyin.</p>
                 </div>
               ) : filtered.length === 0 ? (
                 <div className="bg-surface-container-lowest p-10 text-center editorial-shadow">
-                  <p className="text-sm text-secondary">Bu kategoride haber bulunamadi.</p>
+                  <p className="text-sm text-secondary">Bu kategoride haber bulunamadı.</p>
                 </div>
               ) : (
                 filtered.map((item, i) => (
@@ -214,10 +214,10 @@ export default function Haberler() {
               <div className="bg-primary-container text-white p-6 md:p-8">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="material-symbols-outlined text-on-primary-container">mail</span>
-                  <h3 className="font-headline text-xl font-bold">Haftalik Bulten</h3>
+                  <h3 className="font-headline text-xl font-bold">Haftalık Bülten</h3>
                 </div>
                 <p className="text-xs text-on-primary-container mb-4">
-                  Her Pazartesi piyasa ozeti ve editor secimi haberler e-postanizda.
+                  Her Pazartesi piyasa özeti ve editör seçimi haberler e-postanızda.
                 </p>
                 <div className="flex gap-0">
                   <input

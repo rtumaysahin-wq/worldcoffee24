@@ -5,11 +5,11 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Kahve Terimler Sozlugu — A'dan Z'ye Sektor Terimleri",
+  title: "Kahve Terimler Sözlüğü — A'dan Z'ye Sektör Terimleri",
   description:
-    "Kahve ticareti ve uretiminde kullanilan 30+ terimin aciklamasi. Arabica, Robusta, futures, hedging, cupping, SCA, diferansiyel ve daha fazlasi.",
+    "Kahve ticareti ve üretiminde kullanılan 30+ terimin açıklaması. Arabica, Robusta, futures, hedging, cupping, SCA, diferansiyel ve daha fazlası.",
   keywords: [
-    "kahve sozluk",
+    "kahve sözlük",
     "kahve terimleri",
     "coffee glossary",
     "arabica nedir",
@@ -21,39 +21,39 @@ export const metadata: Metadata = {
 };
 
 const terms = [
-  { term: "Arabica", def: "Coffea arabica turune ait kahve. Dunya uretiminin %60-70'ini olusturur. Yuksek irtifada yetisir, kompleks lezzet profiline sahiptir. Daha az kafeyin (%1.2-1.5) icerir." },
-  { term: "Backwardation", def: "Vadeli kontrat fiyatinin spot fiyattan dusuk olmasi durumu. Arz sikintisi veya guclu anlık talep isareti." },
-  { term: "Blend", def: "Birden fazla mensei veya cesitten karistirilan kahve. Tutarli lezzet profili olusturmak icin kullanilir." },
-  { term: "C-Market (C-Piyasasi)", def: "ICE New York'ta islem goren Arabica kahve vadeli islem kontrati (Coffee C Futures). Kuresel Arabica fiyatlarinin referans noktasi." },
-  { term: "Capping (Cupping)", def: "Kahve kalitesini degerlendirmek icin standartlastirilmis tadim yontemi. SCA protokolune gore yapilir: koku, tat, asidite, govde, denge puanlari verilir." },
-  { term: "Cherry (Kiraz)", def: "Kahve bitkisinin meyvesi. Ici genellikle iki cekirdek (fasulye) icerir. Peaberry'de tek cekirdek bulunur." },
-  { term: "CIF", def: "Cost, Insurance and Freight. Satici navlun ve sigorta dahil fiyat verir. Emtia ticaretinde yaygin kullanilan Incoterm." },
-  { term: "COT Raporu", def: "Commitment of Traders. CFTC tarafindan haftalik yayinlanan rapor. Spekulatif ve ticari pozisyonlari gosterir." },
-  { term: "Contango", def: "Vadeli kontrat fiyatinin spot fiyattan yuksek olmasi. Normal piyasa kosullarinda depolama ve finansman maliyetini yansitir." },
-  { term: "Cuval (Bag)", def: "Kahve olcu birimi. Standart cuval: Arabica 60 kg, Robusta (Vietnam) 60 kg. Brezilya'da bazen 69 kg cuval kullanilir." },
-  { term: "Defekt", def: "Yesil kahve cekirdegindeki kusurlar. Bocek hasari, kuf, kirik, fermente cekirdek gibi. SCA derecelendirmesinde defekt sayisi kaliteyi belirler." },
-  { term: "Diferansiyel", def: "C-Piyasasi fiyatina gore uygulanan prim (+) veya indirim (-). Mensei, kalite, sertifika durumuna gore belirlenir. Ornek: Kolombiya Supremo +15 cent/lb." },
-  { term: "Elek Boyutu (Screen Size)", def: "Cekirdek buyuklugu olcusu. 1/64 inc cinsinden ifade edilir. Ornek: S18 = 18/64 inc. Buyuk cekirdek genellikle daha yuksek fiyat alir." },
-  { term: "FOB", def: "Free on Board. Satici malı gemiye yukler, bundan sonraki tum masraf ve risk aliciya aittir. Kahve ticaretinde en yaygin kullanilan Incoterm." },
-  { term: "Futures (Vadeli Islem)", def: "Belirli bir emtianin onceden belirlenmis fiyat ve tarihte teslimini iceren standart sozlesme. ICE borsasinda islem gorur." },
-  { term: "Green Coffee (Yesil Kahve)", def: "Kavurulmamis kahve cekirdegi. Uluslararasi ticarette kahve yesil haliyle satilir. Dogru depolandığında 12 aya kadar kalitesini korur." },
-  { term: "Hedging", def: "Fiyat riskinden korunma stratejisi. Uretici veya alici, futures piyasasinda ters pozisyon alarak fiziksel kahve isleminin riskini dengeler." },
-  { term: "Honey Process", def: "Kahve isleme yontemi. Kiraz soyulur ancak musilaj tabakasi birakilarak kurutulur. Washed ve Natural arasinda bir lezzet profili olusturur." },
-  { term: "ICE", def: "Intercontinental Exchange. Kahve futures kontratlarinin islem gordugu borsa. New York (Arabica) ve London (Robusta) seksiyonlari var." },
-  { term: "ICO", def: "International Coffee Organization. Uluslararasi Kahve Orgutu. Uretici ve tuketici ulkelerin uye oldugu hukumetlerarasi kurum." },
-  { term: "Lot", def: "Borsa kontrat birimi. Arabica: 1 lot = 37.500 libre (yaklasik 17 ton). Robusta: 1 lot = 10 ton." },
-  { term: "Margin (Teminat)", def: "Futures kontrati acmak icin yatirilan depozito. Kontrat degerinin %5-15'i arasinda degisir." },
-  { term: "Natural Process", def: "Kahve isleme yontemi. Kiraz butun haliyle gunes altinda kurutulur. Yogun meyve tatliligi ve guclu govde olusturur." },
-  { term: "Parchment (Pergamen)", def: "Kahve cekirdegini saran ince zar. Yikama islemi sonrasi cekirdek pergamen icinde kurutulur. Son asamada soyulur (hulling)." },
-  { term: "Peaberry", def: "Kiraz icinde tek cekirdek olusumu (normal: 2 cekirdek). Daha yogun lezzet profiline sahip oldugu kabul edilir. Toplam hasadin %5-10'u." },
-  { term: "Q-Grader", def: "Coffee Quality Institute (CQI) tarafindan sertifikalandirilmis profesyonel kahve degerlendirmecisi. Arabica icin Q Arabica, Robusta icin Q Robusta lisanslari var." },
-  { term: "Robusta", def: "Coffea canephora turune ait kahve. Dusuk irtifada yetisir, daha fazla kafein icerir (%2.2-2.7). Instant kahve ve espresso harmanlarinda yaygin kullanilir." },
-  { term: "SCA Skoru", def: "Specialty Coffee Association derecelendirme sistemi. 100 uzerinden puanlama. 80+ puan: specialty kahve. 85+: excellent. 90+: outstanding." },
-  { term: "Silverskin (Gumus Deri)", def: "Kahve cekirdegini saran en ince zar. Kavurma sirasinda ayrisir ve 'chaff' (kepek) olarak ucusar." },
-  { term: "Specialty Coffee", def: "SCA standartlarina gore 80+ puan alan kahve. Izlenebilir kaynak, minimal defekt, ayirt edici lezzet profili." },
-  { term: "Spot Fiyat", def: "Emtianin aninda teslim edilecegi fiyat. Futures fiyatindan farkli olabilir (contango veya backwardation)." },
-  { term: "Spread", def: "Iki farkli futures kontrat vadesi arasindaki fiyat farki. Piyasa kosullarini ve beklentileri yansitir." },
-  { term: "Washed Process", def: "Kahve isleme yontemi. Kiraz soyulur, fermantasyonla musilaj ayristirilir, suyla yikanir. Temiz, asidik, terroir-odakli fincan profili." },
+  { term: "Arabica", def: "Coffea arabica türüne ait kahve. Dünya üretiminin %60-70'ini oluşturur. Yüksek irtifada yetişir, kompleks lezzet profiline sahiptir. Daha az kafein (%1.2-1.5) içerir." },
+  { term: "Backwardation", def: "Vadeli kontrat fiyatının spot fiyattan düşük olması durumu. Arz sıkıntısı veya güçlü anlık talep işareti." },
+  { term: "Blend", def: "Birden fazla menşei veya çeşitten karıştırılan kahve. Tutarlı lezzet profili oluşturmak için kullanılır." },
+  { term: "C-Market (C-Piyasası)", def: "ICE New York'ta işlem gören Arabica kahve vadeli işlem kontratı (Coffee C Futures). Küresel Arabica fiyatlarının referans noktası." },
+  { term: "Cupping", def: "Kahve kalitesini değerlendirmek için standartlaştırılmış tadım yöntemi. SCA protokolüne göre yapılır: koku, tat, asidite, gövde, denge puanları verilir." },
+  { term: "Cherry (Kiraz)", def: "Kahve bitkisinin meyvesi. İçi genellikle iki çekirdek (fasulye) içerir. Peaberry'de tek çekirdek bulunur." },
+  { term: "CIF", def: "Cost, Insurance and Freight. Satıcı navlun ve sigorta dahil fiyat verir. Emtia ticaretinde yaygın kullanılan Incoterm." },
+  { term: "COT Raporu", def: "Commitment of Traders. CFTC tarafından haftalık yayınlanan rapor. Spekülatif ve ticari pozisyonları gösterir." },
+  { term: "Contango", def: "Vadeli kontrat fiyatının spot fiyattan yüksek olması. Normal piyasa koşullarında depolama ve finansman maliyetini yansıtır." },
+  { term: "Çuval (Bag)", def: "Kahve ölçü birimi. Standart çuval: Arabica 60 kg, Robusta (Vietnam) 60 kg. Brezilya'da bazen 69 kg çuval kullanılır." },
+  { term: "Defekt", def: "Yeşil kahve çekirdeğindeki kusurlar. Böcek hasarı, küf, kırık, fermente çekirdek gibi. SCA derecelendirmesinde defekt sayısı kaliteyi belirler." },
+  { term: "Diferansiyel", def: "C-Piyasası fiyatına göre uygulanan prim (+) veya indirim (-). Menşei, kalite, sertifika durumuna göre belirlenir. Örnek: Kolombiya Supremo +15 cent/lb." },
+  { term: "Elek Boyutu (Screen Size)", def: "Çekirdek büyüklüğü ölçüsü. 1/64 inç cinsinden ifade edilir. Örnek: S18 = 18/64 inç. Büyük çekirdek genellikle daha yüksek fiyat alır." },
+  { term: "FOB", def: "Free on Board. Satıcı malı gemiye yükler, bundan sonraki tüm masraf ve risk alıcıya aittir. Kahve ticaretinde en yaygın kullanılan Incoterm." },
+  { term: "Futures (Vadeli İşlem)", def: "Belirli bir emtianın önceden belirlenmiş fiyat ve tarihte teslimini içeren standart sözleşme. ICE borsasında işlem görür." },
+  { term: "Green Coffee (Yeşil Kahve)", def: "Kavurulmamış kahve çekirdeği. Uluslararası ticarette kahve yeşil haliyle satılır. Doğru depolandığında 12 aya kadar kalitesini korur." },
+  { term: "Hedging", def: "Fiyat riskinden korunma stratejisi. Üretici veya alıcı, futures piyasasında ters pozisyon alarak fiziksel kahve işleminin riskini dengeler." },
+  { term: "Honey Process", def: "Kahve işleme yöntemi. Kiraz soyulur ancak müsilaj tabakası bırakılarak kurutulur. Washed ve Natural arasında bir lezzet profili oluşturur." },
+  { term: "ICE", def: "Intercontinental Exchange. Kahve futures kontratlarının işlem gördüğü borsa. New York (Arabica) ve London (Robusta) seksiyonları var." },
+  { term: "ICO", def: "International Coffee Organization. Uluslararası Kahve Örgütü. Üretici ve tüketici ülkelerin üye olduğu hükümetlerarası kurum." },
+  { term: "Lot", def: "Borsa kontrat birimi. Arabica: 1 lot = 37.500 libre (yaklaşık 17 ton). Robusta: 1 lot = 10 ton." },
+  { term: "Margin (Teminat)", def: "Futures kontratı açmak için yatırılan depozito. Kontrat değerinin %5-15'i arasında değişir." },
+  { term: "Natural Process", def: "Kahve işleme yöntemi. Kiraz bütün haliyle güneş altında kurutulur. Yoğun meyve tatlılığı ve güçlü gövde oluşturur." },
+  { term: "Parchment (Pergamen)", def: "Kahve çekirdeğini saran ince zar. Yıkama işlemi sonrası çekirdek pergamen içinde kurutulur. Son aşamada soyulur (hulling)." },
+  { term: "Peaberry", def: "Kiraz içinde tek çekirdek oluşumu (normal: 2 çekirdek). Daha yoğun lezzet profiline sahip olduğu kabul edilir. Toplam hasadın %5-10'u." },
+  { term: "Q-Grader", def: "Coffee Quality Institute (CQI) tarafından sertifikalandırılmış profesyonel kahve değerlendirmecisi. Arabica için Q Arabica, Robusta için Q Robusta lisansları var." },
+  { term: "Robusta", def: "Coffea canephora türüne ait kahve. Düşük irtifada yetişir, daha fazla kafein içerir (%2.2-2.7). Instant kahve ve espresso harmanlarında yaygın kullanılır." },
+  { term: "SCA Skoru", def: "Specialty Coffee Association derecelendirme sistemi. 100 üzerinden puanlama. 80+ puan: specialty kahve. 85+: excellent. 90+: outstanding." },
+  { term: "Silverskin (Gümüş Deri)", def: "Kahve çekirdeğini saran en ince zar. Kavurma sırasında ayrışır ve 'chaff' (kepek) olarak uçuşur." },
+  { term: "Specialty Coffee", def: "SCA standartlarına göre 80+ puan alan kahve. İzlenebilir kaynak, minimal defekt, ayırt edici lezzet profili." },
+  { term: "Spot Fiyat", def: "Emtianın anında teslim edileceği fiyat. Futures fiyatından farklı olabilir (contango veya backwardation)." },
+  { term: "Spread", def: "İki farklı futures kontrat vadesi arasındaki fiyat farkı. Piyasa koşullarını ve beklentileri yansıtır." },
+  { term: "Washed Process", def: "Kahve işleme yöntemi. Kiraz soyulur, fermantasyonla müsilaj ayrıştırılır, suyla yıkanır. Temiz, asidik, terroir-odaklı fincan profili." },
 ];
 
 export default function TerimlerSozlugu() {
@@ -72,14 +72,14 @@ export default function TerimlerSozlugu() {
           </Link>
 
           <h1 className="font-headline text-4xl md:text-5xl font-bold text-primary leading-tight mb-4">
-            Kahve Terimler Sozlugu
+            Kahve Terimler Sözlüğü
           </h1>
           <p className="text-lg text-secondary leading-relaxed mb-8">
-            Kahve ticareti, uretimi ve degerlendirmesinde kullanilan {terms.length} temel terimin kapsamli aciklamasi.
+            Kahve ticareti, üretimi ve değerlendirmesinde kullanılan {terms.length} temel terimin kapsamlı açıklaması.
           </p>
 
           <p className="text-xs font-label uppercase tracking-widest text-secondary mb-6">
-            {terms.length} terim &bull; A&apos;dan Z&apos;ye siralanmis
+            {terms.length} terim &bull; A&apos;dan Z&apos;ye sıralanmış
           </p>
 
           <div className="divide-y divide-outline-variant/15">

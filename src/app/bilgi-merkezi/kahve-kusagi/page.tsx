@@ -5,15 +5,15 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Kahve Kusagi & Cografya — Uretim Ulkeleri Rehberi",
+  title: "Kahve Kuşağı & Coğrafya — Üretim Ülkeleri Rehberi",
   description:
-    "Dunya kahve kusagi haritasi, baslica uretim ulkeleri, iklim kosullari ve bolgesel lezzet profilleri. Brezilya, Kolombiya, Etiyopya, Vietnam.",
+    "Dünya kahve kuşağı haritası, başlıca üretim ülkeleri, iklim koşulları ve bölgesel lezzet profilleri. Brezilya, Kolombiya, Etiyopya, Vietnam.",
   keywords: [
-    "kahve kusagi",
+    "kahve kuşağı",
     "coffee belt",
-    "kahve uretim ulkeleri",
-    "arabica bolgeler",
-    "robusta bolgeler",
+    "kahve üretim ülkeleri",
+    "arabica bölgeler",
+    "robusta bölgeler",
     "brezilya kahve",
     "etiyopya kahve",
     "vietnam kahve",
@@ -23,63 +23,63 @@ export const metadata: Metadata = {
 const regions = [
   {
     name: "Brezilya",
-    role: "Dunyanin 1 numarali ureticisi",
-    production: "~55M cuval/yil",
+    role: "Dünyanın 1 numaralı üreticisi",
+    production: "~55M çuval/yıl",
     type: "Arabica & Robusta",
     regions: "Minas Gerais, Sao Paulo, Espirito Santo, Bahia",
     altitude: "600-1.400m",
-    flavor: "Cikolatamsi, findiksi, dusuk asidite, genis govdeli",
-    notes: "Dunya uretiminin yaklasik %35'ini saglar. Cift yillik uretim dongusu (on/off year) fiyatlari dogrudan etkiler.",
+    flavor: "Çikolataımsı, fındıksı, düşük asidite, geniş gövdeli",
+    notes: "Dünya üretiminin yaklaşık %35'ini sağlar. Çift yıllık üretim döngüsü (on/off year) fiyatları doğrudan etkiler.",
   },
   {
     name: "Kolombiya",
     role: "Specialty Arabica lideri",
-    production: "~12M cuval/yil",
+    production: "~12M çuval/yıl",
     type: "Sadece Arabica",
-    regions: "Huila, Narino, Antioquia, Tolima",
+    regions: "Huila, Nariño, Antioquia, Tolima",
     altitude: "1.200-2.000m",
-    flavor: "Parlak asidite, karamel tatlilik, meyve notalar",
-    notes: "Yilda iki hasat (ana hasat + mitaca). Yuksek irtifa ve vulkanik toprak specialty kaliteyi destekler.",
+    flavor: "Parlak asidite, karamel tatlılık, meyve notalar",
+    notes: "Yılda iki hasat (ana hasat + mitaca). Yüksek irtifa ve volkanik toprak specialty kaliteyi destekler.",
   },
   {
     name: "Etiyopya",
-    role: "Kahvenin anavatani",
-    production: "~7.5M cuval/yil",
+    role: "Kahvenin anavatanı",
+    production: "~7.5M çuval/yıl",
     type: "Sadece Arabica",
     regions: "Yirgacheffe, Sidamo, Guji, Harrar",
     altitude: "1.500-2.200m",
-    flavor: "Ciceksi, narenciye, yaban mersini, cay benzeri",
-    notes: "Dunya uzerindeki en buyuk genetik cesitlilik. Binlerce yabani cesit. Kahve kulturunun kokeni.",
+    flavor: "Çiçeksi, narenciye, yaban mersini, çay benzeri",
+    notes: "Dünya üzerindeki en büyük genetik çeşitlilik. Binlerce yabani çeşit. Kahve kültürünün kökeni.",
   },
   {
     name: "Vietnam",
-    role: "Dunyanin 1 numarali Robusta ureticisi",
-    production: "~30M cuval/yil",
-    type: "Cogunlukla Robusta",
+    role: "Dünyanın 1 numaralı Robusta üreticisi",
+    production: "~30M çuval/yıl",
+    type: "Çoğunlukla Robusta",
     regions: "Dak Lak, Lam Dong, Gia Lai (Orta Yaylalar)",
     altitude: "400-800m",
-    flavor: "Guclu, aci, ahsumsu, dusuk asidite",
-    notes: "Instant kahve endustrisinin temel hammadde kaynagi. Son yillarda Arabica uretimi de artiyor.",
+    flavor: "Güçlü, acı, ahşumsı, düşük asidite",
+    notes: "Instant kahve endüstrisinin temel hammadde kaynağı. Son yıllarda Arabica üretimi de artıyor.",
   },
   {
     name: "Endonezya",
-    role: "Cesitlilik ulkesi",
-    production: "~10M cuval/yil",
+    role: "Çeşitlilik ülkesi",
+    production: "~10M çuval/yıl",
     type: "Robusta & Arabica",
     regions: "Sumatra, Java, Sulawesi, Bali",
     altitude: "800-1.500m (Arabica), 200-800m (Robusta)",
-    flavor: "Topraksi, baharatli, dusuk asidite, agir govde",
-    notes: "Giling basah (wet-hulling) isleme yontemi benzersiz lezzet profili olusturur. Kopi Luwak'in anavatani.",
+    flavor: "Topraksı, baharatlı, düşük asidite, ağır gövde",
+    notes: "Giling basah (wet-hulling) işleme yöntemi benzersiz lezzet profili oluşturur. Kopi Luwak'ın anavatanı.",
   },
   {
     name: "Honduras",
-    role: "Orta Amerika'nin buyuyen gucu",
-    production: "~6M cuval/yil",
+    role: "Orta Amerika'nın büyüyen gücü",
+    production: "~6M çuval/yıl",
     type: "Sadece Arabica",
-    regions: "Copan, Santa Barbara, Lempira, Ocotepeque",
+    regions: "Copán, Santa Barbara, Lempira, Ocotepeque",
     altitude: "1.000-1.600m",
-    flavor: "Dengeli, cikolatamsi, turunce, findiksi",
-    notes: "Son 15 yilda uretim hacmi iki katina cikti. Kalite/fiyat oraninda rekabetci. Fair Trade sertifikali uretim yaygin.",
+    flavor: "Dengeli, çikolataımsı, turunçsu, fındıksı",
+    notes: "Son 15 yılda üretim hacmi iki katına çıktı. Kalite/fiyat oranında rekabetçi. Fair Trade sertifikalı üretim yaygın.",
   },
 ];
 
@@ -99,28 +99,28 @@ export default function KahveKusagi() {
           </Link>
 
           <h1 className="font-headline text-4xl md:text-5xl font-bold text-primary leading-tight mb-6">
-            Kahve Kusagi &amp; Cografya
+            Kahve Kuşağı &amp; Coğrafya
           </h1>
 
           <p className="text-lg text-secondary leading-relaxed mb-10">
-            Kahve, dunya uzerinde Yengec Donencesi ile Oglak Donencesi arasinda kalan tropikal kusak
-            bolgede yetisir. Bu bolge &ldquo;Kahve Kusagi&rdquo; (Coffee Belt) olarak bilinir ve yaklasik
-            70 ulkede kahve uretimi yapilir.
+            Kahve, dünya üzerinde Yengeç Dönencesi ile Oğlak Dönencesi arasında kalan tropikal kuşak
+            bölgede yetişir. Bu bölge &ldquo;Kahve Kuşağı&rdquo; (Coffee Belt) olarak bilinir ve yaklaşık
+            70 ülkede kahve üretimi yapılır.
           </p>
 
           <section className="mb-12">
             <h2 className="font-headline text-3xl font-bold text-primary mb-4">
-              Kahve Kusagi Nedir?
+              Kahve Kuşağı Nedir?
             </h2>
             <p className="text-base text-on-surface leading-relaxed mb-4">
-              Kahve bitkisi (Coffea) tropikal iklimlerde, 600-2.200 metre yukseklikte, yillik 1.500-3.000mm yagis
-              alan bolgelerde en iyi sonucu verir. Ideal sicaklik 15-24°C arasindadir. Don kahve bitkisi icin
-              oldurucu olabilir — bu nedenle Brezilya&apos;daki don olaylari dunya fiyatlarini dramatik etkiler.
+              Kahve bitkisi (Coffea) tropikal iklimlerde, 600-2.200 metre yükseklikte, yıllık 1.500-3.000mm yağış
+              alan bölgelerde en iyi sonucu verir. İdeal sıcaklık 15-24°C arasındadır. Don kahve bitkisi için
+              öldürücü olabilir — bu nedenle Brezilya&apos;daki don olayları dünya fiyatlarını dramatik etkiler.
             </p>
             <p className="text-base text-on-surface leading-relaxed mb-4">
-              Yukseklik, kahve kalitesini dogrudan etkiler. Genel kural: ne kadar yuksek irtifa, o kadar yavas
-              olgunlasma, o kadar yogun ve kompleks lezzet profili. Bu nedenle Kolombiya ve Etiyopya gibi
-              yuksek irtifa ulkelerinin kahveleri &ldquo;specialty&rdquo; sinifinda deger gorur.
+              Yükseklik, kahve kalitesini doğrudan etkiler. Genel kural: ne kadar yüksek irtifa, o kadar yavaş
+              olgunlaşma, o kadar yoğun ve kompleks lezzet profili. Bu nedenle Kolombiya ve Etiyopya gibi
+              yüksek irtifa ülkelerinin kahveleri &ldquo;specialty&rdquo; sınıfında değer görür.
             </p>
 
             <div className="bg-surface-container-low p-6 my-6 border-l-4 border-tertiary">
@@ -129,21 +129,21 @@ export default function KahveKusagi() {
                 <div>
                   <p className="font-bold text-primary mb-1">Arabica (Coffea arabica)</p>
                   <ul className="text-secondary space-y-1">
-                    <li>• Dunya uretiminin %60-70&apos;i</li>
-                    <li>• Yuksek irtifa (800-2.200m)</li>
+                    <li>• Dünya üretiminin %60-70&apos;i</li>
+                    <li>• Yüksek irtifa (800-2.200m)</li>
                     <li>• Daha az kafein (%1.2-1.5)</li>
-                    <li>• Kompleks, asidik, tatli</li>
-                    <li>• Hastalik ve don&apos;a hassas</li>
+                    <li>• Kompleks, asidik, tatlı</li>
+                    <li>• Hastalık ve don&apos;a hassas</li>
                   </ul>
                 </div>
                 <div>
                   <p className="font-bold text-primary mb-1">Robusta (Coffea canephora)</p>
                   <ul className="text-secondary space-y-1">
-                    <li>• Dunya uretiminin %30-40&apos;i</li>
-                    <li>• Dusuk irtifa (0-800m)</li>
+                    <li>• Dünya üretiminin %30-40&apos;ı</li>
+                    <li>• Düşük irtifa (0-800m)</li>
                     <li>• Daha fazla kafein (%2.2-2.7)</li>
-                    <li>• Guclu, aci, ahsumsu</li>
-                    <li>• Hastaliga dayanikli</li>
+                    <li>• Güçlü, acı, ahşumsı</li>
+                    <li>• Hastalığa dayanıklı</li>
                   </ul>
                 </div>
               </div>
@@ -152,7 +152,7 @@ export default function KahveKusagi() {
 
           <section className="mb-12">
             <h2 className="font-headline text-3xl font-bold text-primary mb-6">
-              Baslica Uretim Ulkeleri
+              Başlıca Üretim Ülkeleri
             </h2>
             <div className="space-y-6">
               {regions.map((r, i) => (
@@ -168,15 +168,15 @@ export default function KahveKusagi() {
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4 text-sm">
                     <div>
-                      <p className="text-[10px] font-label uppercase text-secondary mb-1">Tur</p>
+                      <p className="text-[10px] font-label uppercase text-secondary mb-1">Tür</p>
                       <p className="font-bold">{r.type}</p>
                     </div>
                     <div>
-                      <p className="text-[10px] font-label uppercase text-secondary mb-1">Bolgeler</p>
+                      <p className="text-[10px] font-label uppercase text-secondary mb-1">Bölgeler</p>
                       <p className="font-bold">{r.regions}</p>
                     </div>
                     <div>
-                      <p className="text-[10px] font-label uppercase text-secondary mb-1">Irtifa</p>
+                      <p className="text-[10px] font-label uppercase text-secondary mb-1">İrtifa</p>
                       <p className="font-bold">{r.altitude}</p>
                     </div>
                     <div>

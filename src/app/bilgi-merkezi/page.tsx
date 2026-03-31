@@ -8,25 +8,25 @@ const quickTags = ["Hedging", "Arabica", "Futures", "SCA Score", "Washed", "FOB"
 
 const guides = [
   {
-    category: "Cografya",
-    title: "Kahve Kusagi: Uretim Ulkeleri ve Bolgesel Lezzet Profilleri",
-    desc: "Brezilya'dan Etiyopya'ya, baslica uretim ulkeleri, iklim kosullari ve kahve cesitleri.",
+    category: "Coğrafya",
+    title: "Kahve Kuşağı: Üretim Ülkeleri ve Bölgesel Lezzet Profilleri",
+    desc: "Brezilya'dan Etiyopya'ya, başlıca üretim ülkeleri, iklim koşulları ve kahve çeşitleri.",
     svgBg: "#1a2a12",
     svgFill: "#1f3318",
     href: "/bilgi-merkezi/kahve-kusagi",
   },
   {
     category: "Teknik Analiz",
-    title: "Grafik Okuma Rehberi: Candlestick, Destek/Direnc, Hareketli Ortalamalar",
-    desc: "Emtia grafigi okuma temelleri. Kahve traderlari icin teknik analiz araci.",
+    title: "Grafik Okuma Rehberi: Candlestick, Destek/Direnç, Hareketli Ortalamalar",
+    desc: "Emtia grafiği okuma temelleri. Kahve traderları için teknik analiz aracı.",
     svgBg: "#1a2535",
     svgFill: "#162030",
     href: "/bilgi-merkezi/grafik-okuma",
   },
   {
-    category: "Sozluk",
-    title: "Kahve Terimler Sozlugu: A'dan Z'ye 33 Temel Terim",
-    desc: "Arabica'dan Washed Process'e, kahve ticaretinde kullanilan tum terimlerin aciklamasi.",
+    category: "Sözlük",
+    title: "Kahve Terimler Sözlüğü: A'dan Z'ye 33 Temel Terim",
+    desc: "Arabica'dan Washed Process'e, kahve ticaretinde kullanılan tüm terimlerin açıklaması.",
     svgBg: "#1a1008",
     svgFill: "#2d1a0a",
     href: "/bilgi-merkezi/terimler-sozlugu",
@@ -35,20 +35,20 @@ const guides = [
 
 const glossaryItems = [
   {
-    term: "Cuval (Standart)",
-    definition: "Bir kahve olcu birimi. \"Standart Cuval\" Arabica ticaretinde genellikle 60 kg'dir.",
+    term: "Çuval (Standart)",
+    definition: "Bir kahve ölçü birimi. \"Standart Çuval\" Arabica ticaretinde genellikle 60 kg'dir.",
   },
   {
     term: "Q-Grader",
-    definition: "Arabica kahveyi derecelendirmek icin Coffee Quality Institute (CQI) tarafindan sertifikalandirilmis profesyonel tadimci.",
+    definition: "Arabica kahveyi derecelendirmek için Coffee Quality Institute (CQI) tarafından sertifikalandırılmış profesyonel tadımcı.",
   },
   {
     term: "Diferansiyeller",
-    definition: "C-Piyasa fiyatina gore kalitenin, menseinin ve sertifikasyon durumuna gore kahveye uygulanan fiyat primi veya indirimi.",
+    definition: "C-Piyasa fiyatına göre kalitenin, menşeinin ve sertifikasyon durumuna göre kahveye uygulanan fiyat primi veya indirimi.",
   },
   {
-    term: "Gumus Deri (Silverskin)",
-    definition: "Kahve cekirdegini orten ince zar; kavurma sirasinda \"kepek\" olarak salinir.",
+    term: "Gümüş Deri (Silverskin)",
+    definition: "Kahve çekirdeğini örten ince zar; kavurma sırasında \"kepek\" olarak salınır.",
   },
 ];
 
@@ -71,13 +71,13 @@ export default function BilgiMerkezi() {
                 Mastering the <span className="italic font-normal">Global Bean</span>
               </h1>
               <p className="text-base md:text-lg text-on-surface-variant max-w-xl leading-relaxed">
-                Kahve ureticileri, kurumsal traderlar ve ciddi meraklilar icin derinlemesine egitim kaynaklari.
+                Kahve üreticileri, kurumsal traderlar ve ciddi meraklılar için derinlemesine eğitim kaynakları.
               </p>
             </div>
             <div className="col-span-12 md:col-span-5">
               <div className="w-full bg-surface-container-low p-6">
                 <h3 className="font-headline text-xl font-bold text-primary mb-4">
-                  Hizli Terimler Arama
+                  Hızlı Terimler Arama
                 </h3>
                 <div className="relative w-full">
                   <input
@@ -134,16 +134,16 @@ export default function BilgiMerkezi() {
               <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/50 to-transparent" />
               <div className="relative z-10 max-w-2xl">
                 <span className="bg-tertiary text-on-tertiary-fixed font-bold text-[10px] px-3 py-1 uppercase tracking-widest mb-4 inline-block">
-                  Ozel Seri
+                  Özel Seri
                 </span>
                 <h2 className="font-headline text-3xl md:text-5xl text-white font-bold mb-4 leading-tight">
-                  Kahve Vadeli Islemleri 101: Emtia Borsasinda Yol Haritasi
+                  Kahve Vadeli İşlemleri 101: Emtia Borsasında Yol Haritası
                 </h2>
                 <p className="text-on-primary-container mb-6 leading-relaxed text-sm">
-                  New York Ticaret Borsasi&rsquo;nin mekanizmalarini anlayin. Fiyat oynakligina karsi nasil korunacaginizi ve dalgali kuresel piyasada riski nasil yonetecginizi ogrenin.
+                  New York Ticaret Borsası&rsquo;nın mekanizmalarını anlayın. Fiyat oynaklığına karşı nasıl korunacağınızı ve dalgalı küresel piyasada riski nasıl yöneteceğinizi öğrenin.
                 </p>
                 <Link href="/bilgi-merkezi/futures-101" className="flex items-center gap-2 text-white font-bold tracking-widest uppercase text-xs border-b border-white pb-1 group-hover:gap-4 transition-all">
-                  Okumaya Basla
+                  Okumaya Başla
                   <span className="material-symbols-outlined text-sm">arrow_forward</span>
                 </Link>
               </div>
@@ -156,10 +156,10 @@ export default function BilgiMerkezi() {
                   Temel Bilgi
                 </span>
                 <h3 className="font-headline text-2xl font-bold text-primary mb-3">
-                  Isleme Yontemleri: Bilim &amp; Lezzet
+                  İşleme Yöntemleri: Bilim &amp; Lezzet
                 </h3>
                 <p className="text-on-surface-variant text-sm leading-relaxed mb-6">
-                  Dogal ve Yikamali&rsquo;dan Anaerobik fermantasyona — hasat sonrasi teknikler fincan profilini nasil belirler.
+                  Doğal ve Yıkamalı&rsquo;dan Anaerobik fermantasyona — hasat sonrası teknikler fincan profilini nasıl belirler.
                 </p>
                 <div className="mt-auto">
                   <div className="w-full h-36 bg-surface-container-low mb-4 flex items-center justify-center">
@@ -176,7 +176,7 @@ export default function BilgiMerkezi() {
                     </svg>
                   </div>
                   <Link href="/bilgi-merkezi/isleme-yontemleri" className="text-primary font-bold text-xs uppercase tracking-widest flex items-center gap-2">
-                    Modulu Kesfet
+                    Modülü Keşfet
                     <span className="material-symbols-outlined text-sm">arrow_forward</span>
                   </Link>
                 </div>
@@ -188,10 +188,10 @@ export default function BilgiMerkezi() {
           <section className="mb-12 md:mb-16">
             <div className="flex justify-between items-baseline mb-10 border-b border-outline-variant/30 pb-4">
               <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary">
-                Ileri Teknik Rehberler
+                İleri Teknik Rehberler
               </h2>
               <span className="text-xs font-bold uppercase tracking-widest text-secondary hover:text-primary cursor-pointer">
-                Tum Moduller
+                Tüm Modüller
               </span>
             </div>
             <div className="grid grid-cols-12 gap-8">
@@ -229,17 +229,17 @@ export default function BilgiMerkezi() {
           <section className="mb-12 md:mb-16 bg-surface-container-low p-6 md:p-10 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
             <div>
               <h3 className="font-headline text-3xl font-bold text-primary mb-4">
-                Sektor Sozlugu
+                Sektör Sözlüğü
               </h3>
               <p className="text-sm text-secondary mb-6 leading-relaxed">
-                Botanik siniflandirmalardan finansal ticaret jargonuna kahve terminolojisinin kapsamli dizini.
+                Botanik sınıflandırmalardan finansal ticaret jargonuna kahve terminolojisinin kapsamlı dizini.
               </p>
               <div className="flex gap-3">
                 <button className="px-4 py-2 bg-primary text-white text-xs font-bold uppercase tracking-widest">
                   A-Z Index
                 </button>
                 <button className="px-4 py-2 border border-outline-variant text-xs font-bold uppercase tracking-widest text-secondary">
-                  Populer
+                  Popüler
                 </button>
               </div>
             </div>
@@ -268,43 +268,43 @@ export default function BilgiMerkezi() {
           {/* ═══ FAYDALI KAYNAKLAR ═══ */}
           <section className="mb-12 md:mb-16">
             <div className="flex items-center gap-4 mb-8">
-              <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary">Faydali Kaynaklar</h2>
+              <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary">Faydalı Kaynaklar</h2>
               <div className="h-px flex-1 bg-outline-variant/20" />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
               <a href="http://www.intracen.org/itc/sectors/coffee/" target="_blank" rel="noopener noreferrer" className="p-6 bg-surface-container-lowest editorial-shadow hover:-translate-y-1 transition-all group">
                 <span className="material-symbols-outlined text-3xl text-primary mb-3 block">public</span>
                 <h4 className="font-headline text-lg font-bold mb-2 group-hover:text-primary">ITC Coffee Guide</h4>
-                <p className="text-xs text-secondary leading-relaxed">Uluslararasi Ticaret Merkezi kahve sektor rehberi ve pazar analizi.</p>
+                <p className="text-xs text-secondary leading-relaxed">Uluslararası Ticaret Merkezi kahve sektör rehberi ve pazar analizi.</p>
               </a>
               <a href="https://www.fas.usda.gov/commodities/coffee" target="_blank" rel="noopener noreferrer" className="p-6 bg-surface-container-lowest editorial-shadow hover:-translate-y-1 transition-all group">
                 <span className="material-symbols-outlined text-3xl text-primary mb-3 block">agriculture</span>
                 <h4 className="font-headline text-lg font-bold mb-2 group-hover:text-primary">USDA Coffee Data</h4>
-                <p className="text-xs text-secondary leading-relaxed">ABD Tarim Bakanligi kahve uretim, tuketim ve ticaret verileri.</p>
+                <p className="text-xs text-secondary leading-relaxed">ABD Tarım Bakanlığı kahve üretim, tüketim ve ticaret verileri.</p>
               </a>
               <a href="https://www.searates.com/" target="_blank" rel="noopener noreferrer" className="p-6 bg-surface-container-lowest editorial-shadow hover:-translate-y-1 transition-all group">
                 <span className="material-symbols-outlined text-3xl text-primary mb-3 block">sailing</span>
                 <h4 className="font-headline text-lg font-bold mb-2 group-hover:text-primary">SeaRates</h4>
-                <p className="text-xs text-secondary leading-relaxed">Kuresel navlun oranlari, konteyner takibi ve lojistik hesaplayici.</p>
+                <p className="text-xs text-secondary leading-relaxed">Küresel navlun oranları, konteyner takibi ve lojistik hesaplayıcı.</p>
               </a>
               <a href="http://www.supremo.be/en/continent/coffee-encyclopedia" target="_blank" rel="noopener noreferrer" className="p-6 bg-surface-container-lowest editorial-shadow hover:-translate-y-1 transition-all group">
                 <span className="material-symbols-outlined text-3xl text-primary mb-3 block">auto_stories</span>
                 <h4 className="font-headline text-lg font-bold mb-2 group-hover:text-primary">Coffee Encyclopedia</h4>
-                <p className="text-xs text-secondary leading-relaxed">Kapsamli kahve ansiklopedisi: cesitler, bolgeler, isleme yontemleri.</p>
+                <p className="text-xs text-secondary leading-relaxed">Kapsamlı kahve ansiklopedisi: çeşitler, bölgeler, işleme yöntemleri.</p>
               </a>
             </div>
           </section>
 
           {/* ═══ SEKTÖR DERNEKLERİ & SERTİFİKALAR ═══ */}
           <section className="mb-12 md:mb-16 bg-surface-container-low p-6 md:p-10">
-            <h2 className="font-headline text-3xl font-bold text-primary mb-8">Sektor Dernekleri &amp; Sertifikalar</h2>
+            <h2 className="font-headline text-3xl font-bold text-primary mb-8">Sektör Dernekleri &amp; Sertifikalar</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {[
                 { name: "SCA", full: "Specialty Coffee Association", url: "https://sca.coffee/", icon: "coffee" },
                 { name: "ICO", full: "International Coffee Organization", url: "http://www.ico.org/", icon: "public" },
                 { name: "WCR", full: "World Coffee Research", url: "https://worldcoffeeresearch.org/", icon: "biotech" },
-                { name: "Rainforest Alliance", full: "Surdurulebilirlik Sertifikasi", url: "https://www.rainforest-alliance.org/", icon: "forest" },
-                { name: "Fair Trade", full: "Adil Ticaret Sertifikasi", url: "https://www.fairtrade.net/", icon: "handshake" },
+                { name: "Rainforest Alliance", full: "Sürdürülebilirlik Sertifikası", url: "https://www.rainforest-alliance.org/", icon: "forest" },
+                { name: "Fair Trade", full: "Adil Ticaret Sertifikası", url: "https://www.fairtrade.net/", icon: "handshake" },
                 { name: "CQI", full: "Coffee Quality Institute", url: "https://www.coffeeinstitute.org/", icon: "verified" },
                 { name: "ACE", full: "Alliance for Coffee Excellence", url: "https://allianceforcoffeeexcellence.org/", icon: "emoji_events" },
               ].map((org) => (
@@ -322,10 +322,10 @@ export default function BilgiMerkezi() {
           {/* ═══ PREMIUM BÜLTEN CTA ═══ */}
           <section className="text-center py-12 md:py-16">
             <h2 className="font-headline text-3xl md:text-4xl text-primary mb-4">
-              Daha Derin Analiz mi Istiyorsunuz?
+              Daha Derin Analiz mi İstiyorsunuz?
             </h2>
             <p className="text-secondary text-sm mb-8 max-w-lg mx-auto">
-              Haftalik teknik raporlar, piyasa tahminleri ve sektor onculeriyle ozel roportajlar icin premium bultenimize katilin.
+              Haftalık teknik raporlar, piyasa tahminleri ve sektör öncüleriyle özel röportajlar için premium bültenimize katılın.
             </p>
             <div className="flex max-w-md mx-auto gap-0">
               <input

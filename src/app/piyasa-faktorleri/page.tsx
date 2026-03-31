@@ -5,20 +5,20 @@ import Footer from "@/components/Footer";
 
 const demandCards = [
   {
-    title: "Cin Buyumesi",
-    text: "Cin'in yillik kahve tuketimi %15 buyuyor. 2025 ithalat hacmi 4.2M cuvala ulasmasi bekleniyor.",
+    title: "Çin Büyümesi",
+    text: "Çin'in yıllık kahve tüketimi %15 büyüyor. 2025 ithalat hacmi 4.2M çuvala ulaşması bekleniyor.",
     stat: "+15%",
     statLabel: "YoY",
   },
   {
     title: "Premium Trend",
-    text: "Specialty kahve segmenti kuresel piyasanin %12'sine ulasti. Ucuncu dalga kafelerin buyumesi premium talep yaratmaya devam ediyor.",
+    text: "Specialty kahve segmenti küresel piyasanın %12'sine ulaştı. Üçüncü dalga kafelerin büyümesi premium talep yaratmaya devam ediyor.",
     stat: "12%",
-    statLabel: "Pazar Payi",
+    statLabel: "Pazar Payı",
   },
   {
-    title: "Surdurulebilirlik",
-    text: "AB ormansizlasma yonetmeligi 2025 uygulamasinin Vietnam ve Endonezya ihracatini etkilemesi bekleniyor.",
+    title: "Sürdürülebilirlik",
+    text: "AB ormansızlaşma yönetmeliği 2025 uygulamasının Vietnam ve Endonezya ihracatını etkilemesi bekleniyor.",
     stat: "EU",
     statLabel: "Regulasyon",
   },
@@ -38,18 +38,18 @@ export default function PiyasaFaktorleri() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
               <div className="max-w-2xl">
                 <span className="text-xs font-label uppercase tracking-[0.2em] text-secondary mb-3 block">
-                  Piyasa Faktorleri Ozeti
+                  Piyasa Faktörleri Özeti
                 </span>
                 <h1 className="font-headline text-4xl md:text-6xl font-light text-primary leading-none mb-5">
-                  Piyasa Faktorleri &amp; Makro Dinamikler
+                  Piyasa Faktörleri &amp; Makro Dinamikler
                 </h1>
                 <p className="text-base md:text-lg text-secondary leading-relaxed font-light">
-                  Kuresel kahve emtia alanini sekillendiren kritik degiskenlerin editoryal analizi.
+                  Küresel kahve emtia alanını şekillendiren kritik değişkenlerin editöryal analizi.
                 </p>
               </div>
               <div className="flex items-center gap-4 bg-surface-container-low p-5 md:p-6 editorial-shadow">
                 <div className="text-right border-r border-outline-variant/30 pr-4">
-                  <span className="text-[10px] font-label uppercase text-secondary">Son Guncelleme</span>
+                  <span className="text-[10px] font-label uppercase text-secondary">Son Güncelleme</span>
                   <p className="font-headline text-lg font-bold">30 Mar 2026</p>
                 </div>
                 <div>
@@ -67,7 +67,7 @@ export default function PiyasaFaktorleri() {
 
               {/* Bölüm başlığı */}
               <div className="flex items-center gap-4">
-                <h2 className="font-headline text-2xl font-bold">Iklim &amp; Uretim</h2>
+                <h2 className="font-headline text-2xl font-bold">İklim &amp; Üretim</h2>
                 <div className="h-px flex-1 bg-outline-variant/20" />
               </div>
 
@@ -82,7 +82,7 @@ export default function PiyasaFaktorleri() {
                     ENSO Status: La Nina Transition
                   </h3>
                   <p className="text-sm text-secondary mb-7 leading-relaxed">
-                    La Nina&rsquo;nin Eylul-Kasim arasinda olusma olasiligi %70&rsquo;tir. Kuzey Brezilya&rsquo;da artan yagis, ciceklenmeyi geciktirebilir.
+                    La Nina&rsquo;nin Eylül-Kasım arasında oluşma olasılığı %70&rsquo;tir. Kuzey Brezilya&rsquo;da artan yağış, çiçeklenmeyi geciktirebilir.
                   </p>
                   <div className="flex items-center gap-4">
                     <div className="w-full bg-surface-container-high h-1.5 rounded-full">
@@ -102,12 +102,12 @@ export default function PiyasaFaktorleri() {
                   </span>
                   <h3 className="font-headline text-2xl md:text-3xl mb-4">Brazil Harvest Cycle</h3>
                   <p className="text-sm text-on-tertiary-container mb-7 leading-relaxed">
-                    2025/26 uretimi icin &ldquo;yildan yila donusum&rdquo; dongusu bekleniyor. Ilk tahminler cift yillik donguler nedeniyle Arabica uretiminde %12 azalma ongoruyor.
+                    2025/26 üretimi için &ldquo;yıldan yıla dönüşüm&rdquo; döngüsü bekleniyor. İlk tahminler çift yıllık döngüler nedeniyle Arabica üretiminde %12 azalma öngörüyor.
                   </p>
                   <div className="flex justify-between items-end">
                     <div>
-                      <p className="text-2xl font-headline italic">Dusuk Verim</p>
-                      <p className="text-[10px] uppercase font-label">Tahmini 54.2M Cuval</p>
+                      <p className="text-2xl font-headline italic">Düşük Verim</p>
+                      <p className="text-[10px] uppercase font-label">Tahmini 54.2M Çuval</p>
                     </div>
                     <span className="text-3xl font-headline font-bold">-12%</span>
                   </div>
@@ -119,14 +119,14 @@ export default function PiyasaFaktorleri() {
                     <div className="flex items-center gap-2 mb-4">
                       <div className="w-2 h-2 rounded-full bg-tertiary animate-pulse" />
                       <span className="text-[10px] font-label uppercase tracking-widest text-tertiary font-bold">
-                        Canli Izleme
+                        Canlı İzleme
                       </span>
                     </div>
                     <h3 className="font-headline text-3xl md:text-4xl mb-4">
-                      Don Uyarilari: Minas Gerais
+                      Don Uyarıları: Minas Gerais
                     </h3>
                     <p className="text-sm text-secondary leading-relaxed">
-                      Yuksek irtifa bolgeleri icin kritik izleme asamasi. Sicakliklar 12°C&rsquo;de stabilize oldu. Bu hafta icin risk dusuk, ancak polar hava kutlesi hareketleri saatlik takip gerektiriyor.
+                      Yüksek irtifa bölgeleri için kritik izleme aşaması. Sıcaklıklar 12°C&rsquo;de stabilize oldu. Bu hafta için risk düşük, ancak polar hava kütlesi hareketleri saatlik takip gerektiriyor.
                     </p>
                   </div>
                   <div className="w-full md:w-64 h-40 bg-surface-container-highest overflow-hidden flex-shrink-0">
@@ -149,7 +149,7 @@ export default function PiyasaFaktorleri() {
               {/* ═══ KÜRESEL TALEP TRENDLERİ ═══ */}
               <div>
                 <div className="flex items-center gap-4 mb-8 mt-6">
-                  <h2 className="font-headline text-2xl font-bold">Kuresel Talep Trendleri</h2>
+                  <h2 className="font-headline text-2xl font-bold">Küresel Talep Trendleri</h2>
                   <div className="h-px flex-1 bg-outline-variant/20" />
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -171,7 +171,7 @@ export default function PiyasaFaktorleri() {
             <aside className="col-span-12 lg:col-span-4 space-y-6">
 
               <div className="flex items-center gap-4">
-                <h2 className="font-headline text-2xl font-bold">Ekonomik Faktorler</h2>
+                <h2 className="font-headline text-2xl font-bold">Ekonomik Faktörler</h2>
                 <div className="h-px flex-1 bg-outline-variant/20" />
               </div>
 
@@ -187,7 +187,7 @@ export default function PiyasaFaktorleri() {
                   <span className="font-headline text-2xl font-bold text-primary">0.1982</span>
                 </div>
                 <p className="text-sm text-secondary italic">
-                  &ldquo;Zayiflayan Real, Brezilyali ureticileri daha fazla ihracat yapmaya tesvik ederek New York ICE fiyatlari uzerinde asagi yonlu baski olusturuyor.&rdquo;
+                  &ldquo;Zayıflayan Real, Brezilyalı üreticileri daha fazla ihracat yapmaya teşvik ederek New York ICE fiyatları üzerinde aşağı yönlü baskı oluşturuyor.&rdquo;
                 </p>
               </div>
 
@@ -210,7 +210,7 @@ export default function PiyasaFaktorleri() {
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-sm">Konteyner Mevcudiyeti</span>
-                    <span className="text-xs font-bold uppercase text-secondary">Kisitli</span>
+                    <span className="text-xs font-bold uppercase text-secondary">Kısıtlı</span>
                   </div>
                 </div>
               </div>
@@ -222,23 +222,23 @@ export default function PiyasaFaktorleri() {
                 </h4>
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-secondary">Spekulatif Uzun Pozisyonlar</span>
+                    <span className="text-sm text-secondary">Spekülatif Uzun Pozisyonlar</span>
                     <span className="font-headline text-2xl font-bold text-tertiary">+52,840</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-secondary">Spekulatif Kisa Pozisyonlar</span>
+                    <span className="text-sm text-secondary">Spekülatif Kısa Pozisyonlar</span>
                     <span className="font-headline text-2xl font-bold text-error">-18,210</span>
                   </div>
                 </div>
                 <p className="text-xs text-secondary mt-5 leading-relaxed">
-                  Spekulatif net uzun pozisyon tarihsel olarak yuksek seyrediyor; guclu duyarliliga isaret ediyor ancak teknik satis baskisina karsi savunmasiz.
+                  Spekülatif net uzun pozisyon tarihsel olarak yüksek seyrediyor; güçlü duyarlılığa işaret ediyor ancak teknik satış baskısına karşı savunmasız.
                 </p>
               </div>
 
               {/* ICE Sertifikalı Stoklar */}
               <div className="bg-surface p-6 md:p-8 border border-error/20">
                 <h4 className="font-label text-[10px] uppercase tracking-[0.2em] text-secondary mb-3">
-                  ICE Sertifikali Stoklar
+                  ICE Sertifikalı Stoklar
                 </h4>
                 <p className="font-headline text-4xl font-bold text-primary">842K</p>
                 <p className="text-secondary text-sm mb-3">Bags</p>
@@ -250,7 +250,7 @@ export default function PiyasaFaktorleri() {
                   <span>5-Year Avg (2.4M)</span>
                 </div>
                 <p className="text-[10px] font-bold text-error uppercase mt-3 tracking-widest">
-                  Stok Uyarisi: 10 Yilin En Dusugu
+                  Stok Uyarısı: 10 Yılın En Düşüğü
                 </p>
               </div>
 

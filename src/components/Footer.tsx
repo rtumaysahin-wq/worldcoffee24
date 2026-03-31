@@ -1,10 +1,10 @@
 import Link from "next/link";
 
 const footerLinks = [
-  { href: "/gizlilik", labelTR: "Gizlilik Politikasi", labelEN: "Privacy Policy" },
-  { href: "/kullanim-kosullari", labelTR: "Kullanim Kosullari", labelEN: "Terms of Service" },
+  { href: "/gizlilik", labelTR: "Gizlilik Politikası", labelEN: "Privacy Policy" },
+  { href: "/kullanim-kosullari", labelTR: "Kullanım Koşulları", labelEN: "Terms of Service" },
   { href: "/api-docs", labelTR: "API Documentation", labelEN: "API Documentation" },
-  { href: "/iletisim", labelTR: "Uzmanla Iletisim", labelEN: "Contact Expert" },
+  { href: "/iletisim", labelTR: "Uzmanla İletişim", labelEN: "Contact Expert" },
 ];
 
 export default function Footer() {

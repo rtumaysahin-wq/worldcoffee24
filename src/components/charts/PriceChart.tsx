@@ -59,7 +59,7 @@ export default function PriceChart({
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <div>
           <span className="text-[10px] font-label uppercase tracking-[0.2em] text-secondary mb-1 block">
-            {subtitle || "Canli Veri"}
+            {subtitle || "Canlı Veri"}
           </span>
           <h3 className="font-headline text-2xl md:text-3xl font-bold">
             {title}
@@ -119,9 +119,9 @@ export default function PriceChart({
             <span className="material-symbols-outlined text-4xl text-error mb-2">
               error
             </span>
-            <p className="text-sm">Veri yuklenemedi</p>
+            <p className="text-sm">Veri yüklenemedi</p>
             <p className="text-xs text-outline mt-1">
-              Lutfen daha sonra tekrar deneyin
+              Lütfen daha sonra tekrar deneyin
             </p>
           </div>
         ) : (

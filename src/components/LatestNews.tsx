@@ -59,7 +59,7 @@ export default function LatestNews() {
           href="/haberler"
           className="text-xs font-bold uppercase tracking-widest text-secondary hover:text-primary flex items-center gap-1"
         >
-          Tum Haberler
+          Tüm Haberler
           <span className="material-symbols-outlined text-sm">arrow_forward</span>
         </Link>
       </div>

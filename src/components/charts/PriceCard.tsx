@@ -37,7 +37,7 @@ export default function PriceCard({
         <p className="text-[10px] font-label uppercase tracking-widest text-secondary mb-2">
           {label}
         </p>
-        <p className="text-sm text-error">Veri yuklenemedi</p>
+        <p className="text-sm text-error">Veri yüklenemedi</p>
       </div>
     );
   }
@@ -74,7 +74,7 @@ export default function PriceCard({
           {changePct.toFixed(2)}%)
         </div>
       ) : (
-        <p className="text-[10px] text-outline">Degisim verisi yok</p>
+        <p className="text-[10px] text-outline">Değişim verisi yok</p>
       )}
     </div>
   );

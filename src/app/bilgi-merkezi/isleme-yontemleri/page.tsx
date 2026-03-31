@@ -5,76 +5,76 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Kahve Isleme Yontemleri — Washed, Natural, Honey",
+  title: "Kahve İşleme Yöntemleri — Washed, Natural, Honey",
   description:
-    "Kahve isleme yontemleri rehberi: Yikamali (Washed), Dogal (Natural), Honey, Anaerobik fermantasyon. Her yontemin lezzet profiline etkisi.",
+    "Kahve işleme yöntemleri rehberi: Yıkamalı (Washed), Doğal (Natural), Honey, Anaerobik fermantasyon. Her yöntemin lezzet profiline etkisi.",
   keywords: [
-    "kahve isleme yontemi",
+    "kahve işleme yöntemi",
     "washed process",
     "natural process",
     "honey process",
     "anaerobik fermantasyon",
-    "kahve isleme",
+    "kahve işleme",
     "coffee processing",
   ],
 };
 
 const methods = [
   {
-    name: "Yikamali (Washed / Wet Process)",
+    name: "Yıkamalı (Washed / Wet Process)",
     color: "border-tertiary",
     steps: [
       "Hasat edilen kiraz soyulur (depulping)",
-      "Musilaj tabakasi fermantasyon tanklarinda 12-72 saat bekletilerek ayristirilir",
-      "Temiz suyla yikanir",
-      "Gunes altinda veya mekanik kurutucuda %11-12 neme kadar kurutulur",
+      "Müsilaj tabakası fermantasyon tanklarında 12-72 saat bekletilerek ayrıştırılır",
+      "Temiz suyla yıkanır",
+      "Güneş altında veya mekanik kurutucuda %11-12 neme kadar kurutulur",
     ],
-    flavor: "Temiz fincan, parlak asidite, ciceksi/meyvemsi notalar. Terroir (toprak/iklim) etkisi on plandadir.",
+    flavor: "Temiz fincan, parlak asidite, çiçeksi/meyvemsi notalar. Terroir (toprak/iklim) etkisi ön plandadır.",
     regions: "Kolombiya, Kenya, Etiyopya (Yirgacheffe), Orta Amerika",
-    pros: "Tutarli kalite, temiz lezzet profili, kalite kontrol kolayligi",
-    cons: "Yuksek su tuketimi (islem basina ~15-20 litre), cevresel etki, yuksek maliyet",
+    pros: "Tutarlı kalite, temiz lezzet profili, kalite kontrol kolaylığı",
+    cons: "Yüksek su tüketimi (işlem başına ~15-20 litre), çevresel etki, yüksek maliyet",
   },
   {
-    name: "Dogal (Natural / Dry Process)",
+    name: "Doğal (Natural / Dry Process)",
     color: "border-primary",
     steps: [
-      "Kirazlar olgunlasinca daldan toplanir",
-      "Kiraz butun haliyle (kabuk + meyve eti ile birlikte) kurutma yataginina serilir",
-      "2-4 hafta boyunca gunes altinda duzenli cevrilerek kurutulur",
+      "Kirazlar olgunlaşınca daldan toplanır",
+      "Kiraz bütün haliyle (kabuk + meyve eti ile birlikte) kurutma yatağına serilir",
+      "2-4 hafta boyunca güneş altında düzenli çevrilerek kurutulur",
       "Kuruyan kabuk mekanik olarak soyulur (hulling)",
     ],
-    flavor: "Yogun govde, dusuk asidite, cilek/yabanmersini/tropik meyve tatliligi, sarapsi/fermente notalar.",
+    flavor: "Yoğun gövde, düşük asidite, çilek/yabanmersini/tropik meyve tatlılığı, şarapsı/fermente notalar.",
     regions: "Etiyopya (Sidamo, Guji), Brezilya, Yemen",
-    pros: "Dusuk su tuketimi, cevre dostu, benzersiz tatlilik ve meyve karakteri",
-    cons: "Fermantasyon riski, tutarsiz kalite, mantar/kuf tehlikesi, iscilik yogun",
+    pros: "Düşük su tüketimi, çevre dostu, benzersiz tatlılık ve meyve karakteri",
+    cons: "Fermantasyon riski, tutarsız kalite, mantar/küf tehlikesi, işçilik yoğun",
   },
   {
     name: "Honey (Bal) Process",
     color: "border-on-tertiary-container",
     steps: [
-      "Kiraz soyulur (depulping) ancak musilaj tabakasi birakilir",
-      "Birakilan musilaj miktarina gore siniflandirilir: Yellow, Red, Black Honey",
-      "Musilaj uzerinde kurutulur — yapiskan (bal gibi) bir doku olusur",
-      "%11-12 neme ulasinca kabuk soyulur",
+      "Kiraz soyulur (depulping) ancak müsilaj tabakası bırakılır",
+      "Bırakılan müsilaj miktarına göre sınıflandırılır: Yellow, Red, Black Honey",
+      "Müsilaj üzerinde kurutulur — yapışkan (bal gibi) bir doku oluşur",
+      "%11-12 neme ulaşınca kabuk soyulur",
     ],
-    flavor: "Washed ve Natural arasinda bir yerde. Tatli, govdeli, orta asidite. Karamel/bal notlari.",
+    flavor: "Washed ve Natural arasında bir yerde. Tatlı, gövdeli, orta asidite. Karamel/bal notları.",
     regions: "Kosta Rika, El Salvador, Brezilya",
-    pros: "Daha az su kullanimi, benzersiz tatlilik, farklilastirma firsati",
-    cons: "Iscilik yogun, iklim bagimli, kurutma sureci hassas",
+    pros: "Daha az su kullanımı, benzersiz tatlılık, farklılaştırma fırsatı",
+    cons: "İşçilik yoğun, iklim bağımlı, kurutma süreci hassas",
   },
   {
     name: "Anaerobik Fermantasyon",
     color: "border-error",
     steps: [
-      "Kirazlar veya soyulmus cekirdekler hava gecirmez tanklara yerlestirilir",
-      "Oksijensiz ortamda kontollu fermantasyon (24-120+ saat)",
-      "Sicaklik, pH ve fermantasyon suresi hassas olarak izlenir",
-      "Fermantasyon sonrasi yikama veya dogal kurutma uygulanir",
+      "Kirazlar veya soyulmuş çekirdekler hava geçirmez tanklara yerleştirilir",
+      "Oksijensiz ortamda kontrollü fermantasyon (24-120+ saat)",
+      "Sıcaklık, pH ve fermantasyon süresi hassas olarak izlenir",
+      "Fermantasyon sonrası yıkama veya doğal kurutma uygulanır",
     ],
-    flavor: "Egzotik, yogun, tropik meyve, sarap/bira benzeri kompleks notalar. Bazen tursu/sirke asiditeleri.",
+    flavor: "Egzotik, yoğun, tropik meyve, şarap/bira benzeri kompleks notalar. Bazen turşu/sirke asiditeleri.",
     regions: "Kolombiya, Kosta Rika, Brezilya (specialty segment)",
-    pros: "Son derece benzersiz ve degerli fincan profilleri, yarisma kahveleri",
-    cons: "Cok yuksek risk, uzmanlik gerektirir, tutarsizlik potansiyeli, yuksek maliyet",
+    pros: "Son derece benzersiz ve değerli fincan profilleri, yarışma kahveleri",
+    cons: "Çok yüksek risk, uzmanlık gerektirir, tutarsızlık potansiyeli, yüksek maliyet",
   },
 ];
 
@@ -94,13 +94,13 @@ export default function IslemeYontemleri() {
           </Link>
 
           <h1 className="font-headline text-4xl md:text-5xl font-bold text-primary leading-tight mb-6">
-            Kahve Isleme Yontemleri
+            Kahve İşleme Yöntemleri
           </h1>
 
           <p className="text-lg text-secondary leading-relaxed mb-10">
-            Kahve cekirdeginin lezzet profilini belirleyen en onemli faktorlerden biri hasat sonrasi
-            isleme yontemidir. Ayni ciftlikten, ayni cesit cekirdek farkli yontemlerle islenerek
-            tamamen farkli lezzet profilleri olusturabilir.
+            Kahve çekirdeğinin lezzet profilini belirleyen en önemli faktörlerden biri hasat sonrası
+            işleme yöntemidir. Aynı çiftlikten, aynı çeşit çekirdek farklı yöntemlerle işlenerek
+            tamamen farklı lezzet profilleri oluşturabilir.
           </p>
 
           {methods.map((method, i) => (
@@ -109,7 +109,7 @@ export default function IslemeYontemleri() {
                 {method.name}
               </h2>
 
-              <h3 className="font-bold text-sm uppercase tracking-widest text-secondary mb-3">Islem Adimlari</h3>
+              <h3 className="font-bold text-sm uppercase tracking-widest text-secondary mb-3">İşlem Adımları</h3>
               <ol className="list-decimal list-inside space-y-2 mb-6 text-sm text-on-surface leading-relaxed">
                 {method.steps.map((step, j) => (
                   <li key={j}>{step}</li>
@@ -122,7 +122,7 @@ export default function IslemeYontemleri() {
                   <p className="text-sm text-on-surface leading-relaxed">{method.flavor}</p>
                 </div>
                 <div>
-                  <h4 className="text-[10px] font-label uppercase tracking-widest text-secondary mb-2">Yaygin Bolgeler</h4>
+                  <h4 className="text-[10px] font-label uppercase tracking-widest text-secondary mb-2">Yaygın Bölgeler</h4>
                   <p className="text-sm text-on-surface leading-relaxed">{method.regions}</p>
                 </div>
                 <div>

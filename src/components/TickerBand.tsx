@@ -65,7 +65,7 @@ export default function TickerBand() {
           <span className="material-symbols-outlined text-sm animate-spin">
             progress_activity
           </span>
-          Fiyatlar yukleniyor...
+          Fiyatlar yükleniyor...
         </div>
       </div>
     );
@@ -76,7 +76,7 @@ export default function TickerBand() {
       <div className="bg-surface-container-low border-b border-outline-variant/10 py-3 overflow-hidden flex-shrink-0">
         <div className="flex items-center justify-center gap-2 text-[11px] text-error">
           <span className="material-symbols-outlined text-sm">error</span>
-          Fiyat verisi yuklenemedi
+          Fiyat verisi yüklenemedi
         </div>
       </div>
     );

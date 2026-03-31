@@ -7,50 +7,50 @@ const mainRegions = [
   {
     country: "Brazil",
     city: "Minas Gerais",
-    zone: "Ana Arabica Uretim Bolgesi",
+    zone: "Ana Arabica Üretim Bölgesi",
     temp: 28,
     icon: "rainy",
     iconColor: "text-tertiary",
-    weather: "Hafif Yagmur",
+    weather: "Hafif Yağmur",
     details: [
       { label: "Nem", value: "82%", highlight: false },
-      { label: "Ruzgar", value: "12 km/h NE", highlight: false },
-      { label: "Yagis (7 gun)", value: "42mm", highlight: false },
-      { label: "Don Riski", value: "%5 — Dusuk", highlight: true, color: "text-error" },
+      { label: "Rüzgar", value: "12 km/h NE", highlight: false },
+      { label: "Yağış (7 gün)", value: "42mm", highlight: false },
+      { label: "Don Riski", value: "%5 — Düşük", highlight: true, color: "text-error" },
     ],
-    impact: "Etki: Yuksek nem ciceklenmeyi destekler ancak mantar hastaligi riskini artirir.",
+    impact: "Etki: Yüksek nem çiçeklenmeyi destekler ancak mantar hastalığı riskini artırır.",
   },
   {
     country: "Vietnam",
     city: "Dak Lak",
-    zone: "Ana Robusta Bolgesi",
+    zone: "Ana Robusta Bölgesi",
     temp: 34,
     icon: "sunny",
     iconColor: "text-yellow-600",
-    weather: "Kurak / Yuksek Nem",
+    weather: "Kurak / Yüksek Nem",
     details: [
       { label: "Nem", value: "91%", highlight: true, color: "text-error" },
-      { label: "Ruzgar", value: "8 km/h SW", highlight: false },
-      { label: "Yagis (7g)", value: "3mm — Kuru", highlight: true, color: "text-error" },
+      { label: "Rüzgar", value: "8 km/h SW", highlight: false },
+      { label: "Yağış (7g)", value: "3mm — Kuru", highlight: true, color: "text-error" },
       { label: "ENSO", value: "Notr → La Nina", highlight: false },
     ],
-    impact: "Etki: Uzun kuraklik Robusta cercevesini zorluyor; hafta sonu yagis hasat zamanlamasini etkileyebilir.",
+    impact: "Etki: Uzun kuraklık Robusta çerçevesini zorluyor; hafta sonu yağış hasat zamanlamasını etkileyebilir.",
   },
   {
     country: "Colombia",
     city: "Huila / Narino",
-    zone: "Specialty Arabica Bolgesi",
+    zone: "Specialty Arabica Bölgesi",
     temp: 22,
     icon: "partly_cloudy_day",
     iconColor: "text-secondary",
-    weather: "Parcali Bulutlu",
+    weather: "Parçalı Bulutlu",
     details: [
       { label: "Nem", value: "74%", highlight: false },
-      { label: "Ruzgar", value: "15 km/h N", highlight: false },
-      { label: "Yagis (7g)", value: "28mm — Normal", highlight: true, color: "text-tertiary" },
+      { label: "Rüzgar", value: "15 km/h N", highlight: false },
+      { label: "Yağış (7g)", value: "28mm — Normal", highlight: true, color: "text-tertiary" },
       { label: "Mitaca", value: "Devam Ediyor", highlight: true, color: "text-tertiary" },
     ],
-    impact: "Etki: Hafif yagis mitaca hasadi icin ideal. Hafta sonu gunes kurutma operasyonlarini destekleyecek.",
+    impact: "Etki: Hafif yağış mitaca hasadı için ideal. Hafta sonu güneş kurutma operasyonlarını destekleyecek.",
   },
 ];
 
@@ -75,19 +75,19 @@ export default function HavaRadari() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
               <div>
                 <span className="text-xs font-label uppercase tracking-[0.2em] text-secondary mb-3 block">
-                  Canli Izleme
+                  Canlı İzleme
                 </span>
                 <h1 className="font-headline text-4xl md:text-5xl font-light text-primary leading-none mb-3">
-                  Hava Radari &amp; Iklim
+                  Hava Radarı &amp; İklim
                 </h1>
                 <p className="text-secondary text-sm md:text-base">
-                  Baslica kahve uretim bolgelerinin anlik hava durumu ve tahminleri.
+                  Başlıca kahve üretim bölgelerinin anlık hava durumu ve tahminleri.
                 </p>
               </div>
               <div className="flex items-center gap-2 bg-surface-container-low px-5 py-3">
                 <div className="w-2 h-2 rounded-full bg-tertiary animate-pulse" />
                 <span className="text-[10px] font-label uppercase tracking-widest text-secondary">
-                  Canli &bull; Son guncelleme: 14:22 GMT
+                  Canlı &bull; Son güncelleme: 14:22 GMT
                 </span>
               </div>
             </div>
@@ -98,10 +98,10 @@ export default function HavaRadari() {
             <span className="material-symbols-outlined text-error text-2xl mt-0.5">ac_unit</span>
             <div>
               <p className="text-sm font-bold text-error uppercase tracking-widest mb-1">
-                Don Riski Uyarisi — Minas Gerais
+                Don Riski Uyarısı — Minas Gerais
               </p>
               <p className="text-sm text-on-surface-variant">
-                Guney Minas Gerais bolgesinde bu hafta %5 don riski tespit edildi. Yuksek irtifa bolgeleri saatlik izlemede.
+                Güney Minas Gerais bölgesinde bu hafta %5 don riski tespit edildi. Yüksek irtifa bölgeleri saatlik izlemede.
               </p>
             </div>
           </div>
@@ -150,7 +150,7 @@ export default function HavaRadari() {
 
           {/* ═══ DİĞER ÜRETİM BÖLGELERİ ═══ */}
           <h2 className="font-headline text-2xl font-bold text-primary mb-5">
-            Diger Uretim Bolgeleri
+            Diğer Üretim Bölgeleri
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-outline-variant/20 mb-10">
             {secondaryRegions.map((r, i) => (
@@ -162,7 +162,7 @@ export default function HavaRadari() {
                   <span className="material-symbols-outlined text-2xl text-primary">{r.icon}</span>
                   <span className="font-headline text-2xl font-bold">{r.temp}</span>
                 </div>
-                <p className="text-xs text-secondary">Yagis: {r.rain}</p>
+                <p className="text-xs text-secondary">Yağış: {r.rain}</p>
               </div>
             ))}
           </div>
@@ -172,10 +172,10 @@ export default function HavaRadari() {
             <div>
               <h3 className="font-headline text-3xl mb-3">ENSO Durumu</h3>
               <p className="text-on-primary-container text-sm leading-relaxed mb-5">
-                El Nino&rsquo;dan notr kosullara gecis. La Nina olusma olasiligi onumzdeki 6 ay icin %65-70 arasinda.
+                El Niño&rsquo;dan nötr koşullara geçiş. La Nina oluşma olasılığı önümüzdeki 6 ay için %65-70 arasında.
               </p>
               <span className="inline-block bg-primary px-4 py-2 text-[10px] font-bold uppercase tracking-widest">
-                Notr → La Nina Gecisi
+                Nötr → La Nina Geçişi
               </span>
             </div>
             <div className="border-t md:border-t-0 md:border-l border-white/15 pt-6 md:pt-0 md:pl-8">
@@ -185,15 +185,15 @@ export default function HavaRadari() {
               <ul className="space-y-3 text-sm text-on-primary-container">
                 <li className="flex items-start gap-2">
                   <span className="material-symbols-outlined text-sm mt-0.5">arrow_right</span>
-                  Brezilya: Artan yagis, ciceklenme gecikmesi
+                  Brezilya: Artan yağış, çiçeklenme gecikmesi
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="material-symbols-outlined text-sm mt-0.5">arrow_right</span>
-                  Vietnam: Kuraklik riskinde azalma
+                  Vietnam: Kuraklık riskinde azalma
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="material-symbols-outlined text-sm mt-0.5">arrow_right</span>
-                  Kolombiya: Mitaca hasadinda olumlu kosullar
+                  Kolombiya: Mitaca hasadında olumlu koşullar
                 </li>
               </ul>
             </div>
@@ -201,9 +201,9 @@ export default function HavaRadari() {
               <p className="text-[10px] font-label uppercase tracking-widest text-on-primary-container mb-4">
                 Fiyat Etkisi
               </p>
-              <p className="font-headline text-2xl italic mb-3">Yukari Yonlu Baski</p>
+              <p className="font-headline text-2xl italic mb-3">Yukarı Yönlü Baskı</p>
               <p className="text-sm text-on-primary-container leading-relaxed">
-                La Nina gecisi Arabica arzini kisitlayarak orta vadede fiyatlarda yukari yonlu baski olusturabilir.
+                La Nina geçişi Arabica arzını kısıtlayarak orta vadede fiyatlarda yukarı yönlü baskı oluşturabilir.
               </p>
             </div>
           </div>
