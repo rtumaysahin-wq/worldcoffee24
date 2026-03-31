@@ -66,7 +66,7 @@ export default function BilgiMerkezi() {
               <span className="text-xs tracking-[0.2em] uppercase text-secondary font-bold mb-4 block">
                 Bilgi Merkezi
               </span>
-              <h1 className="font-headline text-5xl md:text-7xl font-bold text-primary leading-none mb-6">
+              <h1 className="font-headline text-3xl md:text-5xl lg:text-7xl font-bold text-primary leading-none mb-6">
                 Küresel Kahve Ticaretinde <span className="italic font-normal">Uzmanlaşın</span>
               </h1>
               <p className="text-base md:text-lg text-on-surface-variant max-w-xl leading-relaxed">
@@ -119,7 +119,7 @@ export default function BilgiMerkezi() {
                 <h2 className="font-headline text-3xl md:text-5xl text-white font-bold mb-4 leading-tight">
                   Kahve Vadeli İşlemleri 101: Emtia Borsasında Yol Haritası
                 </h2>
-                <p className="text-on-primary-container mb-6 leading-relaxed text-sm">
+                <p className="text-white/70 mb-6 leading-relaxed text-sm">
                   New York Ticaret Borsası&rsquo;nın mekanizmalarını anlayın. Fiyat oynaklığına karşı nasıl korunacağınızı ve dalgalı küresel piyasada riski nasıl yöneteceğinizi öğrenin.
                 </p>
                 <Link href="/bilgi-merkezi/futures-101" className="flex items-center gap-2 text-white font-bold tracking-widest uppercase text-xs border-b border-white pb-1 group-hover:gap-4 transition-all">

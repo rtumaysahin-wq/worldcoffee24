@@ -98,11 +98,11 @@ export default function PiyasaFaktorleri() {
 
                 {/* Brazil Harvest */}
                 <div className="bg-primary-container p-6 md:p-8 editorial-shadow text-on-primary">
-                  <span className="text-[10px] font-label uppercase tracking-widest text-on-primary-container block mb-5">
+                  <span className="text-[10px] font-label uppercase tracking-widest text-white/70 block mb-5">
                     Arz Analizi
                   </span>
                   <h3 className="font-headline text-2xl md:text-3xl mb-4">Brezilya Hasat Döngüsü</h3>
-                  <p className="text-sm text-on-tertiary-container mb-7 leading-relaxed">
+                  <p className="text-sm text-white/80 mb-7 leading-relaxed">
                     2025/26 üretimi için &ldquo;yıldan yıla dönüşüm&rdquo; döngüsü bekleniyor. İlk tahminler çift yıllık döngüler nedeniyle Arabica üretiminde %12 azalma öngörüyor.
                   </p>
                   <div className="flex justify-between items-end">

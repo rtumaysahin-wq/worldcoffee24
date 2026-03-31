@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
 /* ===== Genel Stiller ===== */
+html, body {
+  overflow-x: hidden;
+}
+
 body {
   font-family: var(--font-body), "Inter", sans-serif;
 }

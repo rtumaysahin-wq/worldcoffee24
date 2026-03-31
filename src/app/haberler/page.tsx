@@ -214,10 +214,10 @@ export default function Haberler() {
               {/* Bülten CTA */}
               <div className="bg-primary-container text-white p-6 md:p-8">
                 <div className="flex items-center gap-2 mb-3">
-                  <span className="material-symbols-outlined text-on-primary-container">mail</span>
+                  <span className="material-symbols-outlined text-white/70">mail</span>
                   <h3 className="font-headline text-xl font-bold">Haftalık Bülten</h3>
                 </div>
-                <p className="text-xs text-on-primary-container mb-4">
+                <p className="text-xs text-white/70 mb-4">
                   Her Pazartesi piyasa özeti ve editör seçimi haberler e-postanızda.
                 </p>
                 <NewsletterForm variant="dark" />

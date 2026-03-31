@@ -154,7 +154,7 @@ export default function HavaRadari() {
                       {region.temp !== null ? (
                         <>
                           <div className="flex items-end gap-3 mb-6">
-                            <span className="font-headline text-6xl text-primary">{region.temp}</span>
+                            <span className="font-headline text-5xl md:text-6xl text-primary">{region.temp}</span>
                             <div className="pb-2">
                               <span className="font-headline text-2xl text-secondary">°C</span>
                               <p className="text-xs text-secondary">{weatherLabel}</p>
@@ -217,7 +217,7 @@ export default function HavaRadari() {
               <div className="bg-primary-container text-white p-6 md:p-10 grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
                   <h3 className="font-headline text-3xl mb-3">ENSO Durumu</h3>
-                  <p className="text-on-primary-container text-sm leading-relaxed mb-5">
+                  <p className="text-white/70 text-sm leading-relaxed mb-5">
                     El Niño&rsquo;dan nötr koşullara geçiş. La Niña oluşma olasılığı önümüzdeki 6 ay için %65-70 arasında.
                   </p>
                   <span className="inline-block bg-primary px-4 py-2 text-[10px] font-bold uppercase tracking-widest">
@@ -225,10 +225,10 @@ export default function HavaRadari() {
                   </span>
                 </div>
                 <div className="border-t md:border-t-0 md:border-l border-white/15 pt-6 md:pt-0 md:pl-8">
-                  <p className="text-[10px] font-label uppercase tracking-widest text-on-primary-container mb-4">
+                  <p className="text-[10px] font-label uppercase tracking-widest text-white/70 mb-4">
                     Beklenen Etki
                   </p>
-                  <ul className="space-y-3 text-sm text-on-primary-container">
+                  <ul className="space-y-3 text-sm text-white/70">
                     <li className="flex items-start gap-2">
                       <span className="material-symbols-outlined text-sm mt-0.5">arrow_right</span>
                       Brezilya: Artan yağış, çiçeklenme gecikmesi
@@ -244,11 +244,11 @@ export default function HavaRadari() {
                   </ul>
                 </div>
                 <div className="border-t md:border-t-0 md:border-l border-white/15 pt-6 md:pt-0 md:pl-8">
-                  <p className="text-[10px] font-label uppercase tracking-widest text-on-primary-container mb-4">
+                  <p className="text-[10px] font-label uppercase tracking-widest text-white/70 mb-4">
                     Fiyat Etkisi
                   </p>
                   <p className="font-headline text-2xl italic mb-3">Yukarı Yönlü Baskı</p>
-                  <p className="text-sm text-on-primary-container leading-relaxed">
+                  <p className="text-sm text-white/70 leading-relaxed">
                     La Niña geçişi Arabica arzını kısıtlayarak orta vadede fiyatlarda yukarı yönlü baskı oluşturabilir.
                   </p>
                 </div>

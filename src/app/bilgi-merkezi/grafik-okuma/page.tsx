@@ -128,7 +128,7 @@ export default function GrafikOkuma() {
 
             <div className="bg-primary-container text-white p-6 my-6">
               <h4 className="font-headline text-lg font-bold mb-2">Kırılma (Breakout)</h4>
-              <p className="text-sm text-on-primary-container leading-relaxed">
+              <p className="text-sm text-white/70 leading-relaxed">
                 Fiyat direnç seviyesini yukarı kırdığında, eski direnç yeni destek olur. Tersi de geçerlidir.
                 Kırılmalar genellikle yüksek hacimle gerçekleşir ve güçlü trend hareketlerinin başlangıcı olabilir.
                 Kahve piyasasında iklim olayları (don, kuraklık) genellikle direnç kırılmalarına neden olur.

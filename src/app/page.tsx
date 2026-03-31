@@ -40,7 +40,7 @@ export default function Home() {
                   <h1 className="font-headline text-3xl md:text-5xl leading-tight mb-5">
                     Arabica&apos;nın Direnci: Arz Kısıtları 2024 Verim Beklentilerini Nasıl Yeniden Şekillendiriyor?
                   </h1>
-                  <p className="text-on-primary-container/80 text-sm md:text-base mb-8">
+                  <p className="text-white/80 text-sm md:text-base mb-8">
                     İklim oynaklığı Brezilya Yaylalarını vururken, ihracatçılar küresel sabah kahvesini stabilize etmek için Kolombiya çeşitlerine yöneliyor.
                   </p>
                   <div className="flex flex-wrap items-center gap-4 md:gap-6">
@@ -96,7 +96,7 @@ export default function Home() {
                 <div className="w-full bg-white/10 h-1 rounded-full overflow-hidden mb-5">
                   <div className="bg-tertiary-fixed w-[78%] h-full" />
                 </div>
-                <p className="text-xs text-on-primary-container leading-loose">
+                <p className="text-xs text-white/70 leading-loose">
                   Endeks, Minas Gerais&rsquo;deki hasat gecikmelerine rağmen uzun pozisyonlara güçlü bir eğilim gösteriyor.
                 </p>
               </div>

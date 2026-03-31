@@ -164,7 +164,7 @@ export default function Futures101() {
 
           <div className="bg-primary-container text-white p-8 text-center">
             <h3 className="font-headline text-2xl mb-3">Canlı Fiyatları Takip Edin</h3>
-            <p className="text-sm text-on-primary-container mb-5">
+            <p className="text-sm text-white/70 mb-5">
               Arabica ve Robusta futures fiyatlarını canlı olarak Fiyat Merkezi sayfamızdan izleyebilirsiniz.
             </p>
             <Link
