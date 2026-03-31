@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import TickerBand from "@/components/TickerBand";
@@ -129,19 +130,13 @@ export default function PiyasaFaktorleri() {
                       Yüksek irtifa bölgeleri için kritik izleme aşaması. Sıcaklıklar 12°C&rsquo;de stabilize oldu. Bu hafta için risk düşük, ancak polar hava kütlesi hareketleri saatlik takip gerektiriyor.
                     </p>
                   </div>
-                  <div className="w-full md:w-64 h-40 bg-surface-container-highest overflow-hidden flex-shrink-0">
-                    <svg width="100%" height="100%" viewBox="0 0 256 160" xmlns="http://www.w3.org/2000/svg">
-                      <rect width="256" height="160" fill="#c8d8e0" />
-                      <polygon points="0,160 60,60 120,110 180,40 256,160" fill="#8aabb8" />
-                      <polygon points="60,60 120,110 0,160" fill="#6e96a6" />
-                      <polygon points="180,40 256,160 120,110" fill="#7aa3b2" />
-                      <polygon points="60,60 75,80 45,80" fill="white" opacity="0.8" />
-                      <polygon points="180,40 198,65 162,65" fill="white" opacity="0.8" />
-                      <rect x="90" y="125" width="76" height="16" rx="2" fill="white" opacity="0.9" />
-                      <text x="128" y="137" fontFamily="Inter,sans-serif" fontSize="8" fontWeight="bold" fill="#32170d" textAnchor="middle">
-                        ZONE 4: STABLE
-                      </text>
-                    </svg>
+                  <div className="w-full md:w-64 h-40 overflow-hidden flex-shrink-0 relative">
+                    <Image
+                      src="https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=400&q=80"
+                      alt="Minas Gerais bölgesi"
+                      fill
+                      className="object-cover"
+                    />
                   </div>
                 </div>
               </div>

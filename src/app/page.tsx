@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import TickerBand from "@/components/TickerBand";
 import Sidebar from "@/components/Sidebar";
@@ -21,61 +22,13 @@ export default function Home() {
             {/* Hero — Öne Çıkan Haber */}
             <div className="col-span-12 lg:col-span-8 bg-surface-container-lowest editorial-shadow overflow-hidden group">
               <div className="relative h-[340px] md:h-[500px]">
-                {/* Arka plan: kahve plantasyonu illüstrasyonu */}
-                <svg
-                  className="w-full h-full"
-                  viewBox="0 0 900 500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  preserveAspectRatio="xMidYMid slice"
-                >
-                  <defs>
-                    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#0d1f14" />
-                      <stop offset="60%" stopColor="#1a3a22" />
-                      <stop offset="100%" stopColor="#204530" />
-                    </linearGradient>
-                    <radialGradient id="glow" cx="22%" cy="28%" r="30%">
-                      <stop offset="0%" stopColor="#ffd166" stopOpacity="0.35" />
-                      <stop offset="100%" stopColor="#ffd166" stopOpacity="0" />
-                    </radialGradient>
-                  </defs>
-                  <rect width="900" height="500" fill="url(#sky)" />
-                  <rect width="900" height="500" fill="url(#glow)" />
-                  {/* Ay */}
-                  <ellipse cx="200" cy="150" rx="50" ry="50" fill="#ffd166" opacity="0.12" />
-                  <ellipse cx="200" cy="150" rx="25" ry="25" fill="#ffd166" opacity="0.2" />
-                  {/* Tepeler */}
-                  <ellipse cx="450" cy="600" rx="700" ry="280" fill="#0e2a16" />
-                  <ellipse cx="100" cy="560" rx="320" ry="220" fill="#112e19" />
-                  <ellipse cx="820" cy="580" rx="280" ry="200" fill="#0f2b17" />
-                  {/* Ağaç sıraları */}
-                  <g opacity="0.78">
-                    <ellipse cx="30" cy="352" rx="27" ry="40" fill="#0e2714" />
-                    <ellipse cx="170" cy="314" rx="27" ry="40" fill="#0e2714" />
-                    <ellipse cx="310" cy="300" rx="27" ry="40" fill="#0e2714" />
-                    <ellipse cx="450" cy="299" rx="27" ry="40" fill="#0e2714" />
-                    <ellipse cx="590" cy="312" rx="27" ry="40" fill="#0e2714" />
-                    <ellipse cx="730" cy="337" rx="27" ry="40" fill="#0e2714" />
-                    <ellipse cx="865" cy="370" rx="24" ry="35" fill="#0e2714" />
-                  </g>
-                  <g>
-                    <ellipse cx="86" cy="388" rx="31" ry="46" fill="#122c18" />
-                    <ellipse cx="238" cy="358" rx="31" ry="46" fill="#122c18" />
-                    <ellipse cx="390" cy="349" rx="31" ry="46" fill="#122c18" />
-                    <ellipse cx="542" cy="356" rx="31" ry="46" fill="#122c18" />
-                    <ellipse cx="694" cy="377" rx="31" ry="46" fill="#122c18" />
-                    <ellipse cx="846" cy="411" rx="31" ry="46" fill="#122c18" />
-                  </g>
-                  {/* Kahve meyveleri */}
-                  <g fill="#c0392b" opacity="0.85">
-                    <circle cx="162" cy="363" r="4.5" />
-                    <circle cx="314" cy="345" r="4.5" />
-                    <circle cx="390" cy="342" r="4.5" />
-                    <circle cx="466" cy="343" r="4.5" />
-                    <circle cx="542" cy="349" r="4.5" />
-                    <circle cx="694" cy="370" r="4.5" />
-                  </g>
-                </svg>
+                <Image
+                  src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1200&q=80"
+                  alt="Kahve plantasyonu"
+                  fill
+                  className="object-cover"
+                  priority
+                />
                 {/* Gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-primary-container via-primary/25 to-transparent opacity-92" />
                 {/* İçerik */}

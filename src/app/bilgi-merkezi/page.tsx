@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import TickerBand from "@/components/TickerBand";
@@ -11,24 +12,21 @@ const guides = [
     category: "Coğrafya",
     title: "Kahve Kuşağı: Üretim Ülkeleri ve Bölgesel Lezzet Profilleri",
     desc: "Brezilya'dan Etiyopya'ya, başlıca üretim ülkeleri, iklim koşulları ve kahve çeşitleri.",
-    svgBg: "#1a2a12",
-    svgFill: "#1f3318",
+    image: "https://images.unsplash.com/photo-1524350876685-274059332603?w=400&q=80",
     href: "/bilgi-merkezi/kahve-kusagi",
   },
   {
     category: "Teknik Analiz",
     title: "Grafik Okuma Rehberi: Candlestick, Destek/Direnç, Hareketli Ortalamalar",
     desc: "Emtia grafiği okuma temelleri. Kahve traderları için teknik analiz aracı.",
-    svgBg: "#1a2535",
-    svgFill: "#162030",
+    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&q=80",
     href: "/bilgi-merkezi/grafik-okuma",
   },
   {
     category: "Sözlük",
     title: "Kahve Terimler Sözlüğü: A'dan Z'ye 33 Temel Terim",
     desc: "Arabica'dan Washed Process'e, kahve ticaretinde kullanılan tüm terimlerin açıklaması.",
-    svgBg: "#1a1008",
-    svgFill: "#2d1a0a",
+    image: "https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=400&q=80",
     href: "/bilgi-merkezi/terimler-sozlugu",
   },
 ];
@@ -106,31 +104,12 @@ export default function BilgiMerkezi() {
           {/* ═══ KAHVE FUTURES 101 — HERO KART ═══ */}
           <section className="grid grid-cols-12 gap-6 mb-16 md:mb-20">
             <div className="col-span-12 lg:col-span-8 group relative overflow-hidden bg-primary-container min-h-[360px] md:min-h-[440px] flex items-end p-6 md:p-10">
-              {/* SVG arka plan */}
-              <svg
-                className="absolute inset-0 w-full h-full"
-                viewBox="0 0 700 440"
-                xmlns="http://www.w3.org/2000/svg"
-                preserveAspectRatio="xMidYMid slice"
-              >
-                <rect width="700" height="440" fill="#2d1508" />
-                <g opacity="0.2">
-                  <rect x="20" y="280" width="120" height="160" rx="8" fill="#5a3018" />
-                  <rect x="155" y="300" width="120" height="140" rx="8" fill="#4d2814" />
-                  <rect x="290" y="290" width="120" height="150" rx="8" fill="#5a3018" />
-                  <rect x="425" y="295" width="120" height="145" rx="8" fill="#4d2814" />
-                  <rect x="560" y="280" width="140" height="160" rx="8" fill="#5a3018" />
-                  <line x1="20" y1="320" x2="140" y2="320" stroke="#7a4a28" strokeWidth="1.5" />
-                  <line x1="20" y1="350" x2="140" y2="350" stroke="#7a4a28" strokeWidth="1.5" />
-                  <line x1="290" y1="330" x2="410" y2="330" stroke="#7a4a28" strokeWidth="1.5" />
-                  <line x1="290" y1="360" x2="410" y2="360" stroke="#7a4a28" strokeWidth="1.5" />
-                </g>
-                <g opacity="0.08">
-                  <rect x="0" y="80" width="700" height="6" fill="white" />
-                  <rect x="0" y="180" width="700" height="6" fill="white" />
-                  <rect x="0" y="250" width="700" height="6" fill="white" />
-                </g>
-              </svg>
+              <Image
+                src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefda?w=1200&q=80"
+                alt="Kahve vadeli işlemler"
+                fill
+                className="object-cover"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/50 to-transparent" />
               <div className="relative z-10 max-w-2xl">
                 <span className="bg-tertiary text-on-tertiary-fixed font-bold text-[10px] px-3 py-1 uppercase tracking-widest mb-4 inline-block">
@@ -162,18 +141,13 @@ export default function BilgiMerkezi() {
                   Doğal ve Yıkamalı&rsquo;dan Anaerobik fermantasyona — hasat sonrası teknikler fincan profilini nasıl belirler.
                 </p>
                 <div className="mt-auto">
-                  <div className="w-full h-36 bg-surface-container-low mb-4 flex items-center justify-center">
-                    <svg width="120" height="110" viewBox="0 0 120 110" xmlns="http://www.w3.org/2000/svg">
-                      <ellipse cx="60" cy="88" rx="38" ry="7" fill="#d5c3bd" opacity="0.35" />
-                      <path d="M26,44 L36,88 Q60,98 84,88 L94,44 Z" fill="#e8e0dc" />
-                      <path d="M26,44 Q60,54 94,44" fill="none" stroke="#d5c3bd" strokeWidth="2" />
-                      <ellipse cx="60" cy="44" rx="34" ry="9" fill="#ddd5d0" />
-                      <ellipse cx="60" cy="43" rx="27" ry="7" fill="#6f4e37" />
-                      <path d="M94,55 Q112,55 112,70 Q112,84 94,84" fill="none" stroke="#e8e0dc" strokeWidth="8" strokeLinecap="round" />
-                      <path d="M48,35 Q44,24 50,14" fill="none" stroke="#aaa" strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
-                      <path d="M60,32 Q56,21 62,11" fill="none" stroke="#aaa" strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
-                      <path d="M72,35 Q68,24 74,14" fill="none" stroke="#aaa" strokeWidth="1.5" strokeLinecap="round" opacity="0.4" />
-                    </svg>
+                  <div className="w-full h-36 bg-surface-container-low mb-4 relative overflow-hidden">
+                    <Image
+                      src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&q=80"
+                      alt="Kahve işleme yöntemleri"
+                      fill
+                      className="object-cover"
+                    />
                   </div>
                   <Link href="/bilgi-merkezi/isleme-yontemleri" className="text-primary font-bold text-xs uppercase tracking-widest flex items-center gap-2">
                     Modülü Keşfet
@@ -197,23 +171,13 @@ export default function BilgiMerkezi() {
             <div className="grid grid-cols-12 gap-8">
               {guides.map((guide, i) => (
                 <Link key={i} href={guide.href} className="col-span-12 md:col-span-4 group">
-                  <div className="mb-5 aspect-[4/5] overflow-hidden bg-surface-container flex items-center justify-center">
-                    <svg width="100%" height="100%" viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
-                      <rect width="200" height="250" fill={guide.svgBg} />
-                      <rect x="0" y="170" width="200" height="80" fill={guide.svgFill} />
-                      <ellipse cx="100" cy="120" rx="60" ry="80" fill={guide.svgFill} opacity="0.6" />
-                      <text
-                        x="100"
-                        y="130"
-                        fontFamily="Inter,sans-serif"
-                        fontSize="40"
-                        fill="white"
-                        opacity="0.1"
-                        textAnchor="middle"
-                      >
-                        {String(i + 1).padStart(2, "0")}
-                      </text>
-                    </svg>
+                  <div className="mb-5 aspect-[4/5] overflow-hidden bg-surface-container relative">
+                    <Image
+                      src={guide.image}
+                      alt={guide.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
                   </div>
                   <span className="text-[10px] font-label uppercase tracking-widest text-secondary mb-2 block">
                     {guide.category}

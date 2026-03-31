@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import TickerBand from "@/components/TickerBand";
@@ -169,19 +170,13 @@ export default function FiyatMerkezi() {
 
             {/* ═══ EDİTÖRYAL ANALİZ ═══ */}
             <section className="col-span-12 bg-surface-container-high p-6 md:p-10 flex flex-col md:flex-row gap-10 items-center">
-              <div className="md:w-1/2 h-72 bg-[#1a1008] flex-shrink-0 relative overflow-hidden">
-                <svg width="100%" height="100%" viewBox="0 0 500 288" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="500" height="288" fill="#1a1008" />
-                  <g fill="#3d2010" opacity="0.7">
-                    <ellipse cx="55" cy="75" rx="22" ry="14" transform="rotate(-20,55,75)" />
-                    <ellipse cx="115" cy="140" rx="22" ry="14" transform="rotate(15,115,140)" />
-                    <ellipse cx="75" cy="200" rx="22" ry="14" transform="rotate(-35,75,200)" />
-                    <ellipse cx="175" cy="55" rx="22" ry="14" transform="rotate(10,175,55)" />
-                    <ellipse cx="258" cy="96" rx="22" ry="14" transform="rotate(30,258,96)" />
-                    <ellipse cx="358" cy="65" rx="22" ry="14" transform="rotate(20,358,65)" />
-                    <ellipse cx="438" cy="115" rx="22" ry="14" transform="rotate(15,438,115)" />
-                  </g>
-                </svg>
+              <div className="md:w-1/2 h-72 flex-shrink-0 relative overflow-hidden">
+                <Image
+                  src="https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=800&q=80"
+                  alt="Kahve çekirdekleri"
+                  fill
+                  className="object-cover"
+                />
               </div>
               <div className="md:w-1/2">
                 <span className="text-[10px] font-label uppercase tracking-[0.3em] text-secondary mb-4 block">
