@@ -44,7 +44,7 @@ export default function Home() {
                     İklim oynaklığı Brezilya Yaylalarını vururken, ihracatçılar küresel sabah kahvesini stabilize etmek için Kolombiya çeşitlerine yöneliyor.
                   </p>
                   <div className="flex flex-wrap items-center gap-4 md:gap-6">
-                    <button className="bg-[#f4fafe] text-primary-container px-6 py-3 font-bold text-xs uppercase tracking-widest hover:bg-white transition-colors">
+                    <button className="bg-white text-primary px-6 py-3 font-bold text-xs uppercase tracking-widest hover:bg-white/90 transition-colors">
                       Raporu Oku
                     </button>
                     <span className="text-xs uppercase tracking-widest text-white/70">
