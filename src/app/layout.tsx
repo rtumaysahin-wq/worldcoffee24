@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "WorldCoffee24" }],
   creator: "WorldCoffee24",
-  metadataBase: new URL("https://worldcoffee24.vercel.app"),
+  metadataBase: new URL("https://worldcoffee24.com"),
   openGraph: {
     type: "website",
     locale: "tr_TR",
