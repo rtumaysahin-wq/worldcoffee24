@@ -87,17 +87,17 @@ export default function FiyatMerkezi() {
               <div>
                 <h3 className="font-headline text-2xl font-bold mb-2">Kur Çevirici</h3>
                 {rate > 0 && (
-                  <p className="text-[10px] text-[#d5c3bd] mb-5">
+                  <p className="text-[10px] text-white/70 mb-5">
                     1 USD = {rate.toFixed(4)} TRY (canlı kur)
                   </p>
                 )}
                 <div className="space-y-5">
                   <div>
-                    <label className="text-[10px] font-label uppercase tracking-widest text-[#d5c3bd] mb-1 block">
+                    <label className="text-[10px] font-label uppercase tracking-widest text-white/80 mb-1 block">
                       Giriş (USD)
                     </label>
                     <div className="flex items-center bg-[#32170d] p-4">
-                      <span className="text-[#d5c3bd] mr-3 text-lg">$</span>
+                      <span className="text-white/60 mr-3 text-lg">$</span>
                       <input
                         type="number"
                         value={usdAmount}
@@ -108,22 +108,22 @@ export default function FiyatMerkezi() {
                     </div>
                   </div>
                   <div className="flex justify-center">
-                    <button className="bg-primary p-2 rounded-full border border-[#4B2C20] text-white">
+                    <button className="bg-white/20 p-2 rounded-full border-2 border-white/40 text-white hover:bg-white/30 transition-colors">
                       <span className="material-symbols-outlined">swap_vert</span>
                     </button>
                   </div>
                   <div>
-                    <label className="text-[10px] font-label uppercase tracking-widest text-[#d5c3bd] mb-1 block">
+                    <label className="text-[10px] font-label uppercase tracking-widest text-white/80 mb-1 block">
                       Çıkış (TRY)
                     </label>
                     <div className="flex items-center bg-[#32170d] p-4 border-l-4 border-tertiary-fixed">
-                      <span className="text-[#d5c3bd] mr-3 text-lg">&#8378;</span>
+                      <span className="text-white/60 mr-3 text-lg">&#8378;</span>
                       <span className="text-white text-2xl font-headline">{tryResult}</span>
                     </div>
                   </div>
                 </div>
               </div>
-              <p className="text-[10px] italic text-[#d5c3bd] leading-relaxed mt-6 pt-5 border-t border-[#d5c3bd]/20">
+              <p className="text-[10px] italic text-white/60 leading-relaxed mt-6 pt-5 border-t border-white/20">
                 Kur verileri ExchangeRate API&apos;den saatlik güncellenir.
               </p>
             </section>
