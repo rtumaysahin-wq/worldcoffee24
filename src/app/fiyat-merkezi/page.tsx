@@ -102,13 +102,13 @@ export default function FiyatMerkezi() {
                         type="number"
                         value={usdAmount}
                         onChange={(e) => setUsdAmount(e.target.value)}
-                        className="bg-transparent border-none text-white text-2xl font-headline w-full outline-none"
+                        className="bg-transparent border-none text-white text-2xl font-headline w-full outline-none placeholder:text-white/40"
                         placeholder="100"
                       />
                     </div>
                   </div>
                   <div className="flex justify-center">
-                    <button className="bg-primary p-2 rounded-full border border-[#4B2C20]">
+                    <button className="bg-primary p-2 rounded-full border border-[#4B2C20] text-white">
                       <span className="material-symbols-outlined">swap_vert</span>
                     </button>
                   </div>
@@ -183,7 +183,7 @@ export default function FiyatMerkezi() {
                   Editöryal Analiz
                 </span>
                 <h2 className="font-headline text-3xl md:text-4xl font-bold mb-5">
-                  El Niño Gecikmesi: 24/25 Arabica Hasat Döngüsüne Etkisi
+                  El Niño Gecikmesi: 25/26 Arabica Hasat Döngüsüne Etkisi
                 </h2>
                 <p className="text-on-surface-variant text-sm md:text-base leading-relaxed mb-7">
                   Vadeli piyasalar kısa vadeli lojistiğe odaklanırken, Minas Gerais&rsquo;deki son sıcaklık anomalilerinin fizyolojik etkisi gelecek hasatta daha düşük elek boyutları ve cupping skorları olarak ortaya çıkabilir.

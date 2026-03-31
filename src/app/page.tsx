@@ -31,14 +31,14 @@ export default function Home() {
                   priority
                 />
                 {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-primary-container via-primary/25 to-transparent opacity-92" />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/70" />
                 {/* İçerik */}
                 <div className="absolute bottom-0 p-6 md:p-10 text-white max-w-2xl">
                   <span className="bg-primary px-3 py-1 text-[10px] uppercase tracking-[0.2em] font-bold mb-5 inline-block">
                     Analiz
                   </span>
                   <h1 className="font-headline text-3xl md:text-5xl leading-tight mb-5">
-                    Arabica&apos;nın Direnci: Arz Kısıtları 2024 Verim Beklentilerini Nasıl Yeniden Şekillendiriyor?
+                    Arabica&apos;nın Direnci: Arz Kısıtları 2026 Verim Beklentilerini Nasıl Yeniden Şekillendiriyor?
                   </h1>
                   <p className="text-white/80 text-sm md:text-base mb-8">
                     İklim oynaklığı Brezilya Yaylalarını vururken, ihracatçılar küresel sabah kahvesini stabilize etmek için Kolombiya çeşitlerine yöneliyor.
@@ -48,7 +48,7 @@ export default function Home() {
                       Raporu Oku
                     </button>
                     <span className="text-xs uppercase tracking-widest opacity-60">
-                      12 Dk Okuma &bull; Elara Vance
+                      12 Dk Okuma &bull; WC24 Analiz Ekibi
                     </span>
                   </div>
                 </div>
@@ -71,11 +71,11 @@ export default function Home() {
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-primary-fixed-dim flex items-center justify-center font-bold text-primary text-sm">
-                    JT
+                    WC
                   </div>
                   <div>
                     <p className="text-xs font-bold uppercase tracking-wider text-primary">
-                      Julian Thorne
+                      WC24 Editör
                     </p>
                     <p className="text-[10px] text-secondary">
                       Baş Emtia Stratejisti

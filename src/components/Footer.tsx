@@ -20,7 +20,7 @@ export default function Footer() {
             </span>
           </Link>
           <p className="text-slate-400 text-xs mt-1">
-            &copy; 2024 WorldCoffee24.com. All rights reserved.
+            &copy; 2026 WorldCoffee24.com. Tüm hakları saklıdır.
           </p>
         </div>
 
