@@ -1,4 +1,5 @@
 import Image from "next/image";
+import NewsletterForm from "@/components/NewsletterForm";
 import Navbar from "@/components/Navbar";
 import TickerBand from "@/components/TickerBand";
 import Sidebar from "@/components/Sidebar";
@@ -184,16 +185,7 @@ export default function Home() {
             <p className="max-w-xl text-secondary text-sm leading-relaxed mb-8">
               12.000&rsquo;den fazla emtia traderi ve sektör profesyoneli haftalık piyasa özetimize abone.
             </p>
-            <div className="flex w-full max-w-md border-b-2 border-primary">
-              <input
-                className="flex-1 bg-transparent border-none py-3 px-0 focus:ring-0 text-primary text-sm placeholder:text-outline-variant outline-none"
-                placeholder="professional@email.com"
-                type="email"
-              />
-              <button className="text-primary font-bold text-xs uppercase tracking-widest px-4 hover:opacity-70">
-                Abone Ol
-              </button>
-            </div>
+            <NewsletterForm variant="inline" />
             <p className="mt-4 text-[10px] text-outline-variant uppercase tracking-widest">
               Spam yok. Sadece yüksek kaliteli veri.
             </p>

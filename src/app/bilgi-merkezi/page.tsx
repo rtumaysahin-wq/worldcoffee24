@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import NewsletterForm from "@/components/NewsletterForm";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import TickerBand from "@/components/TickerBand";
@@ -291,16 +292,7 @@ export default function BilgiMerkezi() {
             <p className="text-secondary text-sm mb-8 max-w-lg mx-auto">
               Haftalık teknik raporlar, piyasa tahminleri ve sektör öncüleriyle özel röportajlar için premium bültenimize katılın.
             </p>
-            <div className="flex max-w-md mx-auto gap-0">
-              <input
-                className="flex-1 border border-outline-variant px-4 py-3 text-sm focus:ring-1 focus:ring-primary outline-none"
-                placeholder="professional@email.com"
-                type="email"
-              />
-              <button className="bg-primary text-white px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-primary-container">
-                Abone Ol
-              </button>
-            </div>
+            <NewsletterForm />
           </section>
 
         </div>

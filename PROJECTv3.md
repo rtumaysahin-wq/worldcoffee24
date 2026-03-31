@@ -8,7 +8,7 @@
 **Slogan:** Küresel Kahve Piyasa Platformu / Market Intelligence
 **Kurucu:** Recep Tümay Şahin
 **Başlangıç:** Mart 2026
-**Durum:** Tüm sayfalar canlı API + Türkçe + Unsplash görseller → Mailchimp ve responsive test sırada
+**Durum:** Mailchimp entegrasyonu tamamlandı → responsive test ve kontrast iyileştirmesi sırada
 
 ---
 
@@ -228,6 +228,11 @@
   - sitemap.xml (7 sayfa, priority + changeFrequency)
   - robots.txt (tüm sayfalara izin + sitemap referansı)
   - metadataBase: https://worldcoffee24.vercel.app
+- [x] Mailchimp bülten entegrasyonu ✅
+  - /api/subscribe: Mailchimp API ile abone ekleme
+  - NewsletterForm component (3 varyant: default, dark, inline)
+  - Ana Sayfa, Haberler, Bilgi Merkezi formları çalışır durumda
+  - Başarı/hata/duplikat mesajları, loading durumu
 - [ ] Mail listesi büyütme
 - [ ] Premium içerik sistemi
 - [ ] Reklam/sponsorluk alanları

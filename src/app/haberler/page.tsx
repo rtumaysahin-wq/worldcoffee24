@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import NewsletterForm from "@/components/NewsletterForm";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import TickerBand from "@/components/TickerBand";
@@ -219,16 +220,7 @@ export default function Haberler() {
                 <p className="text-xs text-on-primary-container mb-4">
                   Her Pazartesi piyasa özeti ve editör seçimi haberler e-postanızda.
                 </p>
-                <div className="flex gap-0">
-                  <input
-                    className="flex-1 border border-white/20 bg-white/10 px-3 py-2.5 text-sm outline-none focus:bg-white/20 placeholder:text-white/50"
-                    placeholder="email@adres.com"
-                    type="email"
-                  />
-                  <button className="bg-primary text-white px-4 py-2.5 text-xs font-bold uppercase tracking-widest hover:bg-[#32170d]">
-                    Abone
-                  </button>
-                </div>
+                <NewsletterForm variant="dark" />
               </div>
             </aside>
 
