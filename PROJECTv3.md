@@ -281,35 +281,81 @@ Mailchimp bülten entegrasyonu (API Key, Audience ID, Server gerekli). Responsiv
 
 > **Kural:** Hangi component üzerinde çalışılıyorsa sadece o bölüm okunacak. HTML dosyasının tamamı asla okunmayacak.
 
+### 🔑 Environment Variables (.env.local)
+```
+NEXT_PUBLIC_FRED_API_KEY=***       # FRED API — tarihsel Arabica/Robusta fiyatları
+NEXT_PUBLIC_API_NINJAS_KEY=***     # API Ninjas — Sugar fiyatı (coffee premium gerekli)
+```
+> Vercel'de de aynı key'ler tanımlı. `NEXT_PUBLIC_` prefix'i client-side'da görünür — ileride server-only route'lara taşınacak.
+> Open-Meteo ve ExchangeRate API'leri key gerektirmez.
+
+### 🔌 API Entegrasyonları
+| API | Endpoint | Veri | Cache |
+|-----|----------|------|-------|
+| Yahoo Finance (yahoo-finance2) | /api/prices | Arabica KC=F, Sugar SB=F, USD/TRY, EUR/TRY, BRL/USD | 5dk |
+| FRED | /api/prices + /api/prices/history | Robusta PCOFFROBUSDM, tarihsel Arabica PCOFFOTMUSDM | 5dk / 1s |
+| Open-Meteo | /api/weather | 7 üretim bölgesi canlı hava durumu | 30dk |
+| RSS (rss-parser) | /api/news | Daily Coffee News, Sprudge, Perfect Daily Grind, Google News | 30dk |
+
 ### 📁 Mevcut Dosya Yapısı
 ```
 C:\Users\rtuma\worldcoffee24\
 ├── src/
 │   ├── app/
 │   │   ├── favicon.ico
-│   │   ├── globals.css      (custom CSS değişkenleri + ticker animasyonu)
-│   │   ├── layout.tsx        (Newsreader + Inter fontları + Material Symbols)
-│   │   ├── page.tsx          (Ana Sayfa: Hero, Editör Notu, Grafik, Hava, Bülten)
+│   │   ├── globals.css         (custom CSS + ticker animasyonu)
+│   │   ├── layout.tsx          (Newsreader + Inter fontları + Material Symbols + SEO)
+│   │   ├── sitemap.ts          (12 sayfa, priority + changeFrequency)
+│   │   ├── robots.ts           (tüm sayfalara izin + sitemap referansı)
+│   │   ├── page.tsx            (Ana Sayfa: Hero, Editör Notu, Grafik, Hava, Haberler, Bülten)
+│   │   ├── api/
+│   │   │   ├── prices/
+│   │   │   │   ├── route.ts    (Yahoo Finance + FRED → canlı fiyatlar)
+│   │   │   │   └── history/
+│   │   │   │       └── route.ts (FRED → tarihsel Arabica/Robusta)
+│   │   │   ├── weather/
+│   │   │   │   └── route.ts    (Open-Meteo → 7 bölge canlı hava)
+│   │   │   └── news/
+│   │   │       └── route.ts    (RSS parser → 4 kaynaktan haberler)
 │   │   ├── fiyat-merkezi/
-│   │   │   └── page.tsx      (Fiyat Merkezi: Grafik, Kur Çevirici, Kontratlar, SCA)
+│   │   │   ├── layout.tsx      (SEO metadata)
+│   │   │   └── page.tsx        (Recharts grafik, Kur Çevirici, Kontratlar, SCA)
 │   │   ├── piyasa-faktorleri/
-│   │   │   └── page.tsx      (Piyasa Faktörleri: İklim, Talep, Ekonomik)
+│   │   │   ├── layout.tsx      (SEO metadata)
+│   │   │   └── page.tsx        (İklim, Talep, Ekonomik Faktörler)
 │   │   ├── bilgi-merkezi/
-│   │   │   └── page.tsx      (Bilgi Merkezi: Futures 101, Rehberler, Sözlük)
+│   │   │   ├── layout.tsx      (SEO metadata)
+│   │   │   ├── page.tsx        (Ana sayfa: Kaynaklar, Dernekler)
+│   │   │   ├── futures-101/    (Vadeli İşlemler rehberi)
+│   │   │   ├── kahve-kusagi/   (Üretim ülkeleri & coğrafya)
+│   │   │   ├── isleme-yontemleri/ (Washed/Natural/Honey)
+│   │   │   ├── grafik-okuma/   (Teknik analiz temelleri)
+│   │   │   └── terimler-sozlugu/ (33 terim A-Z)
 │   │   ├── hava-radari/
-│   │   │   └── page.tsx      (Hava Radarı: 7 bölge, ENSO, Don Uyarısı)
+│   │   │   ├── layout.tsx      (SEO metadata)
+│   │   │   └── page.tsx        (Canlı Open-Meteo, 7 bölge, ENSO)
 │   │   ├── haberler/
-│   │   │   └── page.tsx      (Haberler: Editör Seçimi, RSS, Haftalık Özet)
+│   │   │   ├── layout.tsx      (SEO metadata)
+│   │   │   └── page.tsx        (Canlı RSS, kaynak filtreleme, bülten)
 │   │   └── is-ticaret/
-│   │       └── page.tsx      (Trade Board: İlanlar, Form, Incoterms, Sertifikalar)
-│   └── components/
-│       ├── Navbar.tsx        (üst menü, dil desteği, aktif sayfa takibi)
-│       ├── Sidebar.tsx       (sol sidebar, sayfa navigasyonu)
-│       ├── TickerBand.tsx    (canlı fiyat bandı, kayan ticker)
-│       ├── Footer.tsx        (alt bilgi, linkler)
-│       └── TradingViewWidget.tsx (TradingView embed component)
-├── tailwind.config.ts        (renk paleti, fontlar)
-├── tsconfig.json             (path alias: @/* → ./src/*)
+│   │       ├── layout.tsx      (SEO metadata)
+│   │       └── page.tsx        (İlanlar, Form, Incoterms, Sertifikalar, Tedarikçiler)
+│   ├── components/
+│   │   ├── Navbar.tsx          (üst menü, dil desteği, aktif sayfa)
+│   │   ├── Sidebar.tsx         (sol sidebar, 7 sayfa navigasyonu)
+│   │   ├── TickerBand.tsx      (canlı fiyat bandı — /api/prices'dan)
+│   │   ├── Footer.tsx          (alt bilgi, linkler)
+│   │   ├── LatestNews.tsx      (ana sayfa son 3 haber — /api/news'dan)
+│   │   └── charts/
+│   │       ├── PriceChart.tsx   (Recharts area chart, 1M/1Y/5Y)
+│   │       └── PriceCard.tsx    (fiyat kartı, değişim %, loading/error)
+│   └── lib/api/
+│       ├── fred.ts             (client-side fetch → /api/prices/history)
+│       └── commodities.ts      (client-side fetch → /api/prices)
+├── .env.local                  (API key'leri — gitignore'da)
+├── next.config.mjs             (Unsplash remote pattern)
+├── tailwind.config.ts          (renk paleti, fontlar)
+├── tsconfig.json               (path alias: @/* → ./src/*)
 ├── package.json
 └── ...
 ```
