@@ -149,9 +149,9 @@ export default function IsTicaret() {
                       </div>
                       <div className="mt-4 pt-4 border-t border-outline-variant/15 flex justify-between items-center">
                         <span className="text-xs text-secondary">{listing.contact}</span>
-                        <button className="text-xs font-bold text-primary uppercase tracking-widest hover:underline">
+                        <a href={`mailto:${listing.contact.includes('@') ? listing.contact : 'info@worldcoffee24.com'}?subject=WC24 İlan: ${listing.origin}`} className="text-xs font-bold text-primary uppercase tracking-widest hover:underline">
                           İletişime Geç
-                        </button>
+                        </a>
                       </div>
                     </div>
                   ))}
@@ -201,9 +201,10 @@ export default function IsTicaret() {
                     <input className="w-full border border-outline-variant px-4 py-3 text-sm outline-none focus:ring-1 focus:ring-primary" placeholder="örn. Rainforest, Organic" />
                   </div>
                 </div>
-                <button className="mt-6 bg-primary text-white px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-primary-container transition-colors">
+                <a href="mailto:info@worldcoffee24.com?subject=Yeni İlan Talebi" className="mt-6 inline-block px-8 py-3 text-xs font-bold uppercase tracking-widest transition-colors" style={{ backgroundColor: "#32170d", color: "#ffffff" }}>
                   İlan Yayınla
-                </button>
+                </a>
+                <p className="text-xs text-secondary mt-2 italic">İlan talebiniz e-posta ile editör ekibimize iletilecektir.</p>
               </div>
 
               {/* Incoterms Rehberi */}
@@ -273,9 +274,6 @@ export default function IsTicaret() {
                     </div>
                   ))}
                 </div>
-                <button className="mt-4 w-full border border-outline-variant py-3 text-xs font-bold uppercase tracking-widest text-secondary hover:bg-surface-container-high transition-colors">
-                  Tüm Tedarikçileri Gör
-                </button>
               </div>
             </aside>
 

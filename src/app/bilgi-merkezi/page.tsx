@@ -78,16 +78,16 @@ export default function BilgiMerkezi() {
                 <h3 className="font-headline text-xl font-bold text-primary mb-4">
                   Hızlı Terimler Arama
                 </h3>
-                <div className="relative w-full">
-                  <input
-                    className="w-full bg-surface-container-lowest border-b-2 border-outline-variant focus:border-primary px-4 py-3 text-sm outline-none"
-                    placeholder="e.g. 'Short Position' or 'Honey Process'"
-                    type="text"
-                  />
+                <a href="/bilgi-merkezi/terimler-sozlugu" className="relative w-full block">
+                  <div
+                    className="w-full bg-surface-container-lowest border-b-2 border-outline-variant px-4 py-3 text-sm text-secondary cursor-pointer hover:border-primary transition-colors"
+                  >
+                    Terimler Sözlüğü&apos;nde ara...
+                  </div>
                   <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline">
                     search
                   </span>
-                </div>
+                </a>
                 <div className="flex flex-wrap gap-2 mt-4">
                   {quickTags.map((tag) => (
                     <span
@@ -165,9 +165,9 @@ export default function BilgiMerkezi() {
               <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary">
                 İleri Teknik Rehberler
               </h2>
-              <span className="text-xs font-bold uppercase tracking-widest text-secondary hover:text-primary cursor-pointer">
+              <a href="/bilgi-merkezi/terimler-sozlugu" className="text-xs font-bold uppercase tracking-widest text-secondary hover:text-primary">
                 Tüm Modüller
-              </span>
+              </a>
             </div>
             <div className="grid grid-cols-12 gap-4 md:gap-8">
               {guides.map((guide, i) => (
@@ -200,12 +200,12 @@ export default function BilgiMerkezi() {
                 Botanik sınıflandırmalardan finansal ticaret jargonuna kahve terminolojisinin kapsamlı dizini.
               </p>
               <div className="flex gap-3">
-                <button className="px-4 py-2 bg-primary text-white text-xs font-bold uppercase tracking-widest">
+                <a href="/bilgi-merkezi/terimler-sozlugu" className="px-4 py-2 text-xs font-bold uppercase tracking-widest inline-block" style={{ backgroundColor: "#32170d", color: "#ffffff" }}>
                   A-Z Index
-                </button>
-                <button className="px-4 py-2 border border-outline-variant text-xs font-bold uppercase tracking-widest text-secondary">
+                </a>
+                <a href="/bilgi-merkezi/terimler-sozlugu" className="px-4 py-2 border border-outline-variant text-xs font-bold uppercase tracking-widest text-secondary inline-block hover:bg-surface-container-high transition-colors">
                   Popüler
-                </button>
+                </a>
               </div>
             </div>
             <div className="space-y-5">

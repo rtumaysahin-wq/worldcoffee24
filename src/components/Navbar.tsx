@@ -58,16 +58,14 @@ export default function Navbar() {
         {/* Sağ: Arama, butonlar */}
         <div className="flex items-center gap-3 md:gap-4">
           {/* Arama kutusu - sadece geniş ekran */}
-          <div className="relative hidden lg:block">
+          <a href="/bilgi-merkezi/terimler-sozlugu" className="relative hidden lg:block">
             <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-xl">
               search
             </span>
-            <input
-              className="bg-surface-variant/50 border-none rounded pl-10 pr-4 py-1.5 text-sm focus:ring-1 focus:ring-primary w-52 outline-none"
-              placeholder={lang === "tr" ? "Piyasalarda ara..." : "Search markets..."}
-              type="text"
-            />
-          </div>
+            <div className="bg-surface-variant/50 border-none rounded pl-10 pr-4 py-1.5 text-sm w-52 text-secondary cursor-pointer hover:bg-surface-variant transition-colors">
+              {lang === "tr" ? "Piyasalarda ara..." : "Search markets..."}
+            </div>
+          </a>
 
           {/* Dil Değiştirme — ileride aktif edilecek */}
           <button

@@ -57,9 +57,9 @@ export default function Home() {
                     İklim oynaklığı Brezilya Yaylalarını vururken, ihracatçılar küresel sabah kahvesini stabilize etmek için Kolombiya çeşitlerine yöneliyor.
                   </p>
                   <div className="flex flex-wrap items-center gap-4 md:gap-6">
-                    <button className="bg-white text-primary px-6 py-3 font-bold text-xs uppercase tracking-widest hover:bg-white/90 transition-colors">
+                    <a href="/bilgi-merkezi/futures-101" className="bg-white text-primary px-6 py-3 font-bold text-xs uppercase tracking-widest hover:bg-white/90 transition-colors inline-block">
                       Raporu Oku
-                    </button>
+                    </a>
                     <span className="text-xs uppercase tracking-widest text-white/70">
                       12 Dk Okuma &bull; WC24 Analiz Ekibi
                     </span>
@@ -129,17 +129,6 @@ export default function Home() {
                   <p className="text-xs text-secondary font-label uppercase tracking-widest mt-1">
                     7 Günlük Teknik Trend (ICE NY)
                   </p>
-                </div>
-                <div className="flex gap-2">
-                  <button className="px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest" style={{ backgroundColor: "#dde3e7", color: "#161d1f" }}>
-                    1D
-                  </button>
-                  <button className="px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest" style={{ backgroundColor: "#32170d", color: "#ffffff" }}>
-                    1W
-                  </button>
-                  <button className="px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest" style={{ backgroundColor: "#dde3e7", color: "#161d1f" }}>
-                    1M
-                  </button>
                 </div>
               </div>
               <PriceChart title="KC1! Arabica Futures" subtitle="7 Gunluk Teknik Trend (ICE NY)" />

@@ -122,6 +122,11 @@ export default function FiyatMerkezi() {
                   {/* Swap butonu */}
                   <div className="flex justify-center">
                     <button
+                      onClick={() => {
+                        if (rate > 0 && tryResult !== "—") {
+                          setUsdAmount((parseFloat(tryResult.replace(/,/g, '')) / rate).toFixed(2));
+                        }
+                      }}
                       className="p-2 rounded-full transition-opacity hover:opacity-80"
                       style={{ backgroundColor: "#5a3d30", color: "#c9a898" }}
                     >
@@ -209,9 +214,9 @@ export default function FiyatMerkezi() {
                 <p className="text-on-surface-variant text-sm md:text-base leading-relaxed mb-7">
                   Vadeli piyasalar kısa vadeli lojistiğe odaklanırken, Minas Gerais&rsquo;deki son sıcaklık anomalilerinin fizyolojik etkisi gelecek hasatta daha düşük elek boyutları ve cupping skorları olarak ortaya çıkabilir.
                 </p>
-                <button className="inline-block px-8 py-4 bg-primary text-white text-xs font-label uppercase tracking-widest hover:translate-x-1 transition-transform">
+                <a href="/piyasa-faktorleri" className="inline-block px-8 py-4 text-xs font-label uppercase tracking-widest hover:translate-x-1 transition-transform" style={{ backgroundColor: "#32170d", color: "#ffffff" }}>
                   Tam Analizi Oku
-                </button>
+                </a>
               </div>
             </section>
 
