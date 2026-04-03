@@ -131,13 +131,13 @@ export default function Home() {
                   </p>
                 </div>
                 <div className="flex gap-2">
-                  <button className="px-4 py-1.5 bg-surface-container-highest text-on-surface text-[10px] font-bold uppercase tracking-widest hover:bg-surface-dim">
+                  <button className="px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest" style={{ backgroundColor: "#dde3e7", color: "#161d1f" }}>
                     1D
                   </button>
-                  <button className="px-4 py-1.5 bg-primary text-white text-[10px] font-bold uppercase tracking-widest">
+                  <button className="px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest" style={{ backgroundColor: "#32170d", color: "#ffffff" }}>
                     1W
                   </button>
-                  <button className="px-4 py-1.5 bg-surface-container-highest text-on-surface text-[10px] font-bold uppercase tracking-widest hover:bg-surface-dim">
+                  <button className="px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest" style={{ backgroundColor: "#dde3e7", color: "#161d1f" }}>
                     1M
                   </button>
                 </div>

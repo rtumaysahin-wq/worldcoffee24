@@ -100,11 +100,12 @@ export default function Haberler() {
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-4 py-2 text-xs font-bold uppercase tracking-widest transition-colors ${
+                className="px-4 py-2 text-xs font-bold uppercase tracking-widest transition-colors"
+                style={
                   activeCategory === cat
-                    ? "bg-primary text-white"
-                    : "bg-surface-container-highest text-on-surface hover:bg-surface-dim"
-                }`}
+                    ? { backgroundColor: "#32170d", color: "#ffffff" }
+                    : { backgroundColor: "#dde3e7", color: "#161d1f" }
+                }
               >
                 {cat}
               </button>

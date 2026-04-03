@@ -87,11 +87,12 @@ export default function PriceChart({
             <button
               key={p}
               onClick={() => setPeriod(p)}
-              className={`px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest transition-colors ${
+              className="px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest transition-colors"
+              style={
                 period === p
-                  ? "bg-primary text-white"
-                  : "bg-surface-container-highest text-on-surface hover:bg-surface-dim"
-              }`}
+                  ? { backgroundColor: "#32170d", color: "#ffffff" }
+                  : { backgroundColor: "#dde3e7", color: "#161d1f" }
+              }
             >
               {p}
             </button>
