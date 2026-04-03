@@ -150,20 +150,18 @@ export default function CoffeeMap() {
 
   return (
     <MapContainer
-      center={[5, 30]}
-      zoom={2}
-      minZoom={2}
+      center={[10, 20]}
+      zoom={3}
+      minZoom={3}
       maxZoom={8}
       scrollWheelZoom={true}
       maxBounds={[[-60, -180], [70, 180]]}
       maxBoundsViscosity={1.0}
-      worldCopyJump={false}
       style={{ height: "100%", width: "100%", borderRadius: "4px" }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        noWrap={true}
       />
 
       {/* Kahve Kuşağı */}
