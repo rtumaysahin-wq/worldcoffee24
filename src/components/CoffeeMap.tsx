@@ -155,11 +155,15 @@ export default function CoffeeMap() {
       minZoom={2}
       maxZoom={8}
       scrollWheelZoom={true}
+      maxBounds={[[-60, -180], [70, 180]]}
+      maxBoundsViscosity={1.0}
+      worldCopyJump={false}
       style={{ height: "100%", width: "100%", borderRadius: "4px" }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        noWrap={true}
       />
 
       {/* Kahve Kuşağı */}
