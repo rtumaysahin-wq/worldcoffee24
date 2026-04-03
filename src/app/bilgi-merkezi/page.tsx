@@ -61,7 +61,7 @@ export default function BilgiMerkezi() {
         <div className="max-w-6xl mx-auto px-4 md:px-8 py-10">
 
           {/* ═══ HEADER ═══ */}
-          <section className="mb-12 md:mb-16 grid grid-cols-12 gap-8 items-end">
+          <section className="mb-12 md:mb-16 grid grid-cols-12 gap-4 md:gap-8 items-end">
             <div className="col-span-12 md:col-span-7">
               <span className="text-xs tracking-[0.2em] uppercase text-secondary font-bold mb-4 block">
                 Bilgi Merkezi
@@ -103,7 +103,7 @@ export default function BilgiMerkezi() {
           </section>
 
           {/* ═══ KAHVE FUTURES 101 — HERO KART ═══ */}
-          <section className="grid grid-cols-12 gap-6 mb-16 md:mb-20">
+          <section className="grid grid-cols-12 gap-4 md:gap-6 mb-12 md:mb-20">
             <div className="col-span-12 lg:col-span-8 group relative overflow-hidden bg-primary-container min-h-[360px] md:min-h-[440px] flex items-end p-6 md:p-10">
               <Image
                 src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=1200&q=80"
@@ -169,10 +169,10 @@ export default function BilgiMerkezi() {
                 Tüm Modüller
               </span>
             </div>
-            <div className="grid grid-cols-12 gap-8">
+            <div className="grid grid-cols-12 gap-4 md:gap-8">
               {guides.map((guide, i) => (
-                <Link key={i} href={guide.href} className="col-span-12 md:col-span-4 group">
-                  <div className="mb-5 aspect-[4/5] overflow-hidden bg-surface-container relative">
+                <Link key={i} href={guide.href} className="col-span-12 sm:col-span-6 md:col-span-4 group">
+                  <div className="mb-5 aspect-[3/2] md:aspect-[4/5] overflow-hidden bg-surface-container relative">
                     <Image
                       src={guide.image}
                       alt={guide.title}
@@ -191,7 +191,7 @@ export default function BilgiMerkezi() {
           </section>
 
           {/* ═══ SEKTÖR SÖZLÜĞÜ ═══ */}
-          <section className="mb-12 md:mb-16 bg-surface-container-low p-6 md:p-10 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
+          <section className="mb-12 md:mb-16 bg-surface-container-low p-5 md:p-10 grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-10">
             <div>
               <h3 className="font-headline text-3xl font-bold text-primary mb-4">
                 Sektör Sözlüğü

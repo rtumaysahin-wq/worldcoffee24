@@ -87,7 +87,7 @@ export default function TickerBand() {
 
   return (
     <div className="bg-surface-container-low border-b border-outline-variant/10 py-2.5 overflow-hidden flex-shrink-0">
-      <div className="ticker-track text-[11px] gap-8 px-8 whitespace-nowrap items-center flex">
+      <div className="ticker-track text-[11px] gap-4 md:gap-8 px-4 md:px-8 whitespace-nowrap items-center flex">
         {doubled.map((item, i) => (
           <span key={i} className="flex items-center gap-2">
             <TickerItem item={item} />

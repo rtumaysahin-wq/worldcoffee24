@@ -6,6 +6,7 @@ import Sidebar from "@/components/Sidebar";
 import Footer from "@/components/Footer";
 import PriceChart from "@/components/charts/PriceChart";
 import LatestNews from "@/components/LatestNews";
+import CurrencyBand from "@/components/CurrencyBand";
 
 export default function Home() {
   return (
@@ -16,6 +17,18 @@ export default function Home() {
       <div className="pt-16 md:ml-64">
         <TickerBand />
         <main className="max-w-7xl mx-auto p-4 md:p-10 space-y-12">
+
+          {/* ═══ DÖVİZ KURU BANDI ═══ */}
+          <section>
+            <div className="flex items-center gap-3 mb-3">
+              <span className="material-symbols-outlined text-lg text-primary">currency_exchange</span>
+              <h3 className="font-label text-[10px] uppercase tracking-[0.2em] text-secondary font-bold">
+                Döviz Kurları — Canlı
+              </h3>
+              <div className="h-px flex-1 bg-outline-variant/20" />
+            </div>
+            <CurrencyBand />
+          </section>
 
           {/* ═══ HERO + EDİTÖR NOTU ═══ */}
           <section className="grid grid-cols-12 gap-6">
@@ -104,7 +117,7 @@ export default function Home() {
           </section>
 
           {/* ═══ GRAFİK + HAVA DURUMU ═══ */}
-          <section className="grid grid-cols-12 gap-8 items-start">
+          <section className="grid grid-cols-12 gap-4 md:gap-8 items-start">
 
             {/* Haftalık Fiyat Grafiği (Placeholder) */}
             <div className="col-span-12 lg:col-span-8 bg-surface-container-lowest p-6 md:p-8 editorial-shadow">
@@ -139,7 +152,7 @@ export default function Home() {
               </h3>
 
               {/* Brezilya */}
-              <div className="flex items-center justify-between p-5 bg-surface-container-high border-r-4 border-tertiary">
+              <div className="flex items-center justify-between p-3 md:p-5 bg-surface-container-high border-r-4 border-tertiary">
                 <div>
                   <p className="text-[10px] font-bold text-secondary uppercase tracking-[0.2em] mb-1">
                     Minas Gerais, Brezilya
@@ -150,7 +163,7 @@ export default function Home() {
               </div>
 
               {/* Vietnam */}
-              <div className="flex items-center justify-between p-5 bg-surface-container-high border-r-4 border-secondary">
+              <div className="flex items-center justify-between p-3 md:p-5 bg-surface-container-high border-r-4 border-secondary">
                 <div>
                   <p className="text-[10px] font-bold text-secondary uppercase tracking-[0.2em] mb-1">
                     Orta Yaylalar, Vietnam
@@ -161,7 +174,7 @@ export default function Home() {
               </div>
 
               {/* Kolombiya */}
-              <div className="flex items-center justify-between p-5 bg-surface-container-high border-r-4 border-on-tertiary-container">
+              <div className="flex items-center justify-between p-3 md:p-5 bg-surface-container-high border-r-4 border-on-tertiary-container">
                 <div>
                   <p className="text-[10px] font-bold text-secondary uppercase tracking-[0.2em] mb-1">
                     Huila, Kolombiya
@@ -177,7 +190,7 @@ export default function Home() {
           <LatestNews />
 
           {/* ═══ BÜLTEN KAYIT FORMU ═══ */}
-          <section className="bg-[#f4fafe] p-8 md:p-12 flex flex-col items-center text-center border border-outline-variant/15 relative">
+          <section className="bg-[#f4fafe] p-5 md:p-12 flex flex-col items-center text-center border border-outline-variant/15 relative">
             <div className="absolute top-0 left-0 w-full h-1 bg-primary" />
             <h2 className="font-headline text-3xl md:text-4xl text-primary mb-4">
               Haftalık Derin Analiz, Her Pazar

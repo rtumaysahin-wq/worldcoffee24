@@ -191,7 +191,7 @@ export default function HavaRadari() {
               <h2 className="font-headline text-2xl font-bold text-primary mb-5">
                 Diğer Üretim Bölgeleri
               </h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-outline-variant/20 mb-10">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-px bg-outline-variant/20 mb-10">
                 {secondaryRegions.map((r, i) => {
                   const icon = getWeatherIcon(r.temp, r.rain7d);
                   return (
@@ -214,7 +214,7 @@ export default function HavaRadari() {
               </div>
 
               {/* ═══ ENSO DURUMU ═══ */}
-              <div className="bg-primary-container text-white p-6 md:p-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="bg-primary-container text-white p-5 md:p-10 grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-8">
                 <div>
                   <h3 className="font-headline text-3xl mb-3">ENSO Durumu</h3>
                   <p className="text-white/70 text-sm leading-relaxed mb-5">

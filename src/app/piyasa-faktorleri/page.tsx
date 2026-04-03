@@ -41,7 +41,7 @@ export default function PiyasaFaktorleri() {
                 <span className="text-xs font-label uppercase tracking-[0.2em] text-secondary mb-3 block">
                   Piyasa Faktörleri Özeti
                 </span>
-                <h1 className="font-headline text-4xl md:text-6xl font-light text-primary leading-none mb-5">
+                <h1 className="font-headline text-3xl md:text-5xl lg:text-6xl font-light text-primary leading-none mb-5">
                   Piyasa Faktörleri &amp; Makro Dinamikler
                 </h1>
                 <p className="text-base md:text-lg text-secondary leading-relaxed font-light">
@@ -61,7 +61,7 @@ export default function PiyasaFaktorleri() {
             </div>
           </header>
 
-          <div className="grid grid-cols-12 gap-8 md:gap-10">
+          <div className="grid grid-cols-12 gap-4 md:gap-8 lg:gap-10">
 
             {/* ═══ SOL KOLON: İKLİM & ÜRETİM + TALEP ═══ */}
             <section className="col-span-12 lg:col-span-8 space-y-8">
@@ -115,7 +115,7 @@ export default function PiyasaFaktorleri() {
                 </div>
 
                 {/* Don Uyarıları — tam genişlik */}
-                <div className="col-span-1 md:col-span-2 bg-surface-container-low p-6 md:p-10 flex flex-col md:flex-row gap-8 md:gap-10 items-center">
+                <div className="col-span-1 md:col-span-2 bg-surface-container-low p-5 md:p-10 flex flex-col md:flex-row gap-5 md:gap-10 items-center">
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-4">
                       <div className="w-2 h-2 rounded-full bg-tertiary animate-pulse" />

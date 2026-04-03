@@ -8,7 +8,7 @@ const footerLinks = [
 export default function Footer() {
   return (
     <footer className="border-t border-outline-variant/15 bg-[#f4fafe]">
-      <div className="w-full py-10 px-8 flex flex-col md:flex-row justify-between items-center gap-4 max-w-screen-2xl mx-auto">
+      <div className="w-full py-8 md:py-10 px-4 md:px-8 flex flex-col md:flex-row justify-between items-center gap-4 max-w-screen-2xl mx-auto">
         {/* Sol: Logo + Copyright */}
         <div className="flex flex-col items-center md:items-start">
           <Link href="/" className="flex items-center gap-2">

@@ -8,7 +8,7 @@
 **Slogan:** Küresel Kahve Piyasa Platformu / Market Intelligence
 **Kurucu:** Recep Tümay Şahin
 **Başlangıç:** Mart 2026
-**Durum:** Mailchimp entegrasyonu tamamlandı → responsive test ve kontrast iyileştirmesi sırada
+**Durum:** Responsive optimizasyon + Döviz kuru bandı tamamlandı → mail listesi büyütme ve premium içerik sırada
 
 ---
 
@@ -159,7 +159,7 @@
   - TickerBand: API'den canlı 6 fiyat, loading/error durumları
   - Fiyat Merkezi: Arabica + Robusta ayrı grafikler, canlı kur çevirici
   - Hardcoded veri yok — veri yoksa "Veri yüklenemedi" gösterir
-- [ ] Döviz kuru bandı
+- [x] Döviz kuru bandı ✅ — CurrencyBand component (USD/TRY, EUR/TRY, BRL/USD canlı veri)
 - [x] Bülten kayıt formu ✅ (UI hazır, Mailchimp entegrasyonu yapılacak)
 - [x] Fiyat Merkezi sayfası ✅ — src/app/fiyat-merkezi/page.tsx
   - Arabica Futures grafik (placeholder bar chart)
@@ -249,6 +249,7 @@
 - **Sohbet 4 (30 Mart 2026):** HTML dosyası component parçalarına bölündü. Navbar içindeki 210KB inline SVG logo tespit edildi (şişkinliğin kaynağı). Navbar.tsx component'i oluşturuldu ve src/components/ klasörüne yerleştirildi. page.tsx oluşturuldu. Sorun: tsconfig.json'da `@/*` path alias tanımlı değil — bu yüzden Navbar import'u çalışmıyor. Çözüm aşağıda.
 - **Sohbet 5 (30 Mart 2026):** Footer, Ana Sayfa layout, Fiyat Merkezi, Piyasa Faktörleri, Bilgi Merkezi, Hava Radarı, Haberler sayfaları oluşturuldu. Vercel deploy + GitHub otomatik deploy bağlantısı. İş & Ticaret (Trade Board) sayfası. SEO optimizasyonu. Faz 1-4 tamamlandı.
 - **Sohbet 6 (31 Mart 2026):** Yahoo Finance + FRED API entegrasyonu (canlı fiyatlar). RSS haber akışı (4 kaynak). Bilgi Merkezi 5 alt sayfa (gerçek SEO içerik). Türkçe karakter düzeltmesi (16 dosya). Tüm İngilizce metinler Türkçeye çevrildi. Unsplash görselleri eklendi (SVG→gerçek fotoğraf). Open-Meteo API ile Hava Radarı canlı veri (7 bölge). KAYNAKLAR.md oluşturuldu.
+- **Sohbet 7 (3 Nisan 2026):** Responsive/mobil optimizasyon (8 dosya: TickerBand, Navbar, Footer, Ana Sayfa, Fiyat Merkezi, Piyasa Faktörleri, Haberler, Hava Radarı, Bilgi Merkezi — gap/padding/grid responsive yapıldı). Döviz kuru bandı eklendi (CurrencyBand.tsx — USD/TRY, EUR/TRY, BRL/USD canlı kartları, ana sayfada Hero üstünde).
 
 ---
 
@@ -268,7 +269,7 @@
 - Proje yolu: C:\Users\rtuma\worldcoffee24
 
 ### 🚨 SONRAKİ CHAT'TE İLK YAPILACAK İŞ
-Mailchimp bülten entegrasyonu (API Key, Audience ID, Server gerekli). Responsive/mobil test. Kontrast/okunabilirlik iyileştirmesi.
+Mail listesi büyütme stratejisi (pop-up, exit-intent, lead magnet). Premium içerik sistemi planlaması. İlan sistemi backend.
 
 ### 📍 HTML Dosya Haritası (kahve_dunyasi_final1.html — 790 satır)
 | Satırlar | Bölüm | Boyut (SVG'siz) |
@@ -349,6 +350,7 @@ C:\Users\rtuma\worldcoffee24\
 │   │   ├── Navbar.tsx          (üst menü, dil desteği, aktif sayfa)
 │   │   ├── Sidebar.tsx         (sol sidebar, 7 sayfa navigasyonu)
 │   │   ├── TickerBand.tsx      (canlı fiyat bandı — /api/prices'dan)
+│   │   ├── CurrencyBand.tsx     (döviz kuru bandı — USD/TRY, EUR/TRY, BRL/USD)
 │   │   ├── Footer.tsx          (alt bilgi, linkler)
 │   │   ├── LatestNews.tsx      (ana sayfa son 3 haber — /api/news'dan)
 │   │   └── charts/

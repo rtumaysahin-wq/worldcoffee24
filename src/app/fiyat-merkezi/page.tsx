@@ -71,7 +71,7 @@ export default function FiyatMerkezi() {
             </div>
           </header>
 
-          <div className="grid grid-cols-12 gap-8">
+          <div className="grid grid-cols-12 gap-4 md:gap-8">
 
             {/* ═══ ARABİCA GRAFİK ═══ */}
             <section className="col-span-12 lg:col-span-8 bg-surface-container-lowest p-6 md:p-8 editorial-shadow">
@@ -169,8 +169,8 @@ export default function FiyatMerkezi() {
             </section>
 
             {/* ═══ EDİTÖRYAL ANALİZ ═══ */}
-            <section className="col-span-12 bg-surface-container-high p-6 md:p-10 flex flex-col md:flex-row gap-10 items-center">
-              <div className="md:w-1/2 h-72 flex-shrink-0 relative overflow-hidden">
+            <section className="col-span-12 bg-surface-container-high p-6 md:p-10 flex flex-col md:flex-row gap-6 md:gap-10 items-center">
+              <div className="md:w-1/2 h-48 md:h-72 flex-shrink-0 relative overflow-hidden">
                 <Image
                   src="https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=800&q=80"
                   alt="Kahve çekirdekleri"
@@ -197,7 +197,7 @@ export default function FiyatMerkezi() {
             {/* ═══ VERİ KAYNAKLARI ═══ */}
             <section className="col-span-12 bg-surface-container-low p-6 md:p-8">
               <h3 className="font-headline text-2xl font-bold mb-6">Veri Kaynakları</h3>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 <a href="https://www.theice.com/products/15/Coffee-C-Futures" target="_blank" rel="noopener noreferrer" className="p-4 bg-surface-container-lowest hover:bg-white transition-colors editorial-shadow">
                   <p className="font-bold text-sm text-primary mb-1">ICE Coffee C Futures</p>
                   <p className="text-xs text-secondary">Arabica vadeli işlemler (NY)</p>
