@@ -44,12 +44,13 @@ export default function PriceChart({
   }, [symbol, period]);
 
   const lastPrice = data.length > 0 ? data[data.length - 1].price : null;
-  const firstPrice = data.length > 1 ? data[0].price : null;
+  // Son iki veri noktası arasındaki günlük değişim
+  const prevPrice = data.length > 1 ? data[data.length - 2].price : null;
   const change =
-    lastPrice !== null && firstPrice !== null ? lastPrice - firstPrice : null;
+    lastPrice !== null && prevPrice !== null ? lastPrice - prevPrice : null;
   const changePct =
-    change !== null && firstPrice !== null && firstPrice > 0
-      ? (change / firstPrice) * 100
+    change !== null && prevPrice !== null && prevPrice > 0
+      ? (change / prevPrice) * 100
       : null;
   const isUp = change !== null && change >= 0;
 
@@ -147,7 +148,7 @@ export default function PriceChart({
               />
               <XAxis
                 dataKey="date"
-                tick={{ fontSize: 10, fill: "#5f5e58" }}
+                tick={{ fontSize: 12, fill: "#666", fontFamily: "Inter, Arial, sans-serif" }}
                 tickFormatter={(d: string) => {
                   const date = new Date(d);
                   if (period === "1M")
@@ -164,11 +165,11 @@ export default function PriceChart({
                 tickLine={false}
               />
               <YAxis
-                tick={{ fontSize: 10, fill: "#5f5e58" }}
+                tick={{ fontSize: 12, fill: "#666", fontFamily: "Inter, Arial, sans-serif" }}
                 axisLine={false}
                 tickLine={false}
                 domain={["auto", "auto"]}
-                width={50}
+                width={55}
               />
               <Tooltip
                 contentStyle={{

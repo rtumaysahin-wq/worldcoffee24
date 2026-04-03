@@ -85,7 +85,7 @@ export default function FiyatMerkezi() {
             {/* ═══ KUR ÇEVİRİCİ ═══ */}
             <section className="col-span-12 lg:col-span-4 bg-primary-container text-white p-6 md:p-8 flex flex-col justify-between">
               <div>
-                <h3 className="font-headline text-2xl font-bold mb-2">Kur Çevirici</h3>
+                <h3 className="font-headline text-2xl font-bold mb-2 text-white">Kur Çevirici</h3>
                 {rate > 0 && (
                   <p className="text-xs text-white/90 mb-5">
                     1 USD = {rate.toFixed(4)} TRY (canlı kur)
