@@ -12,6 +12,22 @@ import {
 } from "recharts";
 import { fetchPriceHistory, type PricePoint } from "@/lib/api/fred";
 
+/* Recharts SVG text — Tailwind v4 global stilleri SVG fill'i eziyor,
+   bu yüzden custom tick component ile inline style kullanıyoruz */
+function CustomTick({ x, y, payload, isY }: { x: number; y: number; payload: { value: string | number }; isY?: boolean }) {
+  return (
+    <text
+      x={x}
+      y={y}
+      dy={isY ? 4 : 16}
+      textAnchor={isY ? "end" : "middle"}
+      style={{ fontSize: 11, fill: "#666666", fontFamily: "Arial, Helvetica, sans-serif" }}
+    >
+      {payload.value}
+    </text>
+  );
+}
+
 interface PriceChartProps {
   title: string;
   subtitle?: string;
@@ -148,24 +164,21 @@ export default function PriceChart({
               />
               <XAxis
                 dataKey="date"
-                tick={{ fontSize: 12, fill: "#666", fontFamily: "Inter, Arial, sans-serif" }}
-                tickFormatter={(d: string) => {
+                tick={(props: Record<string, unknown>) => {
+                  const d = String(props.payload && typeof props.payload === 'object' && 'value' in props.payload ? (props.payload as {value: string}).value : '');
                   const date = new Date(d);
-                  if (period === "1M")
-                    return date.toLocaleDateString("tr", {
-                      day: "numeric",
-                      month: "short",
-                    });
-                  return date.toLocaleDateString("tr", {
-                    month: "short",
-                    year: "2-digit",
-                  });
+                  const label = period === "1M"
+                    ? date.toLocaleDateString("tr", { day: "numeric", month: "short" })
+                    : date.toLocaleDateString("tr", { month: "short", year: "2-digit" });
+                  return <CustomTick x={props.x as number} y={props.y as number} payload={{ value: label }} />;
                 }}
                 axisLine={false}
                 tickLine={false}
               />
               <YAxis
-                tick={{ fontSize: 12, fill: "#666", fontFamily: "Inter, Arial, sans-serif" }}
+                tick={(props: Record<string, unknown>) => (
+                  <CustomTick x={props.x as number} y={props.y as number} payload={{ value: (props.payload as {value: number}).value }} isY />
+                )}
                 axisLine={false}
                 tickLine={false}
                 domain={["auto", "auto"]}
