@@ -68,6 +68,33 @@ h1, h2, h3, h4, blockquote {
   color: white;
 }
 
+/* ===== Leaflet Kahve Kuşağı Label ===== */
+.coffee-belt-label {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #8B6914 !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+}
+
+.coffee-belt-label::before {
+  display: none !important;
+}
+
+/* ===== Leaflet Popup Stili ===== */
+.leaflet-popup-content-wrapper {
+  border-radius: 4px !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12) !important;
+}
+
+.leaflet-popup-content {
+  margin: 12px 14px !important;
+}
+
 /* ===== Recharts SVG Text — Tailwind v4 reset'ini override et ===== */
 .recharts-cartesian-axis-tick text,
 .recharts-text {

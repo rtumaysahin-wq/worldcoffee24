@@ -1,10 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import TickerBand from "@/components/TickerBand";
 import Footer from "@/components/Footer";
+
+const CoffeeMap = dynamic(() => import("@/components/CoffeeMap"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-[300px] md:h-[500px] bg-surface-container-low flex items-center justify-center">
+      <span className="material-symbols-outlined text-4xl text-outline-variant animate-spin">progress_activity</span>
+    </div>
+  ),
+});
 
 interface WeatherData {
   name: string;
@@ -106,6 +116,21 @@ export default function HavaRadari() {
               </div>
             </div>
           </header>
+
+          {/* ═══ İNTERAKTİF HARİTA ═══ */}
+          <section className="mb-10">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="material-symbols-outlined text-lg text-primary">map</span>
+              <h2 className="font-headline text-2xl font-bold text-primary">Üretim Bölgeleri Haritası</h2>
+              <div className="h-px flex-1 bg-outline-variant/20" />
+            </div>
+            <p className="text-sm text-secondary mb-4">
+              Marker&apos;lara tıklayarak bölge detaylarını ve canlı hava durumunu görün.
+            </p>
+            <div className="w-full h-[300px] md:h-[500px] editorial-shadow overflow-hidden rounded-sm">
+              <CoffeeMap />
+            </div>
+          </section>
 
           {loading ? (
             <div className="space-y-6">

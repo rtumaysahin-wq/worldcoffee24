@@ -196,6 +196,9 @@
   - 4 İkincil Bölge (Etiyopya, Endonezya, Honduras, Uganda) — canlı veri
   - 30dk cache, loading skeleton, hata durumu
   - ENSO Durumu paneli (Beklenen Etki + Fiyat Etkisi)
+  - İnteraktif dünya haritası (react-leaflet + OpenStreetMap)
+    - 7 üretim bölgesi marker'ı (popup: canlı hava, hasat dönemi, fiyat etkisi)
+    - Kahve kuşağı polygon (23.5°N — 23.5°S)
 - [x] Haberler sayfası ✅ — src/app/haberler/page.tsx
   - Editör Seçimi haberler (3 makale kartı, öne çıkan vurgulu)
   - Kategori filtreleri (6 kategori, aktif state)
@@ -350,6 +353,7 @@ C:\Users\rtuma\worldcoffee24\
 │   │   ├── Navbar.tsx          (üst menü, dil desteği, aktif sayfa)
 │   │   ├── Sidebar.tsx         (sol sidebar, 7 sayfa navigasyonu)
 │   │   ├── TickerBand.tsx      (canlı fiyat bandı — /api/prices'dan)
+│   │   ├── CoffeeMap.tsx        (interaktif dünya haritası — react-leaflet)
 │   │   ├── CurrencyBand.tsx     (döviz kuru bandı — USD/TRY, EUR/TRY, BRL/USD)
 │   │   ├── Footer.tsx          (alt bilgi, linkler)
 │   │   ├── LatestNews.tsx      (ana sayfa son 3 haber — /api/news'dan)
