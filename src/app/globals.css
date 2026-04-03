@@ -53,18 +53,18 @@ h1, h2, h3, h4, blockquote {
 }
 
 .sb-item.active {
-  background: #32170d;
+  background: #2a1610;
   color: white;
-  border-left: 4px solid #d5c3bd;
+  border-left: 4px solid #c9a898;
   padding-left: 12px;
 }
 
 .sb-item:not(.active) {
-  color: rgba(213, 195, 189, 0.7);
+  color: rgba(201, 168, 152, 0.75);
 }
 
 .sb-item:not(.active):hover {
-  background: #32170d;
+  background: #2a1610;
   color: white;
 }
 

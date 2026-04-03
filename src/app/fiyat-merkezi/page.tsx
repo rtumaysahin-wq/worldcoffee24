@@ -84,36 +84,36 @@ export default function FiyatMerkezi() {
 
             {/* ═══ KUR ÇEVİRİCİ ═══ */}
             <section
-              className="col-span-12 lg:col-span-4 p-6 md:p-8 flex flex-col justify-between rounded"
-              style={{ backgroundColor: "#4b2c20" }}
+              className="col-span-12 lg:col-span-4 p-6 md:p-8 flex flex-col justify-between"
+              style={{ backgroundColor: "#3c2218" }}
             >
               <div>
-                <h3 className="font-headline text-2xl font-bold mb-2" style={{ color: "#fff" }}>
+                <h3 className="font-headline text-2xl font-bold mb-2" style={{ color: "#f5ebe7" }}>
                   Kur Çevirici
                 </h3>
                 {rate > 0 && (
-                  <p className="text-sm mb-6" style={{ color: "#e0cfc9" }}>
+                  <p className="text-sm mb-6" style={{ color: "#c9a898" }}>
                     1 USD = {rate.toFixed(4)} TRY
-                    <span className="ml-1 text-xs" style={{ color: "#c6b5ae" }}>(canlı kur)</span>
+                    <span className="ml-1 text-xs" style={{ color: "#a8877a" }}>(canlı kur)</span>
                   </p>
                 )}
                 <div className="space-y-4">
                   {/* Giriş */}
                   <div>
-                    <label className="text-[11px] uppercase tracking-widest mb-1.5 block font-semibold" style={{ color: "#e0cfc9" }}>
+                    <label className="text-[11px] uppercase tracking-widest mb-1.5 block font-semibold" style={{ color: "#c9a898" }}>
                       Giriş (USD)
                     </label>
                     <div
-                      className="flex items-center p-3 rounded-sm"
-                      style={{ backgroundColor: "#32170d", border: "1px solid #6b4c3f" }}
+                      className="flex items-center p-3"
+                      style={{ backgroundColor: "#2a1610", borderBottom: "2px solid #5a3d30" }}
                     >
-                      <span className="mr-2 text-lg font-bold" style={{ color: "#c6b5ae" }}>$</span>
+                      <span className="mr-2 text-lg" style={{ color: "#a8877a" }}>$</span>
                       <input
                         type="number"
                         value={usdAmount}
                         onChange={(e) => setUsdAmount(e.target.value)}
                         className="bg-transparent border-none text-2xl font-headline w-full outline-none"
-                        style={{ color: "#ffffff" }}
+                        style={{ color: "#f5ebe7" }}
                         placeholder="100"
                       />
                     </div>
@@ -123,7 +123,7 @@ export default function FiyatMerkezi() {
                   <div className="flex justify-center">
                     <button
                       className="p-2 rounded-full transition-opacity hover:opacity-80"
-                      style={{ backgroundColor: "#6b4c3f", color: "#fff" }}
+                      style={{ backgroundColor: "#5a3d30", color: "#c9a898" }}
                     >
                       <span className="material-symbols-outlined">swap_vert</span>
                     </button>
@@ -131,20 +131,20 @@ export default function FiyatMerkezi() {
 
                   {/* Çıkış */}
                   <div>
-                    <label className="text-[11px] uppercase tracking-widest mb-1.5 block font-semibold" style={{ color: "#e0cfc9" }}>
+                    <label className="text-[11px] uppercase tracking-widest mb-1.5 block font-semibold" style={{ color: "#c9a898" }}>
                       Çıkış (TRY)
                     </label>
                     <div
-                      className="flex items-center p-3 rounded-sm"
-                      style={{ backgroundColor: "#32170d", border: "1px solid #6b4c3f", borderLeft: "4px solid #c6eae5" }}
+                      className="flex items-center p-3"
+                      style={{ backgroundColor: "#2a1610", borderBottom: "2px solid #5a3d30", borderLeft: "3px solid #7fb3ab" }}
                     >
-                      <span className="mr-2 text-lg font-bold" style={{ color: "#c6b5ae" }}>&#8378;</span>
-                      <span className="text-2xl font-headline" style={{ color: "#ffffff" }}>{tryResult}</span>
+                      <span className="mr-2 text-lg" style={{ color: "#a8877a" }}>&#8378;</span>
+                      <span className="text-2xl font-headline" style={{ color: "#f5ebe7" }}>{tryResult}</span>
                     </div>
                   </div>
                 </div>
               </div>
-              <p className="text-xs italic leading-relaxed mt-6 pt-4" style={{ color: "#c6b5ae", borderTop: "1px solid #6b4c3f" }}>
+              <p className="text-xs italic leading-relaxed mt-6 pt-4" style={{ color: "#a8877a", borderTop: "1px solid #5a3d30" }}>
                 Kur verileri ExchangeRate API&apos;den saatlik güncellenir.
               </p>
             </section>

@@ -16,7 +16,7 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden md:flex h-screen w-64 fixed left-0 top-0 pt-16 bg-[#4B2C20] flex-col z-40">
+    <aside className="hidden md:flex h-screen w-64 fixed left-0 top-0 pt-16 bg-[#3c2218] flex-col z-40">
       {/* Logo / Brand */}
       <div className="px-5 py-4 border-b border-white/10 flex items-center gap-2.5">
         <span className="material-symbols-outlined text-primary-fixed-dim text-2xl">coffee</span>
