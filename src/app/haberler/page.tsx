@@ -103,7 +103,7 @@ export default function Haberler() {
                 className={`px-4 py-2 text-xs font-bold uppercase tracking-widest transition-colors ${
                   activeCategory === cat
                     ? "bg-primary text-white"
-                    : "bg-surface-container-high text-secondary hover:bg-surface-container-highest"
+                    : "bg-surface-container-highest text-on-surface hover:bg-surface-dim"
                 }`}
               >
                 {cat}

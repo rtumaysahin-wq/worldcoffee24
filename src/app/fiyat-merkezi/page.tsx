@@ -87,43 +87,43 @@ export default function FiyatMerkezi() {
               <div>
                 <h3 className="font-headline text-2xl font-bold mb-2">Kur Çevirici</h3>
                 {rate > 0 && (
-                  <p className="text-[10px] text-white/70 mb-5">
+                  <p className="text-xs text-white/90 mb-5">
                     1 USD = {rate.toFixed(4)} TRY (canlı kur)
                   </p>
                 )}
                 <div className="space-y-5">
                   <div>
-                    <label className="text-[10px] font-label uppercase tracking-widest text-white/80 mb-1 block">
+                    <label className="text-xs font-label uppercase tracking-widest text-white mb-1.5 block">
                       Giriş (USD)
                     </label>
-                    <div className="flex items-center bg-[#32170d] p-4">
-                      <span className="text-white/60 mr-3 text-lg">$</span>
+                    <div className="flex items-center bg-[#1a0b06] p-4 border border-white/20">
+                      <span className="text-white/90 mr-3 text-lg font-bold">$</span>
                       <input
                         type="number"
                         value={usdAmount}
                         onChange={(e) => setUsdAmount(e.target.value)}
-                        className="bg-transparent border-none text-white text-2xl font-headline w-full outline-none placeholder:text-white/40"
+                        className="bg-transparent border-none text-white text-2xl font-headline w-full outline-none placeholder:text-white/50"
                         placeholder="100"
                       />
                     </div>
                   </div>
                   <div className="flex justify-center">
-                    <button className="bg-white/20 p-2 rounded-full border-2 border-white/40 text-white hover:bg-white/30 transition-colors">
+                    <button className="bg-white/25 p-2 rounded-full border-2 border-white/50 text-white hover:bg-white/35 transition-colors">
                       <span className="material-symbols-outlined">swap_vert</span>
                     </button>
                   </div>
                   <div>
-                    <label className="text-[10px] font-label uppercase tracking-widest text-white/80 mb-1 block">
+                    <label className="text-xs font-label uppercase tracking-widest text-white mb-1.5 block">
                       Çıkış (TRY)
                     </label>
-                    <div className="flex items-center bg-[#32170d] p-4 border-l-4 border-tertiary-fixed">
-                      <span className="text-white/60 mr-3 text-lg">&#8378;</span>
+                    <div className="flex items-center bg-[#1a0b06] p-4 border border-white/20 border-l-4 border-l-tertiary-fixed">
+                      <span className="text-white/90 mr-3 text-lg font-bold">&#8378;</span>
                       <span className="text-white text-2xl font-headline">{tryResult}</span>
                     </div>
                   </div>
                 </div>
               </div>
-              <p className="text-[10px] italic text-white/60 leading-relaxed mt-6 pt-5 border-t border-white/20">
+              <p className="text-xs italic text-white/80 leading-relaxed mt-6 pt-5 border-t border-white/30">
                 Kur verileri ExchangeRate API&apos;den saatlik güncellenir.
               </p>
             </section>

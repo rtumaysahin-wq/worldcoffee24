@@ -73,7 +73,7 @@ export default function PriceChart({
               className={`px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest transition-colors ${
                 period === p
                   ? "bg-primary text-white"
-                  : "bg-surface-container-high text-secondary hover:bg-surface-container-highest"
+                  : "bg-surface-container-highest text-on-surface hover:bg-surface-dim"
               }`}
             >
               {p}

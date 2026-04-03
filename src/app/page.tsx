@@ -131,13 +131,13 @@ export default function Home() {
                   </p>
                 </div>
                 <div className="flex gap-2">
-                  <button className="px-4 py-1.5 bg-surface-container-high text-[10px] font-bold uppercase tracking-widest hover:bg-surface-container">
+                  <button className="px-4 py-1.5 bg-surface-container-highest text-on-surface text-[10px] font-bold uppercase tracking-widest hover:bg-surface-dim">
                     1D
                   </button>
                   <button className="px-4 py-1.5 bg-primary text-white text-[10px] font-bold uppercase tracking-widest">
                     1W
                   </button>
-                  <button className="px-4 py-1.5 bg-surface-container-high text-[10px] font-bold uppercase tracking-widest hover:bg-surface-container">
+                  <button className="px-4 py-1.5 bg-surface-container-highest text-on-surface text-[10px] font-bold uppercase tracking-widest hover:bg-surface-dim">
                     1M
                   </button>
                 </div>
