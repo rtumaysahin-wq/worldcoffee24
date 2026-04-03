@@ -116,22 +116,26 @@ export default function HavaRadari() {
               </div>
             </div>
           </header>
+        </div>
 
-          {/* ═══ İNTERAKTİF HARİTA ═══ */}
-          <section className="mb-10">
-            <div className="flex items-center gap-3 mb-4">
+        {/* ═══ İNTERAKTİF HARİTA — TAM GENİŞLİK ═══ */}
+        <section className="mb-10">
+          <div className="max-w-screen-2xl mx-auto px-4 md:px-8 mb-3">
+            <div className="flex items-center gap-3">
               <span className="material-symbols-outlined text-lg text-primary">map</span>
               <h2 className="font-headline text-2xl font-bold text-primary">Üretim Bölgeleri Haritası</h2>
               <div className="h-px flex-1 bg-outline-variant/20" />
             </div>
-            <p className="text-sm text-secondary mb-4">
+            <p className="text-sm text-secondary mt-2">
               Marker&apos;lara tıklayarak bölge detaylarını ve canlı hava durumunu görün.
             </p>
-            <div className="w-full h-[300px] md:h-[500px] editorial-shadow overflow-hidden rounded-sm">
-              <CoffeeMap />
-            </div>
-          </section>
+          </div>
+          <div className="w-full h-[300px] md:h-[500px]">
+            <CoffeeMap />
+          </div>
+        </section>
 
+        <div className="max-w-screen-2xl mx-auto px-4 md:px-8 pb-10 md:pb-12">
           {loading ? (
             <div className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
