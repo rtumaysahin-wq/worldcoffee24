@@ -70,31 +70,33 @@ export default function Home() {
           <section className="grid grid-cols-12 gap-6">
 
             {/* Hero — Öne Çıkan Haber */}
-            <div className="col-span-12 lg:col-span-8 bg-surface-container-lowest editorial-shadow overflow-hidden group">
-              <div className="relative h-[340px] md:h-[500px]">
-                <Image
-                  src={get("home.hero.image")}
-                  alt="Öne çıkan haber"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent" />
-                <div className="absolute bottom-0 p-6 md:p-10 text-white max-w-2xl" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.5)" }}>
-                  <span className="bg-primary px-3 py-1 text-[10px] uppercase tracking-[0.2em] font-bold mb-5 inline-block">
-                    {get("home.hero.tag")}
-                  </span>
-                  <h1 className="font-headline text-3xl md:text-5xl leading-tight mb-5">
+            <div className="col-span-12 lg:col-span-8 editorial-shadow overflow-hidden group relative" style={{ minHeight: "420px" }}>
+              <Image
+                src={get("home.hero.image")}
+                alt="Öne çıkan haber"
+                fill
+                className="object-cover"
+                priority
+              />
+              <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.05) 100%)" }} />
+              <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-10" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.6)" }}>
+                <div className="max-w-2xl">
+                  <div className="mb-4" style={{ backgroundColor: "#32170d", display: "inline-block", padding: "4px 14px" }}>
+                    <span style={{ color: "#ffffff", fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.2em", fontWeight: 700 }}>
+                      {get("home.hero.tag")}
+                    </span>
+                  </div>
+                  <h1 className="font-headline leading-tight mb-3" style={{ color: "#ffffff", fontSize: "clamp(1.5rem, 3vw, 2.75rem)" }}>
                     {get("home.hero.title")}
                   </h1>
-                  <p className="text-white/90 text-sm md:text-base mb-8">
+                  <p className="mb-6 leading-relaxed" style={{ color: "rgba(255,255,255,0.9)", fontSize: "clamp(0.8rem, 1.2vw, 1rem)" }}>
                     {get("home.hero.subtitle")}
                   </p>
                   <div className="flex flex-wrap items-center gap-4 md:gap-6">
-                    <a href={get("home.hero.link")} className="bg-white text-primary px-6 py-3 font-bold text-xs uppercase tracking-widest hover:bg-white/90 transition-colors inline-block">
+                    <a href={get("home.hero.link")} style={{ backgroundColor: "#ffffff", color: "#32170d", padding: "12px 24px", fontSize: "11px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", display: "inline-block" }}>
                       Raporu Oku
                     </a>
-                    <span className="text-xs uppercase tracking-widest text-white/70">
+                    <span style={{ color: "rgba(255,255,255,0.7)", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.1em" }}>
                       {get("home.hero.read_time")}
                     </span>
                   </div>
@@ -106,14 +108,14 @@ export default function Home() {
             <div className="col-span-12 lg:col-span-4 flex flex-col gap-6">
 
               {/* Editörün Günlük Notu */}
-              <div className="flex-1 bg-surface-container-low p-6 md:p-8 border-l-4 border-primary relative overflow-hidden">
+              <div className="flex-1 min-h-0 bg-surface-container-low p-6 md:p-8 border-l-4 border-primary relative overflow-hidden flex flex-col">
                 <span className="material-symbols-outlined absolute -right-4 -top-4 text-9xl opacity-5 text-primary">
                   format_quote
                 </span>
-                <h4 className="font-headline text-xl md:text-2xl text-primary mb-4 italic">
+                <h4 className="font-headline text-lg md:text-xl text-primary mb-3 italic">
                   Editörün Günlük Notu
                 </h4>
-                <p className="text-sm leading-relaxed text-secondary italic mb-6">
+                <p className="text-xs md:text-sm leading-relaxed text-secondary italic mb-4 flex-1 min-h-0 overflow-hidden">
                   &ldquo;{get("home.editor.content")}&rdquo;
                 </p>
                 <div className="flex items-center gap-3">
@@ -143,7 +145,7 @@ export default function Home() {
                 <div className="w-full bg-white/10 h-1 rounded-full overflow-hidden mb-5">
                   <div className="bg-tertiary-fixed h-full" style={{ width: `${pct}%` }} />
                 </div>
-                <p className="text-xs text-white/70 leading-loose">
+                <p className="text-xs text-white/70 leading-loose line-clamp-4">
                   {get("home.sentiment.note")}
                 </p>
               </div>
