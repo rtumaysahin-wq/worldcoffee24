@@ -56,26 +56,20 @@ async function fetchYahooHistory(symbol: string, period: string) {
 
 
 async function fetchFredHistory(seriesId: string, period: string) {
+  const end = new Date();
+  const start = new Date();
+  if (period === "1M") {
+    start.setFullYear(end.getFullYear() - 1);
+  } else if (period === "1Y") {
+    start.setFullYear(end.getFullYear() - 2);
+  } else {
+    start.setFullYear(end.getFullYear() - 5);
+  }
+
+  const url = `https://api.stlouisfed.org/fred/series/observations?series_id=${seriesId}&api_key=${FRED_KEY}&file_type=json&observation_start=${start.toISOString().split("T")[0]}&observation_end=${end.toISOString().split("T")[0]}&sort_order=asc`;
+
   try {
-    // FRED aylık veri — kısa periyotlarda daha geniş pencere kullan
-    const end = new Date();
-    const start = new Date();
-    if (period === "1M") {
-      start.setFullYear(end.getFullYear() - 1); // 1M seçilse bile 1 yıl göster (aylık veri)
-    } else if (period === "1Y") {
-      start.setFullYear(end.getFullYear() - 2);
-    } else {
-      start.setFullYear(end.getFullYear() - 5);
-    }
-    const params = new URLSearchParams({
-      series_id: seriesId,
-      api_key: FRED_KEY,
-      file_type: "json",
-      observation_start: start.toISOString().split("T")[0],
-      observation_end: end.toISOString().split("T")[0],
-      sort_order: "asc",
-    });
-    const res = await fetch(`https://api.stlouisfed.org/fred/series/observations?${params}`);
+    const res = await fetch(url, { next: { revalidate: 3600 } });
     if (!res.ok) return [];
     const data = await res.json();
     return (data.observations || [])
