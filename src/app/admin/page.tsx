@@ -10,7 +10,18 @@ interface ContentItem {
   content_type: string;
 }
 
-const PAGES = ["Ana Sayfa", "Fiyat Merkezi", "Piyasa Faktörleri", "Hava Radarı"];
+interface MailchimpData {
+  totalSubscribers: number;
+  unsubscribed: number;
+  cleaned: number;
+  avgOpenRate: string;
+  avgClickRate: string;
+  listName: string;
+  members: { email: string; status: string; joined: string; name: string }[];
+  recentActivity: { day: string; subs: number; unsubs: number }[];
+}
+
+const PAGES = ["Ana Sayfa", "Fiyat Merkezi", "Piyasa Faktörleri", "Hava Radarı", "Mailchimp"];
 
 export default function AdminPanel() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -21,6 +32,8 @@ export default function AdminPanel() {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [changed, setChanged] = useState<Set<string>>(new Set());
+  const [mailchimp, setMailchimp] = useState<MailchimpData | null>(null);
+  const [mcLoading, setMcLoading] = useState(false);
 
   async function handleLogin() {
     setLoginError("");
@@ -42,6 +55,16 @@ export default function AdminPanel() {
     if (!res.ok) return;
     const data = await res.json();
     setItems(data.items || []);
+  }
+
+  async function loadMailchimp() {
+    setMcLoading(true);
+    const res = await fetch("/api/admin/mailchimp");
+    if (res.ok) {
+      const data = await res.json();
+      setMailchimp(data);
+    }
+    setMcLoading(false);
   }
 
   function updateValue(key: string, value: string) {
@@ -141,20 +164,23 @@ export default function AdminPanel() {
         {/* Sayfa Tabları */}
         <div className="flex flex-wrap gap-2 mb-8">
           {PAGES.map((page) => {
-            const count = items.filter((i) => i.page === page).length;
+            const count = page === "Mailchimp" ? 0 : items.filter((i) => i.page === page).length;
             const hasChanges = items.filter((i) => i.page === page && changed.has(i.key)).length > 0;
             return (
               <button
                 key={page}
-                onClick={() => setActivePage(page)}
+                onClick={() => {
+                  setActivePage(page);
+                  if (page === "Mailchimp" && !mailchimp) loadMailchimp();
+                }}
                 className="px-5 py-2.5 text-xs font-bold uppercase tracking-widest transition-colors relative"
                 style={
                   activePage === page
-                    ? { backgroundColor: "#32170d", color: "#fff" }
+                    ? { backgroundColor: page === "Mailchimp" ? "#FFE01B" : "#32170d", color: page === "Mailchimp" ? "#000" : "#fff" }
                     : { backgroundColor: "#e2e9ec", color: "#161d1f" }
                 }
               >
-                {page} ({count})
+                {page === "Mailchimp" ? "📧 Mailchimp" : `${page} (${count})`}
                 {hasChanges && (
                   <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full" style={{ backgroundColor: "#ba1a1a" }} />
                 )}
@@ -163,8 +189,119 @@ export default function AdminPanel() {
           })}
         </div>
 
-        {/* İçerik Alanları */}
-        <div className="space-y-4">
+        {/* ═══ MAİLCHİMP TAB ═══ */}
+        {activePage === "Mailchimp" && (
+          <div className="space-y-6">
+            {mcLoading ? (
+              <div className="p-10 text-center" style={{ backgroundColor: "#fff" }}>
+                <span className="material-symbols-outlined text-4xl animate-spin" style={{ color: "#83746f" }}>progress_activity</span>
+                <p className="text-sm mt-3" style={{ color: "#5f5e58" }}>Mailchimp verileri yükleniyor...</p>
+              </div>
+            ) : !mailchimp ? (
+              <div className="p-10 text-center" style={{ backgroundColor: "#fff" }}>
+                <p className="text-sm" style={{ color: "#5f5e58" }}>Mailchimp verileri yüklenemedi.</p>
+              </div>
+            ) : (
+              <>
+                {/* İstatistik Kartları */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {[
+                    { label: "Toplam Abone", value: mailchimp.totalSubscribers, icon: "group", color: "#166534" },
+                    { label: "Abonelikten Çıkan", value: mailchimp.unsubscribed, icon: "person_remove", color: "#ba1a1a" },
+                    { label: "Ort. Açılma Oranı", value: `${mailchimp.avgOpenRate}%`, icon: "mail", color: "#b45309" },
+                    { label: "Ort. Tıklama Oranı", value: `${mailchimp.avgClickRate}%`, icon: "ads_click", color: "#1d4ed8" },
+                  ].map((stat) => (
+                    <div key={stat.label} className="p-5" style={{ backgroundColor: "#fff", boxShadow: "0 1px 8px rgba(0,0,0,0.04)" }}>
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="material-symbols-outlined text-lg" style={{ color: stat.color }}>{stat.icon}</span>
+                        <span className="text-[10px] uppercase tracking-widest font-semibold" style={{ color: "#5f5e58" }}>{stat.label}</span>
+                      </div>
+                      <p className="font-headline text-3xl font-bold" style={{ color: "#32170d" }}>{stat.value}</p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Liste Bilgisi */}
+                <div className="p-5" style={{ backgroundColor: "#fff", boxShadow: "0 1px 8px rgba(0,0,0,0.04)" }}>
+                  <p className="text-[10px] uppercase tracking-widest font-semibold mb-1" style={{ color: "#5f5e58" }}>Liste Adı</p>
+                  <p className="text-sm font-bold" style={{ color: "#32170d" }}>{mailchimp.listName}</p>
+                </div>
+
+                {/* Son 7 Gün Aktivite */}
+                {mailchimp.recentActivity.length > 0 && (
+                  <div className="p-5" style={{ backgroundColor: "#fff", boxShadow: "0 1px 8px rgba(0,0,0,0.04)" }}>
+                    <h3 className="font-headline text-lg font-bold mb-4" style={{ color: "#32170d" }}>Son 7 Gün Aktivite</h3>
+                    <div className="grid grid-cols-7 gap-2">
+                      {mailchimp.recentActivity.map((day) => (
+                        <div key={day.day} className="text-center p-3" style={{ backgroundColor: "#f4fafe" }}>
+                          <p className="text-[10px] mb-1" style={{ color: "#5f5e58" }}>
+                            {new Date(day.day).toLocaleDateString("tr", { day: "numeric", month: "short" })}
+                          </p>
+                          <p className="font-bold text-sm" style={{ color: day.subs > 0 ? "#166534" : "#32170d" }}>
+                            +{day.subs}
+                          </p>
+                          {day.unsubs > 0 && (
+                            <p className="text-xs" style={{ color: "#ba1a1a" }}>-{day.unsubs}</p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Son Aboneler */}
+                <div className="p-5" style={{ backgroundColor: "#fff", boxShadow: "0 1px 8px rgba(0,0,0,0.04)" }}>
+                  <div className="flex justify-between items-center mb-4">
+                    <h3 className="font-headline text-lg font-bold" style={{ color: "#32170d" }}>Son Aboneler</h3>
+                    <button onClick={loadMailchimp} className="text-xs uppercase tracking-widest font-bold" style={{ color: "#5f5e58" }}>
+                      Yenile
+                    </button>
+                  </div>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left">
+                      <thead>
+                        <tr className="text-[10px] uppercase tracking-widest" style={{ color: "#5f5e58", borderBottom: "1px solid #d5c3bd" }}>
+                          <th className="pb-3">E-posta</th>
+                          <th className="pb-3">Durum</th>
+                          <th className="pb-3">Katılma Tarihi</th>
+                        </tr>
+                      </thead>
+                      <tbody className="text-sm">
+                        {mailchimp.members.map((m) => (
+                          <tr key={m.email} style={{ borderBottom: "1px solid #eef5f8" }}>
+                            <td className="py-3 font-bold" style={{ color: "#32170d" }}>{m.email}</td>
+                            <td className="py-3">
+                              <span
+                                className="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5"
+                                style={{
+                                  backgroundColor: m.status === "subscribed" ? "#dcfce7" : "#fee2e2",
+                                  color: m.status === "subscribed" ? "#166534" : "#ba1a1a",
+                                }}
+                              >
+                                {m.status === "subscribed" ? "Aktif" : m.status === "unsubscribed" ? "Çıkmış" : m.status}
+                              </span>
+                            </td>
+                            <td className="py-3" style={{ color: "#5f5e58" }}>
+                              {m.joined ? new Date(m.joined).toLocaleDateString("tr", { day: "numeric", month: "short", year: "numeric" }) : "—"}
+                            </td>
+                          </tr>
+                        ))}
+                        {mailchimp.members.length === 0 && (
+                          <tr>
+                            <td colSpan={3} className="py-6 text-center" style={{ color: "#5f5e58" }}>Henüz abone yok.</td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+        )}
+
+        {/* ═══ İÇERİK ALANLARI ═══ */}
+        {activePage !== "Mailchimp" && <div className="space-y-4">
           {pageItems.map((item) => (
             <div
               key={item.key}
@@ -232,7 +369,7 @@ export default function AdminPanel() {
               <p className="text-sm" style={{ color: "#5f5e58" }}>Bu sayfada düzenlenebilir içerik yok.</p>
             </div>
           )}
-        </div>
+        </div>}
 
         {/* Alt Kaydet Butonu */}
         {changed.size > 0 && (
