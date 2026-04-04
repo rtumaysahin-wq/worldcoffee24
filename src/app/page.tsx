@@ -79,7 +79,7 @@ export default function Home() {
                   className="object-cover"
                   priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent" />
                 <div className="absolute bottom-0 p-6 md:p-10 text-white max-w-2xl" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.5)" }}>
                   <span className="bg-primary px-3 py-1 text-[10px] uppercase tracking-[0.2em] font-bold mb-5 inline-block">
                     {get("home.hero.tag")}
