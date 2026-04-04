@@ -57,7 +57,16 @@ async function fetchYahooHistory(symbol: string, period: string) {
 
 async function fetchFredHistory(seriesId: string, period: string) {
   try {
-    const { start, end } = getPeriodDates(period);
+    // FRED aylık veri — kısa periyotlarda daha geniş pencere kullan
+    const end = new Date();
+    const start = new Date();
+    if (period === "1M") {
+      start.setFullYear(end.getFullYear() - 1); // 1M seçilse bile 1 yıl göster (aylık veri)
+    } else if (period === "1Y") {
+      start.setFullYear(end.getFullYear() - 2);
+    } else {
+      start.setFullYear(end.getFullYear() - 5);
+    }
     const params = new URLSearchParams({
       series_id: seriesId,
       api_key: FRED_KEY,
