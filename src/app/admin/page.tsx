@@ -10,6 +10,39 @@ interface ContentItem {
   content_type: string;
 }
 
+interface QueueItem {
+  id: string;
+  type: string;
+  title: string;
+  content: string;
+  image_url: string;
+  source_url: string;
+  status: string;
+  created_by: string;
+  reviewed_by: string;
+  notes: string;
+  created_at: string;
+}
+
+interface QAReport {
+  id: string;
+  category: string;
+  item: string;
+  status: string;
+  details: string;
+  severity: string;
+  created_at: string;
+}
+
+interface AgentLog {
+  id: string;
+  agent: string;
+  action: string;
+  details: string;
+  status: string;
+  created_at: string;
+}
+
 interface MailchimpData {
   totalSubscribers: number;
   unsubscribed: number;
@@ -21,7 +54,7 @@ interface MailchimpData {
   recentActivity: { day: string; subs: number; unsubs: number }[];
 }
 
-const PAGES = ["Ana Sayfa", "Fiyat Merkezi", "Piyasa Faktörleri", "Hava Radarı", "Mailchimp"];
+const PAGES = ["Ana Sayfa", "Fiyat Merkezi", "Piyasa Faktörleri", "Hava Radarı", "Mailchimp", "Agent Merkezi"];
 
 export default function AdminPanel() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -34,6 +67,10 @@ export default function AdminPanel() {
   const [changed, setChanged] = useState<Set<string>>(new Set());
   const [mailchimp, setMailchimp] = useState<MailchimpData | null>(null);
   const [mcLoading, setMcLoading] = useState(false);
+  const [queue, setQueue] = useState<QueueItem[]>([]);
+  const [qaReports, setQaReports] = useState<QAReport[]>([]);
+  const [agentLogs, setAgentLogs] = useState<AgentLog[]>([]);
+  const [agentLoading, setAgentLoading] = useState(false);
 
   async function handleLogin() {
     setLoginError("");
@@ -55,6 +92,18 @@ export default function AdminPanel() {
     if (!res.ok) return;
     const data = await res.json();
     setItems(data.items || []);
+  }
+
+  async function loadAgentData() {
+    setAgentLoading(true);
+    const res = await fetch("/api/admin/agents");
+    if (res.ok) {
+      const data = await res.json();
+      setQueue(data.queue || []);
+      setQaReports(data.qaReports || []);
+      setAgentLogs(data.agentLogs || []);
+    }
+    setAgentLoading(false);
   }
 
   async function loadMailchimp() {
@@ -172,15 +221,16 @@ export default function AdminPanel() {
                 onClick={() => {
                   setActivePage(page);
                   if (page === "Mailchimp" && !mailchimp) loadMailchimp();
+                  if (page === "Agent Merkezi") loadAgentData();
                 }}
                 className="px-5 py-2.5 text-xs font-bold uppercase tracking-widest transition-colors relative"
                 style={
                   activePage === page
-                    ? { backgroundColor: page === "Mailchimp" ? "#FFE01B" : "#32170d", color: page === "Mailchimp" ? "#000" : "#fff" }
+                    ? { backgroundColor: page === "Mailchimp" ? "#FFE01B" : page === "Agent Merkezi" ? "#1d4ed8" : "#32170d", color: page === "Mailchimp" ? "#000" : "#fff" }
                     : { backgroundColor: "#e2e9ec", color: "#161d1f" }
                 }
               >
-                {page === "Mailchimp" ? "📧 Mailchimp" : `${page} (${count})`}
+                {page === "Mailchimp" ? "📧 Mailchimp" : page === "Agent Merkezi" ? "🤖 Agent Merkezi" : `${page} (${count})`}
                 {hasChanges && (
                   <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full" style={{ backgroundColor: "#ba1a1a" }} />
                 )}
@@ -294,6 +344,112 @@ export default function AdminPanel() {
                       </tbody>
                     </table>
                   </div>
+                </div>
+              </>
+            )}
+          </div>
+        )}
+
+        {/* ═══ AGENT MERKEZİ TAB ═══ */}
+        {activePage === "Agent Merkezi" && (
+          <div className="space-y-6">
+            {agentLoading ? (
+              <div className="p-10 text-center" style={{ backgroundColor: "#fff" }}>
+                <span className="material-symbols-outlined text-4xl animate-spin" style={{ color: "#83746f" }}>progress_activity</span>
+                <p className="text-sm mt-3" style={{ color: "#5f5e58" }}>Agent verileri yükleniyor...</p>
+              </div>
+            ) : (
+              <>
+                {/* İçerik Kuyruğu */}
+                <div className="p-5" style={{ backgroundColor: "#fff", boxShadow: "0 1px 8px rgba(0,0,0,0.04)" }}>
+                  <div className="flex justify-between items-center mb-4">
+                    <h3 className="font-headline text-lg font-bold" style={{ color: "#32170d" }}>İçerik Kuyruğu</h3>
+                    <span className="text-xs px-2 py-1 font-bold" style={{ backgroundColor: "#e2e9ec", color: "#5f5e58" }}>{queue.length} içerik</span>
+                  </div>
+                  {queue.length === 0 ? (
+                    <p className="text-sm py-4 text-center" style={{ color: "#5f5e58" }}>Kuyrukta içerik yok. Editör agentı çalıştırın.</p>
+                  ) : (
+                    <div className="space-y-3">
+                      {queue.map((item) => (
+                        <div key={item.id} className="p-4 flex justify-between items-start" style={{ backgroundColor: "#f4fafe", borderLeft: `3px solid ${item.status === "published" ? "#166534" : item.status === "designed" ? "#1d4ed8" : "#b45309"}` }}>
+                          <div>
+                            <p className="font-bold text-sm" style={{ color: "#32170d" }}>{item.title}</p>
+                            <p className="text-xs mt-1" style={{ color: "#5f5e58" }}>{item.created_by} • {new Date(item.created_at).toLocaleDateString("tr")}</p>
+                            {item.notes && <p className="text-xs mt-1 italic" style={{ color: "#83746f" }}>{item.notes}</p>}
+                          </div>
+                          <span className="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5" style={{
+                            backgroundColor: item.status === "published" ? "#dcfce7" : item.status === "designed" ? "#dbeafe" : "#fef3c7",
+                            color: item.status === "published" ? "#166534" : item.status === "designed" ? "#1d4ed8" : "#b45309",
+                          }}>{item.status}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* QA Raporları */}
+                <div className="p-5" style={{ backgroundColor: "#fff", boxShadow: "0 1px 8px rgba(0,0,0,0.04)" }}>
+                  <h3 className="font-headline text-lg font-bold mb-4" style={{ color: "#32170d" }}>Son QA Raporları</h3>
+                  {qaReports.length === 0 ? (
+                    <p className="text-sm py-4 text-center" style={{ color: "#5f5e58" }}>Henüz QA raporu yok. QA agentını çalıştırın.</p>
+                  ) : (
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-left">
+                        <thead>
+                          <tr className="text-[10px] uppercase tracking-widest" style={{ color: "#5f5e58", borderBottom: "1px solid #d5c3bd" }}>
+                            <th className="pb-3">Kategori</th>
+                            <th className="pb-3">Öğe</th>
+                            <th className="pb-3">Durum</th>
+                            <th className="pb-3">Önem</th>
+                            <th className="pb-3">Tarih</th>
+                          </tr>
+                        </thead>
+                        <tbody className="text-sm">
+                          {qaReports.slice(0, 20).map((r) => (
+                            <tr key={r.id} style={{ borderBottom: "1px solid #eef5f8" }}>
+                              <td className="py-2.5" style={{ color: "#5f5e58" }}>{r.category}</td>
+                              <td className="py-2.5 font-bold" style={{ color: "#32170d" }}>{r.item}</td>
+                              <td className="py-2.5">
+                                <span className="text-[10px] font-bold px-2 py-0.5" style={{
+                                  backgroundColor: r.status === "pass" ? "#dcfce7" : r.status === "warning" ? "#fef3c7" : "#fee2e2",
+                                  color: r.status === "pass" ? "#166534" : r.status === "warning" ? "#b45309" : "#ba1a1a",
+                                }}>{r.status}</span>
+                              </td>
+                              <td className="py-2.5 text-xs" style={{ color: "#5f5e58" }}>{r.severity}</td>
+                              <td className="py-2.5 text-xs" style={{ color: "#5f5e58" }}>{new Date(r.created_at).toLocaleDateString("tr")}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
+                </div>
+
+                {/* Agent Logları */}
+                <div className="p-5" style={{ backgroundColor: "#fff", boxShadow: "0 1px 8px rgba(0,0,0,0.04)" }}>
+                  <div className="flex justify-between items-center mb-4">
+                    <h3 className="font-headline text-lg font-bold" style={{ color: "#32170d" }}>Agent Aktivite Logları</h3>
+                    <button onClick={loadAgentData} className="text-xs uppercase tracking-widest font-bold" style={{ color: "#5f5e58" }}>Yenile</button>
+                  </div>
+                  {agentLogs.length === 0 ? (
+                    <p className="text-sm py-4 text-center" style={{ color: "#5f5e58" }}>Henüz agent aktivitesi yok.</p>
+                  ) : (
+                    <div className="space-y-2">
+                      {agentLogs.slice(0, 30).map((log) => (
+                        <div key={log.id} className="flex items-center gap-3 py-2 text-sm" style={{ borderBottom: "1px solid #eef5f8" }}>
+                          <span className="text-[10px] font-bold uppercase px-2 py-0.5" style={{
+                            backgroundColor: log.agent === "editor" ? "#fef3c7" : log.agent === "design" ? "#e0e7ff" : "#dcfce7",
+                            color: log.agent === "editor" ? "#b45309" : log.agent === "design" ? "#4338ca" : "#166534",
+                          }}>{log.agent}</span>
+                          <span style={{ color: "#32170d" }}>{log.action}</span>
+                          {log.details && <span className="text-xs" style={{ color: "#83746f" }}>— {log.details}</span>}
+                          <span className="ml-auto text-xs" style={{ color: "#83746f" }}>
+                            {new Date(log.created_at).toLocaleString("tr", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </>
             )}
