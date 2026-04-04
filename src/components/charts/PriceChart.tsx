@@ -36,6 +36,7 @@ function TradingViewEmbed({ tvSymbol, height }: { tvSymbol: string; height: numb
       theme: "light",
       style: "3",
       locale: "tr",
+      range: "12M",
       allow_symbol_change: false,
       hide_top_toolbar: true,
       hide_legend: true,
@@ -45,6 +46,16 @@ function TradingViewEmbed({ tvSymbol, height }: { tvSymbol: string; height: numb
       calendar: false,
       backgroundColor: "rgba(255, 255, 255, 1)",
       gridColor: "rgba(213, 195, 189, 0.15)",
+      overrides: {
+        "mainSeriesProperties.areaStyle.linecolor": "#4b2c20",
+        "mainSeriesProperties.areaStyle.linewidth": 2,
+        "mainSeriesProperties.areaStyle.color1": "rgba(75, 44, 32, 0.3)",
+        "mainSeriesProperties.areaStyle.color2": "rgba(75, 44, 32, 0.0)",
+        "scalesProperties.textColor": "#666666",
+        "scalesProperties.fontSize": 11,
+        "paneProperties.backgroundType": "solid",
+        "paneProperties.background": "#ffffff",
+      },
       support_host: "https://www.tradingview.com",
     });
 
@@ -135,7 +146,7 @@ export default function PriceChart({
             </h3>
           </div>
         </div>
-        <TradingViewEmbed tvSymbol={tvSymbol} height={350} />
+        <TradingViewEmbed tvSymbol={tvSymbol} height={288} />
       </div>
     );
   }
