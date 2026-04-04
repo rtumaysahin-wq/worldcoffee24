@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import {
   ResponsiveContainer,
   AreaChart,
@@ -12,49 +12,6 @@ import {
 } from "recharts";
 import { fetchPriceHistory, type PricePoint } from "@/lib/api/fred";
 
-/* TradingView widget — FRED'de günlük veri olmayan semboller için (Robusta gibi) */
-const TRADINGVIEW_SYMBOLS: Record<string, string> = {
-  robusta: "ICEEUR:RC1!",
-};
-
-function TradingViewEmbed({ tvSymbol, height }: { tvSymbol: string; height: number }) {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-    containerRef.current.innerHTML = "";
-
-    const script = document.createElement("script");
-    script.src = "https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js";
-    script.type = "text/javascript";
-    script.async = true;
-    script.innerHTML = JSON.stringify({
-      symbol: tvSymbol,
-      width: "100%",
-      height,
-      locale: "tr",
-      dateRange: "12M",
-      colorTheme: "light",
-      isTransparent: true,
-      autosize: false,
-      largeChartUrl: "",
-      trendLineColor: "rgba(75, 44, 32, 1)",
-      underLineColor: "rgba(75, 44, 32, 0.15)",
-      underLineBottomColor: "rgba(75, 44, 32, 0)",
-      noTimeScale: false,
-    });
-
-    containerRef.current.appendChild(script);
-  }, [tvSymbol]);
-
-  return (
-    <div
-      className="tradingview-widget-container"
-      ref={containerRef}
-      style={{ height, width: "100%" }}
-    />
-  );
-}
 
 /* Recharts SVG text — Tailwind v4 global stilleri SVG fill'i eziyor,
    bu yüzden custom tick component ile inline style kullanıyoruz */
@@ -103,9 +60,6 @@ export default function PriceChart({
     });
   }, [symbol, period]);
 
-  /* Robusta gibi FRED'de günlük verisi olmayan semboller için TradingView kullan */
-  const tvSymbol = TRADINGVIEW_SYMBOLS[symbol];
-
   const lastPrice = data.length > 0 ? data[data.length - 1].price : null;
   // Son iki veri noktası arasındaki günlük değişim
   const prevPrice = data.length > 1 ? data[data.length - 2].price : null;
@@ -116,25 +70,6 @@ export default function PriceChart({
       ? (change / prevPrice) * 100
       : null;
   const isUp = change !== null && change >= 0;
-
-  /* TradingView widget render */
-  if (tvSymbol) {
-    return (
-      <div>
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-          <div>
-            <span className="text-[10px] font-label uppercase tracking-[0.2em] text-secondary mb-1 block">
-              {subtitle || "TradingView"}
-            </span>
-            <h3 className="font-headline text-2xl md:text-3xl font-bold">
-              {title}
-            </h3>
-          </div>
-        </div>
-        <TradingViewEmbed tvSymbol={tvSymbol} height={288} />
-      </div>
-    );
-  }
 
   return (
     <div>
