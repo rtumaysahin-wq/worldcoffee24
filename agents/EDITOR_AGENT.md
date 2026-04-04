@@ -82,3 +82,13 @@ curl -s -X POST https://worldcoffee24.com/api/agent \
 - Spekülasyon yapma, veri tabanlı yaz
 - Her zaman kaynağını belirt
 - Tüm curl komutlarını MUTLAKA çalıştır
+- ÖNEMLİ: curl yerine Node.js script ile yaz — Windows terminal'de curl UTF-8 bozuyor. Şu formatta kullan:
+```javascript
+node -e "
+const https = require('https');
+const data = JSON.stringify({action:'update_content',data:{key:'KEY',value:'DEĞER'}});
+const req = https.request({hostname:'worldcoffee24.com',path:'/api/agent',method:'POST',headers:{'Content-Type':'application/json','x-agent-key':'wc24-agent-key-2026-secure','Content-Length':Buffer.byteLength(data)}}, res=>{let b='';res.on('data',c=>b+=c);res.on('end',()=>console.log(b))});
+req.write(data);req.end();
+"
+```
+- Veya Bash tool ile doğrudan fetch kullan — curl'den KAÇIN
