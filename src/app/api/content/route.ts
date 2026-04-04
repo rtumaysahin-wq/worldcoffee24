@@ -1,18 +1,19 @@
 import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 
-export const revalidate = 60; // 1 dakika cache
+export const revalidate = 60;
 
 export async function GET() {
-  const [notes, sentiment, article] = await Promise.all([
-    supabase.from("editor_notes").select("*").order("created_at", { ascending: false }).limit(1),
-    supabase.from("market_sentiment").select("*").order("updated_at", { ascending: false }).limit(1),
-    supabase.from("featured_article").select("*").order("updated_at", { ascending: false }).limit(1),
-  ]);
+  const { data, error } = await supabase.from("site_content").select("key, value");
 
-  return NextResponse.json({
-    editorNote: notes.data?.[0] || null,
-    sentiment: sentiment.data?.[0] || null,
-    featuredArticle: article.data?.[0] || null,
+  if (error || !data) {
+    return NextResponse.json({ content: {} });
+  }
+
+  const content: Record<string, string> = {};
+  data.forEach((row) => {
+    content[row.key] = row.value;
   });
+
+  return NextResponse.json({ content });
 }
