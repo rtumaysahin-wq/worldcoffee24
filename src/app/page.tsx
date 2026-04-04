@@ -70,30 +70,30 @@ export default function Home() {
           <section className="grid grid-cols-12 gap-6">
 
             {/* Hero — Öne Çıkan Haber */}
-            <div className="col-span-12 lg:col-span-8 editorial-shadow overflow-hidden group relative" style={{ minHeight: "420px" }}>
-              <Image
-                src={get("home.hero.image")}
-                alt="Öne çıkan haber"
-                fill
-                className="object-cover"
-                priority
-              />
-              <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.05) 100%)" }} />
-              <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-10" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.6)" }}>
-                <div className="max-w-2xl">
-                  <div className="mb-4" style={{ backgroundColor: "#32170d", display: "inline-block", padding: "4px 14px" }}>
-                    <span style={{ color: "#ffffff", fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.2em", fontWeight: 700 }}>
+            <div className="col-span-12 lg:col-span-8 editorial-shadow overflow-hidden group">
+              <div className="relative h-[340px] md:h-[500px]">
+                <Image
+                  src={get("home.hero.image")}
+                  alt="Öne çıkan haber"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent" />
+                <div className="absolute bottom-0 p-6 md:p-10 text-white max-w-2xl" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.5)" }}>
+                  <div className="mb-4" style={{ backgroundColor: "#32170d", display: "inline-block", padding: "5px 14px" }}>
+                    <span style={{ color: "#fff", fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.2em", fontWeight: 700 }}>
                       {get("home.hero.tag")}
                     </span>
                   </div>
-                  <h1 className="font-headline leading-tight mb-3" style={{ color: "#ffffff", fontSize: "clamp(1.5rem, 3vw, 2.75rem)" }}>
+                  <h1 className="font-headline text-3xl md:text-5xl leading-tight mb-5" style={{ color: "#fff" }}>
                     {get("home.hero.title")}
                   </h1>
-                  <p className="mb-6 leading-relaxed" style={{ color: "rgba(255,255,255,0.9)", fontSize: "clamp(0.8rem, 1.2vw, 1rem)" }}>
+                  <p className="text-sm md:text-base mb-8" style={{ color: "rgba(255,255,255,0.9)" }}>
                     {get("home.hero.subtitle")}
                   </p>
                   <div className="flex flex-wrap items-center gap-4 md:gap-6">
-                    <a href={get("home.hero.link")} style={{ backgroundColor: "#ffffff", color: "#32170d", padding: "12px 24px", fontSize: "11px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", display: "inline-block" }}>
+                    <a href={get("home.hero.link")} style={{ backgroundColor: "#fff", color: "#32170d", padding: "12px 24px", fontSize: "11px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", display: "inline-block" }}>
                       Raporu Oku
                     </a>
                     <span style={{ color: "rgba(255,255,255,0.7)", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.1em" }}>
