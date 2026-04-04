@@ -105,7 +105,10 @@ export async function GET(request: NextRequest) {
   }
 
   if (points.length === 0) {
-    return NextResponse.json({ error: "Veri bulunamadı" }, { status: 404 });
+    return NextResponse.json({
+      error: "Veri bulunamadı",
+      debug: { symbol, period, source: YAHOO_SYMBOLS[symbol] ? "yahoo" : FRED_SERIES[symbol] ? "fred" : "none", fredKeyExists: !!FRED_KEY }
+    }, { status: 404 });
   }
 
   return NextResponse.json({ symbol, period, points, fetchedAt: new Date().toISOString() });
