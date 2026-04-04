@@ -25,38 +25,23 @@ function TradingViewEmbed({ tvSymbol, height }: { tvSymbol: string; height: numb
     containerRef.current.innerHTML = "";
 
     const script = document.createElement("script");
-    script.src = "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
+    script.src = "https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js";
     script.type = "text/javascript";
     script.async = true;
     script.innerHTML = JSON.stringify({
-      autosize: true,
       symbol: tvSymbol,
-      interval: "D",
-      timezone: "Europe/Istanbul",
-      theme: "light",
-      style: "3",
+      width: "100%",
+      height,
       locale: "tr",
-      range: "12M",
-      allow_symbol_change: false,
-      hide_top_toolbar: true,
-      hide_legend: true,
-      hide_side_toolbar: true,
-      hide_volume: true,
-      save_image: false,
-      calendar: false,
-      backgroundColor: "rgba(255, 255, 255, 1)",
-      gridColor: "rgba(213, 195, 189, 0.15)",
-      overrides: {
-        "mainSeriesProperties.areaStyle.linecolor": "#4b2c20",
-        "mainSeriesProperties.areaStyle.linewidth": 2,
-        "mainSeriesProperties.areaStyle.color1": "rgba(75, 44, 32, 0.3)",
-        "mainSeriesProperties.areaStyle.color2": "rgba(75, 44, 32, 0.0)",
-        "scalesProperties.textColor": "#666666",
-        "scalesProperties.fontSize": 11,
-        "paneProperties.backgroundType": "solid",
-        "paneProperties.background": "#ffffff",
-      },
-      support_host: "https://www.tradingview.com",
+      dateRange: "12M",
+      colorTheme: "light",
+      isTransparent: true,
+      autosize: false,
+      largeChartUrl: "",
+      trendLineColor: "rgba(75, 44, 32, 1)",
+      underLineColor: "rgba(75, 44, 32, 0.15)",
+      underLineBottomColor: "rgba(75, 44, 32, 0)",
+      noTimeScale: false,
     });
 
     containerRef.current.appendChild(script);
