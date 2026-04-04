@@ -4,8 +4,11 @@ const FRED_KEY = process.env.NEXT_PUBLIC_FRED_API_KEY || "";
 
 const YAHOO_SYMBOLS: Record<string, string> = {
   arabica: "KC=F",
-  robusta: "RC=F",
   sugar: "SB=F",
+};
+
+const FRED_SERIES: Record<string, string> = {
+  robusta: "PCOFFROBUSDM",
 };
 
 function getPeriodDates(period: string): { start: Date; end: Date; interval: string } {
@@ -52,6 +55,31 @@ async function fetchYahooHistory(symbol: string, period: string) {
 }
 
 
+async function fetchFredHistory(seriesId: string, period: string) {
+  try {
+    const { start, end } = getPeriodDates(period);
+    const params = new URLSearchParams({
+      series_id: seriesId,
+      api_key: FRED_KEY,
+      file_type: "json",
+      observation_start: start.toISOString().split("T")[0],
+      observation_end: end.toISOString().split("T")[0],
+      sort_order: "asc",
+    });
+    const res = await fetch(`https://api.stlouisfed.org/fred/series/observations?${params}`);
+    if (!res.ok) return [];
+    const data = await res.json();
+    return (data.observations || [])
+      .filter((obs: { value: string }) => obs.value !== ".")
+      .map((obs: { date: string; value: string }) => ({
+        date: obs.date,
+        price: Math.round(parseFloat(obs.value) * 100) / 100,
+      }));
+  } catch {
+    return [];
+  }
+}
+
 export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl;
   const symbol = searchParams.get("symbol") || "arabica";
@@ -61,6 +89,8 @@ export async function GET(request: NextRequest) {
 
   if (YAHOO_SYMBOLS[symbol]) {
     points = await fetchYahooHistory(YAHOO_SYMBOLS[symbol], period);
+  } else if (FRED_SERIES[symbol]) {
+    points = await fetchFredHistory(FRED_SERIES[symbol], period);
   } else {
     return NextResponse.json({ error: `Bilinmeyen sembol: ${symbol}` }, { status: 400 });
   }
