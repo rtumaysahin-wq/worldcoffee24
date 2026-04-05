@@ -74,8 +74,8 @@ async function fetchFredRobusta(): Promise<PriceItem | null> {
 }
 
 export async function GET() {
-  const [yahooData, robusta] = await Promise.all([
-    fetchYahooQuotes(["KC=F", "SB=F", "USDTRY=X", "EURTRY=X", "BRLUSD=X"]),
+  const [yahooData, fredRobusta] = await Promise.all([
+    fetchYahooQuotes(["KC=F", "RC=F", "SB=F", "USDTRY=X", "EURTRY=X", "BRLUSD=X"]),
     fetchFredRobusta(),
   ]);
 
@@ -88,9 +88,12 @@ export async function GET() {
     : { label: "Arabica Coffee", symbol: "KC=F", price: null, change: null, changePct: null, unit: "¢/lb", source: "Yahoo Finance" }
   );
 
-  // Robusta (FRED — Yahoo'da yok)
-  prices.push(robusta
-    ?? { label: "Robusta Coffee", symbol: "RC=F", price: null, change: null, changePct: null, unit: "¢/lb", source: "FRED" }
+  // Robusta (Yahoo öncelikli, FRED fallback)
+  const rc = yahooData["RC=F"];
+  prices.push(rc
+    ? { ...rc, label: "Robusta Coffee", unit: "¢/lb" }
+    : fredRobusta
+      ?? { label: "Robusta Coffee", symbol: "RC=F", price: null, change: null, changePct: null, unit: "¢/lb", source: "FRED" }
   );
 
   // USD/TRY
