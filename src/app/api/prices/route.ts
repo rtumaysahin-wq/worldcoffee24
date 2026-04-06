@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
+import { fetchYahooQuotes } from "@/lib/api/yahoo";
+import { fetchFredRobusta } from "@/lib/api/fred";
 
 export const revalidate = 300; // 5 dakika cache
 
-interface PriceItem {
+export interface PriceItem {
   label: string;
   symbol: string;
   price: number | null;
@@ -10,67 +12,6 @@ interface PriceItem {
   changePct: number | null;
   unit: string;
   source: string;
-}
-
-const FRED_KEY = process.env.NEXT_PUBLIC_FRED_API_KEY || "";
-
-// Yahoo Finance — server-side only
-async function fetchYahooQuotes(symbols: string[]): Promise<Record<string, PriceItem>> {
-  const results: Record<string, PriceItem> = {};
-  try {
-    const YahooFinance = (await import("yahoo-finance2")).default;
-    const yf = new YahooFinance({ suppressNotices: ["yahooSurvey"] });
-
-    for (const symbol of symbols) {
-      try {
-        const q = await yf.quote(symbol);
-        if (q && q.regularMarketPrice !== undefined) {
-          results[symbol] = {
-            label: "",
-            symbol,
-            price: q.regularMarketPrice,
-            change: q.regularMarketChange ?? null,
-            changePct: q.regularMarketChangePercent ?? null,
-            unit: "",
-            source: "Yahoo Finance",
-          };
-        }
-      } catch {
-        // Sembol bazlı hata — devam et
-      }
-    }
-  } catch {
-    // Yahoo modül hatası
-  }
-  return results;
-}
-
-// FRED — Robusta fallback
-async function fetchFredRobusta(): Promise<PriceItem | null> {
-  try {
-    const url = `https://api.stlouisfed.org/fred/series/observations?series_id=PCOFFROBUSDM&api_key=${FRED_KEY}&file_type=json&sort_order=desc&limit=2`;
-    const res = await fetch(url);
-    if (!res.ok) return null;
-    const data = await res.json();
-    const obs = data.observations;
-    if (!obs || obs.length < 2) return null;
-    const price = parseFloat(obs[0].value);
-    const prev = parseFloat(obs[1].value);
-    if (isNaN(price) || isNaN(prev)) return null;
-    const change = price - prev;
-    const pct = (change / prev) * 100;
-    return {
-      label: "Robusta Coffee",
-      symbol: "RC=F",
-      price: Math.round(price * 100) / 100,
-      change: Math.round(change * 100) / 100,
-      changePct: Math.round(pct * 100) / 100,
-      unit: "¢/lb",
-      source: "FRED (London ICE)",
-    };
-  } catch {
-    return null;
-  }
 }
 
 export async function GET() {
@@ -84,43 +25,44 @@ export async function GET() {
   // Arabica
   const kc = yahooData["KC=F"];
   prices.push(kc
-    ? { ...kc, label: "Arabica Coffee", unit: "¢/lb" }
+    ? { label: "Arabica Coffee", symbol: "KC=F", price: kc.price, change: kc.change, changePct: kc.changePct, unit: "¢/lb", source: "Yahoo Finance" }
     : { label: "Arabica Coffee", symbol: "KC=F", price: null, change: null, changePct: null, unit: "¢/lb", source: "Yahoo Finance" }
   );
 
   // Robusta (Yahoo öncelikli, FRED fallback)
   const rc = yahooData["RC=F"];
   prices.push(rc
-    ? { ...rc, label: "Robusta Coffee", unit: "¢/lb" }
+    ? { label: "Robusta Coffee", symbol: "RC=F", price: rc.price, change: rc.change, changePct: rc.changePct, unit: "¢/lb", source: "Yahoo Finance" }
     : fredRobusta
-      ?? { label: "Robusta Coffee", symbol: "RC=F", price: null, change: null, changePct: null, unit: "¢/lb", source: "FRED" }
+      ? { label: "Robusta Coffee", symbol: "RC=F", price: fredRobusta.price, change: fredRobusta.change, changePct: fredRobusta.changePct, unit: "¢/lb", source: "FRED (London ICE)" }
+      : { label: "Robusta Coffee", symbol: "RC=F", price: null, change: null, changePct: null, unit: "¢/lb", source: "FRED" }
   );
 
   // USD/TRY
   const usdtry = yahooData["USDTRY=X"];
   prices.push(usdtry
-    ? { ...usdtry, label: "USD/TRY", unit: "" }
+    ? { label: "USD/TRY", symbol: "USDTRY=X", price: usdtry.price, change: usdtry.change, changePct: usdtry.changePct, unit: "", source: "Yahoo Finance" }
     : { label: "USD/TRY", symbol: "USDTRY=X", price: null, change: null, changePct: null, unit: "", source: "Yahoo Finance" }
   );
 
   // EUR/TRY
   const eurtry = yahooData["EURTRY=X"];
   prices.push(eurtry
-    ? { ...eurtry, label: "EUR/TRY", unit: "" }
+    ? { label: "EUR/TRY", symbol: "EURTRY=X", price: eurtry.price, change: eurtry.change, changePct: eurtry.changePct, unit: "", source: "Yahoo Finance" }
     : { label: "EUR/TRY", symbol: "EURTRY=X", price: null, change: null, changePct: null, unit: "", source: "Yahoo Finance" }
   );
 
   // BRL/USD
   const brlusd = yahooData["BRLUSD=X"];
   prices.push(brlusd
-    ? { ...brlusd, label: "BRL/USD", unit: "" }
+    ? { label: "BRL/USD", symbol: "BRLUSD=X", price: brlusd.price, change: brlusd.change, changePct: brlusd.changePct, unit: "", source: "Yahoo Finance" }
     : { label: "BRL/USD", symbol: "BRLUSD=X", price: null, change: null, changePct: null, unit: "", source: "Yahoo Finance" }
   );
 
   // Sugar
   const sb = yahooData["SB=F"];
   prices.push(sb
-    ? { ...sb, label: "Sugar #11", unit: "¢/lb" }
+    ? { label: "Sugar #11", symbol: "SB=F", price: sb.price, change: sb.change, changePct: sb.changePct, unit: "¢/lb", source: "Yahoo Finance" }
     : { label: "Sugar #11", symbol: "SB=F", price: null, change: null, changePct: null, unit: "¢/lb", source: "Yahoo Finance" }
   );
 

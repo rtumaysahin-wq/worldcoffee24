@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
+import { fetchYahooQuotes } from "@/lib/api/yahoo";
+import { fetchFredRobusta } from "@/lib/api/fred";
 import Parser from "rss-parser";
 
 export const maxDuration = 60;
@@ -9,56 +11,29 @@ function isAuthorized(req: NextRequest) {
   return authHeader === `Bearer ${process.env.CRON_SECRET}`;
 }
 
-// ─── Fiyat çekme (direkt Yahoo + FRED, self-fetch yok) ───
-
-const FRED_KEY = process.env.NEXT_PUBLIC_FRED_API_KEY || "";
+// ─── Fiyat çekme ───
 
 async function fetchPricesDirect() {
   const prices: Record<string, { price: number; changePct: number }> = {};
 
-  try {
-    const YahooFinance = (await import("yahoo-finance2")).default;
-    const yf = new YahooFinance({ suppressNotices: ["yahooSurvey"] });
+  const yahooData = await fetchYahooQuotes(["KC=F", "RC=F", "USDTRY=X"]);
+  const symbolMap: Record<string, string> = { "KC=F": "Arabica Coffee", "RC=F": "Robusta Coffee", "USDTRY=X": "USD/TRY" };
 
-    for (const symbol of ["KC=F", "RC=F", "USDTRY=X"]) {
-      try {
-        const q = await yf.quote(symbol);
-        if (q?.regularMarketPrice !== undefined) {
-          const label = symbol === "KC=F" ? "Arabica Coffee"
-            : symbol === "RC=F" ? "Robusta Coffee"
-            : "USD/TRY";
-          prices[label] = {
-            price: q.regularMarketPrice,
-            changePct: q.regularMarketChangePercent ?? 0,
-          };
-        }
-      } catch { /* sembol hatası — devam */ }
-    }
-  } catch { /* yahoo modül hatası */ }
+  for (const [symbol, label] of Object.entries(symbolMap)) {
+    const q = yahooData[symbol];
+    if (q) prices[label] = { price: q.price, changePct: q.changePct ?? 0 };
+  }
 
   // Robusta FRED fallback
   if (!prices["Robusta Coffee"]) {
-    try {
-      const url = `https://api.stlouisfed.org/fred/series/observations?series_id=PCOFFROBUSDM&api_key=${FRED_KEY}&file_type=json&sort_order=desc&limit=2`;
-      const res = await fetch(url);
-      if (res.ok) {
-        const data = await res.json();
-        const obs = data.observations;
-        if (obs?.length >= 2) {
-          const price = parseFloat(obs[0].value);
-          const prev = parseFloat(obs[1].value);
-          if (!isNaN(price) && !isNaN(prev)) {
-            prices["Robusta Coffee"] = { price, changePct: ((price - prev) / prev) * 100 };
-          }
-        }
-      }
-    } catch { /* FRED hatası */ }
+    const fred = await fetchFredRobusta();
+    if (fred) prices["Robusta Coffee"] = { price: fred.price, changePct: fred.changePct };
   }
 
   return prices;
 }
 
-// ─── Haber çekme (direkt RSS, self-fetch yok) ───
+// ─── Haber çekme (direkt RSS) ───
 
 const FEEDS = [
   { name: "Daily Coffee News", url: "https://dailycoffeenews.com/feed/" },
@@ -73,7 +48,7 @@ function stripHtml(html: string): string {
 
 async function fetchNewsDirect() {
   const parser = new Parser();
-  const news: { title: string; summary: string; source: string; url: string }[] = [];
+  const news: { title: string; summary: string; source: string; url: string; date: string }[] = [];
 
   const results = await Promise.allSettled(
     FEEDS.map(async (feed) => {
@@ -96,13 +71,7 @@ async function fetchNewsDirect() {
     if (r.status === "fulfilled") news.push(...r.value);
   }
 
-  // Tarihe göre sırala, son 5
-  news.sort((a, b) => {
-    const da = "date" in a ? new Date((a as { date: string }).date).getTime() : 0;
-    const db = "date" in b ? new Date((b as { date: string }).date).getTime() : 0;
-    return db - da;
-  });
-
+  news.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   return news.slice(0, 5);
 }
 

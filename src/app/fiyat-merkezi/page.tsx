@@ -158,7 +158,7 @@ export default function FiyatMerkezi() {
             <section className="col-span-12 lg:col-span-8 bg-surface-container-lowest p-6 md:p-8 editorial-shadow">
               <PriceChart
                 title="Robusta Coffee Futures (RC1!)"
-                subtitle="London ICE / TradingView"
+                subtitle="London ICE / FRED"
                 symbol="robusta"
               />
             </section>
