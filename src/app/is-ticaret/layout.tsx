@@ -15,9 +15,11 @@ export const metadata: Metadata = {
     "Rainforest Alliance",
     "Fair Trade coffee",
   ],
+  alternates: { canonical: "/is-ticaret" },
   openGraph: {
     title: "İş & Ticaret — WorldCoffee24",
     description: "Kahve alım satım ilanları, tedarikçi dizini ve ticaret rehberi.",
+    url: "https://worldcoffee24.com/is-ticaret",
   },
 };
 

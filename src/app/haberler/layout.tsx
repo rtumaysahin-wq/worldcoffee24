@@ -13,9 +13,11 @@ export const metadata: Metadata = {
     "haftalık kahve özet",
     "coffee market news",
   ],
+  alternates: { canonical: "/haberler" },
   openGraph: {
     title: "Haberler — WorldCoffee24",
     description: "Kahve piyasasından güncel haberler ve analizler.",
+    url: "https://worldcoffee24.com/haberler",
   },
 };
 

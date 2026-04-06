@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Fiyat Merkezi — Canlı Kahve Futures & Kur Çevirici",
+  title: "Fiyat Merkezi — Canlı Kahve Futures",
   description:
     "ICE Arabica ve London Robusta futures fiyatları, aktif kontrat tablosu, USD/TRY kur çevirici, SCA premium rehberi. Canlı kahve emtia verileri.",
   keywords: [
@@ -13,9 +13,11 @@ export const metadata: Metadata = {
     "SCA premium",
     "kahve kontrat",
   ],
+  alternates: { canonical: "/fiyat-merkezi" },
   openGraph: {
     title: "Fiyat Merkezi — WorldCoffee24",
     description: "Canlı Arabica & Robusta futures, kur çevirici, kontrat tablosu.",
+    url: "https://worldcoffee24.com/fiyat-merkezi",
   },
 };
 

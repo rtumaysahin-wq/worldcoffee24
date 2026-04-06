@@ -13,9 +13,11 @@ export const metadata: Metadata = {
     "ENSO La Nina kahve",
     "kahve üretim bölgeleri",
   ],
+  alternates: { canonical: "/hava-radari" },
   openGraph: {
     title: "Hava Radarı — WorldCoffee24",
     description: "Kahve üretim bölgelerinin anlık hava durumu ve iklim verileri.",
+    url: "https://worldcoffee24.com/hava-radari",
   },
 };
 

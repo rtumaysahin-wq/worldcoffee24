@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Kahve Terimler Sözlüğü — A'dan Z'ye Sektör Terimleri",
+  title: "Kahve Terimler Sözlüğü",
   description:
     "Kahve ticareti ve üretiminde kullanılan 30+ terimin açıklaması. Arabica, Robusta, futures, hedging, cupping, SCA, diferansiyel ve daha fazlası.",
   keywords: [

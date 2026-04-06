@@ -14,9 +14,11 @@ export const metadata: Metadata = {
     "coffee education",
     "Q-grader",
   ],
+  alternates: { canonical: "/bilgi-merkezi" },
   openGraph: {
     title: "Bilgi Merkezi — WorldCoffee24",
     description: "Kahve sektörü eğitim kaynakları, teknik rehberler ve sözlük.",
+    url: "https://worldcoffee24.com/bilgi-merkezi",
   },
 };
 

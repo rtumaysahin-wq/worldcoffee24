@@ -13,9 +13,11 @@ export const metadata: Metadata = {
     "ICE certified stocks",
     "kahve arz talep",
   ],
+  alternates: { canonical: "/piyasa-faktorleri" },
   openGraph: {
     title: "Piyasa Faktörleri — WorldCoffee24",
     description: "İklim, üretim ve makro ekonomik faktörlerin kahve piyasasına etkisi.",
+    url: "https://worldcoffee24.com/piyasa-faktorleri",
   },
 };
 
