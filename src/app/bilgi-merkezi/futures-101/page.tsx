@@ -19,9 +19,34 @@ export const metadata: Metadata = {
   ],
 };
 
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: "Kahve Futures 101 — Vadeli İşlemler Rehberi",
+    description: "Kahve vadeli işlemleri nedir, nasıl çalışır? ICE borsasında Arabica ve Robusta futures kontratlarını anlamak için yeni başlayanlar rehberi.",
+    author: { "@type": "Organization", name: "WorldCoffee24" },
+    publisher: { "@type": "Organization", name: "WorldCoffee24", logo: { "@type": "ImageObject", url: "https://worldcoffee24.com/favicon.ico" } },
+    mainEntityOfPage: "https://worldcoffee24.com/bilgi-merkezi/futures-101",
+    inLanguage: "tr",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Ana Sayfa", item: "https://worldcoffee24.com" },
+      { "@type": "ListItem", position: 2, name: "Bilgi Merkezi", item: "https://worldcoffee24.com/bilgi-merkezi" },
+      { "@type": "ListItem", position: 3, name: "Futures 101", item: "https://worldcoffee24.com/bilgi-merkezi/futures-101" },
+    ],
+  },
+];
+
 export default function Futures101() {
   return (
     <>
+      {jsonLd.map((ld, i) => (
+        <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
+      ))}
       <Navbar />
       <Sidebar />
       <div className="pt-16 md:ml-64">

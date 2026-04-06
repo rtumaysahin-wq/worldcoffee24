@@ -56,9 +56,39 @@ const terms = [
   { term: "Washed Process", def: "Kahve işleme yöntemi. Kiraz soyulur, fermantasyonla müsilaj ayrıştırılır, suyla yıkanır. Temiz, asidik, terroir-odaklı fincan profili." },
 ];
 
+function buildFaqSchema() {
+  // İlk 10 terimi FAQ olarak ekle (Google max ~10 gösteriyor)
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: terms.slice(0, 10).map((t) => ({
+      "@type": "Question",
+      name: `${t.term} nedir?`,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: t.def,
+      },
+    })),
+  };
+}
+
+function buildBreadcrumb() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Ana Sayfa", item: "https://worldcoffee24.com" },
+      { "@type": "ListItem", position: 2, name: "Bilgi Merkezi", item: "https://worldcoffee24.com/bilgi-merkezi" },
+      { "@type": "ListItem", position: 3, name: "Terimler Sözlüğü", item: "https://worldcoffee24.com/bilgi-merkezi/terimler-sozlugu" },
+    ],
+  };
+}
+
 export default function TerimlerSozlugu() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(buildFaqSchema()) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(buildBreadcrumb()) }} />
       <Navbar />
       <Sidebar />
       <div className="pt-16 md:ml-64">
