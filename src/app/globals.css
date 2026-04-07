@@ -103,6 +103,17 @@ h1, h2, h3, h4, blockquote {
   font-size: 11px !important;
 }
 
+/* ===== TradingView Widget — attribution gizle ===== */
+.tradingview-widget-copyright,
+.tradingview-widget-container__widget + a,
+.tradingview-widget-container__widget ~ a,
+[class*="tradingview"] + a[href*="tradingview"],
+iframe + div[style*="tradingview"] {
+  display: none !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
 /* ===== Editör Kartı Gölgesi ===== */
 .editorial-shadow {
   box-shadow: 0 24px 40px -12px rgba(22, 29, 31, 0.05);
