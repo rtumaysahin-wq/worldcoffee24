@@ -14,10 +14,10 @@ export default function TickerBand() {
     script.async = true;
     script.textContent = JSON.stringify({
       symbols: [
-        { proName: "TVC:KC1!", title: "Arabica Coffee" },
-        { proName: "TVC:RC1!", title: "Robusta Coffee" },
-        { proName: "TVC:SB1!", title: "Sugar #11" },
-        { proName: "TVC:CC1!", title: "Cocoa" },
+        { proName: "KC1!", title: "Arabica Coffee" },
+        { proName: "RC1!", title: "Robusta Coffee" },
+        { proName: "SB1!", title: "Sugar #11" },
+        { proName: "CC1!", title: "Cocoa" },
         { proName: "FX_IDC:USDBRL", title: "USD/BRL" },
         { proName: "FX_IDC:USDVND", title: "USD/VND" },
         { proName: "FX_IDC:USDTRY", title: "USD/TRY" },

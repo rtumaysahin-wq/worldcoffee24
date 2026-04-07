@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface PriceChartProps {
   title: string;
@@ -9,9 +9,9 @@ interface PriceChartProps {
 }
 
 const symbolMap: Record<string, string> = {
-  arabica: "TVC:KC1!",
-  robusta: "TVC:RC1!",
-  sugar: "TVC:SB1!",
+  arabica: "KC1!",
+  robusta: "RC1!",
+  sugar: "SB1!",
 };
 
 export default function PriceChart({
@@ -20,11 +20,13 @@ export default function PriceChart({
   symbol = "arabica",
 }: PriceChartProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [ready, setReady] = useState(false);
   const tvSymbol = symbolMap[symbol] || symbol;
 
   useEffect(() => {
     if (!containerRef.current) return;
     containerRef.current.innerHTML = "";
+    setReady(false);
 
     const wrapper = document.createElement("div");
     wrapper.className = "tradingview-widget-container";
@@ -69,8 +71,11 @@ export default function PriceChart({
       bottomColor: "rgba(75, 44, 32, 0.02)",
     });
     wrapper.appendChild(script);
-
     containerRef.current.appendChild(wrapper);
+
+    // Wait for notification to auto-dismiss then reveal
+    const timer = setTimeout(() => setReady(true), 4000);
+    return () => clearTimeout(timer);
   }, [tvSymbol]);
 
   return (
@@ -83,7 +88,16 @@ export default function PriceChart({
           </p>
         )}
       </div>
-      <div ref={containerRef} className="h-[420px] w-full" />
+      <div className="relative h-[420px] w-full">
+        <div ref={containerRef} className="h-full w-full" />
+        {!ready && (
+          <div className="absolute inset-0 bg-surface-container-lowest flex items-center justify-center z-10">
+            <span className="material-symbols-outlined text-4xl text-outline-variant animate-spin">
+              progress_activity
+            </span>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

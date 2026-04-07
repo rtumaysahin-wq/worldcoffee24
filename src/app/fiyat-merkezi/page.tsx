@@ -39,8 +39,8 @@ export default function FiyatMerkezi() {
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <PriceCard label="Arabica" symbol="TVC:KC1!" />
-              <PriceCard label="Robusta" symbol="TVC:RC1!" />
+              <PriceCard label="Arabica" symbol="KC1!" />
+              <PriceCard label="Robusta" symbol="RC1!" />
               <PriceCard label="USD/BRL" symbol="FX_IDC:USDBRL" />
             </div>
           </header>

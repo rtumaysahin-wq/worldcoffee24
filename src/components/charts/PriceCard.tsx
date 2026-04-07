@@ -1,30 +1,26 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface PriceCardProps {
   label: string;
   symbol: string;
 }
 
-const symbolMap: Record<string, string> = {
-  "ICEUS:KC1!": "TVC:KC1!",
-  "ICEEUR:RC1!": "TVC:RC1!",
-};
-
 export default function PriceCard({ label, symbol }: PriceCardProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const tvSymbol = symbolMap[symbol] || symbol;
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     if (!containerRef.current) return;
     containerRef.current.innerHTML = "";
+    setReady(false);
 
     const script = document.createElement("script");
     script.src = "https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js";
     script.async = true;
     script.textContent = JSON.stringify({
-      symbol: tvSymbol,
+      symbol,
       width: "100%",
       isTransparent: true,
       colorTheme: "light",
@@ -32,13 +28,23 @@ export default function PriceCard({ label, symbol }: PriceCardProps) {
     });
 
     containerRef.current.appendChild(script);
-  }, [tvSymbol]);
+
+    const timer = setTimeout(() => setReady(true), 4000);
+    return () => clearTimeout(timer);
+  }, [symbol]);
 
   return (
-    <div className="bg-surface-container-lowest editorial-shadow border-l-4 border-primary min-w-[200px]">
+    <div className="bg-surface-container-lowest editorial-shadow border-l-4 border-primary min-w-[200px] relative overflow-hidden">
       <div className="tradingview-widget-container" ref={containerRef}>
         <div className="tradingview-widget-container__widget" />
       </div>
+      {!ready && (
+        <div className="absolute inset-0 bg-surface-container-lowest flex items-center justify-center z-10">
+          <span className="material-symbols-outlined text-xl text-outline-variant animate-spin">
+            progress_activity
+          </span>
+        </div>
+      )}
     </div>
   );
 }
