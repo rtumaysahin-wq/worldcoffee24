@@ -7,7 +7,6 @@ export default function TickerBand() {
 
   useEffect(() => {
     if (!containerRef.current) return;
-    // Clear previous widget
     containerRef.current.innerHTML = "";
 
     const script = document.createElement("script");
@@ -15,14 +14,14 @@ export default function TickerBand() {
     script.async = true;
     script.textContent = JSON.stringify({
       symbols: [
-        { proName: "ICEUS:KC1!", title: "Arabica Coffee" },
-        { proName: "ICEEUR:RC1!", title: "Robusta Coffee" },
-        { proName: "ICEUS:SB1!", title: "Sugar #11" },
-        { proName: "ICEUS:CC1!", title: "Cocoa" },
+        { proName: "TVC:KC1!", title: "Arabica Coffee" },
+        { proName: "TVC:RC1!", title: "Robusta Coffee" },
+        { proName: "TVC:SB1!", title: "Sugar #11" },
+        { proName: "TVC:CC1!", title: "Cocoa" },
         { proName: "FX_IDC:USDBRL", title: "USD/BRL" },
         { proName: "FX_IDC:USDVND", title: "USD/VND" },
-        { proName: "FX_IDC:USDCOP", title: "USD/COP" },
         { proName: "FX_IDC:USDTRY", title: "USD/TRY" },
+        { proName: "FX_IDC:EURUSD", title: "EUR/USD" },
       ],
       showSymbolLogo: true,
       isTransparent: true,

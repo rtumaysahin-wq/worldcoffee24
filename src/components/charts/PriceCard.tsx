@@ -7,8 +7,14 @@ interface PriceCardProps {
   symbol: string;
 }
 
+const symbolMap: Record<string, string> = {
+  "ICEUS:KC1!": "TVC:KC1!",
+  "ICEEUR:RC1!": "TVC:RC1!",
+};
+
 export default function PriceCard({ label, symbol }: PriceCardProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const tvSymbol = symbolMap[symbol] || symbol;
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -18,7 +24,7 @@ export default function PriceCard({ label, symbol }: PriceCardProps) {
     script.src = "https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js";
     script.async = true;
     script.textContent = JSON.stringify({
-      symbol,
+      symbol: tvSymbol,
       width: "100%",
       isTransparent: true,
       colorTheme: "light",
@@ -26,7 +32,7 @@ export default function PriceCard({ label, symbol }: PriceCardProps) {
     });
 
     containerRef.current.appendChild(script);
-  }, [symbol]);
+  }, [tvSymbol]);
 
   return (
     <div className="bg-surface-container-lowest editorial-shadow border-l-4 border-primary min-w-[200px]">
