@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
@@ -8,6 +8,7 @@ import TickerBand from "@/components/TickerBand";
 import Footer from "@/components/Footer";
 import PriceChart from "@/components/charts/PriceChart";
 import PriceCard from "@/components/charts/PriceCard";
+import CoffeeConverter from "@/components/CoffeeConverter";
 import { fetchAllPrices, type PriceItem } from "@/lib/api/commodities";
 import { useTranslation } from "@/lib/i18n/context";
 
@@ -18,7 +19,6 @@ const scaPremiums = [
 ];
 
 export default function FiyatMerkezi() {
-  const [usdAmount, setUsdAmount] = useState("100");
   const [prices, setPrices] = useState<PriceItem[]>([]);
   const [loading, setLoading] = useState(true);
   const { t } = useTranslation();
@@ -31,10 +31,8 @@ export default function FiyatMerkezi() {
   }, []);
 
   const getPrice = (label: string) => prices.find((p) => p.label === label);
-  const usdTry = getPrice("USD/TRY");
-  const brlUsd = getPrice("BRL/USD");
-  const rate = usdTry?.price || 0;
-  const tryResult = usdAmount && rate ? (parseFloat(usdAmount) * rate).toFixed(2) : "—";
+  const usdBrl = getPrice("USD/BRL");
+  const arabica = getPrice("Arabica Coffee");
 
   return (
     <>
@@ -57,17 +55,18 @@ export default function FiyatMerkezi() {
             </div>
             <div className="flex flex-wrap gap-3">
               <PriceCard
-                label="USD/TRY"
-                price={usdTry?.price ?? null}
-                change={usdTry?.change ?? null}
-                changePct={usdTry?.changePct ?? null}
+                label="Arabica KC1!"
+                price={arabica?.price ?? null}
+                change={arabica?.change ?? null}
+                changePct={arabica?.changePct ?? null}
+                unit="¢/lb"
                 loading={loading}
               />
               <PriceCard
-                label="BRL/USD"
-                price={brlUsd?.price ?? null}
-                change={brlUsd?.change ?? null}
-                changePct={brlUsd?.changePct ?? null}
+                label="USD/BRL"
+                price={usdBrl?.price ?? null}
+                change={usdBrl?.change ?? null}
+                changePct={usdBrl?.changePct ?? null}
                 loading={loading}
               />
             </div>
@@ -84,73 +83,12 @@ export default function FiyatMerkezi() {
               />
             </section>
 
-            {/* ═══ KUR ÇEVİRİCİ ═══ */}
+            {/* ═══ COFFEE CONVERTER ═══ */}
             <section
-              className="col-span-12 lg:col-span-4 p-6 md:p-8 flex flex-col justify-between"
+              className="col-span-12 lg:col-span-4 p-6 md:p-8"
               style={{ backgroundColor: "#3c2218" }}
             >
-              <div>
-                <h3 className="font-headline text-2xl font-bold mb-2" style={{ color: "#f5ebe7" }}>
-                  {t.prices.converterTitle}
-                </h3>
-                {rate > 0 && (
-                  <p className="text-sm mb-6" style={{ color: "#c9a898" }}>
-                    {t.prices.converterRate.replace("{rate}", rate.toFixed(4))}
-                    <span className="ml-1 text-xs" style={{ color: "#a8877a" }}>({t.prices.converterLive})</span>
-                  </p>
-                )}
-                <div className="space-y-4">
-                  <div>
-                    <label className="text-[11px] uppercase tracking-widest mb-1.5 block font-semibold" style={{ color: "#c9a898" }}>
-                      {t.prices.converterInput}
-                    </label>
-                    <div
-                      className="flex items-center p-3"
-                      style={{ backgroundColor: "#2a1610", borderBottom: "2px solid #5a3d30" }}
-                    >
-                      <span className="mr-2 text-lg" style={{ color: "#a8877a" }}>$</span>
-                      <input
-                        type="number"
-                        value={usdAmount}
-                        onChange={(e) => setUsdAmount(e.target.value)}
-                        className="bg-transparent border-none text-2xl font-headline w-full outline-none"
-                        style={{ color: "#f5ebe7" }}
-                        placeholder="100"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="flex justify-center">
-                    <button
-                      onClick={() => {
-                        if (rate > 0 && tryResult !== "—") {
-                          setUsdAmount((parseFloat(tryResult.replace(/,/g, '')) / rate).toFixed(2));
-                        }
-                      }}
-                      className="p-2 rounded-full transition-opacity hover:opacity-80"
-                      style={{ backgroundColor: "#5a3d30", color: "#c9a898" }}
-                    >
-                      <span className="material-symbols-outlined">swap_vert</span>
-                    </button>
-                  </div>
-
-                  <div>
-                    <label className="text-[11px] uppercase tracking-widest mb-1.5 block font-semibold" style={{ color: "#c9a898" }}>
-                      {t.prices.converterOutput}
-                    </label>
-                    <div
-                      className="flex items-center p-3"
-                      style={{ backgroundColor: "#2a1610", borderBottom: "2px solid #5a3d30", borderLeft: "3px solid #7fb3ab" }}
-                    >
-                      <span className="mr-2 text-lg" style={{ color: "#a8877a" }}>&#8378;</span>
-                      <span className="text-2xl font-headline" style={{ color: "#f5ebe7" }}>{tryResult}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <p className="text-xs italic leading-relaxed mt-6 pt-4" style={{ color: "#a8877a", borderTop: "1px solid #5a3d30" }}>
-                {t.prices.converterNote}
-              </p>
+              <CoffeeConverter />
             </section>
 
             {/* ═══ ROBUSTA GRAFİK ═══ */}
