@@ -53,7 +53,8 @@
       "Bash(npx tsc:*)",
       "Bash(wc -l /c/Users/rtuma/worldcoffee24/src/app/*/page.tsx /c/Users/rtuma/worldcoffee24/src/app/*/*/page.tsx)",
       "Bash(xargs wc:*)",
-      "Bash(taskkill //f //im node.exe)"
+      "Bash(taskkill //f //im node.exe)",
+      "Bash(grep -v '//')"
     ]
   }
 }

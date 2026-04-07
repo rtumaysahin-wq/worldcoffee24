@@ -1,14 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslation } from "@/lib/i18n/context";
+import { localeOptions } from "@/lib/i18n/context";
 
 export default function Navbar() {
   const { locale, t, setLocale } = useTranslation();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const langRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+
+  const currentOption = localeOptions.find((o) => o.code === locale)!;
 
   const navLinks = [
     { href: "/", label: t.nav.home },
@@ -19,7 +24,15 @@ export default function Navbar() {
     { href: "/haberler", label: t.nav.news },
   ];
 
-  const toggleLang = () => setLocale(locale === "tr" ? "en" : "tr");
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (langRef.current && !langRef.current.contains(e.target as Node)) {
+        setLangOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-[#f4fafe]/90 backdrop-blur-md shadow-sm border-b border-outline-variant/10">
@@ -27,7 +40,6 @@ export default function Navbar() {
 
         {/* Sol: Logo + Nav Linkleri */}
         <div className="flex items-center gap-10">
-          {/* Logo */}
           <Link href="/" className="flex items-center gap-2 cursor-pointer">
             <span className="material-symbols-outlined text-primary text-3xl">coffee</span>
             <span className="font-headline text-primary font-bold text-lg leading-tight">
@@ -35,7 +47,6 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* Desktop Nav Linkleri */}
           <div className="hidden md:flex gap-7 h-full items-center">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
@@ -56,9 +67,8 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Sağ: Arama, butonlar */}
+        {/* Sag: Arama, dil, mobil */}
         <div className="flex items-center gap-3 md:gap-4">
-          {/* Arama kutusu - sadece geniş ekran */}
           <a href="/bilgi-merkezi/terimler-sozlugu" className="relative hidden lg:block">
             <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-xl">
               search
@@ -68,15 +78,43 @@ export default function Navbar() {
             </div>
           </a>
 
-          {/* Dil Değiştirme */}
-          <button
-            onClick={toggleLang}
-            className="text-xs font-bold text-primary-container border border-outline-variant/50 px-3 py-1.5 hover:bg-surface-container transition-colors rounded"
-          >
-            {locale === "tr" ? "EN" : "TR"}
-          </button>
+          {/* Dil Secici Dropdown */}
+          <div className="relative" ref={langRef}>
+            <button
+              onClick={() => setLangOpen(!langOpen)}
+              className="flex items-center gap-1.5 text-xs font-bold text-primary-container border border-outline-variant/50 px-3 py-1.5 hover:bg-surface-container transition-colors rounded"
+            >
+              <span className="text-sm">{currentOption.flag}</span>
+              <span className="hidden sm:inline">{currentOption.label}</span>
+              <span className="material-symbols-outlined text-sm">
+                {langOpen ? "expand_less" : "expand_more"}
+              </span>
+            </button>
 
-          {/* Mobil Menü Butonu */}
+            {langOpen && (
+              <div className="absolute right-0 top-full mt-1 bg-white border border-outline-variant/20 rounded shadow-lg py-1 min-w-[160px] z-[60]">
+                {localeOptions.map((opt) => (
+                  <button
+                    key={opt.code}
+                    onClick={() => {
+                      setLocale(opt.code);
+                      setLangOpen(false);
+                    }}
+                    className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-colors hover:bg-surface-container-low ${
+                      locale === opt.code ? "bg-surface-container-low font-bold text-primary" : "text-on-surface"
+                    }`}
+                  >
+                    <span className="text-base">{opt.flag}</span>
+                    <span>{opt.label}</span>
+                    {locale === opt.code && (
+                      <span className="material-symbols-outlined text-sm text-primary ml-auto">check</span>
+                    )}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className="material-symbols-outlined text-primary-container md:hidden p-2"
@@ -86,7 +124,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobil Menü */}
+      {/* Mobil Menu */}
       {mobileOpen && (
         <div className="md:hidden bg-surface border-t border-outline-variant/10 px-4 py-3">
           {navLinks.map((link) => {

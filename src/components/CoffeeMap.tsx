@@ -16,13 +16,13 @@ interface RegionWeather {
 
 interface MarkerData {
   name: string;
-  country: { tr: string; en: string };
+  country: Record<string, string>;
   flag: string;
   lat: number;
   lng: number;
   type: string;
-  harvest: { tr: string; en: string };
-  priceNote: { tr: string; en: string };
+  harvest: Record<string, string>;
+  priceNote: Record<string, string>;
 }
 
 const regions: MarkerData[] = [
@@ -194,7 +194,7 @@ export default function CoffeeMap() {
             <Popup maxWidth={280} minWidth={220}>
               <div style={{ fontFamily: "Inter, sans-serif", lineHeight: 1.5 }}>
                 <div style={{ fontSize: 16, fontWeight: 700, marginBottom: 4, color: "#32170d" }}>
-                  {region.flag} {region.name}, {region.country[locale]}
+                  {region.flag} {region.name}, {region.country[locale] || region.country.en}
                 </div>
                 <div style={{ fontSize: 11, color: "#5f5e58", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8 }}>
                   {region.type}
@@ -212,10 +212,10 @@ export default function CoffeeMap() {
                 )}
 
                 <div style={{ fontSize: 12, marginBottom: 4 }}>
-                  <strong style={{ color: "#32170d" }}>{harvestLabel}</strong> {region.harvest[locale]}
+                  <strong style={{ color: "#32170d" }}>{harvestLabel}</strong> {region.harvest[locale] || region.harvest.en}
                 </div>
                 <div style={{ fontSize: 11, color: "#5f5e58", fontStyle: "italic", marginTop: 4, borderTop: "1px solid #e5e2da", paddingTop: 6 }}>
-                  📈 {region.priceNote[locale]}
+                  📈 {region.priceNote[locale] || region.priceNote.en}
                 </div>
               </div>
             </Popup>
