@@ -147,16 +147,6 @@ export default function Home() {
           {/* ═══ GRAFİK + HAVA DURUMU ═══ */}
           <section className="grid grid-cols-12 gap-4 md:gap-8 items-start">
             <div className="col-span-12 lg:col-span-8 bg-surface-container-lowest p-6 md:p-8 editorial-shadow">
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
-                <div>
-                  <h3 className="font-headline text-2xl md:text-3xl text-primary">
-                    KC1! Arabica Futures
-                  </h3>
-                  <p className="text-xs text-secondary font-label uppercase tracking-widest mt-1">
-                    {t.home.chartSubtitle}
-                  </p>
-                </div>
-              </div>
               <PriceChart title="KC1! Arabica Futures" subtitle={t.home.chartSubtitle} />
             </div>
 

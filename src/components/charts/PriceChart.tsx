@@ -9,9 +9,9 @@ interface PriceChartProps {
 }
 
 const symbolMap: Record<string, string> = {
-  arabica: "KC1!",
-  robusta: "RC1!",
-  sugar: "SB1!",
+  arabica: "ICEUS:KC1!",
+  robusta: "ICEEUR:RC1!",
+  sugar: "ICEUS:SB1!",
 };
 
 export default function PriceChart({
@@ -40,41 +40,31 @@ export default function PriceChart({
     wrapper.appendChild(widgetDiv);
 
     const script = document.createElement("script");
-    script.src = "https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js";
+    script.src = "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
     script.async = true;
     script.textContent = JSON.stringify({
-      symbols: [[tvSymbol, tvSymbol]],
-      chartOnly: false,
-      width: "100%",
-      height: "100%",
-      locale: "en",
-      colorTheme: "light",
       autosize: true,
-      showVolume: false,
-      showMA: false,
-      hideDateRanges: false,
-      hideMarketStatus: false,
-      hideSymbolLogo: false,
-      scalePosition: "right",
-      scaleMode: "Normal",
-      fontFamily: "Inter, sans-serif",
-      fontSize: "10",
-      noTimeScale: false,
-      valuesTracking: "1",
-      changeMode: "price-and-percent",
-      chartType: "area",
-      lineWidth: 2,
-      lineType: 0,
-      dateRanges: ["1d|1", "1m|30", "3m|60", "12m|1D", "60m|1W", "all|1M"],
-      lineColor: "rgba(75, 44, 32, 1)",
-      topColor: "rgba(75, 44, 32, 0.3)",
-      bottomColor: "rgba(75, 44, 32, 0.02)",
+      symbol: tvSymbol,
+      interval: "D",
+      timezone: "Etc/UTC",
+      theme: "light",
+      style: "1",
+      locale: "en",
+      allow_symbol_change: false,
+      hide_top_toolbar: false,
+      hide_legend: false,
+      save_image: false,
+      calendar: false,
+      hide_volume: true,
+      support_host: "https://www.tradingview.com",
+      backgroundColor: "rgba(255, 255, 255, 1)",
+      gridColor: "rgba(213, 195, 189, 0.15)",
     });
     wrapper.appendChild(script);
     containerRef.current.appendChild(wrapper);
 
-    // Wait for notification to auto-dismiss then reveal
-    const timer = setTimeout(() => setReady(true), 4000);
+    // Overlay hides the TradingView notification popup during load
+    const timer = setTimeout(() => setReady(true), 5000);
     return () => clearTimeout(timer);
   }, [tvSymbol]);
 
@@ -88,13 +78,14 @@ export default function PriceChart({
           </p>
         )}
       </div>
-      <div className="relative h-[420px] w-full">
+      <div className="relative h-[400px] w-full overflow-hidden">
         <div ref={containerRef} className="h-full w-full" />
         {!ready && (
-          <div className="absolute inset-0 bg-surface-container-lowest flex items-center justify-center z-10">
-            <span className="material-symbols-outlined text-4xl text-outline-variant animate-spin">
+          <div className="absolute inset-0 bg-white flex flex-col items-center justify-center z-10">
+            <span className="material-symbols-outlined text-4xl text-outline-variant animate-spin mb-3">
               progress_activity
             </span>
+            <p className="text-xs text-secondary">Loading chart...</p>
           </div>
         )}
       </div>

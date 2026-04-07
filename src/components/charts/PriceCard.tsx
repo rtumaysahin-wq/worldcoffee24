@@ -29,17 +29,17 @@ export default function PriceCard({ label, symbol }: PriceCardProps) {
 
     containerRef.current.appendChild(script);
 
-    const timer = setTimeout(() => setReady(true), 4000);
+    const timer = setTimeout(() => setReady(true), 5000);
     return () => clearTimeout(timer);
   }, [symbol]);
 
   return (
-    <div className="bg-surface-container-lowest editorial-shadow border-l-4 border-primary min-w-[200px] relative overflow-hidden">
+    <div className="bg-surface-container-lowest editorial-shadow border-l-4 border-primary min-w-[200px] relative overflow-hidden min-h-[80px]">
       <div className="tradingview-widget-container" ref={containerRef}>
         <div className="tradingview-widget-container__widget" />
       </div>
       {!ready && (
-        <div className="absolute inset-0 bg-surface-container-lowest flex items-center justify-center z-10">
+        <div className="absolute inset-0 bg-white flex items-center justify-center z-10">
           <span className="material-symbols-outlined text-xl text-outline-variant animate-spin">
             progress_activity
           </span>
