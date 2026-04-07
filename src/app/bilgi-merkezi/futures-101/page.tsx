@@ -1,47 +1,36 @@
-import type { Metadata } from "next";
+"use client";
+
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-
-export const metadata: Metadata = {
-  title: "Kahve Futures 101 — Vadeli İşlemler Rehberi",
-  description:
-    "Kahve vadeli işlemleri nedir, nasıl çalışır? ICE borsasında Arabica ve Robusta futures kontratlarını anlamak için yeni başlayanlar rehberi.",
-  keywords: [
-    "kahve futures nedir",
-    "vadeli işlem nedir",
-    "ICE kahve borsası",
-    "arabica futures",
-    "KC kontrat",
-    "emtia yatırımı",
-    "coffee futures 101",
-  ],
-};
+import { useTranslation } from "@/lib/i18n/context";
 
 const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: "Kahve Futures 101 — Vadeli İşlemler Rehberi",
-    description: "Kahve vadeli işlemleri nedir, nasıl çalışır? ICE borsasında Arabica ve Robusta futures kontratlarını anlamak için yeni başlayanlar rehberi.",
+    headline: "Coffee Futures 101 — A Beginner's Guide to Futures Trading",
+    description: "What are coffee futures and how do they work? A beginner's guide to understanding Arabica and Robusta futures contracts on the ICE exchange.",
     author: { "@type": "Organization", name: "WorldCoffee24" },
     publisher: { "@type": "Organization", name: "WorldCoffee24", logo: { "@type": "ImageObject", url: "https://worldcoffee24.com/favicon.ico" } },
     mainEntityOfPage: "https://worldcoffee24.com/bilgi-merkezi/futures-101",
-    inLanguage: "tr",
+    inLanguage: "en",
   },
   {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Ana Sayfa", item: "https://worldcoffee24.com" },
-      { "@type": "ListItem", position: 2, name: "Bilgi Merkezi", item: "https://worldcoffee24.com/bilgi-merkezi" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://worldcoffee24.com" },
+      { "@type": "ListItem", position: 2, name: "Knowledge Center", item: "https://worldcoffee24.com/bilgi-merkezi" },
       { "@type": "ListItem", position: 3, name: "Futures 101", item: "https://worldcoffee24.com/bilgi-merkezi/futures-101" },
     ],
   },
 ];
 
 export default function Futures101() {
+  const { t } = useTranslation();
+
   return (
     <>
       {jsonLd.map((ld, i) => (
@@ -56,76 +45,76 @@ export default function Futures101() {
             className="text-xs font-label uppercase tracking-widest text-secondary hover:text-primary mb-6 inline-flex items-center gap-1"
           >
             <span className="material-symbols-outlined text-sm">arrow_back</span>
-            Bilgi Merkezi
+            {t.learn.headerLabel}
           </Link>
 
           <span className="bg-tertiary text-on-tertiary-fixed font-bold text-[10px] px-3 py-1 uppercase tracking-widest mb-4 inline-block">
-            Özel Seri
+            {t.learn.futuresBadge}
           </span>
 
           <h1 className="font-headline text-4xl md:text-5xl font-bold text-primary leading-tight mb-6">
-            Kahve Futures 101: Vadeli İşlemler Rehberi
+            Coffee Futures 101: A Beginner&apos;s Guide to Futures Trading
           </h1>
 
           <p className="text-lg text-secondary leading-relaxed mb-10">
-            Kahve dünyasının en önemli fiyat belirleme mekanizması olan vadeli işlem (futures) kontratlarını
-            anlamak, ister üretici ister trader ister sektörde çalışan biri olun, büyük avantaj sağlar.
+            Understanding futures contracts — the most important price-setting mechanism in the coffee world —
+            provides a significant advantage whether you are a producer, trader, or industry professional.
           </p>
 
           <section className="mb-12">
             <h2 className="font-headline text-3xl font-bold text-primary mb-4">
-              Futures Kontratı Nedir?
+              What Is a Futures Contract?
             </h2>
             <p className="text-base text-on-surface leading-relaxed mb-4">
-              Futures (vadeli işlem) kontratı, belirli bir emtianın (bu durumda kahve) önceden belirlenmiş bir fiyattan,
-              belirli bir tarihte teslim edilmesini içeren standartlaştırılmış bir sözleşmedir. Bu kontratlar borsalarda
-              işlem görür ve hem üreticilere hem de alıcılara fiyat riskinden korunma (hedging) imkanı sunar.
+              A futures contract is a standardized agreement to deliver a specific commodity (in this case, coffee)
+              at a predetermined price on a specified date. These contracts are traded on exchanges and offer both
+              producers and buyers a way to hedge against price risk.
             </p>
             <p className="text-base text-on-surface leading-relaxed mb-4">
-              Örneğin, bir Brezilyalı kahve çiftçisi hasat döneminden önce fiyatların düşeceğinden endişe ediyorsa,
-              bugünün fiyatından bir futures kontratı satarak fiyatını sabitleyebilir. Aynı şekilde, bir kavurucu firma
-              maliyetlerini önceden bilmek istiyorsa futures kontratı alarak tedarik fiyatını garanti altına alır.
+              For example, if a Brazilian coffee farmer is worried that prices will fall before the harvest season,
+              they can lock in today&apos;s price by selling a futures contract. Similarly, a roasting company that
+              wants to know its costs in advance can buy a futures contract to secure its supply price.
             </p>
 
             <div className="bg-surface-container-low p-6 md:p-8 my-6 border-l-4 border-primary">
-              <h4 className="font-headline text-lg font-bold mb-2">Basit Örnek</h4>
+              <h4 className="font-headline text-lg font-bold mb-2">Simple Example</h4>
               <p className="text-sm text-secondary leading-relaxed">
-                Bir kavurucu firma 6 ay sonra 100 ton kahveye ihtiyaç duyuyor. Bugünün fiyatı 300 cent/lb.
-                Firma bu fiyattan futures kontratı alıyor. 6 ay sonra fiyat 350 cent/lb&apos;ye çıksa bile,
-                firma kahvesini 300 cent/lb&apos;den alır. Böylece 50 cent/lb tasarruf etmiş olur.
+                A roasting company needs 100 tons of coffee in 6 months. Today&apos;s price is 300 cents/lb.
+                The company buys a futures contract at this price. Even if the price rises to 350 cents/lb
+                in 6 months, the company still gets its coffee at 300 cents/lb — saving 50 cents/lb.
               </p>
             </div>
           </section>
 
           <section className="mb-12">
             <h2 className="font-headline text-3xl font-bold text-primary mb-4">
-              Kahve Borsaları
+              Coffee Exchanges
             </h2>
             <p className="text-base text-on-surface leading-relaxed mb-6">
-              Dünya üzerinde kahve futures kontratlarının işlem gördüğü iki ana borsa vardır:
+              There are two major exchanges in the world where coffee futures contracts are traded:
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div className="bg-surface-container-lowest p-6 editorial-shadow border-l-4 border-primary">
                 <h3 className="font-headline text-xl font-bold mb-2">ICE New York (ICEUS)</h3>
                 <p className="text-[10px] font-label uppercase tracking-widest text-secondary mb-3">
-                  Sembol: KC &bull; Birim: US cent/lb
+                  Symbol: KC &bull; Unit: US cent/lb
                 </p>
                 <p className="text-sm text-secondary leading-relaxed">
-                  Arabica kahve için dünya referans borsası. &ldquo;C Kontratı&rdquo; olarak bilinir.
-                  Kontrat büyüklüğü 37.500 libre (yaklaşık 17 ton). Kolombiya, Brezilya, Guatemala,
-                  Kosta Rika gibi ülkelerin Arabica kahveleri işlem görür.
+                  The world&apos;s benchmark exchange for Arabica coffee. Known as the &ldquo;C Contract.&rdquo;
+                  Contract size is 37,500 pounds (approximately 17 metric tons). Arabica coffees from
+                  Colombia, Brazil, Guatemala, Costa Rica, and other origins are traded here.
                 </p>
               </div>
               <div className="bg-surface-container-lowest p-6 editorial-shadow border-l-4 border-primary-container">
                 <h3 className="font-headline text-xl font-bold mb-2">ICE London (ICEEUR)</h3>
                 <p className="text-[10px] font-label uppercase tracking-widest text-secondary mb-3">
-                  Sembol: RC &bull; Birim: USD/ton
+                  Symbol: RC &bull; Unit: USD/ton
                 </p>
                 <p className="text-sm text-secondary leading-relaxed">
-                  Robusta kahve için referans borsa. Kontrat büyüklüğü 10 ton. Vietnam, Endonezya,
-                  Uganda gibi ülkelerin Robusta kahveleri işlem görür. Instant kahve endüstrisinin
-                  temel hammaddesi Robusta&apos;dır.
+                  The benchmark exchange for Robusta coffee. Contract size is 10 metric tons. Robusta
+                  coffees from Vietnam, Indonesia, Uganda, and other origins are traded here.
+                  Robusta is the primary raw material for the instant coffee industry.
                 </p>
               </div>
             </div>
@@ -133,15 +122,15 @@ export default function Futures101() {
 
           <section className="mb-12">
             <h2 className="font-headline text-3xl font-bold text-primary mb-4">
-              Fiyatı Etkileyen Faktörler
+              Factors That Influence Price
             </h2>
             <div className="space-y-4">
               {[
-                { icon: "thermostat", title: "İklim ve Hava Koşulları", desc: "Don, kuraklık, aşırı yağış gibi hava olayları üretimi doğrudan etkiler. Brezilya'da bir don olayı küresel fiyatları %30-50 yukarı taşıyabilir." },
-                { icon: "currency_exchange", title: "Döviz Kurları", desc: "Brezilya Real'inin dolara karşı değer kaybetmesi, Brezilyalı üreticileri daha fazla ihracata teşvik eder ve arz artışı fiyatları düşürebilir." },
-                { icon: "inventory_2", title: "Stok Seviyeleri", desc: "ICE sertifikalı stokların azalması arz sıkıntısı sinyali verir. 2024-2026 döneminde stoklar tarihi düşük seviyelere indi." },
-                { icon: "bar_chart", title: "Spekülatif Pozisyonlar", desc: "COT (Commitment of Traders) raporunda spekülatörlerin net uzun veya kısa pozisyonları fiyat yönünü gösterebilir." },
-                { icon: "local_shipping", title: "Lojistik ve Navlun", desc: "Konteyner maliyetleri, liman tıkanıklıkları ve nakliye süresi üretim ülkelerinden tüketim merkezlerine kahve akışını etkiler." },
+                { icon: "thermostat", title: "Climate & Weather", desc: "Weather events such as frost, drought, and excessive rainfall directly impact production. A frost event in Brazil can push global prices up by 30–50%." },
+                { icon: "currency_exchange", title: "Exchange Rates", desc: "A weakening Brazilian Real against the US dollar incentivizes Brazilian producers to export more, increasing supply and potentially lowering prices." },
+                { icon: "inventory_2", title: "Stock Levels", desc: "Declining ICE-certified stocks signal supply tightness. During 2024–2026, stocks fell to historically low levels." },
+                { icon: "bar_chart", title: "Speculative Positions", desc: "Net long or short positions held by speculators in the COT (Commitment of Traders) report can indicate price direction." },
+                { icon: "local_shipping", title: "Logistics & Freight", desc: "Container costs, port congestion, and shipping times affect the flow of coffee from producing countries to consuming markets." },
               ].map((item, i) => (
                 <div key={i} className="flex gap-4 p-4 bg-surface-container-lowest">
                   <span className="material-symbols-outlined text-2xl text-primary mt-1">{item.icon}</span>
@@ -156,26 +145,26 @@ export default function Futures101() {
 
           <section className="mb-12">
             <h2 className="font-headline text-3xl font-bold text-primary mb-4">
-              Önemli Terimler
+              Key Terms
             </h2>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm">
                 <thead>
                   <tr className="border-b border-outline-variant/30 text-[10px] font-label uppercase tracking-widest text-secondary">
-                    <th className="pb-3">Terim</th>
-                    <th className="pb-3">Açıklama</th>
+                    <th className="pb-3">Term</th>
+                    <th className="pb-3">Definition</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-outline-variant/10">
                   {[
-                    ["Long Pozisyon", "Kontrat satın almak — fiyatın yükseleceğine bahis"],
-                    ["Short Pozisyon", "Kontrat satmak — fiyatın düşeceğine bahis"],
-                    ["Margin", "Kontrat açmak için gereken teminat tutarı"],
-                    ["Settlement", "Kontrat vadesi geldiğinde fiziksel teslimat veya nakit uzlaşma"],
-                    ["Spread", "İki farklı vade arasındaki fiyat farkı"],
-                    ["Contango", "İleri vadeli kontrat fiyatının spot fiyattan yüksek olması"],
-                    ["Backwardation", "İleri vadeli kontrat fiyatının spot fiyattan düşük olması"],
-                    ["Open Interest", "Açık pozisyon sayısı — piyasa derinliğinin göstergesi"],
+                    ["Long Position", "Buying a contract — a bet that the price will rise"],
+                    ["Short Position", "Selling a contract — a bet that the price will fall"],
+                    ["Margin", "The collateral required to open a contract position"],
+                    ["Settlement", "Physical delivery or cash settlement when the contract expires"],
+                    ["Spread", "The price difference between two different contract expiry dates"],
+                    ["Contango", "When the forward contract price is higher than the spot price"],
+                    ["Backwardation", "When the forward contract price is lower than the spot price"],
+                    ["Open Interest", "The number of outstanding positions — an indicator of market depth"],
                   ].map(([term, desc], i) => (
                     <tr key={i}>
                       <td className="py-3 font-bold text-primary">{term}</td>
@@ -188,15 +177,15 @@ export default function Futures101() {
           </section>
 
           <div className="bg-primary-container text-white p-8 text-center">
-            <h3 className="font-headline text-2xl mb-3">Canlı Fiyatları Takip Edin</h3>
+            <h3 className="font-headline text-2xl mb-3">Track Live Prices</h3>
             <p className="text-sm text-white/70 mb-5">
-              Arabica ve Robusta futures fiyatlarını canlı olarak Fiyat Merkezi sayfamızdan izleyebilirsiniz.
+              Monitor Arabica and Robusta futures prices in real time on our Price Hub page.
             </p>
             <Link
               href="/fiyat-merkezi"
               className="inline-block bg-[#f4fafe] text-primary-container px-6 py-3 font-bold text-xs uppercase tracking-widest hover:bg-white transition-colors"
             >
-              Fiyat Merkezi'ne Git
+              Go to Price Hub
             </Link>
           </div>
         </article>

@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import TickerBand from "@/components/TickerBand";
 import Footer from "@/components/Footer";
+import { useTranslation } from "@/lib/i18n/context";
 
 interface NewsItem {
   title: string;
@@ -15,8 +16,6 @@ interface NewsItem {
   source: string;
 }
 
-const categories = ["Tümü", "Daily Coffee News", "Sprudge", "Perfect Daily Grind", "Google News"];
-
 const sourceColors: Record<string, string> = {
   "Daily Coffee News": "bg-primary",
   "Sprudge": "bg-tertiary",
@@ -24,19 +23,22 @@ const sourceColors: Record<string, string> = {
   "Google News": "bg-on-tertiary-container",
 };
 
-const newsSourceCards = [
-  { name: "Daily Coffee News", desc: "Specialty kahve sektöründen günlük haberler ve analizler.", url: "https://dailycoffeenews.com/" },
-  { name: "Perfect Daily Grind", desc: "Kahve üretiminden tüketimine, sektör profesyonelleri için içerikler.", url: "https://www.perfectdailygrind.com/" },
-  { name: "Sprudge", desc: "Küresel kahve kültürü, etkinlikler ve trendler.", url: "https://sprudge.com/" },
-  { name: "Global Coffee Report", desc: "Küresel kahve endüstrisi haberleri ve pazar analizi.", url: "http://www.gcrmag.com/" },
-  { name: "Roast Magazine", desc: "Kavurma endüstrisi, ekipman ve işletme yönetimi odaklı yayın.", url: "https://www.roastmagazine.com/" },
-];
-
 export default function Haberler() {
-  const [activeCategory, setActiveCategory] = useState("Tümü");
+  const { locale, t } = useTranslation();
+  const [activeCategory, setActiveCategory] = useState(t.news.all);
   const [news, setNews] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+
+  const categories = [t.news.all, "Daily Coffee News", "Sprudge", "Perfect Daily Grind", "Google News"];
+
+  const newsSourceCards = [
+    { name: "Daily Coffee News", desc: t.news.dailyCoffeeDesc, url: "https://dailycoffeenews.com/" },
+    { name: "Perfect Daily Grind", desc: t.news.pdgDesc, url: "https://www.perfectdailygrind.com/" },
+    { name: "Sprudge", desc: t.news.sprudgeDesc, url: "https://sprudge.com/" },
+    { name: "Global Coffee Report", desc: t.news.gcrDesc, url: "http://www.gcrmag.com/" },
+    { name: "Roast Magazine", desc: t.news.roastDesc, url: "https://www.roastmagazine.com/" },
+  ];
 
   useEffect(() => {
     fetch("/api/news")
@@ -59,7 +61,7 @@ export default function Haberler() {
   }, []);
 
   const filtered =
-    activeCategory === "Tümü"
+    activeCategory === t.news.all
       ? news
       : news.filter((n) => n.source === activeCategory);
 
@@ -76,19 +78,19 @@ export default function Haberler() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
               <div>
                 <span className="text-xs font-label uppercase tracking-[0.2em] text-secondary mb-3 block">
-                  Güncel Haberler
+                  {t.news.headerLabel}
                 </span>
                 <h1 className="font-headline text-4xl md:text-5xl font-light text-primary leading-none mb-3">
-                  Haberler &amp; Analiz
+                  {t.news.title}
                 </h1>
                 <p className="text-secondary text-sm md:text-base">
-                  Küresel kahve piyasasından canlı haber akışı — RSS kaynaklarından otomatik güncellenir.
+                  {t.news.description}
                 </p>
               </div>
               <div className="flex items-center gap-2 bg-surface-container-low px-5 py-3">
                 <span className="material-symbols-outlined text-sm text-secondary">rss_feed</span>
                 <span className="text-[10px] font-label uppercase tracking-widest text-secondary">
-                  Canlı RSS Akışı &bull; {news.length} haber
+                  {t.news.liveFeed.replace("{count}", String(news.length))}
                 </span>
               </div>
             </div>
@@ -117,7 +119,7 @@ export default function Haberler() {
             {/* ═══ SOL: CANLI HABERLER ═══ */}
             <section className="col-span-12 lg:col-span-8 space-y-4">
               <div className="flex items-center gap-4 mb-2">
-                <h2 className="font-headline text-2xl font-bold">Canlı Haber Akışı</h2>
+                <h2 className="font-headline text-2xl font-bold">{t.news.feedTitle}</h2>
                 <div className="h-px flex-1 bg-outline-variant/20" />
               </div>
 
@@ -135,12 +137,12 @@ export default function Haberler() {
               ) : error ? (
                 <div className="bg-surface-container-lowest p-10 text-center editorial-shadow">
                   <span className="material-symbols-outlined text-4xl text-error mb-3 block">error</span>
-                  <p className="text-sm text-error font-bold mb-1">Haberler yüklenemedi</p>
-                  <p className="text-xs text-secondary">Lütfen daha sonra tekrar deneyin.</p>
+                  <p className="text-sm text-error font-bold mb-1">{t.news.loadError}</p>
+                  <p className="text-xs text-secondary">{t.common.retry}</p>
                 </div>
               ) : filtered.length === 0 ? (
                 <div className="bg-surface-container-lowest p-10 text-center editorial-shadow">
-                  <p className="text-sm text-secondary">Bu kategoride haber bulunamadı.</p>
+                  <p className="text-sm text-secondary">{t.news.emptyCategory}</p>
                 </div>
               ) : (
                 filtered.map((item, i) => (
@@ -162,7 +164,7 @@ export default function Haberler() {
                         </span>
                         {item.date && (
                           <span className="text-[10px] text-outline">
-                            {new Date(item.date).toLocaleDateString("tr", {
+                            {new Date(item.date).toLocaleDateString(locale, {
                               day: "numeric",
                               month: "short",
                               year: "numeric",
@@ -187,10 +189,9 @@ export default function Haberler() {
             {/* ═══ SAĞ: KAYNAKLAR + BÜLTEN ═══ */}
             <aside className="col-span-12 lg:col-span-4 space-y-6">
 
-              {/* Haber Kaynakları */}
               <div>
                 <div className="flex items-center gap-4 mb-4">
-                  <h2 className="font-headline text-2xl font-bold">Kaynaklar</h2>
+                  <h2 className="font-headline text-2xl font-bold">{t.news.sourcesTitle}</h2>
                   <div className="h-px flex-1 bg-outline-variant/20" />
                 </div>
                 <div className="space-y-3">
@@ -212,14 +213,13 @@ export default function Haberler() {
                 </div>
               </div>
 
-              {/* Bülten CTA */}
               <div className="bg-primary-container text-white p-6 md:p-8">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="material-symbols-outlined text-white/70">mail</span>
-                  <h3 className="font-headline text-xl font-bold">Haftalık Bülten</h3>
+                  <h3 className="font-headline text-xl font-bold">{t.news.newsletterTitle}</h3>
                 </div>
                 <p className="text-xs text-white/70 mb-4">
-                  Her Pazartesi piyasa özeti ve editör seçimi haberler e-postanızda.
+                  {t.news.newsletterSubtitle}
                 </p>
                 <NewsletterForm variant="dark" />
               </div>

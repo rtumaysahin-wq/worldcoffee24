@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import PriceChart from "@/components/charts/PriceChart";
 import PriceCard from "@/components/charts/PriceCard";
 import { fetchAllPrices, type PriceItem } from "@/lib/api/commodities";
+import { useTranslation } from "@/lib/i18n/context";
 
 const scaPremiums = [
   { label: "SCA 86+ (Micro-lot)", range: "+80 / +120" },
@@ -20,6 +21,7 @@ export default function FiyatMerkezi() {
   const [usdAmount, setUsdAmount] = useState("100");
   const [prices, setPrices] = useState<PriceItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchAllPrices().then((data) => {
@@ -46,11 +48,11 @@ export default function FiyatMerkezi() {
           <header className="mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
             <div>
               <h1 className="font-headline text-4xl md:text-5xl font-bold text-on-surface leading-none mb-2">
-                Fiyat Merkezi
+                {t.prices.title}
               </h1>
               <p className="text-secondary text-sm md:text-base flex items-center gap-2">
                 <span className="material-symbols-outlined text-sm">update</span>
-                Canlı Piyasa Verisi
+                {t.prices.liveMarket}
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
@@ -76,8 +78,8 @@ export default function FiyatMerkezi() {
             {/* ═══ ARABİCA GRAFİK ═══ */}
             <section className="col-span-12 lg:col-span-8 bg-surface-container-lowest p-6 md:p-8 editorial-shadow">
               <PriceChart
-                title="ICE Arabica Futures (KC1!)"
-                subtitle="FRED / ICE New York"
+                title={t.prices.arabicaTitle}
+                subtitle={t.prices.arabicaSub}
                 symbol="arabica"
               />
             </section>
@@ -89,19 +91,18 @@ export default function FiyatMerkezi() {
             >
               <div>
                 <h3 className="font-headline text-2xl font-bold mb-2" style={{ color: "#f5ebe7" }}>
-                  Kur Çevirici
+                  {t.prices.converterTitle}
                 </h3>
                 {rate > 0 && (
                   <p className="text-sm mb-6" style={{ color: "#c9a898" }}>
-                    1 USD = {rate.toFixed(4)} TRY
-                    <span className="ml-1 text-xs" style={{ color: "#a8877a" }}>(canlı kur)</span>
+                    {t.prices.converterRate.replace("{rate}", rate.toFixed(4))}
+                    <span className="ml-1 text-xs" style={{ color: "#a8877a" }}>({t.prices.converterLive})</span>
                   </p>
                 )}
                 <div className="space-y-4">
-                  {/* Giriş */}
                   <div>
                     <label className="text-[11px] uppercase tracking-widest mb-1.5 block font-semibold" style={{ color: "#c9a898" }}>
-                      Giriş (USD)
+                      {t.prices.converterInput}
                     </label>
                     <div
                       className="flex items-center p-3"
@@ -119,7 +120,6 @@ export default function FiyatMerkezi() {
                     </div>
                   </div>
 
-                  {/* Swap butonu */}
                   <div className="flex justify-center">
                     <button
                       onClick={() => {
@@ -134,10 +134,9 @@ export default function FiyatMerkezi() {
                     </button>
                   </div>
 
-                  {/* Çıkış */}
                   <div>
                     <label className="text-[11px] uppercase tracking-widest mb-1.5 block font-semibold" style={{ color: "#c9a898" }}>
-                      Çıkış (TRY)
+                      {t.prices.converterOutput}
                     </label>
                     <div
                       className="flex items-center p-3"
@@ -150,15 +149,15 @@ export default function FiyatMerkezi() {
                 </div>
               </div>
               <p className="text-xs italic leading-relaxed mt-6 pt-4" style={{ color: "#a8877a", borderTop: "1px solid #5a3d30" }}>
-                Kur verileri ExchangeRate API&apos;den saatlik güncellenir.
+                {t.prices.converterNote}
               </p>
             </section>
 
             {/* ═══ ROBUSTA GRAFİK ═══ */}
             <section className="col-span-12 lg:col-span-8 bg-surface-container-lowest p-6 md:p-8 editorial-shadow">
               <PriceChart
-                title="Robusta Coffee Futures (RC1!)"
-                subtitle="London ICE / FRED"
+                title={t.prices.robustaTitle}
+                subtitle={t.prices.robustaSub}
                 symbol="robusta"
               />
             </section>
@@ -166,9 +165,9 @@ export default function FiyatMerkezi() {
             {/* ═══ SCA PREMİUM + FİZİKSEL REFERANS ═══ */}
             <section className="col-span-12 lg:col-span-4 space-y-5">
               <div className="bg-white p-6 md:p-8 shadow-sm">
-                <h3 className="font-headline text-2xl font-bold mb-3">SCA Premium Rehberi</h3>
+                <h3 className="font-headline text-2xl font-bold mb-3">{t.prices.scaTitle}</h3>
                 <p className="text-sm text-secondary mb-5 italic">
-                  NY &apos;C&apos; Piyasa fiyatlarına dayalı specialty derecelendirme için kıyaslama diferansiyelleri.
+                  {t.prices.scaDesc}
                 </p>
                 <div className="space-y-4">
                   {scaPremiums.map((item, i) => (
@@ -186,10 +185,10 @@ export default function FiyatMerkezi() {
               <div className="bg-[#dde3e7] p-6 md:p-8">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="material-symbols-outlined text-primary">info</span>
-                  <h4 className="font-headline text-lg font-bold">Fiziksel Referans</h4>
+                  <h4 className="font-headline text-lg font-bold">{t.prices.physicalTitle}</h4>
                 </div>
                 <p className="text-xs text-secondary leading-loose">
-                  Fiziksel fiyatlar, Vietnam Robusta arzındaki sıkılaşmayı yansıtıyor. G1 S18 primleri Londra üzerinde +600$ ile tarihi yüksek seviyelerde.
+                  {t.prices.physicalText}
                 </p>
               </div>
             </section>
@@ -199,54 +198,54 @@ export default function FiyatMerkezi() {
               <div className="md:w-1/2 h-48 md:h-72 flex-shrink-0 relative overflow-hidden">
                 <Image
                   src="https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=800&q=80"
-                  alt="Kahve çekirdekleri"
+                  alt="Coffee beans"
                   fill
                   className="object-cover"
                 />
               </div>
               <div className="md:w-1/2">
                 <span className="text-[10px] font-label uppercase tracking-[0.3em] text-secondary mb-4 block">
-                  Editöryal Analiz
+                  {t.prices.editorialLabel}
                 </span>
                 <h2 className="font-headline text-3xl md:text-4xl font-bold mb-5">
-                  El Niño Gecikmesi: 25/26 Arabica Hasat Döngüsüne Etkisi
+                  {t.prices.editorialTitle}
                 </h2>
                 <p className="text-on-surface-variant text-sm md:text-base leading-relaxed mb-7">
-                  Vadeli piyasalar kısa vadeli lojistiğe odaklanırken, Minas Gerais&rsquo;deki son sıcaklık anomalilerinin fizyolojik etkisi gelecek hasatta daha düşük elek boyutları ve cupping skorları olarak ortaya çıkabilir.
+                  {t.prices.editorialText}
                 </p>
                 <a href="/piyasa-faktorleri" className="inline-block px-8 py-4 text-xs font-label uppercase tracking-widest hover:translate-x-1 transition-transform" style={{ backgroundColor: "#32170d", color: "#ffffff" }}>
-                  Tam Analizi Oku
+                  {t.prices.editorialButton}
                 </a>
               </div>
             </section>
 
             {/* ═══ VERİ KAYNAKLARI ═══ */}
             <section className="col-span-12 bg-surface-container-low p-6 md:p-8">
-              <h3 className="font-headline text-2xl font-bold mb-6">Veri Kaynakları</h3>
+              <h3 className="font-headline text-2xl font-bold mb-6">{t.prices.sourcesTitle}</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 <a href="https://www.theice.com/products/15/Coffee-C-Futures" target="_blank" rel="noopener noreferrer" className="p-4 bg-surface-container-lowest hover:bg-white transition-colors editorial-shadow">
                   <p className="font-bold text-sm text-primary mb-1">ICE Coffee C Futures</p>
-                  <p className="text-xs text-secondary">Arabica vadeli işlemler (NY)</p>
+                  <p className="text-xs text-secondary">{t.prices.sourceICEArabica}</p>
                 </a>
                 <a href="https://www.theice.com/products/37089079/Robusta-Coffee-Futures" target="_blank" rel="noopener noreferrer" className="p-4 bg-surface-container-lowest hover:bg-white transition-colors editorial-shadow">
                   <p className="font-bold text-sm text-primary mb-1">ICE Robusta Futures</p>
-                  <p className="text-xs text-secondary">Robusta vadeli işlemler (London)</p>
+                  <p className="text-xs text-secondary">{t.prices.sourceICERobusta}</p>
                 </a>
                 <a href="https://www.barchart.com/futures/quotes/KC*0/futures-prices" target="_blank" rel="noopener noreferrer" className="p-4 bg-surface-container-lowest hover:bg-white transition-colors editorial-shadow">
                   <p className="font-bold text-sm text-primary mb-1">Barchart Arabica</p>
-                  <p className="text-xs text-secondary">KC futures fiyatlar ve grafikler</p>
+                  <p className="text-xs text-secondary">{t.prices.sourceBarchartA}</p>
                 </a>
                 <a href="https://www.barchart.com/futures/quotes/RM*0/futures-prices" target="_blank" rel="noopener noreferrer" className="p-4 bg-surface-container-lowest hover:bg-white transition-colors editorial-shadow">
                   <p className="font-bold text-sm text-primary mb-1">Barchart Robusta</p>
-                  <p className="text-xs text-secondary">RM futures fiyatlar ve grafikler</p>
+                  <p className="text-xs text-secondary">{t.prices.sourceBarchartR}</p>
                 </a>
                 <a href="https://www.cepea.esalq.usp.br/en/indicator/coffee.aspx" target="_blank" rel="noopener noreferrer" className="p-4 bg-surface-container-lowest hover:bg-white transition-colors editorial-shadow">
-                  <p className="font-bold text-sm text-primary mb-1">CEPEA Kahve</p>
-                  <p className="text-xs text-secondary">Brezilya kahve fiyat endeksi</p>
+                  <p className="font-bold text-sm text-primary mb-1">CEPEA</p>
+                  <p className="text-xs text-secondary">{t.prices.sourceCEPEA}</p>
                 </a>
                 <a href="http://www.ico.org/" target="_blank" rel="noopener noreferrer" className="p-4 bg-surface-container-lowest hover:bg-white transition-colors editorial-shadow">
                   <p className="font-bold text-sm text-primary mb-1">ICO</p>
-                  <p className="text-xs text-secondary">Uluslararası Kahve Örgütü</p>
+                  <p className="text-xs text-secondary">{t.prices.sourceICO}</p>
                 </a>
               </div>
             </section>

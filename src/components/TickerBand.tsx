@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { fetchAllPrices, type PriceItem } from "@/lib/api/commodities";
+import { useTranslation } from "@/lib/i18n/context";
 
 function TickerItem({ item }: { item: PriceItem }) {
   if (item.price === null) return null;
@@ -46,6 +47,7 @@ export default function TickerBand() {
   const [items, setItems] = useState<PriceItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchAllPrices().then((data) => {
@@ -65,7 +67,7 @@ export default function TickerBand() {
           <span className="material-symbols-outlined text-sm animate-spin">
             progress_activity
           </span>
-          Fiyatlar yükleniyor...
+          {t.ticker.loading}
         </div>
       </div>
     );
@@ -76,7 +78,7 @@ export default function TickerBand() {
       <div className="bg-surface-container-low border-b border-outline-variant/10 py-3 overflow-hidden flex-shrink-0">
         <div className="flex items-center justify-center gap-2 text-[11px] text-error">
           <span className="material-symbols-outlined text-sm">error</span>
-          Fiyat verisi yüklenemedi
+          {t.ticker.error}
         </div>
       </div>
     );

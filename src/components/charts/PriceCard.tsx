@@ -1,5 +1,7 @@
 "use client";
 
+import { useTranslation } from "@/lib/i18n/context";
+
 interface PriceCardProps {
   label: string;
   price: number | null;
@@ -19,6 +21,8 @@ export default function PriceCard({
   unit = "",
   loading = false,
 }: PriceCardProps) {
+  const { t } = useTranslation();
+
   if (loading) {
     return (
       <div className="bg-surface-container-lowest p-5 editorial-shadow border-l-4 border-primary animate-pulse">
@@ -37,7 +41,7 @@ export default function PriceCard({
         <p className="text-[10px] font-label uppercase tracking-widest text-secondary mb-2">
           {label}
         </p>
-        <p className="text-sm text-error">Veri yüklenemedi</p>
+        <p className="text-sm text-error">{t.common.error}</p>
       </div>
     );
   }
@@ -74,7 +78,7 @@ export default function PriceCard({
           {changePct.toFixed(2)}%)
         </div>
       ) : (
-        <p className="text-[10px] text-outline">Değişim verisi yok</p>
+        <p className="text-[10px] text-outline">{t.common.noChangeData}</p>
       )}
     </div>
   );

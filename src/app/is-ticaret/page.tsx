@@ -5,79 +5,65 @@ import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import TickerBand from "@/components/TickerBand";
 import Footer from "@/components/Footer";
-
-const sampleListings = [
-  {
-    type: "Satıcı",
-    origin: "Brezilya — Minas Gerais",
-    grade: "SCA 84 — Specialty",
-    process: "Washed",
-    quantity: "2 Konteyner (37.5 ton)",
-    price: "FOB Santos +45 c/lb",
-    contact: "Silva Exports Ltd.",
-    cert: ["Rainforest", "UTZ"],
-  },
-  {
-    type: "Alıcı",
-    origin: "Kolombiya — Huila",
-    grade: "SCA 86+ — Micro-lot",
-    process: "Natural / Honey",
-    quantity: "1 Konteyner (18.75 ton)",
-    price: "FOB +80 c/lb üzerine",
-    contact: "Nordic Roasters AB",
-    cert: ["Organic", "Fair Trade"],
-  },
-  {
-    type: "Satıcı",
-    origin: "Vietnam — Dak Lak",
-    grade: "G1 S18 — Robusta",
-    process: "Washed",
-    quantity: "5 Konteyner (93.75 ton)",
-    price: "London +600 $/ton",
-    contact: "Viet Harvest Co.",
-    cert: ["UTZ"],
-  },
-];
-
-const certifications = [
-  {
-    name: "Rainforest Alliance",
-    desc: "Çevre, sosyal ve ekonomik sürdürülebilirlik standartları. Çiçeklenme haritası ve ormansızlaşma izleme zorunluluğu.",
-    color: "bg-tertiary",
-  },
-  {
-    name: "Fair Trade",
-    desc: "Üreticilere minimum fiyat garantisi ve sosyal prim. Kooperatif yapısı zorunlu. Prim: +20 c/lb.",
-    color: "bg-primary",
-  },
-  {
-    name: "UTZ (RA ile birleşti)",
-    desc: "İzlenebilirlik ve iyi tarım uygulamaları odaklı. 2023'ten itibaren Rainforest Alliance ile birleştirildi.",
-    color: "bg-secondary",
-  },
-  {
-    name: "Organic (USDA/EU)",
-    desc: "Kimyasal gübre ve pestisit kullanımı yasak. 3 yıllık geçiş süreci. Prim: +30-50 c/lb.",
-    color: "bg-on-tertiary-container",
-  },
-];
-
-const incoterms = [
-  { term: "FOB", full: "Free on Board", desc: "Satıcı malı gemiye yükler. Navlun ve sigorta alıcıya aittir." },
-  { term: "CIF", full: "Cost, Insurance & Freight", desc: "Satıcı navlun ve sigorta dahil fiyat verir. Varış limanına kadar risk satıcıda." },
-  { term: "EXW", full: "Ex Works", desc: "Alıcı tüm taşıma ve riski üstlenir. En düşük satıcı sorumluluğu." },
-  { term: "FCA", full: "Free Carrier", desc: "Satıcı malı belirlenen yerde taşıyıcıya teslim eder." },
-];
-
-const suppliers = [
-  { name: "Silva Exports Ltd.", country: "Brezilya", type: "Arabica", volume: "50K+ çuval/yıl", contact: "info@silvaexports.com" },
-  { name: "Viet Harvest Co.", country: "Vietnam", type: "Robusta", volume: "120K+ çuval/yıl", contact: "trade@vietharvest.vn" },
-  { name: "Huila Direct", country: "Kolombiya", type: "Specialty", volume: "5K çuval/yıl", contact: "hello@huiladirect.co" },
-  { name: "Yirgacheffe Union", country: "Etiyopya", type: "Specialty", volume: "8K çuval/yıl", contact: "export@yirgaunion.et" },
-];
+import { useTranslation } from "@/lib/i18n/context";
 
 export default function IsTicaret() {
-  const [formType, setFormType] = useState<"alici" | "satici">("satici");
+  const [formType, setFormType] = useState<"seller" | "buyer">("seller");
+  const { t } = useTranslation();
+
+  const sampleListings = [
+    {
+      type: t.trade.seller,
+      origin: "Brezilya — Minas Gerais",
+      grade: "SCA 84 — Specialty",
+      process: "Washed",
+      quantity: "2 Containers (37.5 ton)",
+      price: "FOB Santos +45 c/lb",
+      contact: "Silva Exports Ltd.",
+      cert: ["Rainforest", "UTZ"],
+    },
+    {
+      type: t.trade.buyer,
+      origin: "Kolombiya — Huila",
+      grade: "SCA 86+ — Micro-lot",
+      process: "Natural / Honey",
+      quantity: "1 Container (18.75 ton)",
+      price: "FOB +80 c/lb",
+      contact: "Nordic Roasters AB",
+      cert: ["Organic", "Fair Trade"],
+    },
+    {
+      type: t.trade.seller,
+      origin: "Vietnam — Dak Lak",
+      grade: "G1 S18 — Robusta",
+      process: "Washed",
+      quantity: "5 Containers (93.75 ton)",
+      price: "London +600 $/ton",
+      contact: "Viet Harvest Co.",
+      cert: ["UTZ"],
+    },
+  ];
+
+  const certifications = [
+    { name: "Rainforest Alliance", desc: t.trade.rainforestCertDesc, color: "#002321" },
+    { name: "Fair Trade", desc: t.trade.fairtradeCertDesc, color: "#32170d" },
+    { name: "UTZ (RA)", desc: t.trade.utzCertDesc, color: "#5f5e58" },
+    { name: "Organic (USDA/EU)", desc: t.trade.organicCertDesc, color: "#81a39e" },
+  ];
+
+  const incoterms = [
+    { term: "FOB", full: "Free on Board", desc: t.trade.fobDesc },
+    { term: "CIF", full: "Cost, Insurance & Freight", desc: t.trade.cifDesc },
+    { term: "EXW", full: "Ex Works", desc: t.trade.exwDesc },
+    { term: "FCA", full: "Free Carrier", desc: t.trade.fcaDesc },
+  ];
+
+  const suppliers = [
+    { name: "Silva Exports Ltd.", country: "Brazil", type: "Arabica", volume: "50K+ bags/yr", contact: "info@silvaexports.com" },
+    { name: "Viet Harvest Co.", country: "Vietnam", type: "Robusta", volume: "120K+ bags/yr", contact: "trade@vietharvest.vn" },
+    { name: "Huila Direct", country: "Colombia", type: "Specialty", volume: "5K bags/yr", contact: "hello@huiladirect.co" },
+    { name: "Yirgacheffe Union", country: "Ethiopia", type: "Specialty", volume: "8K bags/yr", contact: "export@yirgaunion.et" },
+  ];
 
   return (
     <>
@@ -90,13 +76,13 @@ export default function IsTicaret() {
           {/* ═══ HEADER ═══ */}
           <header className="mb-10">
             <span className="text-xs font-label uppercase tracking-[0.2em] text-secondary mb-3 block">
-              Ticaret Platformu
+              {t.trade.headerLabel}
             </span>
             <h1 className="font-headline text-4xl md:text-5xl font-light text-primary leading-none mb-3">
-              İş &amp; Ticaret
+              {t.trade.title}
             </h1>
             <p className="text-secondary text-sm md:text-base max-w-2xl">
-              Kahve alıcı ve satıcıları için ilan panosu, tedarikçi dizini, sertifika rehberi ve uluslararası ticaret koşulları.
+              {t.trade.description}
             </p>
           </header>
 
@@ -105,21 +91,20 @@ export default function IsTicaret() {
             {/* ═══ SOL: İLANLAR + İLAN FORMU ═══ */}
             <section className="col-span-12 lg:col-span-8 space-y-8">
 
-              {/* Aktif İlanlar */}
               <div>
                 <div className="flex items-center gap-4 mb-6">
-                  <h2 className="font-headline text-2xl font-bold">Aktif İlanlar</h2>
+                  <h2 className="font-headline text-2xl font-bold">{t.trade.activeListings}</h2>
                   <div className="h-px flex-1 bg-outline-variant/20" />
                   <span className="text-[10px] font-label uppercase tracking-widest text-secondary">
-                    {sampleListings.length} ilan
+                    {t.trade.listingCount.replace("{count}", String(sampleListings.length))}
                   </span>
                 </div>
 
                 <div className="space-y-4">
                   {sampleListings.map((listing, i) => (
-                    <div key={i} className={`bg-surface-container-lowest p-6 md:p-8 editorial-shadow border-l-4 ${listing.type === "Satıcı" ? "border-primary" : "border-tertiary"}`}>
+                    <div key={i} className={`bg-surface-container-lowest p-6 md:p-8 editorial-shadow border-l-4 ${listing.type === t.trade.seller ? "border-primary" : "border-tertiary"}`}>
                       <div className="flex flex-wrap items-center gap-3 mb-4">
-                        <span className={`px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest ${listing.type === "Satıcı" ? "bg-primary text-white" : "bg-tertiary text-on-tertiary-fixed"}`}>
+                        <span className={`px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest ${listing.type === t.trade.seller ? "bg-primary text-white" : "bg-tertiary text-on-tertiary-fixed"}`}>
                           {listing.type}
                         </span>
                         {listing.cert.map((c) => (
@@ -131,26 +116,26 @@ export default function IsTicaret() {
                       <h3 className="font-headline text-xl md:text-2xl mb-2">{listing.origin}</h3>
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
                         <div>
-                          <p className="text-[10px] font-label uppercase text-secondary mb-1">Derece</p>
+                          <p className="text-[10px] font-label uppercase text-secondary mb-1">{t.trade.grade}</p>
                           <p className="text-sm font-bold">{listing.grade}</p>
                         </div>
                         <div>
-                          <p className="text-[10px] font-label uppercase text-secondary mb-1">İşleme</p>
+                          <p className="text-[10px] font-label uppercase text-secondary mb-1">{t.trade.process}</p>
                           <p className="text-sm font-bold">{listing.process}</p>
                         </div>
                         <div>
-                          <p className="text-[10px] font-label uppercase text-secondary mb-1">Miktar</p>
+                          <p className="text-[10px] font-label uppercase text-secondary mb-1">{t.trade.quantity}</p>
                           <p className="text-sm font-bold">{listing.quantity}</p>
                         </div>
                         <div>
-                          <p className="text-[10px] font-label uppercase text-secondary mb-1">Fiyat</p>
+                          <p className="text-[10px] font-label uppercase text-secondary mb-1">{t.trade.price}</p>
                           <p className="text-sm font-bold text-primary">{listing.price}</p>
                         </div>
                       </div>
                       <div className="mt-4 pt-4 border-t border-outline-variant/15 flex justify-between items-center">
                         <span className="text-xs text-secondary">{listing.contact}</span>
-                        <a href={`mailto:${listing.contact.includes('@') ? listing.contact : 'info@worldcoffee24.com'}?subject=WC24 İlan: ${listing.origin}`} className="text-xs font-bold text-primary uppercase tracking-widest hover:underline">
-                          İletişime Geç
+                        <a href={`mailto:${listing.contact.includes('@') ? listing.contact : 'info@worldcoffee24.com'}`} className="text-xs font-bold text-primary uppercase tracking-widest hover:underline">
+                          {t.trade.contact}
                         </a>
                       </div>
                     </div>
@@ -160,64 +145,64 @@ export default function IsTicaret() {
 
               {/* İlan Formu */}
               <div className="bg-surface-container-low p-6 md:p-8">
-                <h3 className="font-headline text-2xl font-bold mb-6">İlan Ver</h3>
+                <h3 className="font-headline text-2xl font-bold mb-6">{t.trade.postListing}</h3>
                 <div className="flex gap-2 mb-6">
                   <button
-                    onClick={() => setFormType("satici")}
-                    className={`px-4 py-2 text-xs font-bold uppercase tracking-widest ${formType === "satici" ? "bg-primary text-white" : "bg-surface-container-high text-secondary"}`}
+                    onClick={() => setFormType("seller")}
+                    className={`px-4 py-2 text-xs font-bold uppercase tracking-widest ${formType === "seller" ? "bg-primary text-white" : "bg-surface-container-high text-secondary"}`}
                   >
-                    Satıcı
+                    {t.trade.seller}
                   </button>
                   <button
-                    onClick={() => setFormType("alici")}
-                    className={`px-4 py-2 text-xs font-bold uppercase tracking-widest ${formType === "alici" ? "bg-tertiary text-on-tertiary-fixed" : "bg-surface-container-high text-secondary"}`}
+                    onClick={() => setFormType("buyer")}
+                    className={`px-4 py-2 text-xs font-bold uppercase tracking-widest ${formType === "buyer" ? "bg-tertiary text-on-tertiary-fixed" : "bg-surface-container-high text-secondary"}`}
                   >
-                    Alıcı
+                    {t.trade.buyer}
                   </button>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="text-[10px] font-label uppercase tracking-widest text-secondary mb-1 block">Menşei / Bölge</label>
-                    <input className="w-full border border-outline-variant px-4 py-3 text-sm outline-none focus:ring-1 focus:ring-primary" placeholder="örn. Brezilya — Minas Gerais" />
+                    <label className="text-[10px] font-label uppercase tracking-widest text-secondary mb-1 block">{t.trade.origin}</label>
+                    <input className="w-full border border-outline-variant px-4 py-3 text-sm outline-none focus:ring-1 focus:ring-primary" placeholder={t.trade.originPlaceholder} />
                   </div>
                   <div>
-                    <label className="text-[10px] font-label uppercase tracking-widest text-secondary mb-1 block">Kahve Türü / Derece</label>
-                    <input className="w-full border border-outline-variant px-4 py-3 text-sm outline-none focus:ring-1 focus:ring-primary" placeholder="örn. SCA 84 Specialty Arabica" />
+                    <label className="text-[10px] font-label uppercase tracking-widest text-secondary mb-1 block">{t.trade.coffeeType}</label>
+                    <input className="w-full border border-outline-variant px-4 py-3 text-sm outline-none focus:ring-1 focus:ring-primary" placeholder={t.trade.typePlaceholder} />
                   </div>
                   <div>
-                    <label className="text-[10px] font-label uppercase tracking-widest text-secondary mb-1 block">Miktar</label>
-                    <input className="w-full border border-outline-variant px-4 py-3 text-sm outline-none focus:ring-1 focus:ring-primary" placeholder="örn. 2 Konteyner (37.5 ton)" />
+                    <label className="text-[10px] font-label uppercase tracking-widest text-secondary mb-1 block">{t.trade.quantity}</label>
+                    <input className="w-full border border-outline-variant px-4 py-3 text-sm outline-none focus:ring-1 focus:ring-primary" placeholder={t.trade.quantityPlaceholder} />
                   </div>
                   <div>
-                    <label className="text-[10px] font-label uppercase tracking-widest text-secondary mb-1 block">Fiyat / Koşullar</label>
-                    <input className="w-full border border-outline-variant px-4 py-3 text-sm outline-none focus:ring-1 focus:ring-primary" placeholder="örn. FOB Santos +45 c/lb" />
+                    <label className="text-[10px] font-label uppercase tracking-widest text-secondary mb-1 block">{t.trade.conditions}</label>
+                    <input className="w-full border border-outline-variant px-4 py-3 text-sm outline-none focus:ring-1 focus:ring-primary" placeholder={t.trade.pricePlaceholder} />
                   </div>
                   <div>
-                    <label className="text-[10px] font-label uppercase tracking-widest text-secondary mb-1 block">İletişim</label>
-                    <input className="w-full border border-outline-variant px-4 py-3 text-sm outline-none focus:ring-1 focus:ring-primary" placeholder="Firma adı veya e-posta" />
+                    <label className="text-[10px] font-label uppercase tracking-widest text-secondary mb-1 block">{t.trade.contactInfo}</label>
+                    <input className="w-full border border-outline-variant px-4 py-3 text-sm outline-none focus:ring-1 focus:ring-primary" placeholder={t.trade.contactPlaceholder} />
                   </div>
                   <div>
-                    <label className="text-[10px] font-label uppercase tracking-widest text-secondary mb-1 block">Sertifikalar</label>
-                    <input className="w-full border border-outline-variant px-4 py-3 text-sm outline-none focus:ring-1 focus:ring-primary" placeholder="örn. Rainforest, Organic" />
+                    <label className="text-[10px] font-label uppercase tracking-widest text-secondary mb-1 block">{t.trade.certificates}</label>
+                    <input className="w-full border border-outline-variant px-4 py-3 text-sm outline-none focus:ring-1 focus:ring-primary" placeholder={t.trade.certPlaceholder} />
                   </div>
                 </div>
-                <a href="mailto:info@worldcoffee24.com?subject=Yeni İlan Talebi" className="mt-6 inline-block px-8 py-3 text-xs font-bold uppercase tracking-widest transition-colors" style={{ backgroundColor: "#32170d", color: "#ffffff" }}>
-                  İlan Yayınla
+                <a href="mailto:info@worldcoffee24.com?subject=New Listing" className="mt-6 inline-block px-8 py-3 text-xs font-bold uppercase tracking-widest transition-colors" style={{ backgroundColor: "#32170d", color: "#ffffff" }}>
+                  {t.trade.publishButton}
                 </a>
-                <p className="text-xs text-secondary mt-2 italic">İlan talebiniz e-posta ile editör ekibimize iletilecektir.</p>
+                <p className="text-xs text-secondary mt-2 italic">{t.trade.publishNote}</p>
               </div>
 
               {/* Incoterms Rehberi */}
               <div className="bg-surface-container-lowest p-6 md:p-8 editorial-shadow">
-                <h3 className="font-headline text-2xl font-bold mb-2">Sözleşme &amp; Incoterms Rehberi</h3>
-                <p className="text-sm text-secondary mb-6">Uluslararası kahve ticaretinde en çok kullanılan teslimat koşulları.</p>
+                <h3 className="font-headline text-2xl font-bold mb-2">{t.trade.incotermsTitle}</h3>
+                <p className="text-sm text-secondary mb-6">{t.trade.incotermsDesc}</p>
                 <div className="overflow-x-auto">
                   <table className="w-full text-left">
                     <thead>
                       <tr className="text-[10px] font-label uppercase tracking-widest text-secondary border-b border-outline-variant/30">
-                        <th className="pb-4">Terim</th>
-                        <th className="pb-4">Tam Adı</th>
-                        <th className="pb-4">Açıklama</th>
+                        <th className="pb-4">{t.trade.termCol}</th>
+                        <th className="pb-4">{t.trade.fullName}</th>
+                        <th className="pb-4">{t.trade.descCol}</th>
                       </tr>
                     </thead>
                     <tbody className="text-sm divide-y divide-outline-variant/10">
@@ -237,15 +222,14 @@ export default function IsTicaret() {
             {/* ═══ SAĞ: SERTİFİKA REHBERİ + TEDARİKÇİ DİZİNİ ═══ */}
             <aside className="col-span-12 lg:col-span-4 space-y-6">
 
-              {/* Sertifika Rehberi */}
               <div>
                 <div className="flex items-center gap-4 mb-4">
-                  <h2 className="font-headline text-2xl font-bold">Sertifika Rehberi</h2>
+                  <h2 className="font-headline text-2xl font-bold">{t.trade.certGuide}</h2>
                   <div className="h-px flex-1 bg-outline-variant/20" />
                 </div>
                 <div className="space-y-4">
                   {certifications.map((cert, i) => (
-                    <div key={i} className="bg-surface-container-lowest p-6 editorial-shadow border-l-4" style={{ borderLeftColor: cert.color === "bg-tertiary" ? "#002321" : cert.color === "bg-primary" ? "#32170d" : cert.color === "bg-secondary" ? "#5f5e58" : "#81a39e" }}>
+                    <div key={i} className="bg-surface-container-lowest p-6 editorial-shadow border-l-4" style={{ borderLeftColor: cert.color }}>
                       <h4 className="font-headline text-lg font-bold mb-2">{cert.name}</h4>
                       <p className="text-xs text-secondary leading-relaxed">{cert.desc}</p>
                     </div>
@@ -253,10 +237,9 @@ export default function IsTicaret() {
                 </div>
               </div>
 
-              {/* Tedarikçi Dizini */}
               <div>
                 <div className="flex items-center gap-4 mb-4">
-                  <h2 className="font-headline text-2xl font-bold">Tedarikçi Dizini</h2>
+                  <h2 className="font-headline text-2xl font-bold">{t.trade.supplierDir}</h2>
                   <div className="h-px flex-1 bg-outline-variant/20" />
                 </div>
                 <div className="space-y-0 divide-y divide-outline-variant/15">

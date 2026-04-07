@@ -3,22 +3,23 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-const navLinks = [
-  { href: "/", labelTR: "Ana Sayfa", labelEN: "Home" },
-  { href: "/fiyat-merkezi", labelTR: "Fiyat Merkezi", labelEN: "Price Hub" },
-  { href: "/piyasa-faktorleri", labelTR: "Piyasa Faktörleri", labelEN: "Market Factors" },
-  { href: "/hava-radari", labelTR: "Hava Radarı", labelEN: "Weather Radar" },
-  { href: "/bilgi-merkezi", labelTR: "Bilgi Merkezi", labelEN: "Learn" },
-  { href: "/haberler", labelTR: "Haberler", labelEN: "News" },
-];
+import { useTranslation } from "@/lib/i18n/context";
 
 export default function Navbar() {
-  const [lang, setLang] = useState<"tr" | "en">("tr");
+  const { locale, t, setLocale } = useTranslation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
 
-  const toggleLang = () => setLang(lang === "tr" ? "en" : "tr");
+  const navLinks = [
+    { href: "/", label: t.nav.home },
+    { href: "/fiyat-merkezi", label: t.nav.prices },
+    { href: "/piyasa-faktorleri", label: t.nav.market },
+    { href: "/hava-radari", label: t.nav.weather },
+    { href: "/bilgi-merkezi", label: t.nav.learn },
+    { href: "/haberler", label: t.nav.news },
+  ];
+
+  const toggleLang = () => setLocale(locale === "tr" ? "en" : "tr");
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-[#f4fafe]/90 backdrop-blur-md shadow-sm border-b border-outline-variant/10">
@@ -48,7 +49,7 @@ export default function Navbar() {
                       : "text-[#64748b]"
                   }`}
                 >
-                  {lang === "tr" ? link.labelTR : link.labelEN}
+                  {link.label}
                 </Link>
               );
             })}
@@ -63,16 +64,16 @@ export default function Navbar() {
               search
             </span>
             <div className="bg-surface-variant/50 border-none rounded pl-10 pr-4 py-1.5 text-sm w-52 text-secondary cursor-pointer hover:bg-surface-variant transition-colors">
-              {lang === "tr" ? "Piyasalarda ara..." : "Search markets..."}
+              {t.nav.search}
             </div>
           </a>
 
-          {/* Dil Değiştirme — ileride aktif edilecek */}
+          {/* Dil Değiştirme */}
           <button
             onClick={toggleLang}
             className="text-xs font-bold text-primary-container border border-outline-variant/50 px-3 py-1.5 hover:bg-surface-container transition-colors rounded"
           >
-            {lang === "tr" ? "EN" : "TR"}
+            {locale === "tr" ? "EN" : "TR"}
           </button>
 
           {/* Mobil Menü Butonu */}
@@ -101,7 +102,7 @@ export default function Navbar() {
                     : "text-[#64748b] hover:text-primary"
                 }`}
               >
-                {lang === "tr" ? link.labelTR : link.labelEN}
+                {link.label}
               </Link>
             );
           })}

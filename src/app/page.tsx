@@ -10,27 +10,19 @@ import Footer from "@/components/Footer";
 import PriceChart from "@/components/charts/PriceChart";
 import LatestNews from "@/components/LatestNews";
 import CurrencyBand from "@/components/CurrencyBand";
+import { useTranslation } from "@/lib/i18n/context";
 
 // Fallback değerler — Supabase'den veri gelmezse bunlar gösterilir
 const DEFAULTS: Record<string, string> = {
-  "home.hero.tag": "Analiz",
-  "home.hero.title": "Arabica'nın Direnci: Arz Kısıtları 2026 Verim Beklentilerini Nasıl Yeniden Şekillendiriyor?",
-  "home.hero.subtitle": "İklim oynaklığı Brezilya Yaylalarını vururken, ihracatçılar küresel sabah kahvesini stabilize etmek için Kolombiya çeşitlerine yöneliyor.",
   "home.hero.image": "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1200&q=80",
-  "home.hero.read_time": "12 Dk Okuma • WC24 Analiz Ekibi",
   "home.hero.link": "/bilgi-merkezi/futures-101",
-  "home.editor.content": "Vietnam Robusta piyasasında gördüğümüz değişim sadece bir fiyat sıçraması değil; yapısal bir yeniden düzenlenme.",
-  "home.editor.author": "WC24 Editör",
-  "home.editor.author_title": "Baş Emtia Stratejisti",
   "home.sentiment.direction": "Yükseliş",
   "home.sentiment.percentage": "78",
-  "home.sentiment.note": "Endeks, uzun pozisyonlara güçlü bir eğilim gösteriyor.",
-  "home.newsletter.title": "Haftalık Derin Analiz, Her Pazar",
-  "home.newsletter.subtitle": "12.000'den fazla emtia traderi ve sektör profesyoneli haftalık piyasa özetimize abone.",
 };
 
 export default function Home() {
   const [c, setC] = useState<Record<string, string>>(DEFAULTS);
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetch("/api/content")
@@ -59,7 +51,7 @@ export default function Home() {
             <div className="flex items-center gap-3 mb-3">
               <span className="material-symbols-outlined text-lg text-primary">currency_exchange</span>
               <h3 className="font-label text-[10px] uppercase tracking-[0.2em] text-secondary font-bold">
-                Döviz Kurları — Canlı
+                {t.currency.title}
               </h3>
               <div className="h-px flex-1 bg-outline-variant/20" />
             </div>
@@ -74,7 +66,7 @@ export default function Home() {
               <div className="relative h-[340px] md:h-[500px]">
                 <Image
                   src={get("home.hero.image")}
-                  alt="Öne çıkan haber"
+                  alt={t.home.heroAlt}
                   fill
                   className="object-cover"
                   priority
@@ -83,21 +75,21 @@ export default function Home() {
                 <div className="absolute bottom-0 p-6 md:p-10 text-white max-w-2xl" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.5)" }}>
                   <div className="mb-4" style={{ backgroundColor: "#32170d", display: "inline-block", padding: "5px 14px" }}>
                     <span style={{ color: "#fff", fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.2em", fontWeight: 700 }}>
-                      {get("home.hero.tag")}
+                      {t.home.heroTag}
                     </span>
                   </div>
                   <h1 className="font-headline text-3xl md:text-5xl leading-tight mb-5" style={{ color: "#fff" }}>
-                    {get("home.hero.title")}
+                    {t.home.heroTitle}
                   </h1>
                   <p className="text-sm md:text-base mb-8" style={{ color: "rgba(255,255,255,0.9)" }}>
-                    {get("home.hero.subtitle")}
+                    {t.home.heroSubtitle}
                   </p>
                   <div className="flex flex-wrap items-center gap-4 md:gap-6">
                     <a href={get("home.hero.link")} style={{ backgroundColor: "#fff", color: "#32170d", padding: "12px 24px", fontSize: "11px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", display: "inline-block" }}>
-                      Raporu Oku
+                      {t.home.heroButton}
                     </a>
                     <span style={{ color: "rgba(255,255,255,0.7)", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.1em" }}>
-                      {get("home.hero.read_time")}
+                      {t.home.heroReadTime}
                     </span>
                   </div>
                 </div>
@@ -113,10 +105,10 @@ export default function Home() {
                   format_quote
                 </span>
                 <h4 className="font-headline text-lg md:text-xl text-primary mb-3 italic">
-                  Editörün Günlük Notu
+                  {t.home.editorTitle}
                 </h4>
                 <p className="text-xs md:text-sm leading-relaxed text-secondary italic mb-4 flex-1 min-h-0 overflow-hidden">
-                  &ldquo;{get("home.editor.content")}&rdquo;
+                  &ldquo;{t.home.editorContent}&rdquo;
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-primary-fixed-dim flex items-center justify-center font-bold text-primary text-sm">
@@ -124,10 +116,10 @@ export default function Home() {
                   </div>
                   <div>
                     <p className="text-xs font-bold uppercase tracking-wider text-primary">
-                      {get("home.editor.author")}
+                      {t.home.editorAuthor}
                     </p>
                     <p className="text-[10px] text-secondary">
-                      {get("home.editor.author_title")}
+                      {t.home.editorAuthorTitle}
                     </p>
                   </div>
                 </div>
@@ -136,7 +128,7 @@ export default function Home() {
               {/* Piyasa Duyarlılığı */}
               <div className="bg-primary-container text-white p-6 md:p-8 editorial-shadow">
                 <h4 className="font-label text-[10px] uppercase tracking-[0.2em] opacity-60 mb-5">
-                  Piyasa Duyarlılığı
+                  {t.home.sentimentTitle}
                 </h4>
                 <div className="flex justify-between items-end mb-4">
                   <span className="text-4xl font-headline font-light italic">{get("home.sentiment.direction")}</span>
@@ -146,7 +138,7 @@ export default function Home() {
                   <div className="bg-tertiary-fixed h-full" style={{ width: `${pct}%` }} />
                 </div>
                 <p className="text-xs text-white/70 leading-loose line-clamp-4">
-                  {get("home.sentiment.note")}
+                  {t.home.sentimentNote}
                 </p>
               </div>
             </div>
@@ -161,22 +153,22 @@ export default function Home() {
                     KC1! Arabica Futures
                   </h3>
                   <p className="text-xs text-secondary font-label uppercase tracking-widest mt-1">
-                    7 Günlük Teknik Trend (ICE NY)
+                    {t.home.chartSubtitle}
                   </p>
                 </div>
               </div>
-              <PriceChart title="KC1! Arabica Futures" subtitle="7 Gunluk Teknik Trend (ICE NY)" />
+              <PriceChart title="KC1! Arabica Futures" subtitle={t.home.chartSubtitle} />
             </div>
 
             <div className="col-span-12 lg:col-span-4 space-y-4">
               <h3 className="font-headline text-2xl text-primary border-b border-outline-variant/30 pb-3">
-                Üretici Bölge Havaları
+                {t.home.weatherTitle}
               </h3>
 
               <div className="flex items-center justify-between p-3 md:p-5 bg-surface-container-high border-r-4 border-tertiary">
                 <div>
                   <p className="text-[10px] font-bold text-secondary uppercase tracking-[0.2em] mb-1">
-                    Minas Gerais, Brezilya
+                    {t.home.regionBrazil}
                   </p>
                   <p className="font-headline text-2xl text-primary">24°C</p>
                 </div>
@@ -186,7 +178,7 @@ export default function Home() {
               <div className="flex items-center justify-between p-3 md:p-5 bg-surface-container-high border-r-4 border-secondary">
                 <div>
                   <p className="text-[10px] font-bold text-secondary uppercase tracking-[0.2em] mb-1">
-                    Orta Yaylalar, Vietnam
+                    {t.home.regionVietnam}
                   </p>
                   <p className="font-headline text-2xl text-primary">31°C</p>
                 </div>
@@ -196,7 +188,7 @@ export default function Home() {
               <div className="flex items-center justify-between p-3 md:p-5 bg-surface-container-high border-r-4 border-on-tertiary-container">
                 <div>
                   <p className="text-[10px] font-bold text-secondary uppercase tracking-[0.2em] mb-1">
-                    Huila, Kolombiya
+                    {t.home.regionColombia}
                   </p>
                   <p className="font-headline text-2xl text-primary">19°C</p>
                 </div>
@@ -212,14 +204,14 @@ export default function Home() {
           <section className="bg-[#f4fafe] p-5 md:p-12 flex flex-col items-center text-center border border-outline-variant/15 relative">
             <div className="absolute top-0 left-0 w-full h-1 bg-primary" />
             <h2 className="font-headline text-3xl md:text-4xl text-primary mb-4">
-              {get("home.newsletter.title")}
+              {t.home.newsletterTitle}
             </h2>
             <p className="max-w-xl text-secondary text-sm leading-relaxed mb-8">
-              {get("home.newsletter.subtitle")}
+              {t.home.newsletterSubtitle}
             </p>
             <NewsletterForm variant="inline" />
             <p className="mt-4 text-[10px] text-outline-variant uppercase tracking-widest">
-              Spam yok. Sadece yüksek kaliteli veri.
+              {t.common.noSpam}
             </p>
           </section>
 

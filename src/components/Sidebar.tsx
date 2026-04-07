@@ -2,18 +2,20 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-const sidebarLinks = [
-  { href: "/", icon: "home", labelTR: "Ana Sayfa", labelEN: "Home" },
-  { href: "/fiyat-merkezi", icon: "payments", labelTR: "Fiyat Merkezi", labelEN: "Price Hub" },
-  { href: "/piyasa-faktorleri", icon: "account_tree", labelTR: "Piyasa Faktörleri", labelEN: "Market Factors" },
-  { href: "/hava-radari", icon: "cloudy_snowing", labelTR: "Hava Radarı", labelEN: "Weather Radar" },
-  { href: "/bilgi-merkezi", icon: "menu_book", labelTR: "Bilgi Merkezi", labelEN: "Learn" },
-  { href: "/haberler", icon: "newspaper", labelTR: "Haberler", labelEN: "News" },
-];
+import { useTranslation } from "@/lib/i18n/context";
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const { t } = useTranslation();
+
+  const sidebarLinks = [
+    { href: "/", icon: "home", label: t.nav.home },
+    { href: "/fiyat-merkezi", icon: "payments", label: t.nav.prices },
+    { href: "/piyasa-faktorleri", icon: "account_tree", label: t.nav.market },
+    { href: "/hava-radari", icon: "cloudy_snowing", label: t.nav.weather },
+    { href: "/bilgi-merkezi", icon: "menu_book", label: t.nav.learn },
+    { href: "/haberler", icon: "newspaper", label: t.nav.news },
+  ];
 
   return (
     <aside className="hidden md:flex h-screen w-64 fixed left-0 top-0 pt-16 bg-[#3c2218] flex-col z-40">
@@ -42,7 +44,7 @@ export default function Sidebar() {
             >
               <span className="material-symbols-outlined text-xl">{link.icon}</span>
               <span className="font-label text-xs uppercase tracking-widest">
-                {link.labelTR}
+                {link.label}
               </span>
             </Link>
           );

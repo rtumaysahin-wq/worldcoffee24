@@ -1,31 +1,21 @@
+"use client";
+
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import TickerBand from "@/components/TickerBand";
 import Footer from "@/components/Footer";
-
-const demandCards = [
-  {
-    title: "Çin Büyümesi",
-    text: "Çin'in yıllık kahve tüketimi %15 büyüyor. 2025 ithalat hacmi 4.2M çuvala ulaşması bekleniyor.",
-    stat: "+15%",
-    statLabel: "YoY",
-  },
-  {
-    title: "Premium Trend",
-    text: "Specialty kahve segmenti küresel piyasanın %12'sine ulaştı. Üçüncü dalga kafelerin büyümesi premium talep yaratmaya devam ediyor.",
-    stat: "12%",
-    statLabel: "Pazar Payı",
-  },
-  {
-    title: "Sürdürülebilirlik",
-    text: "AB ormansızlaşma yönetmeliği 2025 uygulamasının Vietnam ve Endonezya ihracatını etkilemesi bekleniyor.",
-    stat: "EU",
-    statLabel: "Regulasyon",
-  },
-];
+import { useTranslation } from "@/lib/i18n/context";
 
 export default function PiyasaFaktorleri() {
+  const { t } = useTranslation();
+
+  const demandCards = [
+    { title: t.market.chinaTitle, text: t.market.chinaText, stat: "+15%", statLabel: t.market.yoy },
+    { title: t.market.premiumTitle, text: t.market.premiumText, stat: "12%", statLabel: t.market.marketShare },
+    { title: t.market.sustainTitle, text: t.market.sustainText, stat: "EU", statLabel: t.market.regulation },
+  ];
+
   return (
     <>
       <Navbar />
@@ -39,22 +29,22 @@ export default function PiyasaFaktorleri() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
               <div className="max-w-2xl">
                 <span className="text-xs font-label uppercase tracking-[0.2em] text-secondary mb-3 block">
-                  Piyasa Faktörleri Özeti
+                  {t.market.headerLabel}
                 </span>
                 <h1 className="font-headline text-3xl md:text-5xl lg:text-6xl font-light text-primary leading-none mb-5">
-                  Piyasa Faktörleri &amp; Makro Dinamikler
+                  {t.market.title}
                 </h1>
                 <p className="text-base md:text-lg text-secondary leading-relaxed font-light">
-                  Küresel kahve emtia alanını şekillendiren kritik değişkenlerin editöryal analizi.
+                  {t.market.description}
                 </p>
               </div>
               <div className="flex items-center gap-4 bg-surface-container-low p-5 md:p-6 editorial-shadow">
                 <div className="text-right border-r border-outline-variant/30 pr-4">
-                  <span className="text-[10px] font-label uppercase text-secondary">Son Güncelleme</span>
+                  <span className="text-[10px] font-label uppercase text-secondary">{t.market.lastUpdate}</span>
                   <p className="font-headline text-lg font-bold">30 Mar 2026</p>
                 </div>
                 <div>
-                  <span className="text-[10px] font-label uppercase text-secondary">Endeks Oynaklığı</span>
+                  <span className="text-[10px] font-label uppercase text-secondary">{t.market.volatility}</span>
                   <p className="font-headline text-lg font-bold text-error">Moderate (1.2%)</p>
                 </div>
               </div>
@@ -66,9 +56,8 @@ export default function PiyasaFaktorleri() {
             {/* ═══ SOL KOLON: İKLİM & ÜRETİM + TALEP ═══ */}
             <section className="col-span-12 lg:col-span-8 space-y-8">
 
-              {/* Bölüm başlığı */}
               <div className="flex items-center gap-4">
-                <h2 className="font-headline text-2xl font-bold">İklim &amp; Üretim</h2>
+                <h2 className="font-headline text-2xl font-bold">{t.market.climateTitle}</h2>
                 <div className="h-px flex-1 bg-outline-variant/20" />
               </div>
 
@@ -77,13 +66,13 @@ export default function PiyasaFaktorleri() {
                 {/* ENSO Status */}
                 <div className="group bg-surface-container-lowest p-6 md:p-8 editorial-shadow relative overflow-hidden hover:-translate-y-1 transition-all">
                   <span className="text-[10px] font-label uppercase tracking-widest text-secondary block mb-5">
-                    Meteoroloji
+                    {t.market.ensoCategory}
                   </span>
                   <h3 className="font-headline text-2xl md:text-3xl mb-4">
-                    ENSO Durumu: La Niña Geçişi
+                    {t.market.ensoTitle}
                   </h3>
                   <p className="text-sm text-secondary mb-7 leading-relaxed">
-                    La Nina&rsquo;nin Eylül-Kasım arasında oluşma olasılığı %70&rsquo;tir. Kuzey Brezilya&rsquo;da artan yağış, çiçeklenmeyi geciktirebilir.
+                    {t.market.ensoText}
                   </p>
                   <div className="flex items-center gap-4">
                     <div className="w-full bg-surface-container-high h-1.5 rounded-full">
@@ -99,16 +88,16 @@ export default function PiyasaFaktorleri() {
                 {/* Brazil Harvest */}
                 <div className="bg-primary-container p-6 md:p-8 editorial-shadow text-on-primary">
                   <span className="text-[10px] font-label uppercase tracking-widest text-white/70 block mb-5">
-                    Arz Analizi
+                    {t.market.harvestCategory}
                   </span>
-                  <h3 className="font-headline text-2xl md:text-3xl mb-4">Brezilya Hasat Döngüsü</h3>
+                  <h3 className="font-headline text-2xl md:text-3xl mb-4">{t.market.harvestTitle}</h3>
                   <p className="text-sm text-white/80 mb-7 leading-relaxed">
-                    2025/26 üretimi için &ldquo;yıldan yıla dönüşüm&rdquo; döngüsü bekleniyor. İlk tahminler çift yıllık döngüler nedeniyle Arabica üretiminde %12 azalma öngörüyor.
+                    {t.market.harvestText}
                   </p>
                   <div className="flex justify-between items-end">
                     <div>
-                      <p className="text-2xl font-headline italic">Düşük Verim</p>
-                      <p className="text-[10px] uppercase font-label">Tahmini 54.2M Çuval</p>
+                      <p className="text-2xl font-headline italic">{t.market.yieldLow}</p>
+                      <p className="text-[10px] uppercase font-label">{t.market.yieldEstimate}</p>
                     </div>
                     <span className="text-3xl font-headline font-bold">-12%</span>
                   </div>
@@ -120,20 +109,20 @@ export default function PiyasaFaktorleri() {
                     <div className="flex items-center gap-2 mb-4">
                       <div className="w-2 h-2 rounded-full bg-tertiary animate-pulse" />
                       <span className="text-[10px] font-label uppercase tracking-widest text-tertiary font-bold">
-                        Canlı İzleme
+                        {t.market.frostCategory}
                       </span>
                     </div>
                     <h3 className="font-headline text-3xl md:text-4xl mb-4">
-                      Don Uyarıları: Minas Gerais
+                      {t.market.frostTitle}
                     </h3>
                     <p className="text-sm text-secondary leading-relaxed">
-                      Yüksek irtifa bölgeleri için kritik izleme aşaması. Sıcaklıklar 12°C&rsquo;de stabilize oldu. Bu hafta için risk düşük, ancak polar hava kütlesi hareketleri saatlik takip gerektiriyor.
+                      {t.market.frostText}
                     </p>
                   </div>
                   <div className="w-full md:w-64 h-40 overflow-hidden flex-shrink-0 relative">
                     <Image
                       src="https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=400&q=80"
-                      alt="Minas Gerais bölgesi"
+                      alt={t.market.frostAlt}
                       fill
                       className="object-cover"
                     />
@@ -144,7 +133,7 @@ export default function PiyasaFaktorleri() {
               {/* ═══ KÜRESEL TALEP TRENDLERİ ═══ */}
               <div>
                 <div className="flex items-center gap-4 mb-8 mt-6">
-                  <h2 className="font-headline text-2xl font-bold">Küresel Talep Trendleri</h2>
+                  <h2 className="font-headline text-2xl font-bold">{t.market.demandTitle}</h2>
                   <div className="h-px flex-1 bg-outline-variant/20" />
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -166,7 +155,7 @@ export default function PiyasaFaktorleri() {
             <aside className="col-span-12 lg:col-span-4 space-y-6">
 
               <div className="flex items-center gap-4">
-                <h2 className="font-headline text-2xl font-bold">Ekonomik Faktörler</h2>
+                <h2 className="font-headline text-2xl font-bold">{t.market.economicTitle}</h2>
                 <div className="h-px flex-1 bg-outline-variant/20" />
               </div>
 
@@ -175,37 +164,37 @@ export default function PiyasaFaktorleri() {
                 <div className="flex justify-between items-start mb-5">
                   <div>
                     <span className="text-[10px] font-label uppercase tracking-widest text-secondary block mb-2">
-                      Kur Etkisi
+                      {t.market.fxCategory}
                     </span>
                     <h3 className="font-headline text-3xl font-bold">BRL/USD</h3>
                   </div>
                   <span className="font-headline text-2xl font-bold text-primary">0.1982</span>
                 </div>
                 <p className="text-sm text-secondary italic">
-                  &ldquo;Zayıflayan Real, Brezilyalı üreticileri daha fazla ihracat yapmaya teşvik ederek New York ICE fiyatları üzerinde aşağı yönlü baskı oluşturuyor.&rdquo;
+                  {t.market.fxQuote}
                 </p>
               </div>
 
               {/* Lojistik & Enerji */}
               <div className="bg-surface-container-high/50 p-6 md:p-8">
                 <h4 className="font-label text-[10px] uppercase tracking-[0.2em] text-secondary mb-5">
-                  Lojistik &amp; Enerji
+                  {t.market.logisticsTitle}
                 </h4>
                 <div className="space-y-5">
                   <div className="flex justify-between items-center">
-                    <span className="text-sm">Deniz Navlun Endeksi</span>
+                    <span className="text-sm">{t.market.shippingIndex}</span>
                     <div className="flex items-center gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-error" />
                       <span className="font-headline font-bold">+18%</span>
                     </div>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm">Brent Ham Petrol ($/varil)</span>
+                    <span className="text-sm">{t.market.oilLabel}</span>
                     <span className="font-headline font-bold">82.40</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm">Konteyner Mevcudiyeti</span>
-                    <span className="text-xs font-bold uppercase text-secondary">Kısıtlı</span>
+                    <span className="text-sm">{t.market.containerLabel}</span>
+                    <span className="text-xs font-bold uppercase text-secondary">{t.market.containerStatus}</span>
                   </div>
                 </div>
               </div>
@@ -213,27 +202,27 @@ export default function PiyasaFaktorleri() {
               {/* COT */}
               <div className="bg-surface p-6 md:p-8">
                 <h4 className="font-label text-[10px] uppercase tracking-[0.2em] text-secondary mb-5">
-                  Trader Taahhutleri (COT)
+                  {t.market.cotTitle}
                 </h4>
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-secondary">Spekülatif Uzun Pozisyonlar</span>
+                    <span className="text-sm text-secondary">{t.market.cotLong}</span>
                     <span className="font-headline text-2xl font-bold text-tertiary">+52,840</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-secondary">Spekülatif Kısa Pozisyonlar</span>
+                    <span className="text-sm text-secondary">{t.market.cotShort}</span>
                     <span className="font-headline text-2xl font-bold text-error">-18,210</span>
                   </div>
                 </div>
                 <p className="text-xs text-secondary mt-5 leading-relaxed">
-                  Spekülatif net uzun pozisyon tarihsel olarak yüksek seyrediyor; güçlü duyarlılığa işaret ediyor ancak teknik satış baskısına karşı savunmasız.
+                  {t.market.cotNote}
                 </p>
               </div>
 
               {/* ICE Sertifikalı Stoklar */}
               <div className="bg-surface p-6 md:p-8 border border-error/20">
                 <h4 className="font-label text-[10px] uppercase tracking-[0.2em] text-secondary mb-3">
-                  ICE Sertifikalı Stoklar
+                  {t.market.stocksTitle}
                 </h4>
                 <p className="font-headline text-4xl font-bold text-primary">842K</p>
                 <p className="text-secondary text-sm mb-3">Bags</p>
@@ -241,11 +230,11 @@ export default function PiyasaFaktorleri() {
                   <div className="bg-primary w-[35%] h-full rounded-full" />
                 </div>
                 <div className="flex justify-between text-[10px] text-secondary">
-                  <span>Mevcut Seviye</span>
-                  <span>5 Yıllık Ort. (2.4M)</span>
+                  <span>{t.market.stocksCurrent}</span>
+                  <span>{t.market.stocks5yr}</span>
                 </div>
                 <p className="text-[10px] font-bold text-error uppercase mt-3 tracking-widest">
-                  Stok Uyarısı: 10 Yılın En Düşüğü
+                  {t.market.stocksWarning}
                 </p>
               </div>
 

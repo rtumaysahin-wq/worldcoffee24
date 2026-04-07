@@ -1,69 +1,54 @@
-import type { Metadata } from "next";
+"use client";
+
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-
-export const metadata: Metadata = {
-  title: "Kahve Terimler Sözlüğü",
-  description:
-    "Kahve ticareti ve üretiminde kullanılan 30+ terimin açıklaması. Arabica, Robusta, futures, hedging, cupping, SCA, diferansiyel ve daha fazlası.",
-  keywords: [
-    "kahve sözlük",
-    "kahve terimleri",
-    "coffee glossary",
-    "arabica nedir",
-    "cupping nedir",
-    "hedging nedir",
-    "SCA skoru",
-    "diferansiyel kahve",
-  ],
-};
+import { useTranslation } from "@/lib/i18n/context";
 
 const terms = [
-  { term: "Arabica", def: "Coffea arabica türüne ait kahve. Dünya üretiminin %60-70'ini oluşturur. Yüksek irtifada yetişir, kompleks lezzet profiline sahiptir. Daha az kafein (%1.2-1.5) içerir." },
-  { term: "Backwardation", def: "Vadeli kontrat fiyatının spot fiyattan düşük olması durumu. Arz sıkıntısı veya güçlü anlık talep işareti." },
-  { term: "Blend", def: "Birden fazla menşei veya çeşitten karıştırılan kahve. Tutarlı lezzet profili oluşturmak için kullanılır." },
-  { term: "C-Market (C-Piyasası)", def: "ICE New York'ta işlem gören Arabica kahve vadeli işlem kontratı (Coffee C Futures). Küresel Arabica fiyatlarının referans noktası." },
-  { term: "Cupping", def: "Kahve kalitesini değerlendirmek için standartlaştırılmış tadım yöntemi. SCA protokolüne göre yapılır: koku, tat, asidite, gövde, denge puanları verilir." },
-  { term: "Cherry (Kiraz)", def: "Kahve bitkisinin meyvesi. İçi genellikle iki çekirdek (fasulye) içerir. Peaberry'de tek çekirdek bulunur." },
-  { term: "CIF", def: "Cost, Insurance and Freight. Satıcı navlun ve sigorta dahil fiyat verir. Emtia ticaretinde yaygın kullanılan Incoterm." },
-  { term: "COT Raporu", def: "Commitment of Traders. CFTC tarafından haftalık yayınlanan rapor. Spekülatif ve ticari pozisyonları gösterir." },
-  { term: "Contango", def: "Vadeli kontrat fiyatının spot fiyattan yüksek olması. Normal piyasa koşullarında depolama ve finansman maliyetini yansıtır." },
-  { term: "Çuval (Bag)", def: "Kahve ölçü birimi. Standart çuval: Arabica 60 kg, Robusta (Vietnam) 60 kg. Brezilya'da bazen 69 kg çuval kullanılır." },
-  { term: "Defekt", def: "Yeşil kahve çekirdeğindeki kusurlar. Böcek hasarı, küf, kırık, fermente çekirdek gibi. SCA derecelendirmesinde defekt sayısı kaliteyi belirler." },
-  { term: "Diferansiyel", def: "C-Piyasası fiyatına göre uygulanan prim (+) veya indirim (-). Menşei, kalite, sertifika durumuna göre belirlenir. Örnek: Kolombiya Supremo +15 cent/lb." },
-  { term: "Elek Boyutu (Screen Size)", def: "Çekirdek büyüklüğü ölçüsü. 1/64 inç cinsinden ifade edilir. Örnek: S18 = 18/64 inç. Büyük çekirdek genellikle daha yüksek fiyat alır." },
-  { term: "FOB", def: "Free on Board. Satıcı malı gemiye yükler, bundan sonraki tüm masraf ve risk alıcıya aittir. Kahve ticaretinde en yaygın kullanılan Incoterm." },
-  { term: "Futures (Vadeli İşlem)", def: "Belirli bir emtianın önceden belirlenmiş fiyat ve tarihte teslimini içeren standart sözleşme. ICE borsasında işlem görür." },
-  { term: "Green Coffee (Yeşil Kahve)", def: "Kavurulmamış kahve çekirdeği. Uluslararası ticarette kahve yeşil haliyle satılır. Doğru depolandığında 12 aya kadar kalitesini korur." },
-  { term: "Hedging", def: "Fiyat riskinden korunma stratejisi. Üretici veya alıcı, futures piyasasında ters pozisyon alarak fiziksel kahve işleminin riskini dengeler." },
-  { term: "Honey Process", def: "Kahve işleme yöntemi. Kiraz soyulur ancak müsilaj tabakası bırakılarak kurutulur. Washed ve Natural arasında bir lezzet profili oluşturur." },
-  { term: "ICE", def: "Intercontinental Exchange. Kahve futures kontratlarının işlem gördüğü borsa. New York (Arabica) ve London (Robusta) seksiyonları var." },
-  { term: "ICO", def: "International Coffee Organization. Uluslararası Kahve Örgütü. Üretici ve tüketici ülkelerin üye olduğu hükümetlerarası kurum." },
-  { term: "Lot", def: "Borsa kontrat birimi. Arabica: 1 lot = 37.500 libre (yaklaşık 17 ton). Robusta: 1 lot = 10 ton." },
-  { term: "Margin (Teminat)", def: "Futures kontratı açmak için yatırılan depozito. Kontrat değerinin %5-15'i arasında değişir." },
-  { term: "Natural Process", def: "Kahve işleme yöntemi. Kiraz bütün haliyle güneş altında kurutulur. Yoğun meyve tatlılığı ve güçlü gövde oluşturur." },
-  { term: "Parchment (Pergamen)", def: "Kahve çekirdeğini saran ince zar. Yıkama işlemi sonrası çekirdek pergamen içinde kurutulur. Son aşamada soyulur (hulling)." },
-  { term: "Peaberry", def: "Kiraz içinde tek çekirdek oluşumu (normal: 2 çekirdek). Daha yoğun lezzet profiline sahip olduğu kabul edilir. Toplam hasadın %5-10'u." },
-  { term: "Q-Grader", def: "Coffee Quality Institute (CQI) tarafından sertifikalandırılmış profesyonel kahve değerlendirmecisi. Arabica için Q Arabica, Robusta için Q Robusta lisansları var." },
-  { term: "Robusta", def: "Coffea canephora türüne ait kahve. Düşük irtifada yetişir, daha fazla kafein içerir (%2.2-2.7). Instant kahve ve espresso harmanlarında yaygın kullanılır." },
-  { term: "SCA Skoru", def: "Specialty Coffee Association derecelendirme sistemi. 100 üzerinden puanlama. 80+ puan: specialty kahve. 85+: excellent. 90+: outstanding." },
-  { term: "Silverskin (Gümüş Deri)", def: "Kahve çekirdeğini saran en ince zar. Kavurma sırasında ayrışır ve 'chaff' (kepek) olarak uçuşur." },
-  { term: "Specialty Coffee", def: "SCA standartlarına göre 80+ puan alan kahve. İzlenebilir kaynak, minimal defekt, ayırt edici lezzet profili." },
-  { term: "Spot Fiyat", def: "Emtianın anında teslim edileceği fiyat. Futures fiyatından farklı olabilir (contango veya backwardation)." },
-  { term: "Spread", def: "İki farklı futures kontrat vadesi arasındaki fiyat farkı. Piyasa koşullarını ve beklentileri yansıtır." },
-  { term: "Washed Process", def: "Kahve işleme yöntemi. Kiraz soyulur, fermantasyonla müsilaj ayrıştırılır, suyla yıkanır. Temiz, asidik, terroir-odaklı fincan profili." },
+  { term: "Arabica", def: "Coffee belonging to the Coffea arabica species. Accounts for 60-70% of global production. Grown at high altitudes with a complex flavor profile. Contains less caffeine (1.2-1.5%)." },
+  { term: "Backwardation", def: "A market condition where futures contract prices are lower than the spot price. Signals supply shortages or strong immediate demand." },
+  { term: "Blend", def: "Coffee mixed from multiple origins or varieties. Used to create a consistent flavor profile." },
+  { term: "C-Market", def: "The Arabica coffee futures contract (Coffee C Futures) traded on ICE New York. The benchmark for global Arabica prices." },
+  { term: "Cupping", def: "A standardized tasting method for evaluating coffee quality. Conducted according to SCA protocol: scores are given for aroma, flavor, acidity, body, and balance." },
+  { term: "Cherry", def: "The fruit of the coffee plant. Typically contains two seeds (beans) inside. Peaberries contain only one seed." },
+  { term: "CIF", def: "Cost, Insurance and Freight. The seller quotes a price including freight and insurance. A widely used Incoterm in commodity trading." },
+  { term: "COT Report", def: "Commitment of Traders. A weekly report published by the CFTC. Shows speculative and commercial positions." },
+  { term: "Contango", def: "A market condition where futures contract prices are higher than the spot price. Reflects storage and financing costs under normal market conditions." },
+  { term: "Bag", def: "A unit of measurement for coffee. Standard bag: Arabica 60 kg, Robusta (Vietnam) 60 kg. In Brazil, 69 kg bags are sometimes used." },
+  { term: "Defect", def: "Flaws in green coffee beans. Includes insect damage, mold, breakage, and fermented beans. Defect count determines quality in SCA grading." },
+  { term: "Differential", def: "The premium (+) or discount (-) applied relative to the C-Market price. Determined by origin, quality, and certification status. Example: Colombia Supremo +15 cents/lb." },
+  { term: "Screen Size", def: "A measure of bean size. Expressed in 1/64 inch increments. Example: S18 = 18/64 inch. Larger beans generally command higher prices." },
+  { term: "FOB", def: "Free on Board. The seller loads the goods onto the vessel; all costs and risks thereafter belong to the buyer. The most commonly used Incoterm in coffee trading." },
+  { term: "Futures", def: "A standardized contract for the delivery of a specific commodity at a predetermined price and date. Traded on the ICE exchange." },
+  { term: "Green Coffee", def: "Unroasted coffee beans. Coffee is traded internationally in its green state. When properly stored, it maintains quality for up to 12 months." },
+  { term: "Hedging", def: "A strategy for managing price risk. Producers or buyers take an opposite position in the futures market to offset the risk of their physical coffee transactions." },
+  { term: "Honey Process", def: "A coffee processing method. The cherry is depulped but dried with the mucilage layer intact. Produces a flavor profile between washed and natural." },
+  { term: "ICE", def: "Intercontinental Exchange. The exchange where coffee futures contracts are traded. Has New York (Arabica) and London (Robusta) sections." },
+  { term: "ICO", def: "International Coffee Organization. An intergovernmental body whose members include both producing and consuming countries." },
+  { term: "Lot", def: "The exchange contract unit. Arabica: 1 lot = 37,500 pounds (approximately 17 tonnes). Robusta: 1 lot = 10 tonnes." },
+  { term: "Margin", def: "The deposit required to open a futures contract. Typically ranges between 5-15% of the contract value." },
+  { term: "Natural Process", def: "A coffee processing method. The whole cherry is dried in the sun. Produces intense fruit sweetness and a full body." },
+  { term: "Parchment", def: "A thin membrane surrounding the coffee bean. After washing, the bean is dried inside its parchment layer. Removed in the final stage (hulling)." },
+  { term: "Peaberry", def: "A single bean formation inside the cherry (normal: 2 beans). Considered to have a more intense flavor profile. Accounts for 5-10% of the total harvest." },
+  { term: "Q-Grader", def: "A professional coffee evaluator certified by the Coffee Quality Institute (CQI). Separate licenses exist for Q Arabica and Q Robusta." },
+  { term: "Robusta", def: "Coffee belonging to the Coffea canephora species. Grows at lower altitudes and contains more caffeine (2.2-2.7%). Widely used in instant coffee and espresso blends." },
+  { term: "SCA Score", def: "The Specialty Coffee Association grading system. Scored out of 100. 80+ points: specialty coffee. 85+: excellent. 90+: outstanding." },
+  { term: "Silverskin", def: "The thinnest membrane surrounding the coffee bean. Separates during roasting and floats off as chaff." },
+  { term: "Specialty Coffee", def: "Coffee scoring 80+ points according to SCA standards. Traceable origin, minimal defects, and a distinctive flavor profile." },
+  { term: "Spot Price", def: "The price for immediate delivery of a commodity. May differ from the futures price (contango or backwardation)." },
+  { term: "Spread", def: "The price difference between two different futures contract maturities. Reflects market conditions and expectations." },
+  { term: "Washed Process", def: "A coffee processing method. The cherry is depulped, mucilage is removed through fermentation, and the beans are washed with water. Produces a clean, acidic, terroir-focused cup profile." },
 ];
 
 function buildFaqSchema() {
-  // İlk 10 terimi FAQ olarak ekle (Google max ~10 gösteriyor)
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: terms.slice(0, 10).map((t) => ({
       "@type": "Question",
-      name: `${t.term} nedir?`,
+      name: `What is ${t.term}?`,
       acceptedAnswer: {
         "@type": "Answer",
         text: t.def,
@@ -77,14 +62,16 @@ function buildBreadcrumb() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Ana Sayfa", item: "https://worldcoffee24.com" },
-      { "@type": "ListItem", position: 2, name: "Bilgi Merkezi", item: "https://worldcoffee24.com/bilgi-merkezi" },
-      { "@type": "ListItem", position: 3, name: "Terimler Sözlüğü", item: "https://worldcoffee24.com/bilgi-merkezi/terimler-sozlugu" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://worldcoffee24.com" },
+      { "@type": "ListItem", position: 2, name: "Knowledge Center", item: "https://worldcoffee24.com/bilgi-merkezi" },
+      { "@type": "ListItem", position: 3, name: "Glossary", item: "https://worldcoffee24.com/bilgi-merkezi/terimler-sozlugu" },
     ],
   };
 }
 
 export default function TerimlerSozlugu() {
+  const { t } = useTranslation();
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(buildFaqSchema()) }} />
@@ -98,18 +85,18 @@ export default function TerimlerSozlugu() {
             className="text-xs font-label uppercase tracking-widest text-secondary hover:text-primary mb-6 inline-flex items-center gap-1"
           >
             <span className="material-symbols-outlined text-sm">arrow_back</span>
-            Bilgi Merkezi
+            {t.learn.headerLabel}
           </Link>
 
           <h1 className="font-headline text-4xl md:text-5xl font-bold text-primary leading-tight mb-4">
-            Kahve Terimler Sözlüğü
+            Coffee Glossary
           </h1>
           <p className="text-lg text-secondary leading-relaxed mb-8">
-            Kahve ticareti, üretimi ve değerlendirmesinde kullanılan {terms.length} temel terimin kapsamlı açıklaması.
+            A comprehensive guide to {terms.length} essential terms used in coffee trading, production, and evaluation.
           </p>
 
           <p className="text-xs font-label uppercase tracking-widest text-secondary mb-6">
-            {terms.length} terim &bull; A&apos;dan Z&apos;ye sıralanmış
+            {terms.length} terms &bull; sorted A to Z
           </p>
 
           <div className="divide-y divide-outline-variant/15">

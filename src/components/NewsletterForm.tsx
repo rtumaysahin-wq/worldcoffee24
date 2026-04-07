@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslation } from "@/lib/i18n/context";
 
 interface NewsletterFormProps {
   variant?: "default" | "dark" | "inline";
@@ -10,12 +11,13 @@ export default function NewsletterForm({ variant = "default" }: NewsletterFormPr
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+  const { t } = useTranslation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !email.includes("@")) {
       setStatus("error");
-      setMessage("Geçerli bir e-posta adresi girin.");
+      setMessage(t.common.emailInvalid);
       return;
     }
 
@@ -30,15 +32,15 @@ export default function NewsletterForm({ variant = "default" }: NewsletterFormPr
 
       if (res.ok) {
         setStatus("success");
-        setMessage(data.message || "Bültene başarıyla kaydoldunuz!");
+        setMessage(data.message || t.common.subscribeSuccess);
         setEmail("");
       } else {
         setStatus("error");
-        setMessage(data.error || "Bir hata oluştu.");
+        setMessage(data.error || t.common.subscribeError);
       }
     } catch {
       setStatus("error");
-      setMessage("Bağlantı hatası, lütfen tekrar deneyin.");
+      setMessage(t.common.connectionError);
     }
   };
 
@@ -71,7 +73,7 @@ export default function NewsletterForm({ variant = "default" }: NewsletterFormPr
             {status === "loading" ? (
               <span className="material-symbols-outlined text-sm animate-spin">progress_activity</span>
             ) : (
-              "Abone"
+              t.common.subscribeDark
             )}
           </button>
         </div>
@@ -102,7 +104,7 @@ export default function NewsletterForm({ variant = "default" }: NewsletterFormPr
             {status === "loading" ? (
               <span className="material-symbols-outlined text-sm animate-spin">progress_activity</span>
             ) : (
-              "Abone Ol"
+              t.common.subscribe
             )}
           </button>
         </div>
@@ -133,7 +135,7 @@ export default function NewsletterForm({ variant = "default" }: NewsletterFormPr
           {status === "loading" ? (
             <span className="material-symbols-outlined text-sm animate-spin">progress_activity</span>
           ) : (
-            "Abone Ol"
+            t.common.subscribe
           )}
         </button>
       </div>

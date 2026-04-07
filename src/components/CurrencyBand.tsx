@@ -2,14 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { fetchAllPrices, type PriceItem } from "@/lib/api/commodities";
+import { useTranslation } from "@/lib/i18n/context";
 
-const currencyLabels: Record<string, string> = {
-  "USD/TRY": "Amerikan Doları",
-  "EUR/TRY": "Euro",
-  "BRL/USD": "Brezilya Reali",
-};
-
-function CurrencyItem({ item }: { item: PriceItem }) {
+function CurrencyItem({ item, label }: { item: PriceItem; label: string }) {
   if (item.price === null) return null;
 
   const isUp = item.changePct !== null && item.changePct >= 0;
@@ -19,7 +14,7 @@ function CurrencyItem({ item }: { item: PriceItem }) {
     <div className="flex items-center justify-between gap-3 p-3 md:p-4 bg-surface-container-lowest flex-1 min-w-0">
       <div className="min-w-0">
         <p className="text-[10px] font-label uppercase tracking-widest text-secondary truncate">
-          {currencyLabels[item.label] || item.label}
+          {label}
         </p>
         <p className="font-headline text-lg md:text-xl font-bold text-primary">
           {item.label}
@@ -53,6 +48,13 @@ function CurrencyItem({ item }: { item: PriceItem }) {
 export default function CurrencyBand() {
   const [currencies, setCurrencies] = useState<PriceItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const { t } = useTranslation();
+
+  const currencyLabels: Record<string, string> = {
+    "USD/TRY": t.currency.usd,
+    "EUR/TRY": t.currency.eur,
+    "BRL/USD": t.currency.brl,
+  };
 
   useEffect(() => {
     fetchAllPrices().then((data) => {
@@ -82,7 +84,7 @@ export default function CurrencyBand() {
   return (
     <div className="flex flex-col sm:flex-row gap-2 md:gap-3">
       {currencies.map((item) => (
-        <CurrencyItem key={item.label} item={item} />
+        <CurrencyItem key={item.label} item={item} label={currencyLabels[item.label] || item.label} />
       ))}
     </div>
   );

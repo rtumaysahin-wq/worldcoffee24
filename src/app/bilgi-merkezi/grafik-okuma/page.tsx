@@ -1,25 +1,14 @@
-import type { Metadata } from "next";
+"use client";
+
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-
-export const metadata: Metadata = {
-  title: "Grafik Okuma Rehberi — Teknik Analiz Temelleri",
-  description:
-    "Emtia grafiği okuma rehberi: Candlestick, destek/direnç, trend çizgileri, hareketli ortalamalar. Kahve traderları için teknik analiz.",
-  keywords: [
-    "grafik okuma",
-    "teknik analiz",
-    "candlestick",
-    "destek direnç",
-    "hareketli ortalama",
-    "emtia grafik",
-    "kahve trading",
-  ],
-};
+import { useTranslation } from "@/lib/i18n/context";
 
 export default function GrafikOkuma() {
+  const { t } = useTranslation();
+
   return (
     <>
       <Navbar />
@@ -31,68 +20,68 @@ export default function GrafikOkuma() {
             className="text-xs font-label uppercase tracking-widest text-secondary hover:text-primary mb-6 inline-flex items-center gap-1"
           >
             <span className="material-symbols-outlined text-sm">arrow_back</span>
-            Bilgi Merkezi
+            {t.learn.headerLabel}
           </Link>
 
           <h1 className="font-headline text-4xl md:text-5xl font-bold text-primary leading-tight mb-6">
-            Grafik Okuma Rehberi
+            Chart Reading Guide
           </h1>
 
           <p className="text-lg text-secondary leading-relaxed mb-10">
-            Fiyat grafikleri, piyasa hareketlerini görsel olarak anlamamızı sağlar.
-            Bu rehber, kahve emtia piyasasında kullanılan temel teknik analiz araçlarını kapsar.
+            Price charts allow us to visually understand market movements.
+            This guide covers the fundamental technical analysis tools used in the coffee commodity market.
           </p>
 
           <section className="mb-12">
             <h2 className="font-headline text-3xl font-bold text-primary mb-4">
-              1. Candlestick (Mum) Grafikleri
+              1. Candlestick Charts
             </h2>
             <p className="text-base text-on-surface leading-relaxed mb-4">
-              Candlestick grafikleri, belirli bir zaman dilimindeki açılış, kapanış, en yüksek ve en düşük fiyatları
-              tek bir &ldquo;mum&rdquo; şeklinde gösterir. Japonya&apos;da 18. yüzyılda pirinç ticaretinde geliştirilmiştir.
+              Candlestick charts display the open, close, high, and low prices within a given time period
+              as a single &ldquo;candle.&rdquo; They were developed in 18th-century Japan for rice trading.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
               <div className="bg-surface-container-lowest p-6 border-l-4 border-tertiary editorial-shadow">
-                <h4 className="font-bold text-tertiary mb-2">Yeşil / Boş Mum (Yükseliş)</h4>
+                <h4 className="font-bold text-tertiary mb-2">Green / Hollow Candle (Bullish)</h4>
                 <p className="text-sm text-secondary leading-relaxed mb-3">
-                  Kapanış fiyatı açılış fiyatından yüksektir. Alıcılar baskındadır.
+                  The closing price is higher than the opening price. Buyers are dominant.
                 </p>
                 <div className="text-xs text-secondary space-y-1">
-                  <p>• Üst fitil = dönemde ulaşılan en yüksek fiyat</p>
-                  <p>• Gövde üstü = kapanış fiyatı</p>
-                  <p>• Gövde altı = açılış fiyatı</p>
-                  <p>• Alt fitil = dönemde ulaşılan en düşük fiyat</p>
+                  <p>• Upper wick = highest price reached during the period</p>
+                  <p>• Top of body = closing price</p>
+                  <p>• Bottom of body = opening price</p>
+                  <p>• Lower wick = lowest price reached during the period</p>
                 </div>
               </div>
               <div className="bg-surface-container-lowest p-6 border-l-4 border-error editorial-shadow">
-                <h4 className="font-bold text-error mb-2">Kırmızı / Dolu Mum (Düşüş)</h4>
+                <h4 className="font-bold text-error mb-2">Red / Filled Candle (Bearish)</h4>
                 <p className="text-sm text-secondary leading-relaxed mb-3">
-                  Kapanış fiyatı açılış fiyatından düşüktür. Satıcılar baskındadır.
+                  The closing price is lower than the opening price. Sellers are dominant.
                 </p>
                 <div className="text-xs text-secondary space-y-1">
-                  <p>• Üst fitil = dönemde ulaşılan en yüksek fiyat</p>
-                  <p>• Gövde üstü = açılış fiyatı</p>
-                  <p>• Gövde altı = kapanış fiyatı</p>
-                  <p>• Alt fitil = dönemde ulaşılan en düşük fiyat</p>
+                  <p>• Upper wick = highest price reached during the period</p>
+                  <p>• Top of body = opening price</p>
+                  <p>• Bottom of body = closing price</p>
+                  <p>• Lower wick = lowest price reached during the period</p>
                 </div>
               </div>
             </div>
 
             <div className="bg-surface-container-low p-6 border-l-4 border-primary my-6">
-              <h4 className="font-headline text-lg font-bold mb-3">Önemli Candlestick Formasyonları</h4>
+              <h4 className="font-headline text-lg font-bold mb-3">Key Candlestick Patterns</h4>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                 <div>
                   <p className="font-bold mb-1">Doji</p>
-                  <p className="text-secondary">Açılış ve kapanış neredeyse aynı. Kararsızlık sinyali. Trend dönüşü habercisi olabilir.</p>
+                  <p className="text-secondary">Open and close are nearly identical. A signal of indecision. May herald a trend reversal.</p>
                 </div>
                 <div>
-                  <p className="font-bold mb-1">Hammer (Çekiç)</p>
-                  <p className="text-secondary">Uzun alt fitil, küçük gövde. Düşüş trendinde görülürse dönüş sinyali.</p>
+                  <p className="font-bold mb-1">Hammer</p>
+                  <p className="text-secondary">Long lower wick, small body. When seen in a downtrend, it signals a potential reversal.</p>
                 </div>
                 <div>
                   <p className="font-bold mb-1">Engulfing</p>
-                  <p className="text-secondary">Bir mum önceki mumu tamamen kaplar. Güçlü trend dönüşü sinyali.</p>
+                  <p className="text-secondary">One candle completely engulfs the previous candle. A strong trend reversal signal.</p>
                 </div>
               </div>
             </div>
@@ -100,56 +89,56 @@ export default function GrafikOkuma() {
 
           <section className="mb-12">
             <h2 className="font-headline text-3xl font-bold text-primary mb-4">
-              2. Destek ve Direnç Seviyeleri
+              2. Support and Resistance Levels
             </h2>
             <p className="text-base text-on-surface leading-relaxed mb-4">
-              Destek ve direnç, fiyatın tekrar tekrar test ettiği ve genellikle geri döndüğü yatay seviyelerdir.
-              Bu seviyeler, arz ve talebin yoğunlaştığı bölgeleri temsil eder.
+              Support and resistance are horizontal levels that price repeatedly tests and typically bounces from.
+              These levels represent zones where supply and demand are concentrated.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
               <div className="p-6 bg-surface-container-lowest editorial-shadow">
-                <h4 className="font-bold text-primary mb-2">Destek (Support)</h4>
+                <h4 className="font-bold text-primary mb-2">Support</h4>
                 <p className="text-sm text-secondary leading-relaxed">
-                  Fiyatın düşmeyi durdurduğu ve alıcıların devreye girdiği seviye.
-                  Örnek: Arabica KC1! için 280 cent/lb seviyesi güçlü bir destek olabilir — fiyat bu seviyeye
-                  her düştüğünde alıcı gelir ve fiyat geri toparlanır.
+                  The level where price stops falling and buyers step in.
+                  Example: The 280 cent/lb level may serve as strong support for Arabica KC1! &mdash; every time
+                  price drops to this level, buyers emerge and price recovers.
                 </p>
               </div>
               <div className="p-6 bg-surface-container-lowest editorial-shadow">
-                <h4 className="font-bold text-primary mb-2">Direnç (Resistance)</h4>
+                <h4 className="font-bold text-primary mb-2">Resistance</h4>
                 <p className="text-sm text-secondary leading-relaxed">
-                  Fiyatın yükselmeyi durdurduğu ve satıcıların devreye girdiği seviye.
-                  Örnek: 320 cent/lb seviyesini kıramayan Arabica fiyatı, bu seviyeyi her test ettiğinde
-                  geri düşer — ta ki yeterli alım baskısı ile kırılana kadar.
+                  The level where price stops rising and sellers step in.
+                  Example: Arabica price unable to break the 320 cent/lb level falls back each time
+                  it tests this level &mdash; until sufficient buying pressure finally breaks through.
                 </p>
               </div>
             </div>
 
             <div className="bg-primary-container text-white p-6 my-6">
-              <h4 className="font-headline text-lg font-bold mb-2">Kırılma (Breakout)</h4>
+              <h4 className="font-headline text-lg font-bold mb-2">Breakout</h4>
               <p className="text-sm text-white/70 leading-relaxed">
-                Fiyat direnç seviyesini yukarı kırdığında, eski direnç yeni destek olur. Tersi de geçerlidir.
-                Kırılmalar genellikle yüksek hacimle gerçekleşir ve güçlü trend hareketlerinin başlangıcı olabilir.
-                Kahve piyasasında iklim olayları (don, kuraklık) genellikle direnç kırılmalarına neden olur.
+                When price breaks above a resistance level, the old resistance becomes new support. The reverse is also true.
+                Breakouts typically occur with high volume and can mark the beginning of strong trend moves.
+                In the coffee market, climate events (frost, drought) often trigger resistance breakouts.
               </p>
             </div>
           </section>
 
           <section className="mb-12">
             <h2 className="font-headline text-3xl font-bold text-primary mb-4">
-              3. Trend Çizgileri
+              3. Trend Lines
             </h2>
             <p className="text-base text-on-surface leading-relaxed mb-4">
-              Trend çizgileri, fiyat hareketinin genel yönünü belirlemek için kullanılır.
-              Ardışık dip noktaları birleştirerek yükseliş trendi, ardışık tepe noktaları birleştirerek
-              düşüş trendi çizgisi oluşturulur.
+              Trend lines are used to identify the overall direction of price movement.
+              An uptrend line is drawn by connecting successive lows, while a downtrend line
+              is drawn by connecting successive highs.
             </p>
             <div className="space-y-3 text-sm">
               {[
-                { label: "Yükseliş Trendi (Uptrend)", desc: "Ardışık yükselen dipler ve yükselen tepeler. Her dip bir öncekinden yüksektir." },
-                { label: "Düşüş Trendi (Downtrend)", desc: "Ardışık alçalan tepeler ve alçalan dipler. Her tepe bir öncekinden düşüktür." },
-                { label: "Yatay (Sideways / Range)", desc: "Fiyat belirli bir aralıkta hareket eder. Ne alıcılar ne satıcılar baskındır." },
+                { label: "Uptrend", desc: "Successive higher lows and higher highs. Each low is higher than the previous one." },
+                { label: "Downtrend", desc: "Successive lower highs and lower lows. Each high is lower than the previous one." },
+                { label: "Sideways (Range)", desc: "Price moves within a defined range. Neither buyers nor sellers are dominant." },
               ].map((item, i) => (
                 <div key={i} className="flex gap-3 p-4 bg-surface-container-lowest">
                   <span className="material-symbols-outlined text-primary mt-0.5">show_chart</span>
@@ -164,27 +153,27 @@ export default function GrafikOkuma() {
 
           <section className="mb-12">
             <h2 className="font-headline text-3xl font-bold text-primary mb-4">
-              4. Hareketli Ortalamalar (Moving Averages)
+              4. Moving Averages
             </h2>
             <p className="text-base text-on-surface leading-relaxed mb-4">
-              Hareketli ortalamalar, fiyat verisinin belirlenen dönem içindeki ortalamasını alarak
-              trendi düzleştiren göstergelerdir. Gürültüyü filtreler, ana trendi görmeyi kolaylaştırır.
+              Moving averages are indicators that smooth out price data by averaging values over a specified period.
+              They filter out noise and make the underlying trend easier to see.
             </p>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm">
                 <thead>
                   <tr className="border-b border-outline-variant/30 text-[10px] font-label uppercase tracking-widest text-secondary">
-                    <th className="pb-3">Gösterge</th>
-                    <th className="pb-3">Dönem</th>
-                    <th className="pb-3">Kullanım</th>
+                    <th className="pb-3">Indicator</th>
+                    <th className="pb-3">Period</th>
+                    <th className="pb-3">Usage</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-outline-variant/10">
-                  <tr><td className="py-3 font-bold">SMA 20</td><td className="py-3">20 gün</td><td className="py-3 text-secondary">Kısa vadeli trend. Scalping ve günlük işlemler.</td></tr>
-                  <tr><td className="py-3 font-bold">SMA 50</td><td className="py-3">50 gün</td><td className="py-3 text-secondary">Orta vadeli trend. Swing trading için ideal.</td></tr>
-                  <tr><td className="py-3 font-bold">SMA 200</td><td className="py-3">200 gün</td><td className="py-3 text-secondary">Uzun vadeli trend. Kurumsal yatırımcılar takip eder.</td></tr>
-                  <tr><td className="py-3 font-bold">Golden Cross</td><td className="py-3">50/200</td><td className="py-3 text-tertiary">SMA 50, SMA 200&apos;ü yukarı keserse — güçlü alış sinyali.</td></tr>
-                  <tr><td className="py-3 font-bold">Death Cross</td><td className="py-3">50/200</td><td className="py-3 text-error">SMA 50, SMA 200&apos;ü aşağı keserse — güçlü satış sinyali.</td></tr>
+                  <tr><td className="py-3 font-bold">SMA 20</td><td className="py-3">20 days</td><td className="py-3 text-secondary">Short-term trend. Scalping and day trading.</td></tr>
+                  <tr><td className="py-3 font-bold">SMA 50</td><td className="py-3">50 days</td><td className="py-3 text-secondary">Medium-term trend. Ideal for swing trading.</td></tr>
+                  <tr><td className="py-3 font-bold">SMA 200</td><td className="py-3">200 days</td><td className="py-3 text-secondary">Long-term trend. Followed by institutional investors.</td></tr>
+                  <tr><td className="py-3 font-bold">Golden Cross</td><td className="py-3">50/200</td><td className="py-3 text-tertiary">When SMA 50 crosses above SMA 200 &mdash; strong buy signal.</td></tr>
+                  <tr><td className="py-3 font-bold">Death Cross</td><td className="py-3">50/200</td><td className="py-3 text-error">When SMA 50 crosses below SMA 200 &mdash; strong sell signal.</td></tr>
                 </tbody>
               </table>
             </div>
@@ -192,13 +181,13 @@ export default function GrafikOkuma() {
 
           <section className="mb-12">
             <h2 className="font-headline text-3xl font-bold text-primary mb-4">
-              5. Hacim (Volume)
+              5. Volume
             </h2>
             <p className="text-base text-on-surface leading-relaxed">
-              Hacim, belirli bir dönemde işlem gören kontrat sayısıdır. Fiyat hareketinin &ldquo;gücünü&rdquo; ölçer.
-              Yüksek hacimle gelen fiyat hareketi daha güvenilirdir. Düşük hacimde gelen hareket &ldquo;tuzak&rdquo; olabilir.
-              Kahve piyasasında özellikle CFTC COT raporları, spekülatif pozisyonların yönünü göstererek
-              hacim analizini destekler.
+              Volume is the number of contracts traded during a given period. It measures the &ldquo;strength&rdquo; of a price move.
+              Price movement accompanied by high volume is more reliable. Movement on low volume may be a &ldquo;trap.&rdquo;
+              In the coffee market, CFTC COT reports in particular support volume analysis by showing
+              the direction of speculative positions.
             </p>
           </section>
         </article>

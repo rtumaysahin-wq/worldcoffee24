@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Newsreader, Inter } from "next/font/google";
+import { LanguageProvider } from "@/lib/i18n/context";
 import "./globals.css";
 
 const newsreader = Newsreader({
@@ -80,7 +81,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="tr" className={`${newsreader.variable} ${inter.variable}`}>
+    <html lang="en" className={`${newsreader.variable} ${inter.variable}`}>
       <head>
         {/* Material Symbols — ikon fontu */}
         <link
@@ -119,7 +120,9 @@ export default function RootLayout({
             }),
           }}
         />
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
         <Analytics />
         <SpeedInsights />
       </body>

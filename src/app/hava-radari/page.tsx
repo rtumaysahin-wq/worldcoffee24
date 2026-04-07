@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import TickerBand from "@/components/TickerBand";
 import Footer from "@/components/Footer";
+import { useTranslation } from "@/lib/i18n/context";
 
 const CoffeeMap = dynamic(() => import("@/components/CoffeeMap"), {
   ssr: false,
@@ -37,15 +38,6 @@ function getWeatherIcon(temp: number | null, rain7d: number | null): string {
   return "partly_cloudy_day";
 }
 
-function getWeatherLabel(temp: number | null, rain7d: number | null): string {
-  if (temp === null) return "—";
-  if (rain7d !== null && rain7d > 50) return "Şiddetli Yağış";
-  if (rain7d !== null && rain7d > 20) return "Yağışlı";
-  if (temp > 30 && rain7d !== null && rain7d < 10) return "Sıcak / Kurak";
-  if (rain7d !== null && rain7d > 10) return "Parçalı Bulutlu";
-  return "Açık";
-}
-
 function getIconColor(icon: string): string {
   if (icon === "sunny") return "text-yellow-600";
   if (icon === "rainy" || icon === "thunderstorm") return "text-tertiary";
@@ -57,6 +49,7 @@ export default function HavaRadari() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [fetchedAt, setFetchedAt] = useState("");
+  const { locale, t } = useTranslation();
 
   useEffect(() => {
     fetch("/api/weather")
@@ -79,11 +72,20 @@ export default function HavaRadari() {
       });
   }, []);
 
+  function getWeatherLabel(temp: number | null, rain7d: number | null): string {
+    if (temp === null) return "—";
+    if (rain7d !== null && rain7d > 50) return t.weather.heavyRain;
+    if (rain7d !== null && rain7d > 20) return t.weather.rainy;
+    if (temp > 30 && rain7d !== null && rain7d < 10) return t.weather.hotDry;
+    if (rain7d !== null && rain7d > 10) return t.weather.partlyCloudy;
+    return t.weather.clear;
+  }
+
   const mainRegions = regions.filter((r) => r.type === "main");
   const secondaryRegions = regions.filter((r) => r.type === "secondary");
 
   const updatedTime = fetchedAt
-    ? new Date(fetchedAt).toLocaleTimeString("tr", { hour: "2-digit", minute: "2-digit" })
+    ? new Date(fetchedAt).toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" })
     : "—";
 
   return (
@@ -99,19 +101,19 @@ export default function HavaRadari() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
               <div>
                 <span className="text-xs font-label uppercase tracking-[0.2em] text-secondary mb-3 block">
-                  Canlı İzleme
+                  {t.weather.headerLabel}
                 </span>
                 <h1 className="font-headline text-4xl md:text-5xl font-light text-primary leading-none mb-3">
-                  Hava Radarı &amp; İklim
+                  {t.weather.title}
                 </h1>
                 <p className="text-secondary text-sm md:text-base">
-                  Başlıca kahve üretim bölgelerinin anlık hava durumu ve tahminleri.
+                  {t.weather.description}
                 </p>
               </div>
               <div className="flex items-center gap-2 bg-surface-container-low px-5 py-3">
                 <div className="w-2 h-2 rounded-full bg-tertiary animate-pulse" />
                 <span className="text-[10px] font-label uppercase tracking-widest text-secondary">
-                  Canlı &bull; Son güncelleme: {updatedTime}
+                  {t.weather.liveUpdate.replace("{time}", updatedTime)}
                 </span>
               </div>
             </div>
@@ -123,11 +125,11 @@ export default function HavaRadari() {
           <div className="max-w-screen-2xl mx-auto px-4 md:px-8 mb-3">
             <div className="flex items-center gap-3">
               <span className="material-symbols-outlined text-lg text-primary">map</span>
-              <h2 className="font-headline text-2xl font-bold text-primary">Üretim Bölgeleri Haritası</h2>
+              <h2 className="font-headline text-2xl font-bold text-primary">{t.weather.mapTitle}</h2>
               <div className="h-px flex-1 bg-outline-variant/20" />
             </div>
             <p className="text-sm text-secondary mt-2">
-              Marker&apos;lara tıklayarak bölge detaylarını ve canlı hava durumunu görün.
+              {t.weather.mapInstruction}
             </p>
           </div>
           <div className="w-full h-[300px] md:h-[500px]">
@@ -156,8 +158,8 @@ export default function HavaRadari() {
           ) : error ? (
             <div className="bg-surface-container-lowest p-10 text-center editorial-shadow">
               <span className="material-symbols-outlined text-4xl text-error mb-3 block">error</span>
-              <p className="text-sm text-error font-bold mb-1">Hava durumu verileri yüklenemedi</p>
-              <p className="text-xs text-secondary">Lütfen daha sonra tekrar deneyin.</p>
+              <p className="text-sm text-error font-bold mb-1">{t.common.error}</p>
+              <p className="text-xs text-secondary">{t.common.retry}</p>
             </div>
           ) : (
             <>
@@ -191,17 +193,17 @@ export default function HavaRadari() {
                           </div>
                           <div className="space-y-3 border-t border-outline-variant/20 pt-5">
                             <div className="flex justify-between text-sm">
-                              <span className="text-secondary">Nem</span>
+                              <span className="text-secondary">{t.weather.humidity}</span>
                               <b className={region.humidity !== null && region.humidity > 85 ? "text-error" : ""}>
                                 {region.humidity !== null ? `${region.humidity}%` : "—"}
                               </b>
                             </div>
                             <div className="flex justify-between text-sm">
-                              <span className="text-secondary">Rüzgar</span>
+                              <span className="text-secondary">{t.weather.wind}</span>
                               <b>{region.windSpeed !== null ? `${region.windSpeed} km/h` : "—"}</b>
                             </div>
                             <div className="flex justify-between text-sm">
-                              <span className="text-secondary">Yağış (7 gün)</span>
+                              <span className="text-secondary">{t.weather.rain7d}</span>
                               <b className={region.rain7d !== null && region.rain7d > 40 ? "text-tertiary" : ""}>
                                 {region.rain7d !== null ? `${region.rain7d}mm` : "—"}
                               </b>
@@ -209,7 +211,7 @@ export default function HavaRadari() {
                           </div>
                         </>
                       ) : (
-                        <p className="text-sm text-error">Veri yüklenemedi</p>
+                        <p className="text-sm text-error">{t.common.error}</p>
                       )}
                     </div>
                   );
@@ -218,7 +220,7 @@ export default function HavaRadari() {
 
               {/* ═══ DİĞER ÜRETİM BÖLGELERİ ═══ */}
               <h2 className="font-headline text-2xl font-bold text-primary mb-5">
-                Diğer Üretim Bölgeleri
+                {t.weather.otherRegions}
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-px bg-outline-variant/20 mb-10">
                 {secondaryRegions.map((r, i) => {
@@ -235,7 +237,7 @@ export default function HavaRadari() {
                         </span>
                       </div>
                       <p className="text-xs text-secondary">
-                        Yağış: {r.rain7d !== null ? `${r.rain7d}mm` : "—"}
+                        {t.weather.rain7d}: {r.rain7d !== null ? `${r.rain7d}mm` : "—"}
                       </p>
                     </div>
                   );
@@ -245,40 +247,40 @@ export default function HavaRadari() {
               {/* ═══ ENSO DURUMU ═══ */}
               <div className="bg-primary-container text-white p-5 md:p-10 grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-8">
                 <div>
-                  <h3 className="font-headline text-3xl mb-3">ENSO Durumu</h3>
+                  <h3 className="font-headline text-3xl mb-3">{t.weather.ensoTitle}</h3>
                   <p className="text-white/70 text-sm leading-relaxed mb-5">
-                    El Niño&rsquo;dan nötr koşullara geçiş. La Niña oluşma olasılığı önümüzdeki 6 ay için %65-70 arasında.
+                    {t.weather.ensoDesc}
                   </p>
                   <span className="inline-block bg-primary px-4 py-2 text-[10px] font-bold uppercase tracking-widest">
-                    Nötr → La Niña Geçişi
+                    {t.weather.ensoBadge}
                   </span>
                 </div>
                 <div className="border-t md:border-t-0 md:border-l border-white/15 pt-6 md:pt-0 md:pl-8">
                   <p className="text-[10px] font-label uppercase tracking-widest text-white/70 mb-4">
-                    Beklenen Etki
+                    {t.weather.ensoImpact}
                   </p>
                   <ul className="space-y-3 text-sm text-white/70">
                     <li className="flex items-start gap-2">
                       <span className="material-symbols-outlined text-sm mt-0.5">arrow_right</span>
-                      Brezilya: Artan yağış, çiçeklenme gecikmesi
+                      {t.weather.ensoBrazil}
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="material-symbols-outlined text-sm mt-0.5">arrow_right</span>
-                      Vietnam: Kuraklık riskinde azalma
+                      {t.weather.ensoVietnam}
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="material-symbols-outlined text-sm mt-0.5">arrow_right</span>
-                      Kolombiya: Mitaca hasadında olumlu koşullar
+                      {t.weather.ensoColombia}
                     </li>
                   </ul>
                 </div>
                 <div className="border-t md:border-t-0 md:border-l border-white/15 pt-6 md:pt-0 md:pl-8">
                   <p className="text-[10px] font-label uppercase tracking-widest text-white/70 mb-4">
-                    Fiyat Etkisi
+                    {t.weather.priceImpact}
                   </p>
-                  <p className="font-headline text-2xl italic mb-3">Yukarı Yönlü Baskı</p>
+                  <p className="font-headline text-2xl italic mb-3">{t.weather.priceImpactTitle}</p>
                   <p className="text-sm text-white/70 leading-relaxed">
-                    La Niña geçişi Arabica arzını kısıtlayarak orta vadede fiyatlarda yukarı yönlü baskı oluşturabilir.
+                    {t.weather.priceImpactText}
                   </p>
                 </div>
               </div>

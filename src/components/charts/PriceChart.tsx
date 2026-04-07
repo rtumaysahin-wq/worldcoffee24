@@ -11,6 +11,7 @@ import {
   CartesianGrid,
 } from "recharts";
 import { fetchPriceHistory, type PricePoint } from "@/lib/api/fred";
+import { useTranslation } from "@/lib/i18n/context";
 
 
 /* Recharts SVG text — Tailwind v4 global stilleri SVG fill'i eziyor,
@@ -46,6 +47,7 @@ export default function PriceChart({
   const [data, setData] = useState<PricePoint[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const { locale, t } = useTranslation();
 
   useEffect(() => {
     setLoading(true);
@@ -61,7 +63,6 @@ export default function PriceChart({
   }, [symbol, period]);
 
   const lastPrice = data.length > 0 ? data[data.length - 1].price : null;
-  // Son iki veri noktası arasındaki günlük değişim
   const prevPrice = data.length > 1 ? data[data.length - 2].price : null;
   const change =
     lastPrice !== null && prevPrice !== null ? lastPrice - prevPrice : null;
@@ -77,7 +78,7 @@ export default function PriceChart({
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <div>
           <span className="text-[10px] font-label uppercase tracking-[0.2em] text-secondary mb-1 block">
-            {subtitle || "Canlı Veri"}
+            {subtitle || t.common.liveData}
           </span>
           <h3 className="font-headline text-2xl md:text-3xl font-bold">
             {title}
@@ -138,10 +139,8 @@ export default function PriceChart({
             <span className="material-symbols-outlined text-4xl text-error mb-2">
               error
             </span>
-            <p className="text-sm">Veri yüklenemedi</p>
-            <p className="text-xs text-outline mt-1">
-              Lütfen daha sonra tekrar deneyin
-            </p>
+            <p className="text-sm">{t.common.error}</p>
+            <p className="text-xs text-outline mt-1">{t.common.retry}</p>
           </div>
         ) : (
           <ResponsiveContainer width="100%" height="100%">
@@ -170,8 +169,8 @@ export default function PriceChart({
                   const d = String(props.payload && typeof props.payload === 'object' && 'value' in props.payload ? (props.payload as {value: string}).value : '');
                   const date = new Date(d);
                   const label = period === "1M"
-                    ? date.toLocaleDateString("tr", { day: "numeric", month: "short" })
-                    : date.toLocaleDateString("tr", { month: "short", year: "2-digit" });
+                    ? date.toLocaleDateString(locale, { day: "numeric", month: "short" })
+                    : date.toLocaleDateString(locale, { month: "short", year: "2-digit" });
                   return <CustomTick x={props.x as number} y={props.y as number} payload={{ value: label }} />;
                 }}
                 axisLine={false}
@@ -195,7 +194,7 @@ export default function PriceChart({
                   fontSize: "12px",
                 }}
                 labelFormatter={(d) =>
-                  new Date(String(d)).toLocaleDateString("tr", {
+                  new Date(String(d)).toLocaleDateString(locale, {
                     day: "numeric",
                     month: "long",
                     year: "numeric",
@@ -203,7 +202,7 @@ export default function PriceChart({
                 }
                 formatter={(value) => [
                   `${Number(value).toFixed(2)} USD/lb`,
-                  "Fiyat",
+                  t.common.priceLabel,
                 ]}
               />
               <Area

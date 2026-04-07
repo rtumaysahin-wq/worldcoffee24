@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useTranslation } from "@/lib/i18n/context";
 
 interface NewsItem {
   title: string;
@@ -21,6 +22,7 @@ const sourceColors: Record<string, string> = {
 export default function LatestNews() {
   const [news, setNews] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const { locale, t } = useTranslation();
 
   useEffect(() => {
     fetch("/api/news")
@@ -36,7 +38,7 @@ export default function LatestNews() {
     return (
       <section className="space-y-4">
         <div className="flex items-center justify-between mb-2">
-          <h3 className="font-headline text-2xl md:text-3xl text-primary font-bold">Son Haberler</h3>
+          <h3 className="font-headline text-2xl md:text-3xl text-primary font-bold">{t.common.latestNews}</h3>
         </div>
         {[1, 2, 3].map((i) => (
           <div key={i} className="bg-surface-container-lowest p-5 editorial-shadow animate-pulse">
@@ -54,12 +56,12 @@ export default function LatestNews() {
   return (
     <section>
       <div className="flex items-center justify-between mb-4">
-        <h3 className="font-headline text-2xl md:text-3xl text-primary font-bold">Son Haberler</h3>
+        <h3 className="font-headline text-2xl md:text-3xl text-primary font-bold">{t.common.latestNews}</h3>
         <Link
           href="/haberler"
           className="text-xs font-bold uppercase tracking-widest text-secondary hover:text-primary flex items-center gap-1"
         >
-          Tüm Haberler
+          {t.common.allNews}
           <span className="material-symbols-outlined text-sm">arrow_forward</span>
         </Link>
       </div>
@@ -82,7 +84,7 @@ export default function LatestNews() {
               </span>
               {item.date && (
                 <span className="text-[10px] text-outline">
-                  {new Date(item.date).toLocaleDateString("tr", {
+                  {new Date(item.date).toLocaleDateString(locale, {
                     day: "numeric",
                     month: "short",
                   })}
