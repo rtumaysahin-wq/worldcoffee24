@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
@@ -9,7 +8,6 @@ import Footer from "@/components/Footer";
 import PriceChart from "@/components/charts/PriceChart";
 import PriceCard from "@/components/charts/PriceCard";
 import CoffeeConverter from "@/components/CoffeeConverter";
-import { fetchAllPrices, type PriceItem } from "@/lib/api/commodities";
 import { useTranslation } from "@/lib/i18n/context";
 
 const scaPremiums = [
@@ -19,20 +17,7 @@ const scaPremiums = [
 ];
 
 export default function FiyatMerkezi() {
-  const [prices, setPrices] = useState<PriceItem[]>([]);
-  const [loading, setLoading] = useState(true);
   const { t } = useTranslation();
-
-  useEffect(() => {
-    fetchAllPrices().then((data) => {
-      if (data) setPrices(data.prices);
-      setLoading(false);
-    });
-  }, []);
-
-  const getPrice = (label: string) => prices.find((p) => p.label === label);
-  const usdBrl = getPrice("USD/BRL");
-  const arabica = getPrice("Arabica Coffee");
 
   return (
     <>
@@ -54,21 +39,9 @@ export default function FiyatMerkezi() {
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <PriceCard
-                label="Arabica KC1!"
-                price={arabica?.price ?? null}
-                change={arabica?.change ?? null}
-                changePct={arabica?.changePct ?? null}
-                unit="¢/lb"
-                loading={loading}
-              />
-              <PriceCard
-                label="USD/BRL"
-                price={usdBrl?.price ?? null}
-                change={usdBrl?.change ?? null}
-                changePct={usdBrl?.changePct ?? null}
-                loading={loading}
-              />
+              <PriceCard label="Arabica" symbol="ICEUS:KC1!" />
+              <PriceCard label="Robusta" symbol="ICEEUR:RC1!" />
+              <PriceCard label="USD/BRL" symbol="FX_IDC:USDBRL" />
             </div>
           </header>
 

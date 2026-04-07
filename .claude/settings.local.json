@@ -54,7 +54,11 @@
       "Bash(wc -l /c/Users/rtuma/worldcoffee24/src/app/*/page.tsx /c/Users/rtuma/worldcoffee24/src/app/*/*/page.tsx)",
       "Bash(xargs wc:*)",
       "Bash(taskkill //f //im node.exe)",
-      "Bash(grep -v '//')"
+      "Bash(grep -v '//')",
+      "WebFetch(domain:tr.investing.com)",
+      "WebFetch(domain:databento.com)",
+      "WebFetch(domain:docs.databento.com)",
+      "WebFetch(domain:financeflowapi.com)"
     ]
   }
 }

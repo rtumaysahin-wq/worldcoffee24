@@ -1,103 +1,43 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { fetchAllPrices, type PriceItem } from "@/lib/api/commodities";
-import { useTranslation } from "@/lib/i18n/context";
-
-function TickerItem({ item }: { item: PriceItem }) {
-  if (item.price === null) return null;
-
-  const isUp = item.changePct !== null && item.changePct >= 0;
-  const hasChange = item.changePct !== null;
-
-  const formatted = item.price.toLocaleString("en-US", {
-    minimumFractionDigits: item.price < 10 ? 4 : 2,
-    maximumFractionDigits: item.price < 10 ? 4 : 2,
-  });
-
-  return (
-    <span className="flex items-center gap-2 shrink-0">
-      <span className="font-label uppercase tracking-widest text-secondary text-[11px]">
-        {item.label}
-      </span>
-      <span className="font-bold text-[11px]">
-        {formatted}
-        {item.unit && (
-          <span className="text-secondary font-normal ml-0.5">{item.unit}</span>
-        )}
-      </span>
-      {hasChange && (
-        <span
-          className={`font-bold text-[11px] flex items-center gap-0.5 ${
-            isUp ? "text-tertiary" : "text-error"
-          }`}
-        >
-          <span className="material-symbols-outlined text-sm">
-            {isUp ? "trending_up" : "trending_down"}
-          </span>
-          {isUp ? "+" : ""}
-          {item.changePct!.toFixed(2)}%
-        </span>
-      )}
-    </span>
-  );
-}
+import { useEffect, useRef } from "react";
 
 export default function TickerBand() {
-  const [items, setItems] = useState<PriceItem[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const { t } = useTranslation();
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    fetchAllPrices().then((data) => {
-      if (data && data.prices.length > 0) {
-        setItems(data.prices);
-      } else {
-        setError(true);
-      }
-      setLoading(false);
+    if (!containerRef.current) return;
+    // Clear previous widget
+    containerRef.current.innerHTML = "";
+
+    const script = document.createElement("script");
+    script.src = "https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js";
+    script.async = true;
+    script.textContent = JSON.stringify({
+      symbols: [
+        { proName: "ICEUS:KC1!", title: "Arabica Coffee" },
+        { proName: "ICEEUR:RC1!", title: "Robusta Coffee" },
+        { proName: "ICEUS:SB1!", title: "Sugar #11" },
+        { proName: "ICEUS:CC1!", title: "Cocoa" },
+        { proName: "FX_IDC:USDBRL", title: "USD/BRL" },
+        { proName: "FX_IDC:USDVND", title: "USD/VND" },
+        { proName: "FX_IDC:USDCOP", title: "USD/COP" },
+        { proName: "FX_IDC:USDTRY", title: "USD/TRY" },
+      ],
+      showSymbolLogo: true,
+      isTransparent: true,
+      displayMode: "adaptive",
+      colorTheme: "light",
+      locale: "en",
     });
+
+    containerRef.current.appendChild(script);
   }, []);
 
-  if (loading) {
-    return (
-      <div className="bg-surface-container-low border-b border-outline-variant/10 py-3 overflow-hidden flex-shrink-0">
-        <div className="flex items-center justify-center gap-2 text-[11px] text-secondary">
-          <span className="material-symbols-outlined text-sm animate-spin">
-            progress_activity
-          </span>
-          {t.ticker.loading}
-        </div>
-      </div>
-    );
-  }
-
-  if (error || items.length === 0) {
-    return (
-      <div className="bg-surface-container-low border-b border-outline-variant/10 py-3 overflow-hidden flex-shrink-0">
-        <div className="flex items-center justify-center gap-2 text-[11px] text-error">
-          <span className="material-symbols-outlined text-sm">error</span>
-          {t.ticker.error}
-        </div>
-      </div>
-    );
-  }
-
-  const validItems = items.filter((i) => i.price !== null);
-  const doubled = [...validItems, ...validItems];
-
   return (
-    <div className="bg-surface-container-low border-b border-outline-variant/10 py-2.5 overflow-hidden flex-shrink-0">
-      <div className="ticker-track text-[11px] gap-4 md:gap-8 px-4 md:px-8 whitespace-nowrap items-center flex">
-        {doubled.map((item, i) => (
-          <span key={i} className="flex items-center gap-2">
-            <TickerItem item={item} />
-            {i < doubled.length - 1 && (
-              <span className="text-outline-variant/40 mx-1">|</span>
-            )}
-          </span>
-        ))}
+    <div className="border-b border-outline-variant/10 overflow-hidden flex-shrink-0">
+      <div className="tradingview-widget-container" ref={containerRef}>
+        <div className="tradingview-widget-container__widget" />
       </div>
     </div>
   );
