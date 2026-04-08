@@ -59,7 +59,8 @@
       "WebFetch(domain:databento.com)",
       "WebFetch(domain:docs.databento.com)",
       "WebFetch(domain:financeflowapi.com)",
-      "WebFetch(domain:www.tradingview.com)"
+      "WebFetch(domain:www.tradingview.com)",
+      "Bash(npm ls:*)"
     ]
   }
 }

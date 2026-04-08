@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import TickerBand from "@/components/TickerBand";
 import Footer from "@/components/Footer";
-import PriceChart from "@/components/charts/PriceChart";
+import CoffeeChart from "@/components/charts/CoffeeChart";
 import PriceCard from "@/components/charts/PriceCard";
 import CoffeeConverter from "@/components/CoffeeConverter";
 import { useTranslation } from "@/lib/i18n/context";
@@ -39,9 +39,9 @@ export default function FiyatMerkezi() {
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <PriceCard label="Arabica" symbol="ICEUS:KC1!" />
-              <PriceCard label="Robusta" symbol="ICEEUR:RC1!" />
-              <PriceCard label="USD/BRL" symbol="FX_IDC:USDBRL" />
+              <PriceCard label="Arabica KC1!" filterKey="Arabica Coffee" unit="¢/lb" />
+              <PriceCard label="Robusta RC1!" filterKey="Robusta Coffee" unit="¢/lb" />
+              <PriceCard label="USD/BRL" filterKey="USD/BRL" />
             </div>
           </header>
 
@@ -49,7 +49,7 @@ export default function FiyatMerkezi() {
 
             {/* ═══ ARABİCA GRAFİK ═══ */}
             <section className="col-span-12 lg:col-span-8 bg-surface-container-lowest p-6 md:p-8 editorial-shadow">
-              <PriceChart
+              <CoffeeChart
                 title={t.prices.arabicaTitle}
                 subtitle={t.prices.arabicaSub}
                 symbol="arabica"
@@ -66,7 +66,7 @@ export default function FiyatMerkezi() {
 
             {/* ═══ ROBUSTA GRAFİK ═══ */}
             <section className="col-span-12 lg:col-span-8 bg-surface-container-lowest p-6 md:p-8 editorial-shadow">
-              <PriceChart
+              <CoffeeChart
                 title={t.prices.robustaTitle}
                 subtitle={t.prices.robustaSub}
                 symbol="robusta"

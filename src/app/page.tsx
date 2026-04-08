@@ -7,7 +7,7 @@ import Navbar from "@/components/Navbar";
 import TickerBand from "@/components/TickerBand";
 import Sidebar from "@/components/Sidebar";
 import Footer from "@/components/Footer";
-import PriceChart from "@/components/charts/PriceChart";
+import CoffeeChart from "@/components/charts/CoffeeChart";
 import LatestNews from "@/components/LatestNews";
 import CurrencyBand from "@/components/CurrencyBand";
 import { useTranslation } from "@/lib/i18n/context";
@@ -147,7 +147,7 @@ export default function Home() {
           {/* ═══ GRAFİK + HAVA DURUMU ═══ */}
           <section className="grid grid-cols-12 gap-4 md:gap-8 items-start">
             <div className="col-span-12 lg:col-span-8 bg-surface-container-lowest p-6 md:p-8 editorial-shadow">
-              <PriceChart title="KC1! Arabica Futures" subtitle={t.home.chartSubtitle} />
+              <CoffeeChart title="KC1! Arabica Futures" subtitle={t.home.chartSubtitle} symbol="arabica" />
             </div>
 
             <div className="col-span-12 lg:col-span-4 space-y-4">

@@ -1,42 +1,69 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
+import { fetchAllPrices, type PriceItem } from "@/lib/api/commodities";
 
-export default function TickerBand() {
-  const containerRef = useRef<HTMLDivElement>(null);
+function TickerItem({ item }: { item: PriceItem }) {
+  if (item.price === null) return null;
 
-  useEffect(() => {
-    if (!containerRef.current) return;
-    containerRef.current.innerHTML = "";
-
-    const script = document.createElement("script");
-    script.src = "https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js";
-    script.async = true;
-    script.textContent = JSON.stringify({
-      symbols: [
-        { proName: "ICEUS:KC1!", title: "Arabica" },
-        { proName: "ICEEUR:RC1!", title: "Robusta" },
-        { proName: "ICEUS:SB1!", title: "Sugar" },
-        { proName: "FX_IDC:USDBRL", title: "USD/BRL" },
-        { proName: "FX_IDC:USDVND", title: "USD/VND" },
-        { proName: "FX_IDC:USDCOP", title: "USD/COP" },
-        { proName: "FX_IDC:USDTRY", title: "USD/TRY" },
-        { proName: "FX_IDC:EURUSD", title: "EUR/USD" },
-      ],
-      showSymbolLogo: true,
-      isTransparent: true,
-      displayMode: "adaptive",
-      colorTheme: "light",
-      locale: "en",
-    });
-
-    containerRef.current.appendChild(script);
-  }, []);
+  const isUp = item.changePct !== null && item.changePct >= 0;
+  const hasChange = item.changePct !== null;
+  const decimals = item.price > 1000 ? 0 : item.price < 1 ? 4 : 2;
 
   return (
-    <div className="border-b border-outline-variant/10 overflow-hidden flex-shrink-0">
-      <div className="tradingview-widget-container" ref={containerRef}>
-        <div className="tradingview-widget-container__widget" />
+    <span className="flex items-center gap-2 shrink-0">
+      <span className="font-label uppercase tracking-widest text-secondary text-[11px]">
+        {item.label}
+      </span>
+      <span className="font-bold text-[11px]">
+        {item.price.toLocaleString("en-US", { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}
+        {item.unit && <span className="text-secondary font-normal ml-0.5">{item.unit}</span>}
+      </span>
+      {hasChange && (
+        <span className={`font-bold text-[11px] flex items-center gap-0.5 ${isUp ? "text-tertiary" : "text-error"}`}>
+          <span className="material-symbols-outlined text-sm">{isUp ? "trending_up" : "trending_down"}</span>
+          {isUp ? "+" : ""}{item.changePct!.toFixed(2)}%
+        </span>
+      )}
+    </span>
+  );
+}
+
+export default function TickerBand() {
+  const [items, setItems] = useState<PriceItem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchAllPrices().then((data) => {
+      if (data && data.prices.length > 0) setItems(data.prices);
+      setLoading(false);
+    });
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="bg-surface-container-low border-b border-outline-variant/10 py-3 overflow-hidden flex-shrink-0">
+        <div className="flex items-center justify-center gap-2 text-[11px] text-secondary">
+          <span className="material-symbols-outlined text-sm animate-spin">progress_activity</span>
+          Loading...
+        </div>
+      </div>
+    );
+  }
+
+  const valid = items.filter((i) => i.price !== null);
+  if (valid.length === 0) return null;
+  const doubled = [...valid, ...valid];
+
+  return (
+    <div className="bg-surface-container-low border-b border-outline-variant/10 py-2.5 overflow-hidden flex-shrink-0">
+      <div className="ticker-track text-[11px] gap-4 md:gap-8 px-4 md:px-8 whitespace-nowrap items-center flex">
+        {doubled.map((item, i) => (
+          <span key={i} className="flex items-center gap-2">
+            <TickerItem item={item} />
+            {i < doubled.length - 1 && <span className="text-outline-variant/40 mx-1">|</span>}
+          </span>
+        ))}
       </div>
     </div>
   );

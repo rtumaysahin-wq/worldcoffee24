@@ -1,14 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { fetchYahooHistory } from "@/lib/api/yahoo";
-import { fetchFredHistory } from "@/lib/api/fred";
+import { fetchRobustaWithFallback } from "@/lib/api/robusta-providers";
 
 const YAHOO_SYMBOLS: Record<string, string> = {
   arabica: "KC=F",
   sugar: "SB=F",
-};
-
-const FRED_SERIES: Record<string, string> = {
-  robusta: "PCOFFROBUSDM",
 };
 
 function getPeriodDates(period: string): { start: Date; end: Date; interval: "1d" | "1wk" | "1mo" } {
@@ -35,19 +31,35 @@ export async function GET(request: NextRequest) {
 
   const { start, end, interval } = getPeriodDates(period);
 
-  let points: { date: string; price: number | null }[] = [];
+  // Robusta — multi-provider fallback
+  if (symbol === "robusta") {
+    const result = await fetchRobustaWithFallback(start, end);
+    if (result.data.length === 0) {
+      return NextResponse.json({ error: "No robusta data available" }, { status: 404 });
+    }
+    return NextResponse.json({
+      symbol,
+      period,
+      source: result.source,
+      points: result.data.map((d) => ({ date: d.time, price: d.value })),
+      fetchedAt: new Date().toISOString(),
+    });
+  }
 
+  // Yahoo symbols (arabica, sugar)
   if (YAHOO_SYMBOLS[symbol]) {
-    points = await fetchYahooHistory(YAHOO_SYMBOLS[symbol], start, end, interval);
-  } else if (FRED_SERIES[symbol]) {
-    points = await fetchFredHistory(FRED_SERIES[symbol], start, end);
-  } else {
-    return NextResponse.json({ error: `Bilinmeyen sembol: ${symbol}` }, { status: 400 });
+    const points = await fetchYahooHistory(YAHOO_SYMBOLS[symbol], start, end, interval);
+    if (points.length === 0) {
+      return NextResponse.json({ error: "No data available" }, { status: 404 });
+    }
+    return NextResponse.json({
+      symbol,
+      period,
+      source: "Yahoo Finance",
+      points,
+      fetchedAt: new Date().toISOString(),
+    });
   }
 
-  if (points.length === 0) {
-    return NextResponse.json({ error: "Veri bulunamadı" }, { status: 404 });
-  }
-
-  return NextResponse.json({ symbol, period, points, fetchedAt: new Date().toISOString() });
+  return NextResponse.json({ error: `Unknown symbol: ${symbol}` }, { status: 400 });
 }
