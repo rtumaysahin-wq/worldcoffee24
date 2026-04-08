@@ -46,8 +46,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "tr_TR",
-    alternateLocale: "en_US",
+    locale: "en_US",
+    alternateLocale: ["tr_TR", "es_ES", "pt_BR", "zh_CN", "ar_SA"],
     siteName: "WorldCoffee24",
     title: "WorldCoffee24 — Küresel Kahve Piyasa Platformu",
     description:
